@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { StudentSubjectsComponent } from './student-subjects/student-subjects.component';
 import { StudentEducationComponent } from './student-education/student-education.component';
@@ -21,7 +22,8 @@ import { StudentBasicModule } from './student-basic/student-basic.module';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    StudentBasicModule
+    StudentBasicModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
