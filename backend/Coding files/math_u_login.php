@@ -16,7 +16,7 @@ $usrID = QueryAllUsers($_POST["email"], $_POST["password"]);
 $tblName = DecodeID($usrID);
 //===========================================================
 //Query Sponsor_Users / Query Students Table to get password
-if ($tblName = "Sponsor_Users"){
+if ($tblName = "sponsor_users"){
 	$spr = QuerySponsors($_POST["email"]);
 	//Validate $spr not null
 	//===========================================================
@@ -59,10 +59,13 @@ function QueryAllUsers($email, $pass){
 //function to decode the UserID
 //===============================================
 function DecodeID($id){
-	if (){
+	$firstchar = $id[0];
+	if ($firstchar = 'S'){
+		$tblName = "sponsor_users";
 		//return table that should be searched
 	}
 	else {
+		$tblName = "students";
 		//return table that should be searched
 	}
 }
