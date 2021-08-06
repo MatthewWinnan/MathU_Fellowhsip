@@ -16,9 +16,6 @@ $mysqli = new mysqli('localhost', $user, $pass, $dBName);
 if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
-else {
-	echo 'Connection has been Established';
-}
 //How to run it? 
 //Move file to C:\xampp\htdocs
 //Open browser and type http://localhost/math_u_db_connection.php
