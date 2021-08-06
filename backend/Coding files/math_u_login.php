@@ -84,7 +84,7 @@ function QuerySponsors($email){
 function QueryStudents($email){
 
 	$sql = "SELECT * FROM `Students` WHERE Email_address = "$email"";
-	$result = mysqli_query($conn, $sql);
+	$result = mysqli_query($mysqli, $sql);
 
 	return $result;
 	//returns a row
