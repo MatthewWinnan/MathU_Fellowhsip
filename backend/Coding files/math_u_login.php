@@ -7,6 +7,7 @@
 //include connection 
 include 'math_u_db_connection.php';
 require 'hash_password.php';
+//end of include connection
 
 //---------------------------------------START MAIN ---------------------------------------------//
 if (isset($_POST["email"])and isset($_POST["password"])){//Ensure that received data is not empty
