@@ -5,8 +5,8 @@ import { StudentSubjectsComponent } from './student-subjects/student-subjects.co
 import { StudentEducationComponent } from './student-education/student-education.component';
 
 const appRoutes: Routes = [
-  { path: 'student-education', component: StudentSubjectsComponent },
-  { path: 'student-subjects', component: StudentEducationComponent },
+  { path: 'student-education', component: StudentEducationComponent },
+  { path: 'student-subjects', component: StudentSubjectsComponent },
   { path: '',   redirectTo: '/student-basic', pathMatch: 'full' },
 ];
 
