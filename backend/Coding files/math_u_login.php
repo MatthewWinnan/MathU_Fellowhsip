@@ -1,10 +1,10 @@
 <?php
 //Requirements for logging in
-//Required Data: Email & Password 
+//Required Data: Email & Password
 //Tables: 3 (All_Users, Sponsor_Users, Students)
 //Link: Student_ID & Email & Sponsor_ID
 
-//include connection 
+//include connection
 
 //---------------------------------------START MAIN ---------------------------------------------//
 if (isset($_POST["email"])and isset($_POST["password"])){//Ensure that received data is not empty
@@ -22,7 +22,7 @@ if ($tblName = "Sponsor_Users"){
 	//===========================================================
 	//Compare Passwords -> echo error if no match found
 	$results = ComparePasswords($_POST["password"], $spr);
-	//Check results is not an empty array 
+	//Check results is not an empty array
 	//===========================================================
 	//Go to Homepage if match found
 	Display($results);
@@ -32,11 +32,11 @@ else{
 	$std = QueryStudents($_POST["email"]);
 	//Validate $spr not null
 	//===========================================================
-	//Compare Passwords -> echo error if no match found 
+	//Compare Passwords -> echo error if no match found
 	$results = ComparePasswords($_POST["password"], $std);
-	//Check results is not an empty array 
+	//Check results is not an empty array
 	//===========================================================
-	//Go to Homepage if match found 
+	//Go to Homepage if match found
 	Display($results);
 	//===========================================================
 }
@@ -44,7 +44,7 @@ else{
 }
 //--------------------------------------END MAIN---------------------------------------------//
 //===================
-//LIST OF FUNCTIONS 
+//LIST OF FUNCTIONS
 //===================
 
 //==============================================
@@ -52,6 +52,7 @@ else{
 //===============================================
 function QueryAllUsers($email, $pass){
 	//return data of user_id
+
 }
 
 //===============================================
@@ -70,21 +71,22 @@ function DecodeID($id){
 //function to QuerySponsors, returns a row
 //================================================
 function QuerySponsors($email){
-	//returns a row 
+	//returns a row
+	$sql = "SELECT * FROM Sponsor_Users WHERE Email_address = "$email";"
 }
 
 //=================================================
 //function to QueryStudents, returns a row
 //================================================
 function QueryStudents($email){
-	//returns a row 
+	//returns a row
 }
 
 //=================================================
 //function to Dehash & Compare Password, returns an array of data (accepts an array)
 //================================================
 function ComparePasswords($password, $row){
-	//returns an array 
+	//returns an array
 }
 
 //=================================================
