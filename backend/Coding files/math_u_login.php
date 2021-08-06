@@ -86,7 +86,7 @@ function QueryStudents($email){
 	$sql = "SELECT * FROM `Students` WHERE Email_address = "$email"";
 	$result = mysqli_query($conn, $sql);
 
-	return "$result";
+	return $result;
 	//returns a row
 }
 
