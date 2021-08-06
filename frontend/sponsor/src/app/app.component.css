@@ -1,0 +1,32 @@
+.menu-icon {
+    vertical-align: text-bottom;
+    padding: 0 10px 0 0;
+  }
+  
+  app-header {
+    vertical-align: sup;
+    width: 100%;
+  }
+  
+  mat-toolbar > div{
+    width: 100%;
+  
+  }
+  
+  mat-toolbar {
+    padding: 0 40px;
+  }
+  
+  .logo-spacer {
+    padding-right: 10px;
+  }
+
+  .example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  

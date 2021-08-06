@@ -30,7 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/mathU_theme.css",
+              "src/mathU-theme.css",
               "src/styles.css"
             ],
             "scripts": []
