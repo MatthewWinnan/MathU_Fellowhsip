@@ -39,12 +39,13 @@ if ($usrID != ""){
 			
 			//===========================================================
 			//Go to Homepage if match found
-			echo "<h1>Employee Details</h1>";
+			//echo "<h1>Employee Details</h1>";
 			Display($results);
+		
 			//===========================================================
 		}
 		else{
-			echo "NO Sponsor found!";
+			echo json_encode("NO Sponsor found!");
 		}
 		
 	}
@@ -60,17 +61,17 @@ if ($usrID != ""){
 		
 			//===========================================================
 			//Go to Homepage if match found 
-			echo "<h1>Student Details</h1>";
+			//echo "<h1>Student Details</h1>";
 			Display($results);
 			//===========================================================
 		}
 		else{
-			echo "NO Student found!";
+			echo json_encode("NO Student found!");
 		}
 	}
 }
 else{
-	echo "No Email found!";
+	echo json_encode("No Email found!");
 }
 
 }
@@ -156,7 +157,7 @@ function ComparePasswords($password, $row,int $flag,$mysqli){
 		if ($flag == 1){
 			$sql = "UPDATE sponsor_users SET last_login='".$date."' WHERE email_address='".$row["email_address"]."'";
 			$mysqli->query($sql);
-			echo $mysqli->error;
+			echo json_encode($mysqli->error);
 			
 			$Obj=new \stdClass();
 			$Obj->name = $row["first_name_of_user"];
@@ -173,7 +174,7 @@ function ComparePasswords($password, $row,int $flag,$mysqli){
 		else{
 			$sql = "UPDATE student SET Last_login='".$date."' WHERE Email_address='".$row["Email_address"]."'";
 			$mysqli->query($sql);
-			echo $mysqli->error;
+			echo json_encode($mysqli->error);
 			
 			$Obj = new \stdClass();
 			$Obj->name = $row["First_name"];
@@ -210,7 +211,7 @@ function Display($result){
 		echo json_encode($result);
 	}
 	else{
-		echo "No Results Found";
+		echo json_encode("No Results Found");
 	}
 }
 
