@@ -7,12 +7,18 @@
 //include connection 
 include 'math_u_db_connection.php';
 require 'hash_password.php';
+//INPUT MANAGEMENT
+$input = file_get_contents('php://input');
+$data = json_decode($input, true);
 
 //---------------------------------------START MAIN ---------------------------------------------//
-if (isset($_POST["email"])and isset($_POST["password"])){//Ensure that received data is not empty
+if (isset($data['email_address'])and isset($data['password'])){//Ensure that received data is not empty
 //===========================================================
+$email = $data['email_address'];
+$pass = $data['password'];
+
 //query email -> echo error if no match found -> All_Users
-$usrID = QueryAllUsers($_POST["email"],$mysqli);
+$usrID = QueryAllUsers($email,$mysqli);
 //===========================================================
 //Decode the UserID -> Student:U , Sponsor: S (Parameter User_ID )
 
@@ -22,14 +28,14 @@ if ($usrID != ""){
 //Query Sponsor_Users / Query Students Table to get password
 
 	if ($tblName == "sponsor_users"){
-		$spr = QuerySponsors($_POST["email"], $mysqli);
+		$spr = QuerySponsors($email, $mysqli);
 		//Validate $spr not null
 		//===========================================================
 		
 		//Compare Passwords 
 		if ($spr->num_rows > 0){
 			$flag_bit = 1;
-			$results = ComparePasswords($_POST["password"], $spr->fetch_assoc(), $flag_bit, $mysqli);
+			$results = ComparePasswords($pass, $spr->fetch_assoc(), $flag_bit, $mysqli);
 			
 			//===========================================================
 			//Go to Homepage if match found
@@ -43,14 +49,14 @@ if ($usrID != ""){
 		
 	}
 	else{
-		$std = QueryStudents($_POST["email"],$mysqli);
+		$std = QueryStudents($email,$mysqli);
 		//Validate $spr not null
 		//===========================================================
 		
 		//Compare Passwords 
 		if ($std->num_rows > 0){
 			$flag_bit = 0;
-			$results = ComparePasswords($_POST["password"], $std->fetch_assoc(), $flag_bit, $mysqli);
+			$results = ComparePasswords($pass, $std->fetch_assoc(), $flag_bit, $mysqli);
 		
 			//===========================================================
 			//Go to Homepage if match found 
