@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login', //to change default page
+    redirectTo: 'landing-page', //to change default page
     pathMatch: 'full'
   },
   {
@@ -14,6 +14,18 @@ const routes: Routes = [
   {
     path: 'view-profile',
     loadChildren: () => import('./page/sponsor/view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
+  },
+  {
+    path: 'landing-page',
+    loadChildren: () => import('./page/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./page/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./page/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
 ];
 

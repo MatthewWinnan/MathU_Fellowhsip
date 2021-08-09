@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  showPassword = false;
+  passwordToggleIcon = 'eye';
 
   constructor(private router:Router) { 
 
@@ -17,8 +19,21 @@ export class LoginPage implements OnInit {
 
   logMeIn(){
     // put in code 
-    this.router.navigate(['./menu']);
+    this.router.navigate(['./view-profile']);
+  }
 
+  goBack(){
+    this.router.navigate(['./landing-page']);
+  }
+
+  togglePassword():void{
+    this.showPassword = !this.showPassword;
+    if (this.passwordToggleIcon == 'eye'){
+      this.passwordToggleIcon = 'eye-off';
+    }
+    else{
+      this.passwordToggleIcon = 'eye';
+    }
   }
 
 }
