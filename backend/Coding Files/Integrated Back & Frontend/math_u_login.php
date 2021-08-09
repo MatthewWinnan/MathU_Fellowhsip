@@ -12,7 +12,6 @@ $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
 //---------------------------------------START MAIN ---------------------------------------------//
-if (isset($data['email_address'])and isset($data['password'])){//Ensure that received data is not empty
 //===========================================================
 $email = $data['email_address'];
 $pass = $data['password'];
@@ -74,7 +73,6 @@ else{
 	echo json_encode("No Email found!");
 }
 
-}
 //--------------------------------------END MAIN---------------------------------------------//
 //===================
 //LIST OF FUNCTIONS 
