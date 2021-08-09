@@ -1,13 +1,12 @@
 <?php
 //Requirements for logging in
-//Required Data: Email & Password
+//Required Data: Email & Password 
 //Tables: 3 (All_Users, Sponsor_Users, Students)
 //Link: Student_ID & Email & Sponsor_ID
 
-//include connection
+//include connection 
 include 'math_u_db_connection.php';
 require 'hash_password.php';
-//end of include connection
 
 //---------------------------------------START MAIN ---------------------------------------------//
 if (isset($_POST["email"])and isset($_POST["password"])){//Ensure that received data is not empty
@@ -26,50 +25,52 @@ if ($usrID != ""){
 		$spr = QuerySponsors($_POST["email"], $mysqli);
 		//Validate $spr not null
 		//===========================================================
-
-		//Compare Passwords
+		
+		//Compare Passwords 
 		if ($spr->num_rows > 0){
 			$flag_bit = 1;
-			$results = ComparePasswords($_POST["password"], $spr->fetch_assoc(), $flag_bit);
-
+			$results = ComparePasswords($_POST["password"], $spr->fetch_assoc(), $flag_bit, $mysqli);
+			
 			//===========================================================
 			//Go to Homepage if match found
+			echo "<h1>Employee Details</h1>";
 			Display($results);
 			//===========================================================
 		}
 		else{
-			echo "Your password is incorrect!";
+			echo "NO Sponsor found!";
 		}
-
+		
 	}
 	else{
 		$std = QueryStudents($_POST["email"],$mysqli);
 		//Validate $spr not null
 		//===========================================================
-
-		//Compare Passwords
+		
+		//Compare Passwords 
 		if ($std->num_rows > 0){
 			$flag_bit = 0;
-			$results = ComparePasswords($_POST["password"], $std->fetch_assoc(), $flag_bit);
-
+			$results = ComparePasswords($_POST["password"], $std->fetch_assoc(), $flag_bit, $mysqli);
+		
 			//===========================================================
-			//Go to Homepage if match found
+			//Go to Homepage if match found 
+			echo "<h1>Student Details</h1>";
 			Display($results);
 			//===========================================================
 		}
 		else{
-			echo "Your password is incorrect!";
+			echo "NO Student found!";
 		}
 	}
 }
 else{
-	echo "Your profile does not exist, please sign up.";
+	echo "No Email found!";
 }
 
 }
 //--------------------------------------END MAIN---------------------------------------------//
 //===================
-//LIST OF FUNCTIONS
+//LIST OF FUNCTIONS 
 //===================
 
 //==============================================
@@ -82,7 +83,7 @@ function QueryAllUsers($email,$mysqli){
 	$email = strtolower($email);
 	$query = "SELECT * FROM all_users WHERE Email_address='".$email."'";
 	$result = $mysqli->query($query);
-
+	
 	if ($result->num_rows > 0){
 		$row = $result->fetch_assoc();
 		//echo $row["User_ID"];
@@ -117,11 +118,11 @@ function DecodeID($id){
 //function to QuerySponsors, returns a row
 //================================================
 function QuerySponsors($email, $mysqli){
-	//returns a row
+	//returns a row 
 	$email = strtolower($email);
 	$sql = "SELECT * FROM sponsor_users WHERE email_address = '".$email."'";
 	$result = $mysqli->query($sql);
-
+	//echo json_encode($result);
 	return $result;
 }
 
@@ -129,7 +130,7 @@ function QuerySponsors($email, $mysqli){
 //function to QueryStudents, returns a row
 //================================================
 function QueryStudents($email, $mysqli){
-	//returns a row ->
+	//returns a row -> 
 	$email = strtolower($email);
 	//echo 'Email: '.$email;
 	$sql = "SELECT * FROM student WHERE Email_address = '".$email."'";
@@ -141,12 +142,16 @@ function QueryStudents($email, $mysqli){
 //=================================================
 //function to Dehash & Compare Password, returns an array of data (accepts an array)
 //================================================
-function ComparePasswords($password, $row,int $flag){
-	//returns an array
-
+function ComparePasswords($password, $row,int $flag,$mysqli){
+	//returns an array 
+	
 	if (password_verify($password,$row["password"])){
+		$date = date("Y-m-d");
 		if ($flag == 1){
-			echo "<h1>Employee Details</h1>";
+			$sql = "UPDATE sponsor_users SET last_login='".$date."' WHERE email_address='".$row["email_address"]."'";
+			$mysqli->query($sql);
+			echo $mysqli->error;
+			
 			$Obj=new \stdClass();
 			$Obj->name = $row["first_name_of_user"];
 			$Obj->surname = $row["last_name_of_user"];
@@ -160,7 +165,10 @@ function ComparePasswords($password, $row,int $flag){
 			return $Obj;
 		}
 		else{
-			echo "<h1>Student Details</h1>";
+			$sql = "UPDATE student SET Last_login='".$date."' WHERE Email_address='".$row["Email_address"]."'";
+			$mysqli->query($sql);
+			echo $mysqli->error;
+			
 			$Obj = new \stdClass();
 			$Obj->name = $row["First_name"];
 			$Obj->surname = $row["Last_name"];
@@ -176,54 +184,41 @@ function ComparePasswords($password, $row,int $flag){
 			$Obj->average = $row["Average"];
 			$Obj->website = $row["Website"];
 			return $Obj;
-
+			
 		}
-
+		
 	}
 	else{
 		$Obj = null;
 		return $Obj;
 	}
-
+	
 }
 
 //=================================================
 //function this function echo results in JSON format
 //================================================
 function Display($result){
-	//Check results is not an empty array
+	//Check results is not an empty array 
 	if ($result != null){
 		echo json_encode($result);
 	}
 	else{
-	  echo <<<HTML
-		<script>
-		    function pageRedirect() {
-		        window.location.replace("https://localhost/MathU_Fellowhsip/backend/Coding%20files/db_input_test.html");
-		    }
-		    setTimeout("pageRedirect()", 2000);
-		</script>
-		<p>Your password is incorrect. You will be redirected to the login page in 2 sec.</p>
-HTML;
+		echo "No Results Found";
 	}
 }
 
 //===================================================
-//Creating a Session (Void function)
+//Creating a Session (Void function) 
 //===================================================
-function CreateSession($row){//gets an array to create a session
-
+function CreateSession($row){//gets an array to create a session 
+	
 }
 
 //===================================================
 //Cookie Creation (Void)
 //===================================================
-function CreateCookies($row){//gets an array to create a session
-
+function CreateCookies($row){//gets an array to create a session 
+	
 }
-
-//===================================================
-//Redirect function
-//===================================================
-
 ?>
