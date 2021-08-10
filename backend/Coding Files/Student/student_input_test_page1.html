@@ -1,6 +1,10 @@
 <html>
 <form method="post" action="math_u_add_editStudent.php">
 <h1> Student Input Testing</h1>
+<h2>Student Registration</h2>
+<input type="email" id="u-email" placeholder="Email" name="email" required>
+<input type="password" id="u-password" placeholder="Password" name="password" required>
+<input type="password" placeholder="Confirm Password" name="" required>
 <h2>Personal Details </h2>
 <label for="first_name">First Name</label><br><br>
 <input type="text" id="first_name" placeholder="First Name" name="first_name" required><br><br>
@@ -11,6 +15,7 @@
 
 <label for="province">Province</label><br><br>
 <select id="province" name="province" required>
+
 
 	<option value="" disabled selected hidden>---</option>
 	<option value="Gauteng">Gauteng</option>
@@ -29,15 +34,13 @@
 <label for="contact_number">Contact Number</label><br><br>
 <input type="text" id="contact_number" placeholder="Contact Number" name="contact_number" required><br><br>
 
-<label for="email">Email Address</label><br><br>
-<input type="text" id="email" placeholder="Email address" name="email" required><br><br>
-
 <label for="nationality">What is your nationality?</label><br><br>
 <select id = "nationality" name="nationality" required>
 	<option value="" disabled selected hidden>---</option>
 	<option value="1">South African Citizen</option>
 	<option value="0">Non-South African Citizen</option>
 </select><br><br>
+
 
 <label for="disability">Do you have a disability?</label><br><br>
 <select id = "disability" name="disability" required>
@@ -46,7 +49,7 @@
 	<option value="0">No</option>
 </select><br><br>
 
-	<h2>Studies (High School student)</h2>
+	<h2>Studies</h2>
 	<label for="current_acad">Current academic level</label><br><br>
 	<select id="current_acad" name="current_acad">
 		<option value="" disabled selected hidden>---</option>
