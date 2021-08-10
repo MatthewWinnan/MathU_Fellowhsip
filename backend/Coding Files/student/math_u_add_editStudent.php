@@ -16,8 +16,18 @@ $city = $_POST['city'];
 $nationality = $_POST['nationality'];
 $disability = $_POST['disability'];
 $email = $_POST['email'];
-$submarks = $_POST['submarks'] // this is a nested array
-$filters = $_POST['filters'] //array of filters
+$submarks = $_POST['submarks']; // this is a nested array
+$filters = $_POST['filters']; //array of filters
+$currentacad = $_POST['current_acad'];
+$grade = $_POST['grade'];
+$syllabus = $_POST['syllabus'];
+$studyfurther = $_POST['study_further'];
+$studyinst = $_POST['institution']
+$yearstudy = $_POST['year_of_study']
+$gpa = $_POST['GPA']
+$course = $_POST['course_name']
+$continue = $_POST['continue_studies']
+
 
 $student_id = AddStudent($first_name, $last_name, $dob, $province, $city, $contact_number, $nationality, $disability, $email, $mysqli)
 
@@ -89,6 +99,26 @@ function EditFilters(int $student_id, $filters){
   return $result;
 }
 
+function AddCurrentAcad(){
+  if ($currentacad = 'High School'){
+
+    function AddAcadHS(int $student_id, $currentacad, $grade, $syllabus){
+
+      $sql = "INSERT INTO student (Current_academic_level, Grade, Syllabus) VALUES ('$currentacad', '$grade', '$syllabus') WHERE ID = '".$student_id."'";
+      $result = $mysqli->query($sql)
+  }
+  elseif ($currentacad = 'Undergraduate' or 'Postgraduate') {
+
+    function AddAcadUP(int $student_id, $currentacad, $course, $studyinst, $yearstudy, $gpa, $continue)
+    $sql = "INSERT INTO student (Current_academic_level, Currently_studying, Study_institution, Year_of_study, GPA, Continue_studies) VALUES ('$currentacad', '$course', '$studyinst', '$yearstudy', '$gpa', '$continue') WHERE ID = '".$student_id."'";
+    $result = $mysqli->query($sql)
+  }
+  return $result
+}
+
+
+
+}
 function Display($result){
 	//Check results is not an empty array
 	if ($result != null){
