@@ -76,7 +76,8 @@ export class RegisterPage implements OnInit {
       }
       
     }
-    console.log(this.student_name, this.student_surname);
+    this.the_message = this.student_name;
+    this.printMessage();
   }
 
 
