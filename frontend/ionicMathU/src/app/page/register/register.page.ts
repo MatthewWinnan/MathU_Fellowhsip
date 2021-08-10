@@ -5,6 +5,7 @@ import { ToastController } from '@ionic/angular';
 import { __await } from 'tslib';
 import { stringify } from '@angular/compiler/src/util';
 import { sponsor_users } from 'src/app/model/sponsor_users.model';
+import { student_users } from 'src/app/model/student_users.model';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,11 @@ import { sponsor_users } from 'src/app/model/sponsor_users.model';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  //Student initialize credentials
+  student : student_users;
+  student_name : string="";
+  student_surname : string="";
+  //Sponsor initialize credentials
   sponor : sponsor_users;
   company_name : string = "";
   company_industry : string = "";
@@ -21,7 +27,7 @@ export class RegisterPage implements OnInit {
   password : string = "";
   c_password : string = "";
   the_message : string = "";
-
+  //Password variables
   showPassword = false;
   passwordToggleIcon = 'eye';
   c_showPassword = false;
@@ -35,7 +41,46 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
   }
+  //register code for the students
+  registerMe_Student(){
+    // put in code 
+    //console.log(this.company_name, this.company_industry, this.f_name, this.l_name, this.email_address, this.password, this.c_password)
+    if (this.student_name == ""){
+      this.the_message = 'Please enter a name';
+      this.printMessage();
+    }
+    else if (this.student_surname == ""){
+      this.the_message = 'Please eneter your surname';
+      this.printMessage();
+    }
+    else{
+      let data = {
+        //made dummy variables so project can function
+        id : 0,
+        student_id : "",
+        first_name_of_student : "",
+        last_name_of_student : "",
+        email_address : "",
+        password : "",
+      inactive : "",
+      isVerified : "",
+      regisered_date : "",
+      last_login : "",
 
+        // company_name : this.company_name, 
+        // company_industry : this.company_industry,
+        // f_name : this.f_name,
+        // l_name : this.l_name,
+        // email_address : this.email_address,
+        // password : this.password,
+      }
+      
+    }
+    console.log(this.student_name, this.student_surname);
+  }
+
+
+  //Register code for the sponsors
   registerMe(){
     // put in code 
     //console.log(this.company_name, this.company_industry, this.f_name, this.l_name, this.email_address, this.password, this.c_password)
