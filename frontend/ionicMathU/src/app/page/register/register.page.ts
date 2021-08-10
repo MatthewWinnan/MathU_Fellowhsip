@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { ToastController } from '@ionic/angular';
 import { __await } from 'tslib';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-register',
@@ -53,11 +54,35 @@ export class RegisterPage implements OnInit {
       this.printMessage();
     }
     else if (this.email_address == ""){
-      this.the_message = 'Email address needed';
+      this.the_message = 'Email address needed.';
+      this.printMessage();
+    }
+    else if (this.checkEmailAddress(this.email_address) == false){
+      this.the_message = 'Enter a valid email address.';
       this.printMessage();
     }
     else if (this.password == ""){
       this.the_message = 'Password needed';
+      this.printMessage();
+    }
+    else if (this.password.length < 8){
+      this.the_message = 'Password must be greater than 8 charcters.';
+      this.printMessage();
+    }
+    else if (this.checkUpperCase(this.password) === false){
+      this.the_message = 'Password needs to contain an uppercase letter.';
+      this.printMessage();
+    }
+    else if (this.checkLowerCase(this.password) === false){
+      this.the_message = 'Password needs to contain an lowercase letter.';
+      this.printMessage();
+    }
+    else if (this.checkDigit(this.password) === false){
+      this.the_message = 'Password needs to contain a digit.';
+      this.printMessage();
+    }
+    else if (this.checkSpecialCharacter(this.password) === false){
+      this.the_message = 'Password needs to contain a special character.';
       this.printMessage();
     }
     else if (this.c_password == ""){
@@ -101,6 +126,57 @@ export class RegisterPage implements OnInit {
       });
     }
     
+  }
+
+  checkUpperCase(pass: string):boolean{
+    for (var i=0 ; i<pass.length ; i++){
+      if (pass[i] === pass[i].toUpperCase()){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  checkLowerCase(pass: string):boolean{
+    for (var i=0 ; i<pass.length ; i++){
+      if (pass[i] === pass[i].toLowerCase()){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  checkDigit(pass: string):boolean{
+    for (var i=0 ; i<pass.length ; i++){ 
+      const d = pass.charCodeAt(i);
+      //console.log(pass[i] + ": " + d.toString());
+      if (d <48 || d >57){
+        //console.log("it is false");
+      }
+      else{
+        return true;
+      }
+    }
+    return false;
+  }
+
+  checkSpecialCharacter(pass: string):boolean{
+    var format = /[!@#$%^&*()_+\-=\[\]{};'`~:"\\|,.<>\/?]+/;
+    if (format.test(pass)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  checkEmailAddress(email_add: string):boolean{
+    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (email_add.match(regexEmail)) {
+      return true; 
+    } else {
+      return false; 
+    }
   }
 
   togglePassword():void{
