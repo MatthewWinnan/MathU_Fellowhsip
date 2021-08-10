@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/service/api.service';
 import { ToastController } from '@ionic/angular';
 import { __await } from 'tslib';
 import { stringify } from '@angular/compiler/src/util';
+import { sponsor_users } from 'src/app/model/sponsor_users.model';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +12,7 @@ import { stringify } from '@angular/compiler/src/util';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  sponor : sponsor_users;
   company_name : string = "";
   company_industry : string = "";
   f_name : string = "";
@@ -103,10 +105,10 @@ export class RegisterPage implements OnInit {
         password : this.password,
       }
 
-      this._apiService.registerSponsor(data).subscribe((res:any) => {
-        //console.log("SUCCESS ===", res);
-        this.the_message = res;
-        //"Successfully created an account. Check your email fo the activation email.";
+      this._apiService.registerSponsor(data).subscribe((res:sponsor_users) => {
+        console.log("SUCCESS ===", res);
+        //this.the_message = res;
+        //"Successfully created an account. Check your email for the activation email.";
         this.printMessage();
         //Receive or send?
         this.company_name = "";
