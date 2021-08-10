@@ -1,21 +1,8 @@
 <?php
 
 function getBursaries() {
-
-  date_default_timezone_set ("Africa/Johannesburg");
-  //dB Credentials
-  $user='root';
-  $pass='';
-
-  //dB Name
-  $dBName='math_u_fellows'; // Tested using math_u_fellows_all_updated_tables on my machine
-
-  //Establishing connection
-  $mysqli = new mysqli('localhost', $user, $pass, $dBName);
-
-  if ($mysqli->connect_errno) {
-      echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-    }
+include "math_u_db_connection.php";
+ 
 
 // filters the bursary table
 $bursary_type = $_POST['bursary_type'];
