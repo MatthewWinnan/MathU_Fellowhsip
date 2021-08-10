@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form action="filters.php" method="post">
+
+      <select id="study_field" name="study_field" required>
+      	<option  value="null">Choose your Study Field</option>
+      	<option  value="Engineering">Engineering</option>
+        <option  value="Health Sciences">Health Sciences</option>
+        <option  value="Economic and Management Sciences">Economic and Management Sciences</option>
+        <option  value="Education">Education</option>
+        <option  value="Humanities">Humanities</option>
+        <option  value="Law">Law</option>
+        <option  value="Natural and Agricultural Sciences">Natural and Agricultural Sciences</option>
+        <option  value="Theology">Theology</option>
+      </select><br><br>
+
+      <select id="bursary_type" name="bursary_type" required>
+      	<option  value="null">Choose your Funding Type</option>
+      	<option  value="Bursary">Bursary</option>
+        <option  value="Scholarship">Scholarship</option>
+        <option  value="Learnership">Learnership</option>
+      </select><br><br>
+
+      <select id="academic_level" name="academic_level" required>
+      	<option  value="null">Choose your Academic Level</option>
+      	<option  value="High School">HighSchool</option>
+        <option  value="Undergraduate">Undergraduate</option>
+        <option  value="Postgraduate">Postgraduate</option>
+      </select><br><br>
+
+      <select id="minimum_average" name="minimum_average" required>
+      	<option  value="null">Choose your Minimum Average</option>
+      	<option  value=50>50</option>
+        <option  value=55>55</option>
+        <option  value=60>60</option>
+        <option  value=65>65</option>
+        <option  value=70>70</option>
+        <option  value=75>75</option>
+      </select><br><br>
+
+      <select id="bursary_covers" name="bursary_covers" required>
+        <option  value="null">Funding Covers These Costs</option>
+        <option  value="Tuition">Tuition</option>
+        <option  value="Tuition&Acomodation">Tuition&Acomodation</option>
+        <option  value="Tuition&Acomodation&Stipend">Tuition&Acomodation&Stipend</option>
+      </select><br><br>
+      <button type="submit">Confirm</button>
+    </form>
+    <br>
+  </body>
+</html>
