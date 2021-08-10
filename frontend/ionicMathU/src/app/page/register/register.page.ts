@@ -97,12 +97,29 @@ export class RegisterPage implements OnInit {
     }
     else{
       let data = {
-        company_name : this.company_name, 
-        company_industry : this.company_industry,
-        f_name : this.f_name,
-        l_name : this.l_name,
+        //made dummy variables so project can function
+        //@Raaga please fix??
+        id : 20,
+        sponsor_id : "",
+        first_name_of_user : "",
+        last_name_of_user : "",
         email_address : this.email_address,
         password : this.password,
+        company_id : 0,
+        isSuperAdmin : "",
+        manageBursaries	: "",
+      manageApplications : "",
+      inactive : "",
+      isVerified : "",
+      regisered_date : "",
+      last_login : "",
+
+        // company_name : this.company_name, 
+        // company_industry : this.company_industry,
+        // f_name : this.f_name,
+        // l_name : this.l_name,
+        // email_address : this.email_address,
+        // password : this.password,
       }
 
       this._apiService.registerSponsor(data).subscribe((res:sponsor_users) => {
