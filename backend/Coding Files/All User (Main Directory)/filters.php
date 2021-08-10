@@ -1,15 +1,31 @@
 <?php
 
 function getBursaries() {
-include "math_u_db_connection.php";
- 
+
+  $input = file_get_contents('php://input');
+  $data = json_decode($input, true);
+
+  date_default_timezone_set ("Africa/Johannesburg");
+  //dB Credentials
+  $user='root';
+  $pass='';
+
+  //dB Name
+  $dBName='math_u_fellows'; // Tested using math_u_fellows_all_updated_tables on my machine
+
+  //Establishing connection
+  $mysqli = new mysqli('localhost', $user, $pass, $dBName);
+
+  if ($mysqli->connect_errno) {
+      echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+    }
 
 // filters the bursary table
-$bursary_type = $_POST['bursary_type'];
-$study_field = $_POST['study_field'];
-$minimum_average = $_POST['minimum_average'];
-$bursary_covers = $_POST['bursary_covers'];
-$academic_level = $_POST['academic_level'];
+$bursary_type = $data['bursary_type'];
+$study_field = $data['study_field'];
+$minimum_average = $data['minimum_average'];
+$bursary_covers = $data['bursary_covers'];
+$academic_level = $data['academic_level'];
 
 $sql = "SELECT * FROM `bursaries`
 WHERE `Bursary_Type` LIKE '$bursary_type'
