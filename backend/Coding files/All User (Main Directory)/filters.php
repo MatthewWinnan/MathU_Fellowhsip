@@ -2,9 +2,6 @@
 
 function getBursaries() {
 
-  $input = file_get_contents('php://input');
-  $data = json_decode($input, true);
-
   date_default_timezone_set ("Africa/Johannesburg");
   //dB Credentials
   $user='root';
@@ -21,11 +18,11 @@ function getBursaries() {
     }
 
 // filters the bursary table
-$bursary_type = $data['bursary_type'];
-$study_field = $data['study_field'];
-$minimum_average = $data['minimum_average'];
-$bursary_covers = $data['bursary_covers'];
-$academic_level = $data['academic_level'];
+$bursary_type = $_POST['bursary_type'];
+$study_field = $_POST['study_field'];
+$minimum_average = $_POST['minimum_average'];
+$bursary_covers = $_POST['bursary_covers'];
+$academic_level = $_POST['academic_level'];
 
 $sql = "SELECT * FROM `bursaries`
 WHERE `Bursary_Type` LIKE '$bursary_type'
