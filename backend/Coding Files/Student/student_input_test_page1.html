@@ -10,7 +10,7 @@
 <input type="date" id="date_of_birth" placeholder="Date of Birth" name="date_of_birth" required><br><br>
 
 <label for="province">Province</label><br><br>
-<select id="province" name="province">
+<select id="province" name="province" required>
 
 	<option value="" disabled selected hidden>---</option>
 	<option value="gauteng">Gauteng</option>
@@ -33,16 +33,16 @@
 <input type="text" id="email" placeholder="Email address" name="email" required><br><br>
 
 <label for="nationality">What is your nationality?</label><br><br>
-<select id = "nationality" name="nationality">
+<select id = "nationality" name="nationality" required>
 	<option value="" disabled selected hidden>---</option>
 	<option value="southafrican">South African Citizen</option>
 	<option value="nonsouthafrican">Non-South African Citizen</option>
 </select><br><br>
 <label for="disability">Do you have a disability?</label><br><br>
-<select id = "disability" name="disability">
+<select id = "disability" name="disability" required>
 	<option value="" disabled selected hidden>---</option>
-	<option value="yes">Yes</option>
-	<option value="no">No</option>
+	<option value="1">Yes</option>
+	<option value="0">No</option>
 </select><br><br>
 
 <button  type="submit">Submit</button><br><br>
