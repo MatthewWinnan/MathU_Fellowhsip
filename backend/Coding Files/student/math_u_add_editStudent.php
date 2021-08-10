@@ -88,4 +88,14 @@ function EditFilters(int $student_id, $filters){
   $result = $mysqli->query($sql);
   return $result;
 }
+
+function Display($result){
+	//Check results is not an empty array
+	if ($result != null){
+		echo json_encode($result);
+	}
+	else{
+		echo "No Results Found";
+	}
+}
  ?>
