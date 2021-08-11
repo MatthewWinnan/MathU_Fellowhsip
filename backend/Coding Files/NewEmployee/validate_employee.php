@@ -4,7 +4,6 @@
 // Connection
 //==============================================================================================================================[[[[[[[[[Commets for Benis Here]]]]]]]]]==================
 
-// include("math_u_registration.php");
 if(isset($_POST['submit'])) {
 
 $first_name = $_POST['fname'];
@@ -26,19 +25,10 @@ if(filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE) {
 // viewEmployees();
 // isEmployeeExists();
 runProgram();
-
-
-//=================================================================================
-// INACTIVE FUNCTIONS
-//=================================================================================
-
-// addEmployeeToAllUsers();
-
 }
-// sendEmail();
 
 //===================================================
-// Tables Required: sponsor_user,all_users, company
+// Tables Required: sponsor_user, company
 //===================================================
 
 
@@ -59,10 +49,10 @@ function addNewEmployee(){ //Adds new employee to the database and sends email.
   $regdate = date('Y-m-d');
   $email = strtolower($_POST['email']);
   $sponsor_id = ucfirst($_POST['sponsor_id']);
-  $password = md5($first_name.$sponsor_id.$email);
+  $password = md5($first_name.$sponsor_id);
  // $company_id = '';-----------------------------------CAUSES DATATYPE MISMATCH
   $company_id = getCompanyID($_POST['company_name']);  //===================================================[[[[[Assign the Company ID within the add employee function -> Does not update automatically]]]]]]=============================
-  // echo "<br><br>Company ID: ".$company_id;
+  // echo "Company ID: ".$company_id."<br><br>";
 
   if($role == 'SuperAdmin'){
 
@@ -100,20 +90,19 @@ function runProgram(){
 
 //====================================================================================================
 
-function sendEmail(){
+function sendEmail(){ //===================================================================={{{{{{{{{{{[[[{{{{[[SHOULD BE MODIFIED TO SEND EMAILS FROM AN ONLINE SERVER]]}}}}]]]}}}}}}}}}}}
 
   $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows');
 
   $first_name = $_POST['fname'];
   $email = strtolower($_POST['email']);
   $sponsor_id = ucfirst($_POST['sponsor_id']);
-  $pword = $first_name.$sponsor_id.$email;
+  $pword = $first_name.$sponsor_id;
 
   // Send Email
 
   $to = $email;
   $subject = 'Your account has been created';
-  // $message = "Record Added!";
   $message = "Dear ".$first_name."\n\n"."Your account has been successfully created."."\n\n".
               "Please login using you email address and dummy password: $pword"."\n\n".
               "Please set a new password to verify your account."."\n\n".
@@ -121,7 +110,6 @@ function sendEmail(){
 
   if(mail($to,$subject,$message,'')) {
     echo "<script>alert('Email sent');</script>";
-    // header("Location: view_employees.php");
   } else {
     echo "Failed to send email. Error Code: ".$mysqli->errno;
   };
