@@ -1,9 +1,65 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>view-profile</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title class = "ion-text-center">Profile View</ion-title>
+
+    <ion-buttons slot = "end" (click)="editProfile()">
+      <ion-icon name="pencil-outline" size= "small" ></ion-icon>
+     </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Company Name</ion-card-subtitle>
+      <ion-card-title>C incorparated</ion-card-title>
+
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-subtitle>Company Industry</ion-card-subtitle>
+      <ion-card-title>Engineering Industry</ion-card-title>
+    </ion-card-header>
+     
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Company Logo</ion-card-subtitle>
+      <br>
+      <img src= "assets/mathu-fellows-logo_final.png" alt = "code-logo" width = 200px height = 200 px>
+      
+    </ion-card-header>
+  
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-subtitle>Company Description</ion-card-subtitle>
+      <ion-card-title>This company aims to provide financial assistance for students</ion-card-title>
+    </ion-card-header>
+      
+ </ion-card>
+
+ <ion-card>
+  <ion-card-header>
+    
+    <ion-card-subtitle>Company URL</ion-card-subtitle>
+    <ion-card-title>http....</ion-card-title>
+  </ion-card-header>
+  
+</ion-card>
+
 </ion-content>
+
