@@ -17,8 +17,8 @@
   <div class="summaryCards">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>(company_name)</ion-card-title>
-        <ion-card-subtitle>(company_industry)</ion-card-subtitle>
+        <ion-card-title>{{ companyName }}</ion-card-title>
+        <ion-card-subtitle>{{ companyIndustry }}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
 
@@ -29,11 +29,11 @@
     
       <ion-card-content>
         <ul>
-          <li>(bursary_Name)</li>
-          <li>(field_study_needed)</li>
-          <li>(offer_expirations_date)</li>
-          <li>(bursary_covers_for)</li>
-          <li>(latest_average_above)</li>
+          <li>{{ bursaryName }}</li>
+          <li>{{ fieldStudyNeeded }}</li>
+          <li>{{ offerExpirationDate }}</li>
+          <li>{{ bursaryCoversFor }}</li>
+          <li>{{ latestAverageAbove }}</li>
         </ul>
       </ion-card-content>
     </ion-card>
@@ -42,14 +42,14 @@
   <div [className]="showValid ? 'showMore' : 'showLess'">
     <ion-card>
       <ion-card-header>
-        <ion-card-subtitle>Details about the (company_name)</ion-card-subtitle>
+        <ion-card-subtitle>Details about {{ companyName }}</ion-card-subtitle>
       </ion-card-header>
     
       <ion-card-content>
         <ul>
-          <li>(company_description)</li>
-          <li>(company_URL)</li>
-          <li>(email_address)</li>
+          <li>{{ companyDescription }}</li>
+          <li>{{ companyURL }}</li>
+          <li>{{ emailAddress }}</li>
         </ul>
       </ion-card-content>
     </ion-card>
@@ -61,10 +61,10 @@
     
       <ion-card-content>
         <ul>
-          <li>(bursary_type)</li>
-          <li>(bursary_duration)</li>
-          <li>(field_of_study)</li>
-          <li>current_year_of_study</li>
+          <li>{{ bursaryType }}</li>
+          <li>{{ bursaryDuration }}</li>
+          <li>{{ fieldOfStudy }}</li>
+          <li>{{ currentYearOfStudy }}</li>
         </ul>
       </ion-card-content>
     </ion-card>
@@ -76,11 +76,20 @@
     
       <ion-card-content>
         <ul>
-          <li>Age Range: (age_min) upto (age_max)</li>
-          <li>RSA citizen: (RSA_citizen_needed)</li>
-          <li>Bursary for financial assistence: (for_financial_assistence)</li>
-          <li>Disability: (disability)</li>
-          <li>Study Further: (study_further)</li>
+          <li>Age Range: {{ ageMin }} upto {{ ageMax }}</li>
+          <li>
+            RSA citizen:
+            <ion-icon name="{{RSACitizenNeeded ? 'checkmark-circle-outline' : 'close-circle-outline'}}" slot="start"></ion-icon>
+          </li>
+          <li>
+            Bursary for financial assistence: 
+            {{forFinancialAssistence ? 'Only' : 'Not Only'}}
+          </li>
+          <li>
+            Disability: 
+            {{disability ? 'Only' : 'Not Only'}}
+          </li>
+          <li>Study Further: {{ studyFuther }}</li>
         </ul>
       </ion-card-content>
     </ion-card>
@@ -92,8 +101,13 @@
     
       <ion-card-content>
         <ul>
-          <li>(Documents_needed)</li>
-          <li>(date_for_further_communication)</li>
+          <li>
+            Documents Needed:
+            <ul *ngFor="let doc of documentsNeeded">
+              <li>{{doc.docName}}, Certified: {{doc.docCertified}}</li>
+            </ul>
+          </li>
+          <li>{{ dateForFurtherCommunication }}</li>
         </ul>
       </ion-card-content>
     </ion-card>
