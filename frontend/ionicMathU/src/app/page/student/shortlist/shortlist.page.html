@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" height="50px" style="display: block;
-        margin-left: 20%;
-        margin-right: auto;
-        width: auto;">
+    <ion-title class="ion-text-center">
+      <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" height="50px" width="auto"> 
     </ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="student-menu"></ion-menu-button>
     </ion-buttons>
+    <ion-button fill="none" slot="end">
+      <ion-icon name=""></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -29,6 +29,23 @@
         Select
       </ion-col>
     </ion-row>
+    
+    <ion-button *ngFor="let burs of bursaryShortlist" routerLink="/student-home">
+      <ion-row>
+        <ion-col>
+          {{ burs.bursName }}
+        </ion-col>
+        <ion-col>
+          {{ burs.bursCompName }}
+        </ion-col>
+        <ion-col>
+      
+        </ion-col>
+        <ion-col>
+      
+        </ion-col>
+      </ion-row>
+    </ion-button>
   </ion-grid>
 
 </ion-content>
