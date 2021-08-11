@@ -50,7 +50,7 @@ function addNewEmployee(){ //Adds new employee to the database and sends email.
 
   // Connection
 
-  $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows_all_updated_tables');
+  $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows');
 
 
   $role = $_POST['role_of_employee'];
@@ -102,7 +102,7 @@ function runProgram(){
 
 function sendEmail(){
 
-  $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows_all_updated_tables');
+  $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows');
 
   $first_name = $_POST['fname'];
   $email = strtolower($_POST['email']);
@@ -131,7 +131,7 @@ function sendEmail(){
 //====================================================================================================
 
 function viewEmployees(){
-    $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows_all_updated_tables');
+    $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows');
     $sponsor_id = ucfirst($_POST['sponsor_id']);
     $sql = "SELECT `first_name_of_user`, `last_name_of_user`, `email_address` FROM `sponsor_users` WHERE `sponsor_id` = '$sponsor_id'";
     $entry = $mysqli->query($sql);
@@ -152,7 +152,7 @@ function viewEmployees(){
 
 function getCompanyID() { //====================================================================================================[[[[[[Get Company ID function]]]]]]========================
   // Connection
-  $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows_all_updated_tables');
+  $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows');
   if ($mysqli->connect_errno) {
       echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
       }
@@ -177,7 +177,7 @@ function getCompanyID() { //====================================================
   //====================================================================================================
 
 function isEmployeeExists(){
-  $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows_all_updated_tables');
+  $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows');
   $email = strtolower($_POST['email']);
 
   //Checks if employee is already in sponsor_users, if not, employee gets Added
