@@ -20,6 +20,7 @@
         <ion-label>Student</ion-label>
       </super-tab-button>
 
+
       <super-tab-button>
         <ion-label>Sponsor</ion-label>
       </super-tab-button>
@@ -28,7 +29,40 @@
     <super-tabs-container>
       <super-tab>
         <ion-content>
-          <h2 class="ion-text-center">Student Sign Up</h2>
+
+          <h3>Student details</h3>
+          <ion-list>
+            <ion-item>
+              <ion-input placeholder="Student Name" [(ngModel)]="student_name" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input placeholder="Student Surname" [(ngModel)]="student_surname" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input placeholder="Email Address" [(ngModel)]="student_email" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input placeholder="Password" [(ngModel)]="password" [type]="showPassword ? 'text' : 'password'"></ion-input>
+              <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+            </ion-item>
+
+            <ion-item>
+              <ion-input placeholder="Confirm Password" [(ngModel)]="c_password" [type]="c_showPassword ? 'text' : 'password'"></ion-input>
+              <ion-icon slot="end" [name]="c_passwordToggleIcon" (click)="c_togglePassword()"></ion-icon>
+            </ion-item>
+          </ion-list>
+          <h2> Enter date of birth</h2>
+          <ion-item>
+            <ion-datetime displayFormat="DD MM YY" placeholder="DD/MM/YY" [(ngModel)]="student_dob"></ion-datetime>
+          </ion-item>
+          <br>
+          <div class="ion-text-center">
+            <ion-button color="primary" (click)="registerMe_Student()">Sign Up</ion-button>
+          </div>
+          <br>
+
+
+          
         </ion-content>
       </super-tab>
       <super-tab>
