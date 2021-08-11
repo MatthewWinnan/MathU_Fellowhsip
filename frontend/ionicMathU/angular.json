@@ -9,11 +9,7 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
+      "schematics": { },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

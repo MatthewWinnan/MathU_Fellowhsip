@@ -75,7 +75,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-select value="Select Company Industry" okText="Okay" cancelText="Dismiss" [(ngModel)]="company_industry">
+              <ion-select value="Select Company Industry" okText="Okay" cancelText="Dismiss" [(ngModel)]="sponsor.company.company_industry">
                 <ion-select-option value="Select Company Industry">Select Company Industry</ion-select-option>
                 <ion-select-option value="IT">IT</ion-select-option>
                 <ion-select-option value="etc">etc</ion-select-option>
@@ -89,19 +89,19 @@
           <h3>Super Admin details</h3>
           <ion-list>
             <ion-item>
-              <ion-input placeholder="First Name" [(ngModel)]="f_name" type="text"></ion-input>
+              <ion-input placeholder="First Name" [(ngModel)]="sponsor.first_name_of_user" type="text"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-input placeholder="Last Name" [(ngModel)]="l_name" type="text"></ion-input>
+              <ion-input placeholder="Last Name" [(ngModel)]="sponsor.last_name_of_user" type="text"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-input placeholder="Email address" [(ngModel)]="email_address" type="Email"></ion-input>
+              <ion-input placeholder="Email address" [(ngModel)]="sponsor.email_address" type="Email"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-input placeholder="Password" [(ngModel)]="password" [type]="showPassword ? 'text' : 'password'"></ion-input>
+              <ion-input placeholder="Password" [(ngModel)]="sponsor.password" [type]="showPassword ? 'text' : 'password'"></ion-input>
               <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
             </ion-item>
 
