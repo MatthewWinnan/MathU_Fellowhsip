@@ -18,8 +18,8 @@ export class Bursary {
     province? = "";          //
     bursary_covers = [];    //array
     closing_date = "";  //compulsary 
+    shortlist_date = "";    //compulsary
     email_address = "";     //compulsary
     bursary_duration = 0;       //compulsary
-    shortlist_date = "";    //compulsary
     isVisible = true;       //mostly true 
 }
