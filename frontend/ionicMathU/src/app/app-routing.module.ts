@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'view-profile',
     loadChildren: () => import('./page/sponsor/view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
   },
+  {
+    path: 'student-home',
+    loadChildren: () => import('./page/student/student-home/student-home.module').then( m => m.StudentHomePageModule)
+  },
 ];
 
 @NgModule({
