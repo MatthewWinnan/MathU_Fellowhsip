@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
+    <ion-button slot="start" fill="none">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-button>
+    <ion-button slot="end">
+      <ion-icon></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2 class="ion-text-center">Edit Bursary</h2>
+  <form [formGroup]="addBursary" (ngSubmit)="addBursarySubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Bursary Name</ion-label>
+        <ion-input formControlName="bursary_name" autocapitalize inputmode="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.bursary_name">
+        <ng-container *ngIf="bursary_name.hasError(error.type) && (bursary_name.dirty || bursary_name.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Bursary type</ion-label>
+        <ion-select formControlName="bursary_type">
+          <ion-select-option value="">Select Bursary Type</ion-select-option>
+          <ion-select-option value="Bursary">Bursary</ion-select-option>
+          <ion-select-option value="Work Back">Work Back</ion-select-option>
+          <ion-select-option value="Full Bursary">Full Bursary</ion-select-option>
+          <ion-select-option value="Partial Bursary">Partial Bursary</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.bursary_type">
+        <ng-container *ngIf="bursary_type.hasError(error.type) && (bursary_type.dirty || bursary_type.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Bursary Description</ion-label>
+        <ion-input formControlName="bursary_description" inputmode="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.bursary_description">
+        <ng-container *ngIf="bursary_description.hasError(error.type) && (bursary_description.dirty || bursary_description.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Email Address</ion-label>
+        <ion-input formControlName="email_address_bursary" inputmode="email"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.email_address_bursary">
+        <ng-container *ngIf="email_address_bursary.hasError(error.type) && (email_address_bursary.dirty || email_address_bursary.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+    </ion-list>
+    <ion-list class="ion-text-center">
+      <ion-button [disabled]="!addBursary.valid" type="submit" color="">
+        Submit
+      </ion-button>
+    </ion-list>
+  </form>
+</ion-content>

@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
 
   logMeIn(){
     // put in code 
-    this.router.navigate(['./student-view-profile']);
+    this.router.navigate(['./view-profile']);
   }
 
   goBack(){

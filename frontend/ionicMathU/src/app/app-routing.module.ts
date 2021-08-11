@@ -30,7 +30,15 @@ const routes: Routes = [
   {
     path: 'student-view-profile',
     loadChildren: () => import('./page/student/student-view-profile/student-view-profile.module').then( m => m.ViewStudentPageModule)
+  },  {
+    path: 'edit-bursary',
+    loadChildren: () => import('./page/sponsor/edit-bursary/edit-bursary.module').then( m => m.EditBursaryPageModule)
   },
+  {
+    path: 'view-bursary',
+    loadChildren: () => import('./page/sponsor/view-bursary/view-bursary.module').then( m => m.ViewBursaryPageModule)
+  },
+
 ];
 
 @NgModule({
