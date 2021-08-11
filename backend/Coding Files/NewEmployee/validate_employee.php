@@ -60,7 +60,7 @@ function addNewEmployee(){ //Adds new employee to the database and sends email.
   $email = strtolower($_POST['email']);
   $sponsor_id = ucfirst($_POST['sponsor_id']);
   $password = md5($first_name.$sponsor_id.$email);
-  $company_id = '';
+ // $company_id = '';-----------------------------------CAUSES DATATYPE MISMATCH
   $company_id = getCompanyID($_POST['company_name']);  //===================================================[[[[[Assign the Company ID within the add employee function -> Does not update automatically]]]]]]=============================
   // echo "<br><br>Company ID: ".$company_id;
 
@@ -153,6 +153,7 @@ function viewEmployees(){
 function getCompanyID() { //====================================================================================================[[[[[[Get Company ID function]]]]]]========================
   // Connection
   $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows');
+  $res = 0;//NEW VARIABLE
   if ($mysqli->connect_errno) {
       echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
       }
@@ -162,10 +163,10 @@ function getCompanyID() { //====================================================
               $sql = "SELECT `company_id` FROM `company` WHERE `company_name` = '$company_name' LIMIT 1";
                 if($res1 = $mysqli->query($sql)){
                   $res2 = mysqli_fetch_array($res1, MYSQLI_ASSOC);
-                  $res = print($res2['company_id']);
+                  $res = $res2['company_id'];//REMOVED PRINT
 
           } else {
-            $res = "Query not processed".$mysqli->errno;
+            echo "Query not processed".$mysqli->errno;
           }
 
       } else {
