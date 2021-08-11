@@ -6,7 +6,7 @@ import { __await } from 'tslib';
 import { Sponsor_users } from '../../model/sponsor_users';
 import { Company } from '../../model/company';
 import { stringify } from '@angular/compiler/src/util';
-import { Student_users } from '../../model/student_users';
+import { student_users } from '../../model/student_users.model';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +16,7 @@ import { Student_users } from '../../model/student_users';
 export class RegisterPage implements OnInit {
   sponsor = new Sponsor_users() ;
   //Student initialize credentials
-  student : Student_users;
+  student : student_users;
   student_name : string="";
   student_surname : string="";
   //Sponsor initialize credentials
