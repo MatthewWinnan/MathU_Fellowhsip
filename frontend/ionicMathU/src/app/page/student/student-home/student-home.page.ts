@@ -8,27 +8,49 @@ import { Router } from '@angular/router';
 })
 export class StudentHomePage implements OnInit {
 
+  showValid: boolean = false;
+  viewMoreStr: string = "View More";
+  viewLessStr: string = "View Less";
+
   constructor(
     private router: Router
   ) { }
 
   ngOnInit() {
   }
+
+  rightOption() {
+    this.showValid ? this.applyBursary() : this.nextBursary()
+  }
+
+  leftOption() {
+    this.showValid ? this.dismissBursary() : this.prevBursary()
+  }
+
   nextBursary() {
-    console.log("NextBursary()")
+    console.log("nextBursary()")
   }
 
   prevBursary() {
-    console.log("PrevBursary()")
+    console.log("prevBursary()")
+  }
+  
+  applyBursary() {
+    console.log("applyBursary()")
+  }
+
+  dismissBursary() {
+    console.log("dismissBursary()")
   }
 
   viewMore() {
-    console.log("ViewMore()")
-    /* this.router.navigate(['/bursary-more-info']) */
+    console.log("viewMore()")
+    this.showValid = !this.showValid
   }
 
   filter() {
     console.log("Filter()")
   }
+
 
 }

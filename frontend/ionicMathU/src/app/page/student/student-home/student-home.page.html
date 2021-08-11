@@ -14,16 +14,14 @@
 
 <ion-content>
 
-  <div class="topCard">
+  <div class="summaryCards">
     <ion-card>
       <ion-card-header>
         <ion-card-title>(company_name)</ion-card-title>
         <ion-card-subtitle>(company_industry)</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
-  </div>
 
-  <div class="botCard">
     <ion-card>
       <ion-card-header>
         <ion-card-subtitle>Summary Details</ion-card-subtitle>
@@ -41,18 +39,80 @@
     </ion-card>
   </div>
 
+  <div [className]="showValid ? 'showMore' : 'showLess'">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Details about the (company_name)</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ul>
+          <li>(company_description)</li>
+          <li>(company_URL)</li>
+          <li>(email_address)</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Bursary Details</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ul>
+          <li>(bursary_type)</li>
+          <li>(bursary_duration)</li>
+          <li>(field_of_study)</li>
+          <li>current_year_of_study</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Criteria</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ul>
+          <li>Age Range: (age_min) upto (age_max)</li>
+          <li>RSA citizen: (RSA_citizen_needed)</li>
+          <li>Bursary for financial assistence: (for_financial_assistence)</li>
+          <li>Disability: (disability)</li>
+          <li>Study Further: (study_further)</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Application Process</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ul>
+          <li>(Documents_needed)</li>
+          <li>(date_for_further_communication)</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
   <ion-footer >
     <div class="bottomNavigation">
-      <ion-button fill="none" (click)="prevBursary()">
-        <ion-icon name="chevron-back-outline" slot="start"></ion-icon>
+      <ion-button fill="none" (click)="leftOption()">
+        <ion-icon name="{{showValid ? 'close-outline' : 'chevron-back-outline'}}" slot="start"></ion-icon>
       </ion-button>
   
       <ion-button shape="circle" (click)="viewMore()">
-        <ion-label>View More</ion-label>
+        <ion-label>
+          {{showValid ? 'View Less' : 'View More'}}
+        </ion-label>
       </ion-button>
       
-      <ion-button fill="none" (click)="nextBursary()">
-        <ion-icon name="chevron-forward-outline" slot="start"></ion-icon>
+      <ion-button fill="none" (click)="rightOption()">
+        <ion-icon name="{{showValid ? 'checkmark-outline' : 'chevron-forward-outline'}}" slot="start"></ion-icon>
       </ion-button>
     </div>
   </ion-footer>
