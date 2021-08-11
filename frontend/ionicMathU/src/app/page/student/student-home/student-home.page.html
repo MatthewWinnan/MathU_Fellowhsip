@@ -24,12 +24,11 @@
 
     <ion-card>
       <ion-card-header>
-        <ion-card-subtitle>Summary Details</ion-card-subtitle>
+        <ion-card-subtitle>{{ bursaryName }}</ion-card-subtitle>
       </ion-card-header>
     
       <ion-card-content>
         <ul>
-          <li>{{ bursaryName }}</li>
           <li>{{ fieldStudyNeeded }}</li>
           <li>{{ offerExpirationDate }}</li>
           <li>{{ bursaryCoversFor }}</li>
@@ -62,9 +61,9 @@
       <ion-card-content>
         <ul>
           <li>{{ bursaryType }}</li>
-          <li>{{ bursaryDuration }}</li>
-          <li>{{ fieldOfStudy }}</li>
-          <li>{{ currentYearOfStudy }}</li>
+          <li>The duration the bursary will cover {{ bursaryDuration }}</li>
+          <li>{{ academicLevel }}</li>
+          <li>{{ minYearRequired }} and above</li>
         </ul>
       </ion-card-content>
     </ion-card>
@@ -89,7 +88,7 @@
             Disability: 
             {{disability ? 'Only' : 'Not Only'}}
           </li>
-          <li>Study Further: {{ studyFuther }}</li>
+          <li>Study Further: {{ studyFurther }}</li>
         </ul>
       </ion-card-content>
     </ion-card>

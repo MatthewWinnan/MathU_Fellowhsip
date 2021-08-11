@@ -25,8 +25,8 @@ export class StudentHomePage implements OnInit {
 
   bursaryType: string = "<bursary_type>";
   bursaryDuration: string = "<bursary_duration>";
-  fieldOfStudy: string = "<field_of_study>";
-  currentYearOfStudy: string = "<current_year_of_study>";
+  academicLevel: string = "<academic_level>";
+  minYearRequired: string = "<min_year_required>";
 
   ageMin: string = "<age_min>";
   ageMax: string = "<age_max>";
