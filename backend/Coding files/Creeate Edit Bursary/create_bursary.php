@@ -55,8 +55,8 @@
             
             <!-- Bursary Date Start-->
             <div>
-                <label>Bursary Application End Date: (Please Enter Date As Year/Month/Day)</label><br>
-                <input type="text" name="bursaryEnddate" value="" placeholder="Enter Date Here.." >
+                <label>Bursary Application End Date:</label><br>
+                <input type="date" name="bursaryEnddate" value="" placeholder="Enter Date Here.." >
             </div><br>
             <!--Bursary Date End-->
 
@@ -213,10 +213,19 @@
 
             <!-- Bursary Date For Further Communication Start-->
             <div>
-                <label>Date For Further Communication: (Please Enter Date As Year/Month/Day)</label><br>
-                <input type="text" name="bursaryCommunicationDate" value="" placeholder="Enter Date Here..">
+                <label>Date For Further Communication:</label><br>
+                <input type="date" name="bursaryCommunicationDate" value="" placeholder="Enter Date Here..">
             </div><br>
             <!-- Bursary Date For Further Communication End-->
+
+            <!-- Bursary Description  Start-->
+            <div>
+                <label>Bursary Description:</label><br>
+                <input type="text" name="bursaryDescription" style="height:200px" size="100"  value="" placeholder="Enter Bursary Description Here..">
+            </div><br>
+
+            <!-- Bursary Description End-->
+
             
             <button type="submit" name="submit" class="btn btn-primary" value="submit">SAVE BURSARY</button>
         </form>

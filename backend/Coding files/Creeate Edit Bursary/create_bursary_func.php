@@ -1,82 +1,73 @@
 <?php
 
-include 'session.php';
-
-$_SESSION['bursary_name'] = $_POST['bursary_name'];
-//echo $_SESSION['bursary_name'];
-
-
-
-
 function createBursary(){
-    //Database Connection Start...
-    date_default_timezone_set ("Africa/Johannesburg");
+    //Have to include connection file here
     $url="localhost";
     $username = "root";
     $password = "";
     $dbname = "math_u_fellows";
-    $checkbox1 = $_POST['covers'];
-    $chk="";  
-    foreach($checkbox1 as $chk1)  
-       {  
-          $chk.= $chk1.",";  
-       }  
-
     $conn = mysqli_connect($url, $username, $password, $dbname);
-    //Database Connection End
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-    
-    // Single Checkboxes_variables
+
     $rsaCitizen = isset($_POST['rsaCitizen']) ? "1" : "0";
     $financialAssistance= isset($_POST['financialAssistance']) ? "1" : "0";
     $studyFurther = isset($_POST['studyFurther']) ? "1" : "0";
     $disability = isset($_POST['disability']) ? "1" : "0";
 
-    //=============================VARIABLES==============================================
-
-    //=============================VARIABLES==============================================
     //Date Created
     $date_created = date("Y-m-d");
-
-    
-    /*
-    Here we assume that whoever logs in from company's side will be able to add/edit bursary
-    So we will store his/her email in a session variable from the moment he/she logs in
-    With the stored email we query sponsor_users table to get company_id and store it in $result variable
-    We use the company_id to INSERT bursary details in bursaries 
-    */
-    //=========== TO GET COMPANY ID===============
-    $email = 'dflorrian@jbsr.com'; //?????This will change for now it's just a test?????
-    $sql= "SELECT * FROM `sponsor_users` WHERE email_address = 'dflorrian@jbsr.com'";
-    $result = mysqli_query($conn,$sql);
+    //We have to keep track of user email from the moment he/she log in 
+    $email = 'augustnoheart@godspeed.com'; //?????This will change for now it's just a test?????
+    $sql1= "SELECT * FROM `sponsor_users` WHERE email_address = 'augustnoheart@godspeed.com'"; //Query sponsor table to get company_id with users email
+    $result = mysqli_query($conn,$sql1);
     $row = mysqli_fetch_assoc($result);
-    $result = $row["company_id"];
-    //echo $result;
+    $result = $row["company_id"];//company_id
 
-    //Query Start
-    $sql = "INSERT INTO bursaries(Company_ID,Bursary_Name,WB_Duration,Closing_Date,Minimum_Age,Maximum_Age,Bursary_Duration,Minimum_Average,Email_Address,Shortlist_Date,Bursary_Covers,
-    Bursary_Type,Academic_Level,Study_Field,Current_Year,Province,RSA_Citizen,Financial_Need,Study_Further,Disability,Date_Created) 
+    //Querys Start
+    $sql = "INSERT INTO bursaries(Company_ID,Bursary_Name,WB_Duration,Closing_Date,Minimum_Age,Maximum_Age,Bursary_Duration,Minimum_Average,Email_Address,Shortlist_Date,
+    Bursary_Type,Academic_Level,Study_Field,Minimum_Year_Of_Study,Province,RSA_Citizen,Financial_Need,Study_Further,Disability,Date_Created,Description) 
     VALUES($result,'$_POST[bursary_name]','$_POST[WorkBackDuration]','$_POST[bursaryEnddate]','$_POST[minAge]','$_POST[maxAge]','$_POST[bursaryDuration]','$_POST[requiredMarks]','$_POST[bursaryEmail]',
-    '$_POST[bursaryCommunicationDate]','$chk','$_POST[bursaryType]','$_POST[academicLevel]','$_POST[fieldOfstudy]','$_POST[yearOfstudy]',
-    '$_POST[province]',$rsaCitizen,$financialAssistance,$studyFurther,$disability,'$date_created')";
-    //Query End
-    
-    //Running Queries
+    '$_POST[bursaryCommunicationDate]','$_POST[bursaryType]','$_POST[academicLevel]','$_POST[fieldOfstudy]','$_POST[yearOfstudy]',
+    '$_POST[province]',$rsaCitizen,$financialAssistance,$studyFurther,$disability,'$date_created','$_POST[bursaryDescription]')";
+
     $run_query = mysqli_query($conn,$sql);
-    
-    //$run_query4 = mysqli_query($conn,$sql4);
-    if($run_query) {
-    
-        echo 'Query added sucessfully';
-    } 
-    else {
+    if($run_query){
+        echo 'Query added sucessfully<br>';
+    } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
-    mysqli_close($conn);
+    return $result; //Returns Company_id
 }
 
+function coversFor(){
+    //Have to include connection file here
+    $rs = createBursary(); //Company_id
+    $url="localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "math_u_fellows";
+    $checkbox1 = $_POST['covers'];
+    $chk="";
+    foreach($checkbox1 as $chk1){
+        $chk.= $chk1.",";
+    }
+    $conn = mysqli_connect($url, $username, $password, $dbname);
 
-createBursary();
+    $sql2 = "SELECT * FROM `bursaries` WHERE Company_ID = $rs"; //query bursaries table for Bursary_ID 
+    $bursary_id = mysqli_query($conn,$sql2);
+    $row = mysqli_fetch_assoc($bursary_id);
+    $bursary_id = $row["Bursary_ID"];//Bursary_ID
+
+    $sql3 = "INSERT INTO bursary_covers(Bursary_ID,Bursary_Covers) VALUES ($bursary_id,'$chk')";
+    $run_query = mysqli_query($conn,$sql3);
+
+    if($run_query){
+        echo 'Query added sucessfully<br>';
+    } else {
+        echo "Error: " . $sql3 . "<br>" . mysqli_error($conn);
+    }
+    return $bursary_id;
+}
+
+coversFor()
+
 ?>
