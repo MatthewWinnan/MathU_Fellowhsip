@@ -215,7 +215,7 @@
             <!-- Bursary Date For Further Communication End-->
             
             <button type="submit" name="submit" class="btn btn-primary" value="submit">EDIT BURSARY</button>
-            
+        
         </form>
     </div>  
 </body>

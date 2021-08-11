@@ -34,6 +34,9 @@ function createBursary(){
     $studyFurther = isset($_POST['studyFurther']) ? "1" : "0";
     $disability = isset($_POST['disability']) ? "1" : "0";
 
+    //=============================VARIABLES==============================================
+
+    //=============================VARIABLES==============================================
     //Date Created
     $date_created = date("Y-m-d");
 
