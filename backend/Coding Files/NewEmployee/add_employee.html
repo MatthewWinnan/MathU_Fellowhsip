@@ -1,0 +1,15 @@
+<form action="validate_employee.php" method="post">
+  First Name: <input type="text" name="fname" required><br><br>
+  Last Name: <input type="text" name="lname" required><br><br>
+  Email: <input type="email" name="email" required><br><br>
+  Company Name: <input type="text" name="company_name" required><br><br>
+  Sponsor ID: <input type="text" name="sponsor_id" required><br><br>
+  Role of Employee<br><select name="role_of_employee" required>
+    <option  placeholder="Role" </option>
+    <option  value="SuperAdmin">SuperAdmin</option>
+    <option  value="manageBursaries">manageBursaries</option>
+    <option  value="manageApplications">manageApplications</option>
+  </select><br><br>
+  <button type="submit" name="submit">Add Employee</button>
+
+</form>
