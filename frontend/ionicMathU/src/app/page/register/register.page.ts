@@ -81,6 +81,8 @@ export class RegisterPage implements OnInit {
       
     }
     console.log(this.student_name, this.student_surname);
+    //this.router.navigate(['./login']);
+    this.router.navigate(['./student-view-profile']);
   }
 
 
@@ -89,7 +91,7 @@ export class RegisterPage implements OnInit {
     // put in code 
     //console.log(this.company_name, this.company_industry, this.f_name, this.l_name, this.email_address, this.password, this.c_password)
     console.log(this.sponsor);
-    this.router.navigate(['./login']);
+    this.router.navigate(['./view-profile']);
     // if (this.sponsor.company.company_name == ""){
     //   this.the_message = 'Company name needed';
     //   this.printMessage();
