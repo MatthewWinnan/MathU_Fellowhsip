@@ -54,6 +54,16 @@ function UpdateCity($student_id, $city, $mysqli){
   }
 }
 
+function UpdateContact($student_id, $contact_number, $mysqli){
+  $sql = "UPDATE student SET Contact_number = '$contact_number' WHERE ID = '".$student_id."'";
+  if (mysqli_query($mysqli, $sql)) {
+   echo "Contact number updated successfully !";
+  } else {
+   echo "Error: " . $sql . "
+" . mysqli_error($mysqli);
+  }
+}
+
 function UpdateNationality($student_id, $nationality, $mysqli){
   $sql = "UPDATE student SET Nationality = '$nationality' WHERE ID = '".$student_id."'";
   if (mysqli_query($mysqli, $sql)) {
@@ -138,7 +148,7 @@ function AllSubjects($student_id, $subjects, $mysqli){ //takes in an array of su
       array_push($ids, $last_id);
     }
     echo "Subjects added successfully! <br>";
-    return $ids
+    return $ids;
 }
 
 
@@ -286,6 +296,16 @@ function UpdateBursaries($student_id, $bursary, $mysqli){
   }
 }
 
+function UpdateWorkback($student_id, $workback, $mysqli){
+  $sql = "UPDATE student SET Workback = '$workback' WHERE ID = $student_id";
+  if (mysqli_query($mysqli, $sql)) {
+   echo "Workback updated successfully !";
+  } else {
+   echo "Error: " . $sql . "
+" . mysqli_error($mysqli);
+  }
+}
+
 function UpdateWebsite($student_id, $website, $mysqli){
   $sql = "UPDATE student SET Website = '$website' WHERE ID = $student_id";
   if (mysqli_query($mysqli, $sql)) {
@@ -296,7 +316,7 @@ function UpdateWebsite($student_id, $website, $mysqli){
   }
 }
 
-function AddFilters($student_id, $filter, $mysqli){
+/*function AddFilters($student_id, $filter, $mysqli){
   $sql = "INSERT INTO filters (Student_ID, Filter) VALUES ('$student_id', '$filter')";
   if($mysqli->query($sql) === TRUE){
     return $mysqli->insert_id;
@@ -317,6 +337,5 @@ function UpdateFilters($f_id, $filter, $mysqli){
 " . mysqli_error($mysqli);
   }
 }
-
-
+*/
  ?>

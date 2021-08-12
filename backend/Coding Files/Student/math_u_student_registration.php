@@ -1,9 +1,5 @@
 <?php
 
-include_once 'math_u_registration.php';
-include_once 'math_u_db_connection.php';
-
-
 function AddStudent($email, $hashed_pass, $mysqli){
 
   $date = date("Y-m-d");
