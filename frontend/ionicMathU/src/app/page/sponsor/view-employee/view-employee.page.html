@@ -7,7 +7,7 @@
 
     <ion-title class = "ion-text-center">Employee View</ion-title>
 
-    <ion-button fill="none"  color= "black" slot = "end" (click)="editEmployee()">
+    <ion-button fill="none"  slot = "end" (click)="editEmployee()">
       <ion-icon name="add-outline"  size= "small" ></ion-icon>
      </ion-button>
 
@@ -16,112 +16,43 @@
 
 <ion-content>
 
-  <ion-card>
+  <ion-card *ngFor = 'let item of SuperAdminDetails'>
     <ion-card-header>
       <ion-card-subtitle>Super Admin</ion-card-subtitle>
       <ion-card-title></ion-card-title>
-      <ion-item> First Name </ion-item> 
+      <ion-item> {{ item.firstName }} </ion-item> 
 
-      
-
-       <ion-item> Last Name </ion-item>
-      <ion-item> email adress </ion-item>
+       <ion-item> {{ item.lastName }} </ion-item>
+      <ion-item>{{ item.adress }}</ion-item>
 
 
     </ion-card-header>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngFor = 'let item of EmployeeDetails'>
     <ion-card-header>
       
       <ion-card-subtitle>Employee</ion-card-subtitle>
       <ion-card-title></ion-card-title>
-      <ion-item> First Name </ion-item> <ion-item> Last Name </ion-item>
-      <ion-item> email adress</ion-item>
-      <ion-item> Rights</ion-item>
+      <ion-item> {{ item.FirstName }} </ion-item>
+      <ion-item> {{ item.LastName }} </ion-item>
+      <ion-item> {{ item.Adress }}</ion-item>
+      <ion-item> {{ item.Rights }}</ion-item>
 
-      <ion-toolbar>
-        <ion-button fill="none"  color= "black"  slot = "start" (click)="editEmployee()">
+      <ion-toolbar>      
+        <ion-button fill="none"  color= "black" slot= "start"  (click)="addEmployee()">
           <ion-icon name="brush-outline"  size= "small" ></ion-icon>
         </ion-button>
 
-        <ion-button fill="none"  color= "black"  slot = "end" (click)="editEmployee()">
+        <ion-button fill="none"  color= "black"   slot = "end" (click)="editEmployee()">
           <ion-icon name="close-circle-outline"  size= "small" ></ion-icon>
         </ion-button>
-      </ion-toolbar>
+      </ion-toolbar>  
+      
 
     </ion-card-header>
      
   </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-
-      <ion-card-subtitle>Employee</ion-card-subtitle>
-      <ion-card-title></ion-card-title>
-      <ion-item> First Name </ion-item> <ion-item> Last Name </ion-item>
-      <ion-item> email adress</ion-item>
-      <ion-item> Rights</ion-item>
-
-      <ion-toolbar>
-        <ion-button fill="none"  color= "black"  slot = "start" (click)="editEmployee()">
-          <ion-icon name="brush-outline"  size= "small" ></ion-icon>
-        </ion-button>
-
-        <ion-button fill="none"  color= "black"  slot = "end" (click)="editEmployee()">
-          <ion-icon name="close-circle-outline"  size= "small" ></ion-icon>
-        </ion-button>
-      </ion-toolbar>
-      
-    </ion-card-header>
-  
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      
-     <ion-card-subtitle>Employee</ion-card-subtitle>
-      <ion-card-title></ion-card-title>
-      <ion-item> First Name </ion-item> <ion-item> Last Name </ion-item>
-      <ion-item> email adress</ion-item>
-      <ion-item> Rights</ion-item>
-
-      <ion-toolbar>
-        <ion-button fill="none"  color= "black"  slot = "start" (click)="editEmployee()">
-          <ion-icon name="brush-outline"  size= "small" ></ion-icon>
-        </ion-button>
-
-        <ion-button fill="none"  color= "black"  slot = "end" (click)="editEmployee()">
-          <ion-icon name="close-circle-outline"  size= "small" ></ion-icon>
-        </ion-button>
-      </ion-toolbar>
-
-    </ion-card-header>
-      
- </ion-card>
-
- <ion-card>
-  <ion-card-header>
-    
-    <ion-card-subtitle>Employee</ion-card-subtitle>
-      <ion-card-title></ion-card-title>
-      <ion-item> First Name </ion-item> <ion-item> Last Name </ion-item>
-      <ion-item> email adress</ion-item>
-      <ion-item> Rights</ion-item>
-
-      <ion-toolbar>
-        <ion-button fill="none"  color= "black"  slot = "start" (click)="editEmployee()">
-          <ion-icon name="brush-outline"  size= "small" ></ion-icon>
-        </ion-button>
-
-        <ion-button fill="none"  color= "black"  slot = "end" (click)="editEmployee()">
-          <ion-icon name="close-circle-outline"  size= "small" ></ion-icon>
-        </ion-button>
-      </ion-toolbar>
-
-  </ion-card-header>
-  
-</ion-card>
 
 </ion-content>
 
