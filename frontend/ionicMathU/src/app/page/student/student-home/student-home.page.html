@@ -6,7 +6,7 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="student-menu"></ion-menu-button>
     </ion-buttons>
-    <ion-button fill="none" routerLink="/shortlist" slot="end">
+    <ion-button fill="none" (click)="filter()" routerLink="/student-home" slot="end">
       <ion-icon small style="margin-left: 5px;" name="funnel"></ion-icon>
     </ion-button>
   </ion-toolbar>
