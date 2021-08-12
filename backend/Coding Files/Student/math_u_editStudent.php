@@ -95,7 +95,7 @@ if(isset($_POST['email']) and isset($_POST['password'])){
 		if (UpdateStudentID($student_id, $u_id, $mysqli)===TRUE){
 
 		  if (AddToUsers($email, $u_id, $mysqli) === TRUE){
-			echo "New user added successfully";
+			echo "New user added successfully <br>";
       echo json_encode(display($student_id, $mysqli));
 		  }
 		}
@@ -124,10 +124,11 @@ function QueryStudents($email, $mysqli){
 }
 
 function display($student_id, $mysqli){
-	$sql = "SELECT * FROM student WHERE ID = $student_id AND IS NOT NULL";
+	$sql = "SELECT * FROM student WHERE ID = '".$student_id."'";
 	$result = $mysqli->query($sql);
 
 	if ($result->num_rows>0){
+    $row = $result->fetch_assoc();
     $Obj = new \stdClass();
     $Obj->name = $row["First_name"];
     $Obj->surname = $row["Last_name"];
