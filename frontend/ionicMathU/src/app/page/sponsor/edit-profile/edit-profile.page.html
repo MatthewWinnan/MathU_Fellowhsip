@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill = "none" slot = "start" (click)= "viewProfile()">
+      <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
+    </ion-button>
+
+    <ion-title class = "ion-text-center" >
+      Edit Profile
+    </ion-title>
+
+   <ion-button fill = "none" slot = "end" (click)="acceptChanges()">
+    <ion-icon name="checkmark-outline" size= "small" color = "green"></ion-icon>
+   </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Company Name</ion-card-subtitle>
+      <ion-card-title>
+      C incorparated
+    </ion-card-title> 
+
+    </ion-card-header>
+  
+    <ion-card-content></ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-subtitle>Company Industry</ion-card-subtitle>
+      <ion-card-title>
+        Engineering
+      </ion-card-title>
+    </ion-card-header>
+     
+  </ion-card>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Company Logo</ion-card-subtitle>
+      <br>
+      
+       <img src="assets/mathu-fellows-logo_final.png" width = 200px height = 200 px />
+       
+      
+    </ion-card-header>
+  
+  </ion-card>
+
+  <ion-card>
+      <ion-card-header>
+        
+        <ion-card-subtitle>Company Description</ion-card-subtitle>
+        <ion-card-title>
+          <ion-item>
+          <ion-input placeholder = "Company Description"></ion-input>
+          </ion-item>
+        </ion-card-title>
+      </ion-card-header>
+    
+      
+   </ion-card>
+
+   <ion-card>
+    <ion-card-header>
+      
+      <ion-card-subtitle>Company URL</ion-card-subtitle>
+      <ion-card-title>
+        <ion-item>
+          <ion-input placeholder = "Company URL"></ion-input>
+        </ion-item>
+      </ion-card-title>
+    </ion-card-header>
+  
+    
+ </ion-card>
+
+</ion-content>
+

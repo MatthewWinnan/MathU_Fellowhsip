@@ -1,5 +1,7 @@
 {
   "name": "ionicMathU",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
