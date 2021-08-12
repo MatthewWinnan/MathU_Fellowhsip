@@ -7,11 +7,8 @@
 //ALL USERS
 //--------------
 class all_users{
-	public $Email_address;
-
-	public function __construct($Email_address){
-		$this->Email_address = $Email_address;
-	}n
+	public student $Student;
+	public sponsor_users $Sponsor;
 }
 
 //--------------
@@ -118,8 +115,9 @@ class company{
 //--------------
 class sponsor_users{
 
-	new company($company_id=0, $company_logo="", $company_industry="", $company_description="", $company_URL="", $number_of_reports=0);
-
+	//new company($company_id=0, $company_logo="", $company_industry="", $company_description="", $company_URL="", $number_of_reports=0);
+	
+	public company $Company;
 	public $sponsor_id;
 	public $first_name_of_user;
 	public $last_name_of_user;
@@ -151,7 +149,7 @@ class sponsor_users{
 //--------------
 class student{
 
-	public $student_id;
+	public $id;
 	public $first_name;
 	public $last_name;
 	public date $dob
@@ -183,9 +181,8 @@ class student{
 	public subject_marks $Subjects_marks;
 	public filters $Filter;
 	
-	public function __construct($student_id="", $first_name="", $last_name="", $dob, $email="", $password="", $validated=FALSE, $nationality=TRUE, $contact="", $city="", $province="", $disability=FALSE, $current_acad="", $grade, $syllabus="", $average=50.0, $current_study="", int $yearstudy, $studyinst="", $cont_studies=TRUE, $gpa=50.0, $studentbio="", $bursarred=FALSE, $current_bursary="", $workback=TRUE, $website="", $num_reports=0,
-	 $banned=FALSE){
-		 $this->student_id = $student_id;
+	public function __construct($id = 0, $first_name="", $last_name="", $dob, $email="", $validated=FALSE, $nationality=TRUE, $contact="", $city="", $province="", $disability=FALSE, $current_acad="", $grade, $syllabus="", $average=50.0, $current_study="", int $yearstudy, $studyinst="", $cont_studies=TRUE, $gpa=50.0, $studentbio="", $bursarred=FALSE, $current_bursary="", $workback=TRUE, $website="", $num_reports=0,$banned=FALSE){
+		 $this->id = $id;
 		 $this->first_name = $first_name;
 		 $this->last_name = $last_name;
 		 $this->dob = $dob;
@@ -204,7 +201,7 @@ class student{
 		 $this->current_study = $current_study;
 		 $this->yearstudy = $yearstudy;
 		 $this->studyinst = $studyinst;
-		 $this->continue = $continue;
+		 $this->cont_studies = $cont_studies;
 		 $this->gpa = $gpa;
 		 $this->studentbio = $studentbio;
 		 $this->bursarred = $bursarred;
