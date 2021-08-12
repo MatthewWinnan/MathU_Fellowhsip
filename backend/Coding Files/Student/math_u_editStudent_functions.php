@@ -316,26 +316,4 @@ function UpdateWebsite($student_id, $website, $mysqli){
   }
 }
 
-/*function AddFilters($student_id, $filter, $mysqli){
-  $sql = "INSERT INTO filters (Student_ID, Filter) VALUES ('$student_id', '$filter')";
-  if($mysqli->query($sql) === TRUE){
-    return $mysqli->insert_id;
-  }
-  else{
-    return 0;
-  }
-}
-
-//$f_id = AddFilters($student_id, $filter, $mysqli);
-
-function UpdateFilters($f_id, $filter, $mysqli){
-  $sql = "UPDATE filters SET Filter = '$filter' WHERE ID = $f_id";
-  if (mysqli_query($mysqli, $sql)) {
-   echo "Filter updated successfully !";
-  } else {
-   echo "Error: " . $sql . "
-" . mysqli_error($mysqli);
-  }
-}
-*/
  ?>
