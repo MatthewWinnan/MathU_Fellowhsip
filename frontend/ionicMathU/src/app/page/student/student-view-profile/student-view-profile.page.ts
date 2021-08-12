@@ -26,10 +26,10 @@ export class ViewProfilePage implements OnInit {
     //disability: [false],
     current_academic_level: [''],
     grade: [0],
-    //syllabus: [''],
-    //average: [0.0],
-    //currently_studying: [''],
-    //year_of_study: [''],
+    syllabus: [''],
+    average: [0.0],
+    currently_studying: [''],
+    year_of_study: [''],
     //study_institution: [''],
     //continue_studies: [false],
     //gpa: [0.0],
@@ -61,6 +61,16 @@ export class ViewProfilePage implements OnInit {
   get current_academic_level() {
     return this.addStudent_details.get('current_academic_level');
   }
+  get syllabus() {
+    return this.addStudent_details.get('syllabus');
+  }
+  get grade() {
+    return this.addStudent_details.get('grade');
+  }
+  get average() {
+    return this.addStudent_details.get('average');
+  }
+
 
   student = new student_users();
 

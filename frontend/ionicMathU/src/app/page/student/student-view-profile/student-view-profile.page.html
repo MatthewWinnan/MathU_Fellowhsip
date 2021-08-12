@@ -77,6 +77,7 @@
           <ion-select-option value="Postgraduate">Postgraduate</ion-select-option>
         </ion-select>
       </ion-item>
+      <!-- Info for only HS students -->
       <ion-item *ngIf="current_academic_level.value === 'High School'">
         <ion-label position="floating">Current Grade</ion-label>
         <ion-select formControlName="grade">
@@ -85,6 +86,44 @@
           <ion-select-option value= 12 >12</ion-select-option>
         </ion-select>
       </ion-item>
+      <ion-item *ngIf="current_academic_level.value === 'High School'">
+        <ion-label position="floating">Syllabus</ion-label>
+        <ion-select formControlName="syllabus">
+          <ion-select-option value= "Cambridge" >Cambridge</ion-select-option>
+          <ion-select-option value= "CAPS" >CAPS</ion-select-option>
+          <ion-select-option value= "IEB" >IEB</ion-select-option>
+          <ion-select-option value= "Other" >Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="current_academic_level.value === 'High School'">
+        <ion-label position="floating">Average</ion-label>
+        <ion-input formControlName="average" placeholder="Average" type="number"></ion-input>
+      </ion-item>
+      <!-- Info for uni students -->
+      <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
+        <ion-label position="floating">Currently Studying</ion-label>
+        <ion-input formControlName="currently_studying" placeholder="Other" type="text"></ion-input>
+      </ion-item>
+      <!-- Info for undergrad students -->
+      <ion-item *ngIf="current_academic_level.value === 'Undergraduate'">
+        <ion-label position="floating">Year Of Study</ion-label>
+        <ion-select formControlName="year_of_study">
+          <ion-select-option value= "1st" >1st</ion-select-option>
+          <ion-select-option value= "2nd" >2nd</ion-select-option>
+          <ion-select-option value= "3rd" >3rd</ion-select-option>
+          <ion-select-option value= "4th" >4th</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- Info for postgrad -->
+      <ion-item *ngIf="current_academic_level.value === 'Postgraduate'">
+        <ion-label position="floating">Year Of Study</ion-label>
+        <ion-select formControlName="year_of_study">
+          <ion-select-option value= "Honours" >Honors</ion-select-option>
+          <ion-select-option value= "Masters" >Masters</ion-select-option>
+          <ion-select-option value= "PHD" >PHD</ion-select-option>
+        </ion-select>
+      </ion-item>
+
     </ion-list>
       <!-- Submit Form -->
     <ion-button type="submit">
