@@ -151,14 +151,12 @@ function UpdateSyllabus($student_id, $syllabus, $mysqli){
 function AddSubject($student_id, $subject, $mysqli){
 
   $sql = "INSERT INTO subjects_marks (Student_ID, Subject_name) VALUES ('$student_id', '$subject')";
-  if($mysqli->query($sql)=== TRUE){
-		http_response_code(201);
-		return true;
-	}
-	else{
-		http_response_code(422);
-		return false;
-	}
+  if($mysqli->query($sql) === TRUE){
+    return $mysqli->insert_id;
+  }
+  else{
+    return 0;
+  }
 }
 
 //----------------------------------------------------------------------------//
@@ -215,6 +213,14 @@ function UpdateSubject($sub_id, $subject, $mysqli){
 	}
 }
 
+function UpdateAllSubjects($ids, $subjects, $mysqli){
+  $i = 0;
+  foreach (array_filter($subjects) as $subject) {
+    UpdateSubject($ids[$i], $mark, $mysqli);
+    $i+=1;
+  }
+  //echo "Subjects updated successfully! <br>";
+}
 function GetAverage($student_id, $mysqli){
   $sql = "SELECT AVG(Mark) AS average FROM subjects_marks WHERE Student_ID = '".$student_id."'";
   $result = $mysqli->query($sql);

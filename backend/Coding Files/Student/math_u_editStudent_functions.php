@@ -190,6 +190,14 @@ function UpdateSubject($sub_id, $subject, $mysqli){
 	}
 }
 
+function UpdateAllSubjects($ids, $subjects, $mysqli){
+  $i = 0;
+  foreach (array_filter($subjects) as $subject) {
+    UpdateSubject($ids[$i], $mark, $mysqli);
+    $i+=1;
+  }
+  //echo "Subjects updated successfully! <br>";
+}
 
 function GetAverage($student_id, $mysqli){
   $sql = "SELECT AVG(Mark) AS average FROM subjects_marks WHERE Student_ID = '".$student_id."'";
