@@ -15,7 +15,7 @@
 
 
 <ion-content>
-  <h3>View Student Details</h3>
+  <h3>Basic Student Details</h3>
   <form [formGroup]="addStudent_details" (ngSubmit)="addStudentDetails()">
     <!-- Basic information -->
     <ion-list>
@@ -41,7 +41,7 @@
       </ion-item>
     </ion-list>
     <!-- Citizenship and residence information -->
-    <h3>View Residential Information</h3>
+    <h3>Residential Information</h3>
     <ion-list>
       <ion-item>
         <ion-label position="floating">Province</ion-label>
@@ -71,7 +71,7 @@
       </ion-item>
     </ion-list>
     <!-- Academic Information -->
-    <h3>View Academic Information</h3>
+    <h3>Academic Information</h3>
     <ion-list>
       <ion-item>
         <ion-label position="floating">Academic Level</ion-label>
@@ -168,14 +168,14 @@
         <ion-input formControlName="gpa" placeholder="GPA" type="number"></ion-input>
       </ion-item>
     </ion-list>
-    <h3>View About Me</h3>
+    <h3>About me</h3>
     <ion-item>
       <ion-label position="floating">Student summary</ion-label>
       <ion-input formControlName="description_of_student" placeholder="Please enter a short description about yourself" type="text"></ion-input>
     </ion-item>
       <!-- Submit Form -->
     <ion-button type="submit">
-      Edit
+      Submit
     </ion-button>
   </form>
 <ion-content>
