@@ -13,7 +13,92 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
+  <h3>Basic Student Details</h3>
+  <form [formGroup]="addStudent_details" (ngSubmit)="addStudentDetails()">
+    <!-- Basic information -->
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Student name</ion-label>
+        <ion-input formControlName="first_name_of_student" placeholder="Student Name" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Student surname</ion-label>
+        <ion-input formControlName="last_name_of_student" placeholder="Student Surname" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email address</ion-label>
+        <ion-input formControlName="email_address" placeholder="Email Address" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contact number</ion-label>
+        <ion-input formControlName="contact_number" placeholder="Contact Number" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Date of birth</ion-label>
+        <ion-datetime formControlName="data_of_birth" displayFormat="YYYY MM DD" placeholder="YYYY/MM/DD" ></ion-datetime>
+      </ion-item>
+    </ion-list>
+    <!-- Citizenship and residence information -->
+    <h3>Residential Information</h3>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Province</ion-label>
+        <ion-select formControlName="province">
+          <ion-select-option value="Mpumalanga">Mpumalanga</ion-select-option>
+          <ion-select-option value="Eastern Cape">Eastern Cape</ion-select-option>
+          <ion-select-option value="Free State">Free State</ion-select-option>
+          <ion-select-option value="Gauteng">Gauteng</ion-select-option>
+          <ion-select-option value="Limpopo">Limpopo</ion-select-option>
+          <ion-select-option value="Northern Cape">Northern Cape</ion-select-option>
+          <ion-select-option value="North West">North West</ion-select-option>
+          <ion-select-option value="Western Cape">Western Cape</ion-select-option>
+          <ion-select-option value="KwaZulu-Natal">KwaZulu-Natal</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">RSA citizen</ion-label>
+        <ion-checkbox formControlName="RSA_citizen" checked="false" color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">City</ion-label>
+        <ion-input formControlName="city" placeholder="City" type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+    <!-- Academic Information -->
+    <h3>Academic Information</h3>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Academic Level</ion-label>
+        <ion-select formControlName="current_academic_level">
+          <ion-select-option value="High School">High School</ion-select-option>
+          <ion-select-option value="Undergraduate">Undergraduate</ion-select-option>
+          <ion-select-option value="Postgraduate">Postgraduate</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="current_academic_level.value === 'High School'">
+        <ion-label position="floating">Current Grade</ion-label>
+        <ion-select formControlName="grade">
+          <ion-select-option value= 10 >10</ion-select-option>
+          <ion-select-option value= 11 >11</ion-select-option>
+          <ion-select-option value= 12 >12</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+      <!-- Submit Form -->
+    <ion-button type="submit">
+      Submit
+    </ion-button>
+  </form>
+<ion-content>
+
+
+
+
+
+
+<!-- <ion-content>
   <super-tabs>
     <super-tabs-toolbar slot="top" color="light">
       <super-tab-button>
@@ -29,57 +114,56 @@
     <super-tabs-container>
       <super-tab>
         <ion-content>
+          <form [formGroup]="addBursary" (ngSubmit)="addBursarySubmit()"></form>
           <h3>Student details</h3>
-          <form>
-            <ion-list>
-              <ion-item>
-                <ion-label position="floating">Student name</ion-label>
-                <ion-input placeholder="Student Name" type="text"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating">Student surname</ion-label>
-                <ion-input placeholder="Student Surname"  type="text"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating">Email address</ion-label>
-                <ion-input placeholder="Email Address"  type="text"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating">Contact number</ion-label>
-                <ion-input placeholder="Contact Number"  type="text"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating">Date of birth</ion-label>
-                <ion-datetime displayFormat="DD MM YY" placeholder="DD/MM/YY" [(ngModel)]="student_dob"></ion-datetime>
-              </ion-item>
-            </ion-list>
+          <ion-list>
             <ion-item>
-              <ion-label position="floating">Province</ion-label>
-              <ion-select>
-                <ion-select-option value="Mpumalanga">Mpumalanga</ion-select-option>
-                <ion-select-option value="Eastern Cape">Eastern Cape</ion-select-option>
-                <ion-select-option value="Free State">Free State</ion-select-option>
-                <ion-select-option value="Gauteng">Gauteng</ion-select-option>
-                <ion-select-option value="Limpopo">Limpopo</ion-select-option>
-                <ion-select-option value="Northern Cape">Northern Cape</ion-select-option>
-                <ion-select-option value="North West">North West</ion-select-option>
-                <ion-select-option value="Western Cape">Western Cape</ion-select-option>
-                <ion-select-option value="KwaZulu-Natal">KwaZulu-Natal</ion-select-option>
-              </ion-select>
+              <ion-label position="floating">Student name</ion-label>
+              <ion-input placeholder="Student Name" [(ngModel)]="student_name" type="text"></ion-input>
             </ion-item>
+            <ion-item>
+              <ion-label position="floating">Student surname</ion-label>
+              <ion-input placeholder="Student Surname" [(ngModel)]="student_surname" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Email address</ion-label>
+              <ion-input placeholder="Email Address" [(ngModel)]="student_email" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Contact number</ion-label>
+              <ion-input placeholder="Contact Number" [(ngModel)]="student_contact_number" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Date of birth</ion-label>
+              <ion-datetime displayFormat="DD MM YY" placeholder="DD/MM/YY" [(ngModel)]="student_dob"></ion-datetime>
+            </ion-item>
+          </ion-list>
+          <ion-item>
+            <ion-label position="floating">Province</ion-label>
+            <ion-select>
+              <ion-select-option value="Mpumalanga">Mpumalanga</ion-select-option>
+              <ion-select-option value="Eastern Cape">Eastern Cape</ion-select-option>
+              <ion-select-option value="Free State">Free State</ion-select-option>
+              <ion-select-option value="Gauteng">Gauteng</ion-select-option>
+              <ion-select-option value="Limpopo">Limpopo</ion-select-option>
+              <ion-select-option value="Northern Cape">Northern Cape</ion-select-option>
+              <ion-select-option value="North West">North West</ion-select-option>
+              <ion-select-option value="Western Cape">Western Cape</ion-select-option>
+              <ion-select-option value="KwaZulu-Natal">KwaZulu-Natal</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>RSA citizen</ion-label>
+            <ion-checkbox formControlName="name" checked="false" color="dark"></ion-checkbox>
+          </ion-item>
 
 
-            <ion-button type="submit">
-              Submit
-            </ion-button>
-            
-          <form>
         </ion-content>
       </super-tab>
       <super-tab>
         <ion-content>
-          <!-- <h2 class="ion-text-center">Sponsor Sign Up</h2> -->
-          <h3>Student academics</h3>
+          <h2 class="ion-text-center">Sponsor Sign Up</h2> -->
+          <!-- <h3>Student academics</h3>
 
         </ion-content>
 
@@ -88,4 +172,4 @@
     </super-tabs-container>
   </super-tabs>
 
-</ion-content>
+</ion-content> -->

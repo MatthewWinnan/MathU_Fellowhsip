@@ -12,20 +12,20 @@ export class ViewProfilePage implements OnInit {
 
   constructor(private formBuilder: FormBuilder) { }
 
-  addStudent_basic = this.formBuilder.group({
+  addStudent_details = this.formBuilder.group({
     first_name_of_student: [''],
     last_name_of_student: [''],
     data_of_birth: [Date],
     email_address: [''],
     //password: [''],  
     contact_number: [''],
-    //city: [''],
+    city: [''],
     province: [''],
     RSA_citizen: [false],
     //study_further: [false],
     //disability: [false],
-    //current_academic_level: [''],
-    //grade: [0],
+    current_academic_level: [''],
+    grade: [0],
     //syllabus: [''],
     //average: [0.0],
     //currently_studying: [''],
@@ -38,32 +38,34 @@ export class ViewProfilePage implements OnInit {
 
   //Gets for all the form's parameters
   get student_name() {
-    return this.addStudent_basic.get('first_name_of_student');
+    return this.addStudent_details.get('first_name_of_student');
   }
   get student_surname() {
-    return this.addStudent_basic.get('last_name_of_student');
+    return this.addStudent_details.get('last_name_of_student');
   }
   get student_dob() {
-    return this.addStudent_basic.get('data_of_birth');
+    return this.addStudent_details.get('data_of_birth');
   }
   get contact_number() {
-    return this.addStudent_basic.get('contact_number');
+    return this.addStudent_details.get('contact_number');
   }
   get province() {
-    return this.addStudent_basic.get('province');
+    return this.addStudent_details.get('province');
   }
   get RSA_citizen() {
-    return this.addStudent_basic.get('RSA_citizen');
+    return this.addStudent_details.get('RSA_citizen');
+  }
+  get city() {
+    return this.addStudent_details.get('city');
+  }
+  get current_academic_level() {
+    return this.addStudent_details.get('current_academic_level');
   }
 
   student = new student_users();
 
-  public addStudentBasic() {
-    
-  }
-
-  public addStudentAcademics() {
-    
+  public addStudentDetails() {
+    console.log(this.addStudent_details.value)
   }
 
   ngOnInit() {
