@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../../service/api.service';
+import { ApiService } from '../../service/api/api.service';
 import { ToastController } from '@ionic/angular';
 import { __await } from 'tslib';
 import { Sponsor_users } from '../../model/sponsor_users';
 import { Company } from '../../model/company';
-import { stringify } from '@angular/compiler/src/util';
 import { student_users } from '../../model/student_users.model';
 
 @Component({

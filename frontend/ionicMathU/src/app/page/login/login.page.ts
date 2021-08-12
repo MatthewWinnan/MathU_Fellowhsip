@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { student_users } from '../../model/student_users.model';
 // import {ViewStudentPageModule} from '../student/student-view-profile/student-view-profile.module';
 // import { NavController } from '@ionic/angular';
-import {NavparamService} from '../../navparam.service';
+import {NavparamService} from '../../service/navparam/navparam.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
