@@ -48,11 +48,11 @@ if(isset($_POST['email']) and isset($_POST['password'])){
    }
    if (isset($_POST['contact_number'])){
 	   $contact_number = $_POST['contact_number'];
-	   UpdateContact($student_id, $city, $mysqli);
+	   UpdateContact($student_id, $contact_number, $mysqli);
    }
    if (isset($_POST['nationality'])){
 	  $nationality = $_POST['nationality'];
-	   UpdateNationality($student_id, $contact_number, $mysqli);
+	   UpdateNationality($student_id,$nationality , $mysqli);
    }
    if (isset($_POST['disability'])){
 	   $disability = $_POST['disability'];
@@ -63,8 +63,12 @@ if(isset($_POST['email']) and isset($_POST['password'])){
 	if (isset($_POST['current_acad'])){
 		//--------------------------------
 	  $currentacad = $_POST['current_acad'];
+	  //Updating academic level
+	  $sql = "UPDATE student SET Current_academic_level = '$currentacad' WHERE Email_address = '$email'";
+	  $mysqli->query($sql);
 		if($currentacad == 'High School'){
-			
+			$mysqli->query($sql);
+ 
 			if (isset($_POST['grade'])){
 				$grade = $_POST['grade'];
 				UpdateGrade($student_id, $grade, $mysqli);
