@@ -96,6 +96,7 @@ if(isset($_POST['email']) and isset($_POST['password'])){
 
 		  if (AddToUsers($email, $u_id, $mysqli) === TRUE){
 			echo "New user added successfully";
+      echo json_encode(display($student_id, $mysqli));
 		  }
 		}
       }
@@ -122,14 +123,35 @@ function QueryStudents($email, $mysqli){
 	return $row["ID"];
 }
 
-/*function Display($result){
-	//Check results is not an empty array
-	if ($result != null){
-		echo json_encode($result);
+function display($student_id, $mysqli){
+	$sql = "SELECT * FROM student WHERE ID = $student_id AND IS NOT NULL";
+	$result = $mysqli->query($sql);
+
+	if ($result->num_rows>0){
+    $Obj = new \stdClass();
+    $Obj->name = $row["First_name"];
+    $Obj->surname = $row["Last_name"];
+    $Obj->email = $row["Email_address"];
+    $Obj->dob = $row["Date_of_birth"];
+    $Obj->validated = $row["Validated"];
+    $Obj->nationality = $row["Nationality"];
+    $Obj->contact_number = $row["Contact_number"];
+    $Obj->city = $row["City"];
+    $Obj->province = $row["Province"];
+    $Obj->disability = $row["Disability"];
+    $Obj->academic_Level = $row["Current_academic_level"];
+    $Obj->grade = $row["Grade"];
+    $Obj->syllabus = $row["Syllabus"];
+    $Obj->average = $row["Average"];
+    $Obj->course = $row["Currently_studying"];
+    $Obj->studyinst = $row["Study_institution"];
+    $Obj->yearstudy = $row["Year_of_study"];
+    $Obj->gpa = $row["GPA"];
+    $Obj->continue = $row["Continue_studies"];
+    $Obj->bio = $row["Description_of_student"];
+    $Obj->website = $row["Website"];
+		return $Obj;
 	}
-	else{
-		echo "No Results Found";
-	}
+	else return null;
 }
-*/
  ?>
