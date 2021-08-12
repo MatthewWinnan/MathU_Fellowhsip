@@ -11,80 +11,134 @@ include_once 'math_u_student_registration.php';
 include_once 'math_u_editStudent_functions.php';
 
 
-if (isset($_POST['first_name']) and isset($_POST['last_name']) and isset($_POST['email']) and isset($_POST['password'])){
+if(isset($_POST['email']) and isset($_POST['password'])){
 
   $email = $_POST['email'];
   $pass = $_POST['password'];
-  $first_name = $_POST['first_name'];
-  $last_name = $_POST['last_name'];
   $isUnique = isUniqueEmail($email, $mysqli);
   $hashed_pass = GenerateHashPassword($pass);
 
   if ($isUnique === TRUE){
-      $student_id = AddStudent($first_name, $last_name, $email, $hashed_pass, $mysqli);
-      echo "New student added successfully ";
+      $student_id = AddStudent($email, $hashed_pass, $mysqli);
+      //Generate a Student object and send
       if ($student_id > 0) {
 
-	  $dob = $_POST['date_of_birth'];
-	  $province = $_POST['province'];
-	  $city = $_POST['city'];
-	  $contact_number = $_POST['contact_number'];
-	  $nationality = $_POST['nationality'];
-	  $disability = $_POST['disability'];
-	  $currentacad = $_POST['current_acad'];
-	  $grade = $_POST['grade'];
-	  $syllabus = $_POST['syllabus'];
-    $subjects = $_POST['subjects'];
-    $marks = $_POST['marks'];
-	  $studyinst = $_POST['institution'];
-	  $yearstudy = $_POST['year_of_study'];
-	  $gpa = $_POST['GPA'];
-	  $course = $_POST['course_name'];
-	  $continue = $_POST['continue_studies'];
-	  $studentbio = $_POST['student_bio'];
-	  $bursarred = $_POST['bursarred'];
-	  $bursary = $_POST['bursary'];
-	  $workback = $_POST['workback'];
-	  $website = $_POST['website'];
+	  
 
     //--------------------------Personal Details------------------------------//
-
-    UpdateFirstName($student_id, $first_name, $mysqli);
-    UpdateLastName($student_id, $last_name, $mysqli);
-    UpdateDOB($student_id, $dob, $mysqli);
-    UpdateProvince($student_id, $province, $mysqli);
-    UpdateCity($student_id, $city, $mysqli);
-    UpdateContact($student_id, $contact_number, $mysqli);
-    UpdateNationality($student_id, $nationality, $mysqli);
-    UpdateDisability($student_id, $disability, $mysqli);
+	if (isset($_POST['first_name'])){
+		$first_name = $_POST['first_name'];
+		UpdateFirstName($student_id, $first_name, $mysqli);
+	}
+   if (isset($_POST['last_name'])){
+	   $last_name = $_POST['last_name'];
+	   UpdateLastName($student_id, $last_name, $mysqli);
+   }
+   if (isset($_POST['date_of_birth'])){
+	   $dob = $_POST['date_of_birth'];
+	   UpdateDOB($student_id, $dob, $mysqli);
+   }
+   if(isset($_POST['province'])){
+	   $province = $_POST['province'];
+	   UpdateProvince($student_id, $province, $mysqli);
+   }
+   if (isset($_POST['city'])){
+	    $city = $_POST['city'];
+	    UpdateCity($student_id, $city, $mysqli);
+   }
+   if (isset($_POST['contact_number'])){
+	   $contact_number = $_POST['contact_number'];
+	   UpdateContact($student_id, $city, $mysqli);
+   }
+   if (isset($_POST['nationality'])){
+	  $nationality = $_POST['nationality'];
+	   UpdateNationality($student_id, $contact_number, $mysqli);
+   }
+   if (isset($_POST['disability'])){
+	   $disability = $_POST['disability'];
+	   UpdateDisability($student_id, $disability, $mysqli);
+   }
 
     //--------------------------Academic Information--------------------------//
-    UpdateAcadLevel($student_id, $currentacad, $mysqli);
-    if($currentacad == 'High School'){
-      UpdateGrade($student_id, $grade, $mysqli);
-      UpdateSyllabus($student_id, $syllabus, $mysqli);
-      // subjects and marks will be added here //
-      $ids = AllSubjects($student_id, $subjects, $mysqli);
-      AllMarks($ids, $marks, $mysqli);
-      $average = GetAverage($student_id, $mysqli);
-      UpdateAverage($student_id, $average, $mysqli);
-    }else{
-      UpdateCourse($student_id, $course, $mysqli);
-      UpdateStudyInst($student_id, $studyinst, $mysqli);
-      UpdateYearStudy($student_id, $yearstudy, $mysqli);
-      UpdateGPA($student_id, $gpa, $mysqli);
-      UpdateContinue($student_id, $continue, $mysqli);
-    }
-
+	if (isset($_POST['current_acad'])){
+		//--------------------------------
+	  $currentacad = $_POST['current_acad'];
+		if($currentacad == 'High School'){
+			
+			if (isset($_POST['grade'])){
+				$grade = $_POST['grade'];
+				UpdateGrade($student_id, $grade, $mysqli);
+			}
+		  
+			if (isset($_POST['syllabus'])){
+				 $syllabus = $_POST['syllabus'];
+				UpdateSyllabus($student_id, $syllabus, $mysqli);
+			}
+		  
+		  // subjects and marks will be added here //
+		  if (isset($_POST['subjects']) and isset($_POST['marks'])){
+			  $marks = $_POST['marks'];
+			  $subjects = $_POST['subjects'];
+			  $ids = AllSubjects($student_id, $subjects, $mysqli);
+			  AllMarks($ids, $marks, $mysqli);
+		  }
+		  
+		  $average = GetAverage($student_id, $mysqli);
+		  UpdateAverage($student_id, $average, $mysqli);
+		  
+		}else{
+		  
+		  if (isset($_POST['institution'])){
+			  $studyinst = $_POST['institution'];
+			  UpdateStudyInst($student_id, $studyinst, $mysqli);
+		  }
+		  if (isset($_POST['course_name'])){
+			  $course = $_POST['course_name'];
+			  UpdateCourse($student_id, $course, $mysqli);
+		  }
+		  
+		  if (isset($_POST['year_of_study'])){
+			  $yearstudy = $_POST['year_of_study'];
+			  UpdateYearStudy($student_id, $yearstudy, $mysqli);
+		  }
+		  
+		  if (isset($_POST['GPA'])){
+			  $gpa = $_POST['GPA'];
+			  UpdateGPA($student_id, $gpa, $mysqli);
+		  }
+		  
+		  if (isset($_POST['continue_studies'])){
+			  $continue = $_POST['continue_studies'];
+			  UpdateContinue($student_id, $continue, $mysqli);
+		  }
+		  
+		}
+	}
     //-------------------------Other Information------------------------------//
+	if (isset($_POST['student_bio'])){
+		$studentbio = $_POST['student_bio'];
+		UpdateBio($student_id, $studentbio, $mysqli);
+	}
+	if (isset($_POST['bursarred'])){
+		$bursarred = $_POST['bursarred'];
+		UpdateBursarred($student_id, $bursarred, $mysqli);
+		if ($bursarred == '1'){
+			if (isset($_POST['bursary'])){
+				$bursary = $_POST['bursary'];
+				UpdateBursaries($student_id, $bursary, $mysqli);
+			}
+		}
+	}
 
-    UpdateBio($student_id, $studentbio, $mysqli);
-    UpdateBursarred($student_id, $bursarred, $mysqli);
-    if ($burssared == '1') {
-      UpdateBursaries($student_id, $bursaries, $mysqli);
-    }
-    UpdateWorkback($student_id, $workback, $mysqli);
-    UpdateWebsite($student_id, $website, $mysqli);
+    if (isset($_POST['workback'])){
+		$workback = $_POST['workback'];
+		UpdateWorkback($student_id, $workback, $mysqli);
+	}
+    if (isset($_POST['website'])){
+		$website = $_POST['website'];
+		UpdateWebsite($student_id, $website, $mysqli);
+	}
+   
 
 	  /*EditStudent($first_name, $last_name, $dob, $province, $city, $contact_number, $nationality, $disability, $student_id, $mysqli);
 	  AddEditCurrentAcad($student_id, $currentacad, $grade, $syllabus, $course, $studyinst, $yearstudy, $gpa, $continue, $mysqli);
@@ -96,7 +150,7 @@ if (isset($_POST['first_name']) and isset($_POST['last_name']) and isset($_POST[
 		if (UpdateStudentID($student_id, $u_id, $mysqli)===TRUE){
 
 		  if (AddToUsers($email, $u_id, $mysqli) === TRUE){
-			echo "New user added successfully <br>";
+			echo "New user added successfully";
       echo json_encode(display($student_id, $mysqli));
 		  }
 		}
@@ -110,7 +164,7 @@ if (isset($_POST['first_name']) and isset($_POST['last_name']) and isset($_POST[
 	else{
 		echo "Not Unique!";
 	}
-}
+  }
 
 
 function QueryStudents($email, $mysqli){
@@ -125,11 +179,10 @@ function QueryStudents($email, $mysqli){
 }
 
 function display($student_id, $mysqli){
-	$sql = "SELECT * FROM student WHERE ID = '".$student_id."'";
+	$sql = "SELECT * FROM student WHERE ID = $student_id AND IS NOT NULL";
 	$result = $mysqli->query($sql);
 
 	if ($result->num_rows>0){
-    $row = $result->fetch_assoc();
     $Obj = new \stdClass();
     $Obj->name = $row["First_name"];
     $Obj->surname = $row["Last_name"];
