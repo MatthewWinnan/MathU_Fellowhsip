@@ -14,14 +14,14 @@
   <h2 class="ion-text-center">View Bursary</h2>
   <!-- fetch bursaries from database on page load -->
   <ion-list>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">Bursary Status</ion-label>
       <ion-select (ngModel)="b_status" (ionChange)="filterBursary($event)">
-        <ion-select-option value="Pending">Pending</ion-select-option>
-        <ion-select-option value="Accepted">Accepted</ion-select-option>
-        <ion-select-option value="Declined">Declined</ion-select-option>
+        <ion-select-option value="Open">Open</ion-select-option>
+        <ion-select-option value="Closed">Closed</ion-select-option>
+        <ion-select-option value="Deactivated">Deactivated</ion-select-option>
       </ion-select>
-    </ion-item>
+    </ion-item> -->
 
     <ion-item>
       <ion-searchbar placeholder="Bursary Name" (ionInput)="filterBursary($event)"></ion-searchbar>
@@ -29,8 +29,10 @@
   </ion-list>
 
   <ion-list>
-    <ion-item (click)="selectVal(item)" *ngFor="let item of jsonData">
-      {{item.bursary_name}}
+    <ion-item *ngFor="let item of jsonData">
+      <p>
+        {{item.bursary_name}} of status {{item.status}} with {{item.bursary_type}}
+      </p>
     </ion-item>
   </ion-list>
   
