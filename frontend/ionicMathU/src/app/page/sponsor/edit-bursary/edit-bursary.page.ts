@@ -49,29 +49,8 @@ export class EditBursaryPage implements OnInit {
   get province(){
     return this.addBursary.get('province');
   }
-  get full_registration(){
-    return this.addBursary.get('full_registration');
-  }
-  get tuition(){
-    return this.addBursary.get('tuition');
-  }
-  get accommodation_fees(){
-    return this.addBursary.get('accommodation_fees');
-  }
-  get meals(){
-    return this.addBursary.get('meals');
-  }
-  get books_allowance(){
-    return this.addBursary.get('books_allowance');
-  }
-  get laptop(){
-    return this.addBursary.get('laptop');
-  }
-  get transport(){
-    return this.addBursary.get('transport');
-  }
-  get other(){
-    return this.addBursary.get('other');
+  get bursary_covers_for(){
+    return this.addBursary.get('bursary_covers_for');
   }
   get bursary_duration(){
     return this.addBursary.get('bursary_duration');
@@ -115,15 +94,7 @@ export class EditBursaryPage implements OnInit {
     financial_need: [],
     study_further: [],
     disability: [],
-    full_registration: [],
-    tuition: [],
-    province: [],
-    accommodation_fees: [],
-    meals: [],
-    books_allowance: [],
-    laptop: [],
-    transport: [],
-    other: [],
+    bursary_covers_for: [],
     bursary_duration: [
       { type: 'required', message: 'Bursary Duration is required' },
     ],
@@ -154,14 +125,7 @@ export class EditBursaryPage implements OnInit {
     study_further: [false],
     disability: [false],
     province: [],
-    full_registration: [false],
-    tuition: [false],
-    accommodation_fees: [false],
-    meals: [false],
-    books_allowance: [false],
-    laptop: [false],
-    transport: [false],
-    other: [false],
+    bursary_covers_for: [],
     bursary_duration: ['', [Validators.required]],
     closing_date: ['', [Validators.required]],
     shortlist_date: ['', [Validators.required]],
@@ -200,10 +164,10 @@ export class EditBursaryPage implements OnInit {
     this.bursary.study_further = this.addBursary.value.study_further;
     this.bursary.disability = this.addBursary.value.disability;
     this.bursary.province = this.addBursary.value.province;
-    //this.bursary.bursary_covers = ''; //fix it
+    this.bursary.bursary_covers = this.addBursary.value.bursary_covers_for; 
     this.bursary.closing_date = this.dateChanged();
     this.bursary.shortlist_date = this.addBursary.value.shortlist_date.substring(0,10);
-    this.bursary.email_address = this.addBursary.value.email_address;
+    this.bursary.email_address = this.addBursary.value.email_address_bursary;
     this.bursary.bursary_duration = this.addBursary.value.bursary_duration;
     console.log(this.bursary);
     //console.log(this.addBursary.value.age_group.lower);
@@ -219,6 +183,10 @@ export class EditBursaryPage implements OnInit {
 
   _ionChange(event : any){
     console.log(event.detail.checked);
+  }
+
+  multipleCheckBox(event: any){
+    //console.log(event.detail.value);
   }
 
   dateChanged(){
