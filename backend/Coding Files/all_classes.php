@@ -11,7 +11,7 @@ class all_users{
 
 	public function __construct($Email_address){
 		$this->Email_address = $Email_address;
-	}
+	}n
 }
 
 //--------------
@@ -19,12 +19,13 @@ class all_users{
 //--------------
 class bursary{
 
-	new company($company_id=0, $company_logo="", $company_industry="", $company_description="", $company_URL="", $number_of_reports=0);
-
+	//new company($company_id=0, $company_logo="", $company_industry="", $company_description="", $company_URL="", $number_of_reports=0);
+	
+	public int $bursary_id;
 	public int $company_id;
 	public $bursary_name;
 	public $bursary_type;
-	public $wb_duration;
+	public int $wb_duration;
 	public date $closing_date;
 	public int $min_age;
 	public int $max_age;
@@ -42,9 +43,11 @@ class bursary{
 	public date $short_date;
 	public $isVisible;
 	public $description;
-
-	public function __construct($company_id=0, $bursary_name="", $bursary_type="", $wb_duration="", $closing_date=, $min_age=13, $max_age = 40, $acad_level="", $study_field="", $current_year=1, $duration=1, $min_average=60.0, $rsa_citizen=TRUE, $financial_need=TRUE,
-	 $study_further=TRUE, $disability=FALSE, $province="", $email_address="", $short_date=, $isVisible=TRUE, $description=""){
+	
+	public company $Company;
+	
+	public function __construct($company_id=0, $bursary_name="", $bursary_type="", $wb_duration=0, $closing_date, $min_age=13, $max_age = 40, $acad_level="", $study_field="", $current_year=1, $duration=1, $min_average=60.0, $rsa_citizen=TRUE, $financial_need=TRUE,
+	 $study_further=TRUE, $disability=FALSE, $province="", $email_address="", $short_date, $isVisible=TRUE, $description=""){
 		 $this->company_id = $company_id;
 		 $this->bursary_name= $bursary_name;
 		 $this->bursary_type = $bursary_type;
@@ -74,12 +77,13 @@ class bursary{
 //--------------
 class bursary_covers{
 
-	new bursary($company_id=0, $bursary_name="", $bursary_type="", $wb_duration="", $closing_date=, $min_age=13, $max_age = 40, $acad_level="", $study_field="", $current_year=1, $duration=1, $min_average=60.0, $rsa_citizen=TRUE, $financial_need=TRUE,
-	 $study_further=TRUE, $disability=FALSE, $province="", $email_address="", $short_date=, $isVisible=TRUE, $description="");
+	//new bursary($company_id=0, $bursary_name="", $bursary_type="", $wb_duration="", $closing_date=, $min_age=13, $max_age = 40, $acad_level="", $study_field="", $current_year=1, $duration=1, $min_average=60.0, $rsa_citizen=TRUE, $financial_need=TRUE,
+	// $study_further=TRUE, $disability=FALSE, $province="", $email_address="", $short_date=, $isVisible=TRUE, $description="");
 
 	public int $Bursary_ID;
 	public $Bursary_Covers;
-
+	public bursary $Bursary;
+	
 	public function __construct($Bursary_ID=0,$Bursary_Covers=""){
 		$this->Bursary_ID = $Bursary_ID;
 		$this->Bursary_Covers = $Bursary_Covers;
@@ -152,7 +156,6 @@ class student{
 	public $last_name;
 	public date $dob
 	public $email;
-	private $password;
 	public bool $validated;
 	public bool $nationality;
 	public $contact;
@@ -175,9 +178,12 @@ class student{
 	public $website;
 	public int $num_reports;
 	public bool $banned;
-
-	public function __construct($student_id="", $first_name="", $last_name="", $dob=date("Y-m-d"), $email="", $password="", $validated=FALSE, $nationality=TRUE, $contact="", $city="", $province="", $disability=FALSE, $current_acad="",
-	 $grade="", $syllabus="", $average=50.0, $current_study="", $yearstudy="", $studyinst="", $cont_studies=TRUE, $gpa=50.0, $studentbio="", $bursarred=FALSE, $current_bursary="", $workback=TRUE, $website="", $num_reports=0,
+	
+	
+	public subject_marks $Subjects_marks;
+	public filters $Filter;
+	
+	public function __construct($student_id="", $first_name="", $last_name="", $dob, $email="", $password="", $validated=FALSE, $nationality=TRUE, $contact="", $city="", $province="", $disability=FALSE, $current_acad="", $grade, $syllabus="", $average=50.0, $current_study="", int $yearstudy, $studyinst="", $cont_studies=TRUE, $gpa=50.0, $studentbio="", $bursarred=FALSE, $current_bursary="", $workback=TRUE, $website="", $num_reports=0,
 	 $banned=FALSE){
 		 $this->student_id = $student_id;
 		 $this->first_name = $first_name;
@@ -215,14 +221,8 @@ class student{
 //------------------
 class student_bursaries{
 
-	new student($student_id="", $first_name="", $last_name="", $dob=date("Y-m-d"), $email="", $password="", $validated=FALSE, $nationality=TRUE, $contact="", $city="", $province="", $disability=FALSE, $current_acad="",
-	 $grade="", $syllabus="", $average=50.0, $current_study="", $yearstudy="", $studyinst="", $cont_studies=TRUE, $gpa=50.0, $studentbio="", $bursarred=FALSE, $current_bursary="", $workback=TRUE, $website="", $num_reports=0,
-	 $banned=FALSE);
-	 
-	new bursary($company_id=0, $bursary_name="", $bursary_type="", $wb_duration="", $closing_date=, $min_age=13, $max_age = 40, $acad_level="", $study_field="", $current_year=1, $duration=1, $min_average=60.0, $rsa_citizen=TRUE,
-	$financial_need=TRUE, $study_further=TRUE, $disability=FALSE, $province="", $email_address="", $short_date=, $isVisible=TRUE, $description="");
-
-
+	public student $Student;
+	public bursary $Bursary;
 	public int $Bursary_ID;
 	public int $Student_ID;
 	public bool $ShortListed;
@@ -249,10 +249,6 @@ class subjects{
 //--------------
 class subjects_marks{
 
-	new student($student_id="", $first_name="", $last_name="", $dob=date("Y-m-d"), $email="", $password="", $validated=FALSE, $nationality=TRUE, $contact="", $city="", $province="", $disability=FALSE, $current_acad="",
-	 $grade="", $syllabus="", $average=50.0, $current_study="", $yearstudy="", $studyinst="", $cont_studies=TRUE, $gpa=50.0, $studentbio="", $bursarred=FALSE, $current_bursary="", $workback=TRUE, $website="", $num_reports=0,
-	 $banned=FALSE);
-
 	public int $Student_ID;
 	public $Subject_name;
 	public double $Mark;
@@ -269,10 +265,6 @@ class subjects_marks{
 //FILTERS
 //--------------
 class filters{
-
-	new student($student_id="", $first_name="", $last_name="", $dob=date("Y-m-d"), $email="", $password="", $validated=FALSE, $nationality=TRUE, $contact="", $city="", $province="", $disability=FALSE, $current_acad="",
-	 $grade="", $syllabus="", $average=50.0, $current_study="", $yearstudy="", $studyinst="", $cont_studies=TRUE, $gpa=50.0, $studentbio="", $bursarred=FALSE, $current_bursary="", $workback=TRUE, $website="", $num_reports=0,
-	 $banned=FALSE);
 
 	public int $Student_ID;
 	public $Filter;
