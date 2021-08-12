@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-employee',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewEmployeePage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  editEmployee() {
+    // put in code 
+    this.router.navigate(['./../edit-employee']);
+
   }
 
 }
