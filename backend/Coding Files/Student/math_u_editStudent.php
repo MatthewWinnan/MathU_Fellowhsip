@@ -23,7 +23,7 @@ if(isset($_POST['email']) and isset($_POST['password'])){
       //Generate a Student object and send
       if ($student_id > 0) {
 
-	  
+
 
     //--------------------------Personal Details------------------------------//
 	if (isset($_POST['first_name'])){
@@ -64,17 +64,17 @@ if(isset($_POST['email']) and isset($_POST['password'])){
 		//--------------------------------
 	  $currentacad = $_POST['current_acad'];
 		if($currentacad == 'High School'){
-			
+
 			if (isset($_POST['grade'])){
 				$grade = $_POST['grade'];
 				UpdateGrade($student_id, $grade, $mysqli);
 			}
-		  
+
 			if (isset($_POST['syllabus'])){
 				 $syllabus = $_POST['syllabus'];
 				UpdateSyllabus($student_id, $syllabus, $mysqli);
 			}
-		  
+
 		  // subjects and marks will be added here //
 		  if (isset($_POST['subjects']) and isset($_POST['marks'])){
 			  $marks = $_POST['marks'];
@@ -82,12 +82,12 @@ if(isset($_POST['email']) and isset($_POST['password'])){
 			  $ids = AllSubjects($student_id, $subjects, $mysqli);
 			  AllMarks($ids, $marks, $mysqli);
 		  }
-		  
+
 		  $average = GetAverage($student_id, $mysqli);
 		  UpdateAverage($student_id, $average, $mysqli);
-		  
+
 		}else{
-		  
+
 		  if (isset($_POST['institution'])){
 			  $studyinst = $_POST['institution'];
 			  UpdateStudyInst($student_id, $studyinst, $mysqli);
@@ -96,22 +96,22 @@ if(isset($_POST['email']) and isset($_POST['password'])){
 			  $course = $_POST['course_name'];
 			  UpdateCourse($student_id, $course, $mysqli);
 		  }
-		  
+
 		  if (isset($_POST['year_of_study'])){
 			  $yearstudy = $_POST['year_of_study'];
 			  UpdateYearStudy($student_id, $yearstudy, $mysqli);
 		  }
-		  
+
 		  if (isset($_POST['GPA'])){
 			  $gpa = $_POST['GPA'];
 			  UpdateGPA($student_id, $gpa, $mysqli);
 		  }
-		  
+
 		  if (isset($_POST['continue_studies'])){
 			  $continue = $_POST['continue_studies'];
 			  UpdateContinue($student_id, $continue, $mysqli);
 		  }
-		  
+
 		}
 	}
     //-------------------------Other Information------------------------------//
@@ -138,12 +138,7 @@ if(isset($_POST['email']) and isset($_POST['password'])){
 		$website = $_POST['website'];
 		UpdateWebsite($student_id, $website, $mysqli);
 	}
-   
 
-	  /*EditStudent($first_name, $last_name, $dob, $province, $city, $contact_number, $nationality, $disability, $student_id, $mysqli);
-	  AddEditCurrentAcad($student_id, $currentacad, $grade, $syllabus, $course, $studyinst, $yearstudy, $gpa, $continue, $mysqli);
-	  AddEditStudentBio($student_id, $studentbio, $mysqli);
-	  AddEditMisc($student_id, $bursarred, $bursary, $workback, $website, $mysqli);*/
 
 		$u_id = GenerateUserID($student_id, 1);
 

@@ -7,7 +7,7 @@ include 'math_u_db_connection.php';
 function AddStudent($first_name, $last_name, $email, $hashed_pass, $mysqli){
 
   $date = date("Y-m-d");
-  $sql = "INSERT INTO student (First_name, Last_name, Email_address, Password, Registerred_date) VALUES ('$first_name', '$last_name','$email', '$hashed_pass', '$date')";
+  $sql = "INSERT INTO student (First_name, Last_name, Email_address, Password, Registerred_date, Validated) VALUES ('$first_name', '$last_name','$email', '$hashed_pass', '$date', FALSE)";
 
   if($mysqli->query($sql)=== TRUE){
 		http_response_code(201);
