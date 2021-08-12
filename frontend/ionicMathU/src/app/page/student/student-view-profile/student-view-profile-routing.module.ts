@@ -7,15 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: ViewProfilePage
-  },
-  {
-    path: 'student-academics',
-    loadChildren: () => import('./student-profile-pages/student-academics/student-academics.module').then( m => m.StudentAcademicsPageModule)
-  },
-  {
-    path: 'student-basic-info',
-    loadChildren: () => import('./student-profile-pages/student-basic-info/student-basic-info.module').then( m => m.StudentBasicInfoPageModule)
-  },
+  }
 ];
 
 @NgModule({

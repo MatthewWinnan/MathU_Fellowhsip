@@ -1,10 +1,80 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>student-view-profile</ion-title>
+    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <!-- <ion-buttons slot="start">
+      <ion-icon name="arrow-back" (click)="goBack()"></ion-icon>
+    </ion-buttons> -->
+    <ion-buttons slot="end">
+      <ion-icon></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <super-tabs>
+    <super-tabs-toolbar slot="top" color="light">
+      <super-tab-button>
+        <ion-label>Student details</ion-label>
+      </super-tab-button>
+
+
+      <super-tab-button>
+        <ion-label>Academics</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+
+    <super-tabs-container>
+      <super-tab>
+        <ion-content>
+          <h3>Student details</h3>
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Student name</ion-label>
+              <ion-input placeholder="Student Name" [(ngModel)]="student_name" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Student surname</ion-label>
+              <ion-input placeholder="Student Surname" [(ngModel)]="student_surname" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Email address</ion-label>
+              <ion-input placeholder="Email Address" [(ngModel)]="student_email" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Date of birth</ion-label>
+              <ion-datetime displayFormat="DD MM YY" placeholder="DD/MM/YY" [(ngModel)]="student_dob"></ion-datetime>
+            </ion-item>
+          </ion-list>
+          <ion-item>
+            <ion-label position="floating">Province</ion-label>
+            <ion-select>
+              <ion-select-option value="Mpumalanga">Mpumalanga</ion-select-option>
+              <ion-select-option value="Eastern Cape">Eastern Cape</ion-select-option>
+              <ion-select-option value="Free State">Free State</ion-select-option>
+              <ion-select-option value="Gauteng">Gauteng</ion-select-option>
+              <ion-select-option value="Limpopo">Limpopo</ion-select-option>
+              <ion-select-option value="Northern Cape">Northern Cape</ion-select-option>
+              <ion-select-option value="North West">North West</ion-select-option>
+              <ion-select-option value="Western Cape">Western Cape</ion-select-option>
+              <ion-select-option value="KwaZulu-Natal">KwaZulu-Natal</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+        </ion-content>
+      </super-tab>
+      <super-tab>
+        <ion-content>
+          <!-- <h2 class="ion-text-center">Sponsor Sign Up</h2> -->
+          <h3>Student academics</h3>
+
+        </ion-content>
+
+
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
 
 </ion-content>
-
