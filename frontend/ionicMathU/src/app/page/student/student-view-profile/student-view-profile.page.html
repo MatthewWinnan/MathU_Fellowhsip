@@ -65,6 +65,10 @@
         <ion-label position="floating">City</ion-label>
         <ion-input formControlName="city" placeholder="City" type="text"></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label position="floating">Currently disabled?</ion-label>
+        <ion-checkbox formControlName="disability" checked="false" color="dark"></ion-checkbox>
+      </ion-item>
     </ion-list>
     <!-- Academic Information -->
     <h3>Academic Information</h3>
@@ -123,14 +127,61 @@
           <ion-select-option value= "PHD" >PHD</ion-select-option>
         </ion-select>
       </ion-item>
-
+<!-- Info for uni students -->
+      <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
+        <ion-label position="floating">Institution of study</ion-label>
+        <ion-select formControlName="study_institution">
+          <ion-select-option value= "Cape Peninsula University of Technology (CPUT)" >Cape Peninsula University of Technology (CPUT)</ion-select-option>
+          <ion-select-option value= "Central University of Technology (CUT)" >Central University of Technology (CUT)</ion-select-option>
+          <ion-select-option value="Durban University of Technology (DUT)">Durban University of Technology (DUT)</ion-select-option>
+          <ion-select-option value="Mangosuthu University of Technology (MUT)">Mangosuthu University of Technology (MUT)</ion-select-option>
+          <ion-select-option value="Nelson Mandela University (NMU)">Nelson Mandela University (NMU)</ion-select-option>
+          <ion-select-option value="North-West University (NWU)">North-West University (NWU)</ion-select-option>
+          <ion-select-option value="Rhodes University (RU)">Rhodes University (RU)</ion-select-option>
+          <ion-select-option value="Sefako Makgatho Health Sciences University (SMU)">Sefako Makgatho Health Sciences University (SMU)</ion-select-option>
+          <ion-select-option value="Sol Plaatje University (SPU)">Sol Plaatje University (SPU)</ion-select-option>
+          <ion-select-option value="Tshwane University of Technology (TUT)">Tshwane University of Technology (TUT)</ion-select-option>
+          <ion-select-option value="Universiteit Stellenbosch (SU)">Universiteit Stellenbosch (SU)</ion-select-option>
+          <ion-select-option value="University of Cape Town (UCT)">University of Cape Town (UCT)</ion-select-option>
+          <ion-select-option value="University of Fort Hare (UFH)">University of Fort Hare (UFH)</ion-select-option>
+          <ion-select-option value="University of Johannesburg (UJ)">University of Johannesburg (UJ)</ion-select-option>
+          <ion-select-option value="University of KwaZulu-Natal (UKZN)">University of KwaZulu-Natal (UKZN)</ion-select-option>
+          <ion-select-option value="University of Limpopo (UL)">University of Limpopo (UL)</ion-select-option>
+          <ion-select-option value="University of Mpumalanga (UMP)">University of Mpumalanga (UMP)</ion-select-option>
+          <ion-select-option value="University of Pretoria (UP)">University of Pretoria (UP)</ion-select-option>
+          <ion-select-option value="University of the Free State (UFS)">University of the Free State (UFS)</ion-select-option>
+          <ion-select-option value="University of the Western Cape (UWC)">University of the Western Cape (UWC)</ion-select-option>
+          <ion-select-option value="University of the Witwatersrand (WITS)">University of the Witwatersrand (WITS)</ion-select-option>
+          <ion-select-option value="University of Venda (UNIVEN)">University of Venda (UNIVEN)</ion-select-option>
+          <ion-select-option value="University of Zululand (UNIZULU)">University of Zululand (UNIZULU)</ion-select-option>
+          <ion-select-option value="Vaal University of Technology (VUT)">Vaal University of Technology (VUT)</ion-select-option>
+          <ion-select-option value="Walter Sisulu University (WSU)">Walter Sisulu University (WSU)</ion-select-option>
+          <ion-select-option value="Other ()">Other ()</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
+        <ion-label position="floating">Will you be continuing with studies?</ion-label>
+        <ion-checkbox formControlName="continue_studies" checked="false" color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
+        <ion-label position="floating">Current GPA</ion-label>
+        <ion-input formControlName="gpa" placeholder="GPA" type="number"></ion-input>
+      </ion-item>
     </ion-list>
+    <h3>About me</h3>
+    <ion-item>
+      <ion-label position="floating">Student summary</ion-label>
+      <ion-input formControlName="description_of_student" placeholder="Please enter a short description about yourself" type="text"></ion-input>
+    </ion-item>
       <!-- Submit Form -->
     <ion-button type="submit">
       Submit
     </ion-button>
   </form>
 <ion-content>
+
+
+
 
 
 

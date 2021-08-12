@@ -22,18 +22,17 @@ export class ViewProfilePage implements OnInit {
     city: [''],
     province: [''],
     RSA_citizen: [false],
-    //study_further: [false],
-    //disability: [false],
+    disability: [false],
     current_academic_level: [''],
     grade: [0],
     syllabus: [''],
     average: [0.0],
     currently_studying: [''],
     year_of_study: [''],
-    //study_institution: [''],
-    //continue_studies: [false],
-    //gpa: [0.0],
-    //description_of_student: [''],
+    study_institution: [''],
+    continue_studies: [false],
+    gpa: [0.0],
+    description_of_student: [''],
   });
 
   //Gets for all the form's parameters
@@ -70,7 +69,21 @@ export class ViewProfilePage implements OnInit {
   get average() {
     return this.addStudent_details.get('average');
   }
-
+  get currently_studying() {
+    return this.addStudent_details.get('currently_studying');
+  }
+  get year_of_study() {
+    return this.addStudent_details.get('year_of_study');
+  }
+  get study_institution() {
+    return this.addStudent_details.get('study_institution');
+  }
+  get disability() {
+    return this.addStudent_details.get('disability');
+  }
+  get gpa() {
+    return this.addStudent_details.get('gpa');
+  }
 
   student = new student_users();
 

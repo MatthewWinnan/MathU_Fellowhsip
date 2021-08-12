@@ -29,7 +29,7 @@ export class student_users{
     bursarred = 0;
     current_bursaries = null;
     workback = 0;
-    webnsite = "";
+    website = "";
 	last_login = ""; 
     number_of_reports = 0;
     banned = 0;
