@@ -11,20 +11,20 @@ include_once 'math_u_student_registration.php';
 include_once 'math_u_editStudent_functions.php';
 
 
-if(isset($_POST['email']) and isset($_POST['password'])){
+if (isset($_POST['first_name']) and isset($_POST['last_name']) and isset($_POST['email']) and isset($_POST['password'])){
 
   $email = $_POST['email'];
   $pass = $_POST['password'];
+  $first_name = $_POST['first_name'];
+  $last_name = $_POST['last_name'];
   $isUnique = isUniqueEmail($email, $mysqli);
   $hashed_pass = GenerateHashPassword($pass);
 
   if ($isUnique === TRUE){
-      $student_id = AddStudent($email, $hashed_pass, $mysqli);
-      echo "New student added successfully ".$student_id;
+      $student_id = AddStudent($first_name, $last_name, $email, $hashed_pass, $mysqli);
+      echo "New student added successfully ";
       if ($student_id > 0) {
 
-	  $first_name = $_POST['first_name'];
-	  $last_name = $_POST['last_name'];
 	  $dob = $_POST['date_of_birth'];
 	  $province = $_POST['province'];
 	  $city = $_POST['city'];
@@ -59,6 +59,7 @@ if(isset($_POST['email']) and isset($_POST['password'])){
     UpdateDisability($student_id, $disability, $mysqli);
 
     //--------------------------Academic Information--------------------------//
+    UpdateAcadLevel($student_id, $currentacad, $mysqli);
     if($currentacad == 'High School'){
       UpdateGrade($student_id, $grade, $mysqli);
       UpdateSyllabus($student_id, $syllabus, $mysqli);
@@ -109,7 +110,7 @@ if(isset($_POST['email']) and isset($_POST['password'])){
 	else{
 		echo "Not Unique!";
 	}
-  }
+}
 
 
 function QueryStudents($email, $mysqli){

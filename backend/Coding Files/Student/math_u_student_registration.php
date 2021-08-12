@@ -1,9 +1,9 @@
 <?php
 
-function AddStudent($email, $hashed_pass, $mysqli){
+function AddStudent($first_name, $last_name, $email, $hashed_pass, $mysqli){
 
   $date = date("Y-m-d");
-  $sql = "INSERT INTO student (Email_address, Password, Registerred_date) VALUES ('$email', '$hashed_pass', '$date')";
+  $sql = "INSERT INTO student (First_name, Last_name, Email_address, Password, Registerred_date) VALUES ('$first_name', '$last_name','$email', '$hashed_pass', '$date')";
 
   if($mysqli->query($sql) === TRUE){
     return $mysqli->insert_id;
