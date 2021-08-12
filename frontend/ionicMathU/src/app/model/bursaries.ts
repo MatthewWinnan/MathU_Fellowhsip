@@ -1,3 +1,5 @@
+import { Company } from './Company';
+
 export class Bursary {
     bursary_id? : 0;    //created in backend 
     company_id = 0;     //will be avaliable from login 
@@ -15,11 +17,15 @@ export class Bursary {
     financial_need = false;
     study_further = false;
     disability = false;
-    province? = "";          //
+    province? = "";          //not compulsary
     bursary_covers = [];    //array
     closing_date = "";  //compulsary 
     shortlist_date = "";    //compulsary
     email_address = "";     //compulsary
     bursary_duration = 0;       //compulsary
     isVisible = true;       //mostly true 
+    bursary_statue: "";     //ask backend team
+
+    company? : Company;
+
 }

@@ -174,6 +174,12 @@ export class EditBursaryPage implements OnInit {
     //console.log(this.addBursary.value.age_group.upper);
     //console.log(this.addBursary.value.RSA_citizen.detail.checked);
 
+
+    //student_bursary
+    //id    bursary_id    student_id     shortlisted (true or false)     bursary_status 
+    //1       b1           s_1            false                           decline 
+
+
     //send api request 
   }
 
