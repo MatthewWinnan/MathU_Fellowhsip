@@ -82,6 +82,7 @@ if(isset($_POST['email']) and isset($_POST['password'])){
 			  $ids = AllSubjects($student_id, $subjects, $mysqli);
 			  AllMarks($ids, $marks, $mysqli);
 		  }
+      
 
 		  $average = GetAverage($student_id, $mysqli);
 		  UpdateAverage($student_id, $average, $mysqli);
