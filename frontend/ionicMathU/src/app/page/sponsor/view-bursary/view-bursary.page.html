@@ -28,12 +28,25 @@
     </ion-item>
   </ion-list>
 
-  <ion-list>
+  <ion-card *ngFor="let item of jsonData">
+    <ion-item>
+      <ion-card-header>
+        <ion-card-subtitle>{{item.bursary_type}}</ion-card-subtitle>
+        <ion-card-title>{{item.bursary_name}}</ion-card-title>
+      </ion-card-header>
+      <ion-button fill="outline" slot="end">View</ion-button>
+    </ion-item>
+  
+    <ion-card-content>
+      {{item.bursary_description}}
+    </ion-card-content>
+  </ion-card>
+  <!-- <ion-list>
     <ion-item *ngFor="let item of jsonData">
       <p>
         {{item.bursary_name}} of status {{item.status}} with {{item.bursary_type}}
       </p>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
   
 </ion-content>
