@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
 import { HttpClientModule } from '@angular/common/http';
-
+import {NavparamService} from './navparam.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -17,7 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule, 
     SuperTabsModule.forRoot()
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    NavparamService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -80,7 +80,7 @@ export class RegisterPage implements OnInit {
       }
       
     }
-    console.log(this.student_name, this.student_surname);
+    // console.log(this.student_name, this.student_surname);
     //this.router.navigate(['./login']);
     this.router.navigate(['./student-view-profile']);
   }

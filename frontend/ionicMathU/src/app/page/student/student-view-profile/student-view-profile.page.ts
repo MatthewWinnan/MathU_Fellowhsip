@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { student_users } from '../../../model/student_users.model';
 import { Router } from '@angular/router';
-
+import {NavparamService} from '../../../navparam.service';
 @Component({
   selector: 'app-view-profile',
   templateUrl: './student-view-profile.page.html',
@@ -10,9 +10,15 @@ import { Router } from '@angular/router';
 })
 export class ViewProfilePage implements OnInit {
   dateToday = new Date().toISOString().substring(0,10);
-
+  student : student_users;
   constructor(private formBuilder: FormBuilder,
-    private router:Router) { }
+    private router:Router,
+    private studentData:NavparamService) 
+    { 
+      this.student = this.studentData.getStudent();
+      console.log(this.student.last_name_of_student);
+    }
+
 
   addStudent_details = this.formBuilder.group({
     first_name_of_student: [''],
@@ -87,8 +93,6 @@ export class ViewProfilePage implements OnInit {
     return this.addStudent_details.get('gpa');
   }
 
-  // student = new student_users();
-
   public addStudentDetails() {
     console.log(this.addStudent_details.value);
     this.router.navigate(['./student-edit-profile']);
@@ -96,6 +100,7 @@ export class ViewProfilePage implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 }
