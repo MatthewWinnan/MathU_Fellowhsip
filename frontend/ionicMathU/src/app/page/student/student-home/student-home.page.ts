@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Bursary } from 'src/app/model/bursary';
+import { Company } from 'src/app/model/company';
 
 let bursary = new Bursary;
+let company = new Company;
 let someArray = ["company_id", "bursary_id"];
 let i = 0;
 
@@ -15,16 +17,17 @@ let i = 0;
 export class StudentHomePage implements OnInit {
 
   /* Form Variables */
-  companyName = "<company_name>";
-  companyIndustry = "<company_industry>"
+  companyLogo = company.comapny_logo;
+  companyName = company.company_name;
+  companyIndustry = company.company_industry;
   bursaryName = bursary.bursary_name;
   fieldStudyNeeded = bursary.study_field;
   offerExpirationDate = bursary.closing_date;
   bursaryCoversFor = bursary.bursary_covers;
   latestAverageAbove = bursary.min_average;
 
-  companyDescription: string = "<company_description>";
-  companyURL: string = "<company_URL>";
+  companyDescription = company.company_description;
+  companyURL = company.company_URL;
   emailAddress = bursary.email_address;
 
   bursaryType: string = bursary.bursary_type;
@@ -54,6 +57,8 @@ export class StudentHomePage implements OnInit {
   showValid: boolean = false;
   viewMoreStr: string = "View More";
   viewLessStr: string = "View Less";
+  i = 0;
+  moreBursaries: any = '';
 
 
   constructor(
@@ -74,11 +79,29 @@ export class StudentHomePage implements OnInit {
   }
 
   nextBursary() {
-    console.log("nextBursary()")
+    // there needs to be a list option to make sure that button will be disabled if end of list is reached.
+    // list represents the list of bursaries that meet the filter criteria
+    let list = [
+      "a", "b", 1
+    ];
+    
+    if (i >= list.length) {
+      alert("End of bursary list reached.")
+      this.moreBursaries = 'disabled'
+    } 
+
+    if (i < list.length)
+    {
+      console.log("Next Bursary Brought In");
+      i++
+    }
+
+
+
   }
 
   prevBursary() {
-    console.log("prevBursary()")
+    console.log("Previous Bursary Brought In")
   }
   
   applyBursary() {
@@ -92,6 +115,7 @@ export class StudentHomePage implements OnInit {
   viewMore() {
     console.log("viewMore()")
     this.showValid = !this.showValid
+    console.log(i)
   }
 
   filter() {

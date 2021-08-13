@@ -10,7 +10,7 @@ export class Bursary {
     academic_level = "";    //compulsary
     study_field = "";       //compulsary (only if not "High School")
     minimum_year_required = 0; //compulsary (only if not "High School")
-    min_average = 0;      //compulsary
+    min_average = 60;      //compulsary
     RSA_citizen = false;
     financial_need = false;
     study_further = false;
