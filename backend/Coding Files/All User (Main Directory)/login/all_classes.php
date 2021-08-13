@@ -2,13 +2,59 @@
 //--------------------------
 //This is a file of classes
 //---------------------------
+//FRONTEND
+/*
+For Sponsor Register:
+{
+    "sponsor_id": "",
+    "first_name_of_user": "",	--
+    "last_name_of_user": "",	--
+    "email_address": "",	--
+    "password": "",	--
+    "company_id": 0,
+    "isSuperAdmin": false,	--> true
+    "manageBursaries": false,	--> true
+    "manageApplications": false,	--> true
+    "inactive": false,
+    "isVerified": false,
+    "company": {
+        "company_id": 0,
+        "company_name": "", 	--
+        "company_industry": "",	--
+        "number_of_reports": 0
+    }
+}
 
+For Sponsor Login 
+{
+    "sponsor_id": "",
+    "first_name_of_user": "",
+    "last_name_of_user": "",
+    "email_address": "",
+    "company_id": 0,
+    "isSuperAdmin": false,
+    "manageBursaries": false,
+    "manageApplications": false,
+    "inactive": false,
+    "isVerified": true,		--> compulsary
+    "company": {
+        "company_id": 0,
+        "company_name": "",
+        "company_industry": "",
+		"comapny_logo" : "",
+		"company_description" : "",
+		"company_URL" : "",
+        "number_of_reports": 0
+    }
+}
+*/
 //--------------
 //ALL USERS
 //--------------
 class all_users{
 	public student $Student;
 	public sponsor_users $Sponsor;
+	public $message;
 }
 
 //--------------
