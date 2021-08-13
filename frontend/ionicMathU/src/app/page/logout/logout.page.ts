@@ -10,6 +10,7 @@ import { Storage } from '@ionic/storage-angular';
 export class LogoutPage implements OnInit {
 
   constructor(private router:Router, public storage: Storage) { 
+    this.storage.set('name', "");
     this.storage.clear();
     this.router.navigate(['login']);
    }

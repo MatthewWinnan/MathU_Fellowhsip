@@ -23,7 +23,8 @@ export class LoginPage implements OnInit {
     public login_api: LoginApiService,
     public toastController: ToastController
   ) { 
-    //this.getValue();
+    this.storage.clear();
+    this.getValue();
   }
 
   get email_address() {
@@ -61,23 +62,41 @@ export class LoginPage implements OnInit {
 
     this.login_api.login_a_user(login_data).subscribe((res) => {
       console.log("SUCCESS ===", res);
-      this.the_message = "You have been successfully logged in";
-      this.printMessage();
-      this.setValue(res);
-      this.getValue();  //remove later (to test)
-      //this.router.navigate(['./view-profile']);
-      //uuncomment later
+
+      //console.log(res["message"]);
+      //console.log(Object.keys(res).length);
+      if (res["message"]!= null){  //if length is 0, then incorrect details
+      //if (res.message){
+        this.the_message = res["message"];
+        this.printMessage();
+      }
+      else{
+        this.the_message = "You have been successfully logged in";
+        this.printMessage();
+        //console.log(res);
+
+        this.setValue(res);
+
+        if (res["Sponsor"] != null){
+          //console.log("Sponsor logged in");
+          //console.log(res["Sponsor"]["company_id"]);
+          //this.getValue();  //remove later (to test)
+          this.router.navigate(['./view-profile']);
+        }
+        if (res["Student"]){
+          //console.log("Student logged in");
+          //console.log(res["Student"]["first_name"]);
+          //this.setValue(res);
+          //this.getValue();  //remove later (to test)
+          this.router.navigate(['./student-view-profile']);
+        }
+      }
     }, (error:any) => {
       this.the_message = error.statusText;
       //this.the_message = 'error';// error;
       this.printMessage();
       console.log("ERROR ===", error);
     });
-
-    
-
-
-
   }
 
 
@@ -101,9 +120,20 @@ export class LoginPage implements OnInit {
 
   getValue(){
     this.storage.get('name').then( (val) => {
-      console.log("value is " + val);
+      //console.log(val);
+      if (val != null){
+        if (val["Sponsor"] != null){
+          console.log(val["Sponsor"]["company_id"]);
+        }
+        else if (val["Student"] != null){
+          console.log(val["Student"]["first_name"]);
+        }
+      }
+      else{
+        console.log("val is nothing")
+      }
     }, (err)=>{
-      console.log("empty");
+      console.log(err);
     })
   }
 

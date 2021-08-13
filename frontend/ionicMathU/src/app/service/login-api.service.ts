@@ -15,7 +15,7 @@ export class LoginApiService {
   }
 
   login_a_user(data:any){
-    return this.http.post<any>('http://localhost/mathU_backend/math_u_addSponsor.php', data);
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_login.php', data);
     //change the file name!
   }
 }

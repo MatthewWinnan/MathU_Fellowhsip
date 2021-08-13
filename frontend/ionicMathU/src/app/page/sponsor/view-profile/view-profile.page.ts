@@ -18,9 +18,22 @@ export class ViewProfilePage implements OnInit {
 
   getValue(){
     this.storage.get('name').then( (val) => {
-      this.gmail = "value is " + val;
+      //console.log(val);
+      //if (val != null){
+        //if (val["Sponsor"] != null){
+          this.gmail = "Company ID is " + val["Sponsor"]["company_id"]; 
+          //console.log(val["Sponsor"]["company_id"]);
+        //}
+        //else if (val["Student"] != null){
+          //console.log(val["Student"]["first_name"]);
+        //}
+      //}
+      //else{
+        //console.log("val is nothing")
+      //}
     }, (err)=>{
-      this.gmail = "empty";
+      this.gmail = "";
+      //console.log(err);
     })
   }
 
