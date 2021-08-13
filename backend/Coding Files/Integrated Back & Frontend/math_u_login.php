@@ -6,6 +6,8 @@
 
 //include connection 
 include 'math_u_db_connection.php';
+include 'math_u_functions.php';
+include 'all_classes.php';
 require 'hash_password.php';
 //INPUT MANAGEMENT
 $input = file_get_contents('php://input');
@@ -16,6 +18,7 @@ $data = json_decode($input, true);
 $email = $data['email_address'];
 $pass = $data['password'];
 
+//===========================================================
 //query email -> echo error if no match found -> All_Users
 $usrID = QueryAllUsers($email,$mysqli);
 //===========================================================
@@ -34,17 +37,16 @@ if ($usrID != ""){
 		//Compare Passwords 
 		if ($spr->num_rows > 0){
 			$flag_bit = 1;
-			$results = ComparePasswords($pass, $spr->fetch_assoc(), $flag_bit, $mysqli);
+			$results = ComparePasswords($password, $spr->fetch_assoc(), $flag_bit, $mysqli);
 			
 			//===========================================================
 			//Go to Homepage if match found
-			//echo "<h1>Employee Details</h1>";
 			Display($results);
-		
 			//===========================================================
 		}
 		else{
-			echo json_encode("NO Sponsor found!");
+			//return empty object 
+			
 		}
 		
 	}
@@ -56,22 +58,22 @@ if ($usrID != ""){
 		//Compare Passwords 
 		if ($std->num_rows > 0){
 			$flag_bit = 0;
-			$results = ComparePasswords($pass, $std->fetch_assoc(), $flag_bit, $mysqli);
+			$results = ComparePasswords($password, $std->fetch_assoc(), $flag_bit, $mysqli);
 		
 			//===========================================================
 			//Go to Homepage if match found 
-			//echo "<h1>Student Details</h1>";
 			Display($results);
 			//===========================================================
 		}
 		else{
-			echo json_encode("NO Student found!");
+			//empty Object
 		}
 	}
 }
 else{
-	echo json_encode("No Email found!");
+	//empty Object
 }
+
 
 //--------------------------------------END MAIN---------------------------------------------//
 //===================
@@ -120,31 +122,6 @@ function DecodeID($id){
 }
 
 //=================================================
-//function to QuerySponsors, returns a row
-//================================================
-function QuerySponsors($email, $mysqli){
-	//returns a row 
-	$email = strtolower($email);
-	$sql = "SELECT * FROM sponsor_users WHERE email_address = '".$email."'";
-	$result = $mysqli->query($sql);
-	//echo json_encode($result);
-	return $result;
-}
-
-//=================================================
-//function to QueryStudents, returns a row
-//================================================
-function QueryStudents($email, $mysqli){
-	//returns a row -> 
-	$email = strtolower($email);
-	//echo 'Email: '.$email;
-	$sql = "SELECT * FROM student WHERE Email_address = '".$email."'";
-	$result = $mysqli->query($sql);
-	//echo json_encode($result);
-	return $result;
-}
-
-//=================================================
 //function to Dehash & Compare Password, returns an array of data (accepts an array)
 //================================================
 function ComparePasswords($password, $row,int $flag,$mysqli){
@@ -152,67 +129,48 @@ function ComparePasswords($password, $row,int $flag,$mysqli){
 	
 	if (password_verify($password,$row["password"])){
 		$date = date("Y-m-d");
+		
 		if ($flag == 1){
 			$sql = "UPDATE sponsor_users SET last_login='".$date."' WHERE email_address='".$row["email_address"]."'";
-			$mysqli->query($sql);
-			echo json_encode($mysqli->error);
 			
-			$Obj=new \stdClass();
-			$Obj->name = $row["first_name_of_user"];
-			$Obj->surname = $row["last_name_of_user"];
-			$Obj->email = $row["email_address"];
-			$Obj->company_id = $row["company_id"];
-			$Obj->isSuperAdmin = $row["isSuperAdmin"];
-			$Obj->manageBursaries = $row["manageBursaries"];
-			$Obj->manageApplications = $row["manageApplications"];
-			$Obj->inactive = $row["inactive"];
-			$Obj->isVerified = $row["isVerified"];
-			return $Obj;
+			if($mysqli->query($sql)){
+				//create object to send to the frontend
+				$user = new all_users();
+				$user->Sponsor = new sponsor_users($row["id"], $row["first_name_of_user"],$row["last_name_of_user"], $row["email_address"],  $row["company_id"], $row["isSuperAdmin"], $row["manageBursaries"], $row["manageApplications"], $row["inactive"], $row["isVerified"]);
+				return $user;
+				
+			}
+			else{
+				//update error message and send empty obj
+				$user = new all_users();
+				return $user;
+			}
 		}
 		else{
 			$sql = "UPDATE student SET Last_login='".$date."' WHERE Email_address='".$row["Email_address"]."'";
-			$mysqli->query($sql);
-			echo json_encode($mysqli->error);
 			
-			$Obj = new \stdClass();
-			$Obj->name = $row["First_name"];
-			$Obj->surname = $row["Last_name"];
-			$Obj->email = $row["Email_address"];
-			$Obj->dob = $row["Date_of_birth"];
-			$Obj->validated = $row["Validated"];
-			$Obj->nationality = $row["Nationality"];
-			$Obj->contact_number = $row["Contact_number"];
-			$Obj->city = $row["City"];
-			$Obj->province = $row["Province"];
-			$Obj->disability = $row["Disability"];
-			$Obj->academic_Level = $row["Current_academic_level"];
-			$Obj->average = $row["Average"];
-			$Obj->website = $row["Website"];
-			return $Obj;
+			if($mysqli->query($sql)){
+				//create object to send to the frontend
+				$user = new all_users();
+				$user->Student = new student($row["ID"], $row["First_name"], $row["Last_name"], $row["Date_of_birth"], $row["Email_address"], $row["Validated"], $row["Nationality"], $row["Contact_number"], $row["City"], $row["Province"], $row["Disability"], $row["Current_academic_level"], $row["Grade"], $row["Syllabus"], $row["Average"], $row["Currently_studying"], $row["Year_of_study"], $row["Study_institution"], $row["Continue_studies"], $row["GPA"], $row["Description_of_student"], $row["Bursarred"], $row["Current_bursaries"], $row["Workback"], $row["Website"], $row["Number_of_reports"],$row["Banned"]);
+				return $user;
+			}
+			else{
+				//update error message send empty obj
+				$user = new all_users();
+				return $user;
+			}
 			
 		}
 		
 	}
 	else{
-		$Obj = null;
-		return $Obj;
+		//return empty oBJ
+		$user = new all_users();
+		return $user;
 	}
 	
 }
-
-//=================================================
-//function this function echo results in JSON format
-//================================================
-function Display($result){
-	//Check results is not an empty array 
-	if ($result != null){
-		echo json_encode($result);
-	}
-	else{
-		echo json_encode("No Results Found");
-	}
-}
-
 //===================================================
 //Creating a Session (Void function) 
 //===================================================
@@ -226,4 +184,5 @@ function CreateSession($row){//gets an array to create a session
 function CreateCookies($row){//gets an array to create a session 
 	
 }
+?>
 ?>
