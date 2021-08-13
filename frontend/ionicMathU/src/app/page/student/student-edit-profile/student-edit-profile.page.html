@@ -82,7 +82,16 @@
         </ion-select>
       </ion-item>
       <!-- Info for only HS students -->
-      <ion-item *ngIf="current_academic_level.value === 'High School'">
+      <ion-item *ngIf="this.student.current_academic_level === '' && current_academic_level.value === 'High School'">
+        <ion-label position="stacked">Current Grade</ion-label>
+        <ion-select formControlName="grade" placeholder = {{this.student.grade}}>
+          <ion-select-option value= 10 >10</ion-select-option>
+          <ion-select-option value= 11 >11</ion-select-option>
+          <ion-select-option value= 12 >12</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="this.student.current_academic_level !== '' && current_academic_level.value === 'High School'">
         <ion-label position="floating">Current Grade</ion-label>
         <ion-select formControlName="grade" placeholder = {{this.student.grade}}>
           <ion-select-option value= 10 >10</ion-select-option>
@@ -90,6 +99,7 @@
           <ion-select-option value= 12 >12</ion-select-option>
         </ion-select>
       </ion-item>
+
       <ion-item *ngIf="current_academic_level.value === 'High School'">
         <ion-label position="floating">Syllabus</ion-label>
         <ion-select formControlName="syllabus" placeholder = {{this.student.syllabus}}>
