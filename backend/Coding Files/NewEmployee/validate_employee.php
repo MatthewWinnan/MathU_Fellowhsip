@@ -60,24 +60,26 @@ function addNewEmployee(){ //Adds new employee to the database and sends email.
   VALUES ('$sponsor_id', '$first_name', '$last_name', '$email', '$password', '$regdate','$company_id', 1)";
   $entry = $mysqli->query($sql);
 
-} elseif ($role == 'manageBursaries'){
+  } elseif ($role == 'manageBursaries'){
 
-$sql = "INSERT INTO `sponsor_users` (`sponsor_id`, `first_name_of_user`, `last_name_of_user`, `email_address`, `password`, `regisered_date`,`company_id`, `manageBursaries`)
-VALUES ('$sponsor_id', '$first_name', '$last_name', '$email', '$password', '$regdate','$company_id', 1)";
-$entry = $mysqli->query($sql);
+  $sql = "INSERT INTO `sponsor_users` (`sponsor_id`, `first_name_of_user`, `last_name_of_user`, `email_address`, `password`, `regisered_date`,`company_id`, `manageBursaries`)
+ VALUES ('$sponsor_id', '$first_name', '$last_name', '$email', '$password', '$regdate','$company_id', 1)";
+ $entry = $mysqli->query($sql);
 
-} else {
-$sql = "INSERT INTO `sponsor_users` (`sponsor_id`, `first_name_of_user`, `last_name_of_user`, `email_address`, `password`, `regisered_date`,`company_id`, `manageApplications`)
-VALUES ('$sponsor_id', '$first_name', '$last_name', '$email', '$password', '$regdate','$company_id', 1)";
-$entry = $mysqli->query($sql);
+  } else {
+    $sql = "INSERT INTO `sponsor_users` (`sponsor_id`, `first_name_of_user`, `last_name_of_user`, `email_address`, `password`, `regisered_date`,`company_id`, `manageApplications`)
+    VALUES ('$sponsor_id', '$first_name', '$last_name', '$email', '$password', '$regdate','$company_id', 1)";
+    $entry = $mysqli->query($sql);
 
-}
+  }
 
-if($entry){
-  sendEmail();
-} else {
-  echo "Error Code: ".$mysqli->errno;
-}
+  if($entry){
+    sendEmail();
+  } else {
+    $addEmployee = new Employee();
+
+  return $addEmployee;
+  }
 }
 
 //====================================================================================================
@@ -109,9 +111,15 @@ function sendEmail(){ //========================================================
               "Thank you for using MathU Fellows."."\n\n"."Please do not reply to this email.";
 
   if(mail($to,$subject,$message,'')) {
-    echo "<script>alert('Email sent');</script>";
+    $mail = new mailSend();
+    $mail->Alert = "Mail Sent.";
+
+    return $mail;
+    // echo "<script>alert('Email sent');</script>";
   } else {
-    echo "Failed to send email. Error Code: ".$mysqli->errno;
+    $mail = new mailSend();
+
+    return $mail;
   };
 
 }
@@ -130,9 +138,16 @@ function viewEmployees(){
         $employees[$p] = $row;
         $p += 1;
       }
-      print_r($employees);
+      $viewEmployees = new Employees();
+      $viewEmployees->Employees = $employees;
+      // $viewEmployees->Employees = print_r($employees);
+
+      return $viewEmployees;
+
     } else {
-      echo "Could not view employees. Error Code: ".$mysqli->errno;
+      $viewEmployees = new Employees();
+
+      return $viewEmployees;
     }
 }
 
@@ -145,23 +160,33 @@ function getCompanyID() { //====================================================
   if ($mysqli->connect_errno) {
       echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
       }
-        // Get ID using Company Name
-        $company_name = $_POST['company_name'];
-        if($company_name){
-              $sql = "SELECT `company_id` FROM `company` WHERE `company_name` = '$company_name' LIMIT 1";
-                if($res1 = $mysqli->query($sql)){
-                  $res2 = mysqli_fetch_array($res1, MYSQLI_ASSOC);
-                  $res = $res2['company_id'];//REMOVED PRINT
 
-          } else {
-            echo "Query not processed".$mysqli->errno;
-          }
+  // Get ID using Company Name
+  $company_name = $_POST['company_name'];
+  if($company_name){
+        $sql = "SELECT `company_id` FROM `company` WHERE `company_name` = '$company_name' LIMIT 1";
+          if($res1 = $mysqli->query($sql)){
+            $res2 = mysqli_fetch_array($res1, MYSQLI_ASSOC);
+            $res = $res2['company_id'];//REMOVED PRINT
 
-      } else {
-        echo "Something went wrong. Company Name not found.";
-      }
-  return $res;
-  }
+            $company_id = new companyID
+            $company_id->CompanyID = $res;
+
+            return $company_id;
+
+    } else {
+      $company_id = new companyID();
+
+      return $company_id;
+    }
+
+} else {
+  $company_id = new companyID();
+
+  return $company_id;
+}
+// return $res;
+}
 
   //====================================================================================================
 
@@ -176,7 +201,10 @@ function isEmployeeExists(){
     addNewEmployee();
     viewEmployees();
   } else {
-  echo "Employee already exists";
+  // echo "Employee already exists";
+  $EmployeeExists() = new Exists();
+
+  return $EmployeeExists;
   }
 }
 
