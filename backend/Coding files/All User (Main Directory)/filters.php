@@ -24,7 +24,7 @@ function getBursaries() {
 $bursary_type = $data['bursary_type'];
 $study_field = $data['study_field'];
 $minimum_average = $data['minimum_average'];
-$province = $data['province'];
+$bursary_covers = $data['bursary_covers'];
 $academic_level = $data['academic_level'];
 
 $sql = "SELECT * FROM `bursaries`
@@ -32,7 +32,7 @@ WHERE `Bursary_Type` LIKE '$bursary_type'
 AND `Academic_Level` LIKE '$academic_level'
 AND `Study_field` LIKE '$study_field'
 AND `Minimum_Average` >= '$minimum_average'
-AND `Province` LIKE '$province'";
+AND `Bursary_Covers` LIKE '$bursary_covers'";
 
 $bursaryrow = array();
 $result = $mysqli->query($sql);
