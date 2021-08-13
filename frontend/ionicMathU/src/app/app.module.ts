@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule.forRoot(), 
     HttpClientModule,
     AppRoutingModule, 
-    SuperTabsModule.forRoot()
+    SuperTabsModule.forRoot(),
+    IonicStorageModule.forRoot()
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
