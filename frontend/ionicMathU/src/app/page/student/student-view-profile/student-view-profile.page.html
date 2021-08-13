@@ -36,7 +36,7 @@
       </ion-item>
       <ion-item *ngIf="this.student.date_of_birth !== null " >
         <ion-label position="stacked">Date of birth</ion-label>
-        <ion-note color = "dark"> {{this.student.date_of_birth}} </ion-note>
+        <ion-note color = "dark"> {{this.student.date_of_birth | date: 'dd/MM/yyyy'}} </ion-note>
       </ion-item>
       <ion-item *ngIf="this.student.disability !== null ">
         <ion-label position="stacked">Currently disabled?</ion-label>

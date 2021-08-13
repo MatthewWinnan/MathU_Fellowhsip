@@ -21,25 +21,37 @@
     <ion-list>
       <ion-item>
         <ion-label position="floating">Student name</ion-label>
-        <ion-input formControlName="first_name_of_student" placeholder={{this.student.first_name_of_student}} type="text"></ion-input>
+        <ion-input formControlName="first_name_of_student" type="text" [(ngModel)]="name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Student surname</ion-label>
-        <ion-input formControlName="last_name_of_student" placeholder={{this.student.last_name_of_student}} type="text"></ion-input>
+        <ion-input formControlName="last_name_of_student" [(ngModel)]="surname" type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Email address</ion-label>
-        <ion-input formControlName="email_address" placeholder= {{this.student.email_address}} type="text"></ion-input>
+        <ion-input formControlName="email_address" [(ngModel)]="email" type="text"></ion-input>
       </ion-item>
-      <ion-item>
+      
+      <ion-item *ngIf="this.student.contact_number === '' ">
         <ion-label position="floating">Contact number</ion-label>
-        <ion-input formControlName="contact_number" placeholder={{this.student.contact_number}} type="text"></ion-input>
+        <ion-input formControlName="contact_number" placeholder= "Please Enter Your Contact Number" type="text"></ion-input>
       </ion-item>
-      <ion-item>
+
+      <ion-item *ngIf="this.student.contact_number !== '' ">
+        <ion-label position="floating">Contact number</ion-label>
+        <ion-input formControlName="contact_number" [(ngModel)]="number" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="this.student.data_of_birth !== null ">
         <ion-label position="floating">Date of birth</ion-label>
-        <ion-datetime formControlName="data_of_birth" displayFormat="YYYY MMMM DD" value={{this.student.date_of_birth}} ></ion-datetime>
+        <ion-datetime formControlName="data_of_birth" displayFormat="YYYY MMMM DD"  [(ngModel)]="dob"></ion-datetime>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="this.student.data_of_birth === null ">
+        <ion-label position="floating">Date of birth</ion-label>
+        <ion-datetime formControlName="data_of_birth" displayFormat="YYYY MMMM DD" placeholder = " YYYY/MM/DD"></ion-datetime>
+      </ion-item>
+
+      <ion-item >
         <ion-label position="floating">Currently disabled?</ion-label>
         <ion-checkbox formControlName="disability" checked={{this.student.disability}} color="dark"></ion-checkbox>
       </ion-item>
@@ -47,9 +59,10 @@
     <!-- Citizenship and residence information -->
     <h3>Residential Information</h3>
     <ion-list>
-      <ion-item>
+
+      <ion-item *ngIf="this.student.province === '' ">
         <ion-label position="floating">Province</ion-label>
-        <ion-select formControlName="province" placeholder = {{this.student.province}}>
+        <ion-select formControlName="province" placeholder = "Please Select Your Province">
           <ion-select-option value="Mpumalanga">Mpumalanga</ion-select-option>
           <ion-select-option value="Eastern Cape">Eastern Cape</ion-select-option>
           <ion-select-option value="Free State">Free State</ion-select-option>
@@ -61,26 +74,57 @@
           <ion-select-option value="KwaZulu-Natal">KwaZulu-Natal</ion-select-option>
         </ion-select>
       </ion-item>
+      <ion-item *ngIf="this.student.province !== '' ">
+        <ion-label position="floating">Province</ion-label>
+        <ion-select formControlName="province" [(ngModel)]="student_province">
+          <ion-select-option value="Mpumalanga">Mpumalanga</ion-select-option>
+          <ion-select-option value="Eastern Cape">Eastern Cape</ion-select-option>
+          <ion-select-option value="Free State">Free State</ion-select-option>
+          <ion-select-option value="Gauteng">Gauteng</ion-select-option>
+          <ion-select-option value="Limpopo">Limpopo</ion-select-option>
+          <ion-select-option value="Northern Cape">Northern Cape</ion-select-option>
+          <ion-select-option value="North West">North West</ion-select-option>
+          <ion-select-option value="Western Cape">Western Cape</ion-select-option>
+          <ion-select-option value="KwaZulu-Natal">KwaZulu-Natal</ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <ion-item>
         <ion-label position="floating">RSA citizen</ion-label>
         <ion-checkbox formControlName="RSA_citizen" checked={{this.student.RSA_citizen}} color="dark"></ion-checkbox>
       </ion-item>
-      <ion-item>
+
+      <ion-item *ngIf="this.student.city === '' ">
         <ion-label position="floating">City</ion-label>
-        <ion-input formControlName="city" placeholder="{{this.student.city}}" type="text"></ion-input>
+        <ion-input formControlName="city" placeholder="Please Enter Your City Of Residence" type="text"></ion-input>
       </ion-item>
+      <ion-item *ngIf="this.student.city !== '' ">
+        <ion-label position="floating">City</ion-label>
+        <ion-input formControlName="city" [(ngModel)]="student_city" type="text"></ion-input>
+      </ion-item>
+
     </ion-list>
     <!-- Academic Information -->
     <h3>Academic Information</h3>
     <ion-list>
-      <ion-item>
-        <ion-label position="floating">Academic Level</ion-label>
-        <ion-select formControlName="current_academic_level" placeholder = {{this.student.current_academic_level}}>
+      
+      <ion-item *ngIf="this.student.current_academic_level === ''">
+        <ion-label position="floating">Enter Academic Level</ion-label>
+        <ion-select formControlName="current_academic_level">
           <ion-select-option value="High School">High School</ion-select-option>
           <ion-select-option value="Undergraduate">Undergraduate</ion-select-option>
           <ion-select-option value="Postgraduate">Postgraduate</ion-select-option>
         </ion-select>
       </ion-item>
+      <ion-item *ngIf="this.student.current_academic_level !== ''">
+        <ion-label position="floating">Enter Academic Level</ion-label>
+        <ion-select formControlName="current_academic_level" [(ngModel)]="academic_level">
+          <ion-select-option value="High School">High School</ion-select-option>
+          <ion-select-option value="Undergraduate">Undergraduate</ion-select-option>
+          <ion-select-option value="Postgraduate">Postgraduate</ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <!-- Info for only HS students -->
       <ion-item *ngIf="this.student.grade === 0.0 && current_academic_level.value === 'High School'">
         <ion-label position="float">Current Grade</ion-label>

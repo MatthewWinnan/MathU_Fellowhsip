@@ -12,6 +12,24 @@ import { Router } from '@angular/router';
 export class ViewProfilePage implements OnInit {
   dateToday = new Date().toISOString().substring(0,10);
   student : student_users;
+  name: any = '';
+  surname: any = '';
+  dob : Date;
+  email : any;
+  number : any;
+  student_city : any;
+  student_province : any;
+  nation : any;
+  disable : any;
+  academic_level : any;
+  student_grade : any;
+  student_syllabus : any;
+  student_average : any;
+  study : any;
+  year_study : any;
+  institution : any;
+  continue : any;
+  description : any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,6 +38,24 @@ export class ViewProfilePage implements OnInit {
 
     ) {
       this.student = this.studentData.getStudent();
+      this.name = this.student.first_name_of_student;
+      this.surname = this.student.last_name_of_student;
+      this.dob = this.student.data_of_birth;
+      this.email = this.student.email_address;
+      this.number = this.student.contact_number;
+      this.student_city = this.student.city;
+      this.student_province = this.student.province;
+      this.nation = this.student.nationality;
+      this.disable = this.student.disability;
+      this.academic_level = this.student.current_academic_level;
+      this.student_grade = this.student.grade;
+      this.student_syllabus = this.student.syllabus;
+      this.student_average = this.student.average;
+      this.study = this.student.currently_studying;
+      this.year_study = this.student.year_of_study;
+      this.institution = this.student.study_institution;
+      this.continue = this.student.continue_studies;
+      this.description = this.student.description_of_student;
      }
 
   addStudent_details = this.formBuilder.group({
