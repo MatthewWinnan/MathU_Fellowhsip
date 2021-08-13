@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { student_users } from '../../../model/student_users.model';
+import {NavparamService} from '../../../service/navparam/navparam.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-profile',
@@ -9,8 +11,16 @@ import { student_users } from '../../../model/student_users.model';
 })
 export class ViewProfilePage implements OnInit {
   dateToday = new Date().toISOString().substring(0,10);
+  student : student_users;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private studentData:NavparamService,
+    private router:Router,
+
+    ) {
+      this.student = this.studentData.getStudent();
+     }
 
   addStudent_details = this.formBuilder.group({
     first_name_of_student: [''],
@@ -85,10 +95,10 @@ export class ViewProfilePage implements OnInit {
     return this.addStudent_details.get('gpa');
   }
 
-  student = new student_users();
-
   public addStudentDetails() {
-    console.log(this.addStudent_details.value)
+    console.log(this.addStudent_details.value);
+    this.studentData.setStudent(this.student);
+    this.router.navigate(['./student-view-profile']);
   }
 
   ngOnInit() {

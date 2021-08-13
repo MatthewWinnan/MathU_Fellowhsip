@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
 import { HttpClientModule } from '@angular/common/http';
-import {NavparamService} from './navparam.service';
+import {NavparamService} from './service/navparam/navparam.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

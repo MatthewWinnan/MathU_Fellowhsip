@@ -21,23 +21,23 @@
     <ion-list>
       <ion-item>
         <ion-label position="floating">Student name</ion-label>
-        <ion-input formControlName="first_name_of_student" placeholder="Student Name" type="text"></ion-input>
+        <ion-input formControlName="first_name_of_student" placeholder={{this.student.first_name_of_student}} type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Student surname</ion-label>
-        <ion-input formControlName="last_name_of_student" placeholder="Student Surname" type="text"></ion-input>
+        <ion-input formControlName="last_name_of_student" placeholder={{this.student.last_name_of_student}} type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Email address</ion-label>
-        <ion-input formControlName="email_address" placeholder="Email Address" type="text"></ion-input>
+        <ion-input formControlName="email_address" placeholder= {{this.student.email_address}} type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Contact number</ion-label>
-        <ion-input formControlName="contact_number" placeholder="Contact Number" type="text"></ion-input>
+        <ion-input formControlName="contact_number" placeholder={{this.student.contact_number}} type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Date of birth</ion-label>
-        <ion-datetime formControlName="data_of_birth" displayFormat="YYYY MM DD" placeholder="YYYY/MM/DD" ></ion-datetime>
+        <ion-datetime formControlName="data_of_birth" displayFormat="YYYY MM DD" placeholder={{this.student.date_of_birth}} ></ion-datetime>
       </ion-item>
     </ion-list>
     <!-- Citizenship and residence information -->
@@ -45,7 +45,7 @@
     <ion-list>
       <ion-item>
         <ion-label position="floating">Province</ion-label>
-        <ion-select formControlName="province">
+        <ion-select formControlName="province" placeholder = {{this.student.province}}>
           <ion-select-option value="Mpumalanga">Mpumalanga</ion-select-option>
           <ion-select-option value="Eastern Cape">Eastern Cape</ion-select-option>
           <ion-select-option value="Free State">Free State</ion-select-option>
@@ -59,15 +59,15 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">RSA citizen</ion-label>
-        <ion-checkbox formControlName="RSA_citizen" checked="false" color="dark"></ion-checkbox>
+        <ion-checkbox formControlName="RSA_citizen" checked={{this.student.RSA_citizen}} color="dark"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label position="floating">City</ion-label>
-        <ion-input formControlName="city" placeholder="City" type="text"></ion-input>
+        <ion-input formControlName="city" placeholder="{{this.student.city}}" type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Currently disabled?</ion-label>
-        <ion-checkbox formControlName="disability" checked="false" color="dark"></ion-checkbox>
+        <ion-checkbox formControlName="disability" checked={{this.student.disability}} color="dark"></ion-checkbox>
       </ion-item>
     </ion-list>
     <!-- Academic Information -->
@@ -75,7 +75,7 @@
     <ion-list>
       <ion-item>
         <ion-label position="floating">Academic Level</ion-label>
-        <ion-select formControlName="current_academic_level">
+        <ion-select formControlName="current_academic_level" placeholder = {{this.student.current_academic_level}}>
           <ion-select-option value="High School">High School</ion-select-option>
           <ion-select-option value="Undergraduate">Undergraduate</ion-select-option>
           <ion-select-option value="Postgraduate">Postgraduate</ion-select-option>
@@ -84,7 +84,7 @@
       <!-- Info for only HS students -->
       <ion-item *ngIf="current_academic_level.value === 'High School'">
         <ion-label position="floating">Current Grade</ion-label>
-        <ion-select formControlName="grade">
+        <ion-select formControlName="grade" placeholder = {{this.student.grade}}>
           <ion-select-option value= 10 >10</ion-select-option>
           <ion-select-option value= 11 >11</ion-select-option>
           <ion-select-option value= 12 >12</ion-select-option>
@@ -92,7 +92,7 @@
       </ion-item>
       <ion-item *ngIf="current_academic_level.value === 'High School'">
         <ion-label position="floating">Syllabus</ion-label>
-        <ion-select formControlName="syllabus">
+        <ion-select formControlName="syllabus" placeholder = {{this.student.syllabus}}>
           <ion-select-option value= "Cambridge" >Cambridge</ion-select-option>
           <ion-select-option value= "CAPS" >CAPS</ion-select-option>
           <ion-select-option value= "IEB" >IEB</ion-select-option>
@@ -101,27 +101,30 @@
       </ion-item>
       <ion-item *ngIf="current_academic_level.value === 'High School'">
         <ion-label position="floating">Average</ion-label>
-        <ion-input formControlName="average" placeholder="Average" type="number"></ion-input>
+        <ion-input formControlName="average" placeholder={{this.student.average}} type="number"></ion-input>
       </ion-item>
       <!-- Info for uni students -->
       <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
         <ion-label position="floating">Currently Studying</ion-label>
-        <ion-input formControlName="currently_studying" placeholder="Other" type="text"></ion-input>
+        <ion-input formControlName="currently_studying" placeholder={{this.student.currently_studying}} type="text"></ion-input>
       </ion-item>
       <!-- Info for undergrad students -->
       <ion-item *ngIf="current_academic_level.value === 'Undergraduate'">
         <ion-label position="floating">Year Of Study</ion-label>
-        <ion-select formControlName="year_of_study">
+        <ion-select formControlName="year_of_study" placeholder = {{this.student.year_of_study}}>
           <ion-select-option value= "1st" >1st</ion-select-option>
           <ion-select-option value= "2nd" >2nd</ion-select-option>
           <ion-select-option value= "3rd" >3rd</ion-select-option>
           <ion-select-option value= "4th" >4th</ion-select-option>
+          <ion-select-option value= "5th" >5th</ion-select-option>
+          <ion-select-option value= "6th" >6th</ion-select-option>
+          <ion-select-option value= "7th" >7th</ion-select-option>
         </ion-select>
       </ion-item>
       <!-- Info for postgrad -->
       <ion-item *ngIf="current_academic_level.value === 'Postgraduate'">
         <ion-label position="floating">Year Of Study</ion-label>
-        <ion-select formControlName="year_of_study">
+        <ion-select formControlName="year_of_study" placeholder = {{this.student.year_of_study}}>
           <ion-select-option value= "Honours" >Honors</ion-select-option>
           <ion-select-option value= "Masters" >Masters</ion-select-option>
           <ion-select-option value= "PHD" >PHD</ion-select-option>
@@ -130,7 +133,7 @@
 <!-- Info for uni students -->
       <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
         <ion-label position="floating">Institution of study</ion-label>
-        <ion-select formControlName="study_institution">
+        <ion-select formControlName="study_institution" placeholder = {{this.student.study_institution}}>
           <ion-select-option value= "Cape Peninsula University of Technology (CPUT)" >Cape Peninsula University of Technology (CPUT)</ion-select-option>
           <ion-select-option value= "Central University of Technology (CUT)" >Central University of Technology (CUT)</ion-select-option>
           <ion-select-option value="Durban University of Technology (DUT)">Durban University of Technology (DUT)</ion-select-option>
@@ -161,17 +164,17 @@
       </ion-item>
       <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
         <ion-label position="floating">Will you be continuing with studies?</ion-label>
-        <ion-checkbox formControlName="continue_studies" checked="false" color="dark"></ion-checkbox>
+        <ion-checkbox formControlName="continue_studies" checked={{this.student.continue_studies}} color="dark"></ion-checkbox>
       </ion-item>
       <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
         <ion-label position="floating">Current GPA</ion-label>
-        <ion-input formControlName="gpa" placeholder="GPA" type="number"></ion-input>
+        <ion-input formControlName="gpa" placeholder={{this.student.gpa}} type="number"></ion-input>
       </ion-item>
     </ion-list>
     <h3>About me</h3>
     <ion-item>
       <ion-label position="floating">Student summary</ion-label>
-      <ion-input formControlName="description_of_student" placeholder="Please enter a short description about yourself" type="text"></ion-input>
+      <ion-input formControlName="description_of_student" placeholder={{this.student.description_of_student}} type="text"></ion-input>
     </ion-item>
       <!-- Submit Form -->
     <ion-button type="submit">
