@@ -1,4 +1,6 @@
 <?php
+include_once 'all_classes.php';
+
 //=================================================
 //function to QueryStudents, returns a ID
 //================================================
@@ -54,7 +56,8 @@ function Display($result){
 		echo json_encode($result);
 	}
 	else{
-		echo "No Results Found";
+		$user = new all_users();
+		echo json_encode($user);
 	}
 }
 
