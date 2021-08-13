@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +10,11 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
   showPassword = false;
   passwordToggleIcon = 'eye';
+  email_address : string="";
+  password : string="";
 
-  constructor(private router:Router) { 
-
+  constructor(private router:Router, public storage: Storage) { 
+    this.getValue();
   }
 
   ngOnInit() {
@@ -19,6 +22,7 @@ export class LoginPage implements OnInit {
 
   logMeIn(){
     // put in code 
+    this.setValue();
     this.router.navigate(['./view-profile']);
   }
 
@@ -34,6 +38,18 @@ export class LoginPage implements OnInit {
     else{
       this.passwordToggleIcon = 'eye';
     }
+  }
+
+  setValue(){
+    this.storage.set('name', this.email_address);
+  }
+
+  getValue(){
+    this.storage.get('name').then( (val) => {
+      console.log("value is " + val);
+    }, (err)=>{
+      console.log("empty");
+    })
   }
 
 }

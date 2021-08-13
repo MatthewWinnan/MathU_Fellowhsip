@@ -19,12 +19,12 @@
   <ion-list>
     <ion-item>
       <!-- <ion-label>Username</ion-label> -->
-      <ion-input placeholder="Username" type="text"></ion-input>
+      <ion-input placeholder="Email Address" type="text" [(ngModel)]="email_address"></ion-input>
     </ion-item>
 
     <ion-item>
       <!-- <ion-label>Password</ion-label> -->
-      <ion-input placeholder="Password" name="password" [type]="showPassword ? 'text' : 'password'"></ion-input>
+      <ion-input [(ngModel)]="password" placeholder="Password" name="password" [type]="showPassword ? 'text' : 'password'"></ion-input>
       <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
     </ion-item>
   </ion-list>

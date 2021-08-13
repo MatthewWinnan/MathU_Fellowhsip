@@ -17,7 +17,9 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     HttpClientModule,
     AppRoutingModule, 
     SuperTabsModule.forRoot(),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot({
+      name: 'exdb'
+    })
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

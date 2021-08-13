@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Bursary } from '../../../model/bursaries';
 import { Platform } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-view-bursary',
@@ -12,8 +13,18 @@ export class ViewBursaryPage implements OnInit {
   // jsonData:Bursary[] = [];
   jsonData:any = [];
   b_status : string = "Open";
+  gmail = "";
 
-  constructor( private platform: Platform) { 
+  getValue(){
+    this.storage.get('name').then( (val) => {
+      this.gmail = "value is " + val;
+    }, (err)=>{
+      this.gmail = "empty";
+    })
+  }
+
+  constructor( private platform: Platform, public storage: Storage) { 
+    this.getValue();
     this.platform.ready().then(()=>{
       this.initializeJSONData();
     });

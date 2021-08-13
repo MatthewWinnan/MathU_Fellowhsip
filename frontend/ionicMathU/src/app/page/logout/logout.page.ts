@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-logout',
@@ -8,7 +9,8 @@ import { Router } from '@angular/router';
 })
 export class LogoutPage implements OnInit {
 
-  constructor(private router:Router) { 
+  constructor(private router:Router, public storage: Storage) { 
+    this.storage.clear();
     this.router.navigate(['login']);
    }
 
