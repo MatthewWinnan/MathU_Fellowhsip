@@ -7,7 +7,7 @@
 //include connection 
 include 'math_u_db_connection.php';
 include 'math_u_functions.php';
-include 'all_classes.php';
+include_once 'all_classes.php';
 require 'hash_password.php';
 //INPUT MANAGEMENT
 $input = file_get_contents('php://input');
@@ -16,7 +16,7 @@ $data = json_decode($input, true);
 //---------------------------------------START MAIN ---------------------------------------------//
 //===========================================================
 $email = $data['email_address'];
-$pass = $data['password'];
+$password = $data['password'];
 
 //===========================================================
 //query email -> echo error if no match found -> All_Users
@@ -41,11 +41,22 @@ if ($usrID != ""){
 			
 			//===========================================================
 			//Go to Homepage if match found
-			Display($results);
+			if ($results != null){
+				Display($results);
+			}
+			else{
+				$user = new all_users();
+				$user->message= "Password is Incorrect!";
+				Display($user);
+			}
+			
 			//===========================================================
 		}
 		else{
 			//return empty object 
+			$user = new all_users();
+			$user->message= "Password is Incorrect!";
+			Display($user);
 			
 		}
 		
@@ -62,16 +73,29 @@ if ($usrID != ""){
 		
 			//===========================================================
 			//Go to Homepage if match found 
-			Display($results);
+			if ($results != null){
+				Display($results);
+			}
+			else{
+				$user = new all_users();
+				$user->message= "Password is Incorrect!";
+				Display($user);
+			}
 			//===========================================================
 		}
 		else{
 			//empty Object
+			$user = new all_users();
+			$user->message= "Password is Incorrect!";
+			Display($user);
 		}
 	}
 }
 else{
 	//empty Object
+	$user = new all_users();
+	$user->message= "Email Address does not exist!";
+    Display($user);
 }
 
 
@@ -142,8 +166,7 @@ function ComparePasswords($password, $row,int $flag,$mysqli){
 			}
 			else{
 				//update error message and send empty obj
-				$user = new all_users();
-				return $user;
+				return null;
 			}
 		}
 		else{
@@ -157,8 +180,7 @@ function ComparePasswords($password, $row,int $flag,$mysqli){
 			}
 			else{
 				//update error message send empty obj
-				$user = new all_users();
-				return $user;
+				return null;
 			}
 			
 		}
@@ -166,8 +188,7 @@ function ComparePasswords($password, $row,int $flag,$mysqli){
 	}
 	else{
 		//return empty oBJ
-		$user = new all_users();
-		return $user;
+		return null;
 	}
 	
 }
@@ -184,5 +205,4 @@ function CreateSession($row){//gets an array to create a session
 function CreateCookies($row){//gets an array to create a session 
 	
 }
-?>
 ?>
