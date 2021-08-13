@@ -152,42 +152,41 @@ class student{
 	public $id;
 	public $first_name;
 	public $last_name;
-	public date $dob
+	public $dob;
 	public $email;
-	public bool $validated;
-	public bool $nationality;
+	public $validated;
+	public $nationality;
 	public $contact;
 	public $city;
 	public $province;
-	public bool $disability;
+	public $disability;
 	public $current_acad;
 	public $grade;
 	public $syllabus;
-	public double $average;
+	public $average;
 	public $current_study;
 	public $yearstudy;
 	public $studyinst;
 	public $cont_studies;
 	public $gpa;
 	public $studentbio;
-	public bool $bursarred;
+	public $bursarred;
 	public $current_bursary;
 	public $workback;
 	public $website;
-	public int $num_reports;
-	public bool $banned;
+	public $num_reports;
+	public $banned;
 	
 	
 	public subject_marks $Subjects_marks;
 	public filters $Filter;
 	
-	public function __construct($id = 0, $first_name="", $last_name="", $dob, $email="", $validated=FALSE, $nationality=TRUE, $contact="", $city="", $province="", $disability=FALSE, $current_acad="", $grade, $syllabus="", $average=50.0, $current_study="", int $yearstudy, $studyinst="", $cont_studies=TRUE, $gpa=50.0, $studentbio="", $bursarred=FALSE, $current_bursary="", $workback=TRUE, $website="", $num_reports=0,$banned=FALSE){
+	public function __construct($id, $first_name, $last_name, $dob, $email, $validated, $nationality, $contact, $city, $province, $disability, $current_acad, $grade, $syllabus, $average, $current_study, $yearstudy, $studyinst, $cont_studies, $gpa, $studentbio, $bursarred, $current_bursary, $workback, $website, $num_reports,$banned){
 		 $this->id = $id;
 		 $this->first_name = $first_name;
 		 $this->last_name = $last_name;
 		 $this->dob = $dob;
 		 $this->email = $email;
-		 $this->password = $password;
 		 $this->validated = $validated;
 		 $this->nationality = $nationality;
 		 $this->contact = $contact;
@@ -272,5 +271,4 @@ class filters{
 	}
 }
 
-class
 ?>
