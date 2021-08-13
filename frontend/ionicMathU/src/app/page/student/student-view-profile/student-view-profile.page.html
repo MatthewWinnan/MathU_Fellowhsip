@@ -34,7 +34,7 @@
         <ion-label position="stacked">Contact number</ion-label>
         <ion-note color = "dark"> {{this.student.contact_number}} </ion-note>
       </ion-item>
-      <ion-item *ngIf="this.student.date_of_birth !== '' " >
+      <ion-item *ngIf="this.student.date_of_birth !== null " >
         <ion-label position="stacked">Date of birth</ion-label>
         <ion-note color = "dark"> {{this.student.date_of_birth}} </ion-note>
       </ion-item>

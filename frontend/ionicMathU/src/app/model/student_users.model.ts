@@ -6,7 +6,7 @@ export class student_users{
     student_id = "";
     first_name_of_student = "";
     last_name_of_student = "";
-    data_of_birth = "";
+    data_of_birth: Date;
     email_address = "";
     password = "";
     validated = 0;

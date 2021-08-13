@@ -52,7 +52,7 @@ export class ViewProfilePage implements OnInit {
   get student_surname() {
     return this.addStudent_details.get('last_name_of_student');
   }
-  get student_dob() {
+  get data_of_birth() {
     return this.addStudent_details.get('data_of_birth');
   }
   get contact_number() {
@@ -116,7 +116,7 @@ export class ViewProfilePage implements OnInit {
     this.student.continue_studies = this.addStudent_details.value.continue_studies;
     this.student.gpa = this.addStudent_details.value.gpa;
     this.student.description_of_student = this.addStudent_details.value.description_of_student;
-    console.log(this.addStudent_details.value);
+    console.log(this.student);
     this.studentData.setStudent(this.student);
     this.router.navigate(['./student-view-profile']);
   }
