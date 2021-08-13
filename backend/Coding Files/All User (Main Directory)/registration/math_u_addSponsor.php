@@ -2,6 +2,7 @@
 //====================================
 include 'math_u_db_connection.php';
 include 'math_u_registration.php';
+include_once 'all_classes.php';
 
 //====================================
 //Tables Needed: all_users, company, sponsor_users, student
@@ -23,6 +24,7 @@ if (isset($_POST["company_name"])and $_POST["industry"] != "null" and isset($_PO
 	$email = strtolower($email);
 	$isUnique = isUniqueEmail($email,$mysqli);
 	//--------------------------------------------------
+	$new_user = new all_users();
 	//------------------------//
 	//CHECK EMAIL IS UNIQUE
 	//-----------------------//
@@ -55,75 +57,50 @@ if (isset($_POST["company_name"])and $_POST["industry"] != "null" and isset($_PO
 						//Add to All_USERS TABLE
 						//-------------------------------------------------
 						if (AddToUsers($email, $new_id, $mysqli)===TRUE){
-							$message = array();
-							$message["message"] = "Success!";
-							echo json_encode($message);
+							$new_user->message= "Success!";
+							echo json_encode($new_user);
 						}
 						else{
-							$message["message"] = "Could not account add to all users";
-		          echo json_encode($message);
+							$new_user->message = "Could not account add to all users";
+		          echo json_encode($new_user);
 						}
 						//-------------------------------------------------
 					}
 					else {
-						$message["message"] = "Could not update sponsor ID";
-		        echo json_encode($message);
+						$new_user->message= "Could not update sponsor ID";
+		        echo json_encode($new_user);
 					}
 					//---------------------------------------------------------
 
 				}
 				else{
-					$message["message"] = "Could not Add Admin!";
-	        echo json_encode($message);
+					$new_user->message = "Could not Add Admin!";
+	        echo json_encode($new_user);
 				}
 				//-------------------------------------------------------------------------
 			}
 			else{
-				$message["message"] = "Please Provide the correct details for the Super Admin!";
-				echo json_encode($message);
+				$new_user->message = "Please Provide the correct details for the Super Admin!";
+				echo json_encode($new_user);
 			}
 		}
 		else{
-			$message["message"] = "Could not Insert New Company Try Again!";
-			echo json_encode($message);
+			$new_user->message = "Could not Insert New Company Try Again!";
+			echo json_encode($new_user);
 		}
 	}
 	else{
-		$message["message"] = "Email not unique!";
-		echo json_encode($message);
+		$new_user->message = "Email not unique!";
+		echo json_encode($new_user);
 	}
 }
 else{
-	$message["message"] = "Form is incomplete!";
-	echo json_encode($message);
+	$new_user->message = "Form is incomplete!";
+	echo json_encode($new_user);
 }
 
 //==========================END===============================================//
 //==============================
 //List of functions
 //==============================
-
-//-----------------------------------------
-//function that displays the data as an obj
-//-----------------------------------------
-function display(int $id, $mysqli){
-	$sql = "SELECT * FROM sponsor_users WHERE id =$id";
-	$result = $mysqli->query($sql);
-
-	if ($result->num_rows>0){
-		$row = $result->fetch_assoc();
-		$Obj=new \stdClass();
-		$Obj->name = $row["first_name_of_user"];
-		$Obj->surname = $row["last_name_of_user"];
-		$Obj->email = $row["email_address"];
-		$Obj->company_id = $row["company_id"];
-		$Obj->isSuperAdmin = $row["isSuperAdmin"];
-		$Obj->manageBursaries = $row["manageBursaries"];
-		$Obj->manageApplications = $row["manageApplications"];
-		$Obj->inactive = $row["inactive"];
-		$Obj->isVerified = $row["isVerified"];
-		return $Obj;
-	}
-	else return null;
-}
 ?>
