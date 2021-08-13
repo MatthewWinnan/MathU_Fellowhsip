@@ -10,11 +10,11 @@ export class student_users{
     email_address = "";
     password = "";
     validated = 0;
-    nationality = 0;
+    nationality = null;
     contact_number = "";
     city = "";
     province = "";
-    disability = 0;
+    disability = null;
     current_academic_level = "";
     grade = 0.0;
     syllabus = "";

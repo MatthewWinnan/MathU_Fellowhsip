@@ -30,39 +30,40 @@
         <ion-label position="stacked">Email address</ion-label>
         <ion-note color = "dark"> {{this.student.email_address}} </ion-note>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="this.student.contact_number !== '' " >
         <ion-label position="stacked">Contact number</ion-label>
         <ion-note color = "dark"> {{this.student.contact_number}} </ion-note>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="this.student.date_of_birth !== NONE_TYPE " >
         <ion-label position="stacked">Date of birth</ion-label>
         <ion-note color = "dark"> {{this.student.date_of_birth}} </ion-note>
       </ion-item>
+      <ion-item *ngIf="this.student.disability !== null ">
+        <ion-label position="stacked">Currently disabled?</ion-label>
+        <ion-checkbox  checked="{{this.student.disability}}" color="dark"></ion-checkbox>
+      </ion-item>
     </ion-list>
+    
     <!-- Citizenship and residence information -->
     <h1>View Residential Information</h1>
     <ion-list>
-      <ion-item>
+      <ion-item *ngIf="this.student.province !== '' ">
         <ion-label position="stacked">Province</ion-label>
         <ion-note color = "dark"> {{this.student.province}} </ion-note>
       </ion-item>
-      <ion-item>
-        <ion-label position="stacked">RSA citizen</ion-label>
-        <ion-checkbox  checked="false" color="dark"></ion-checkbox>
-      </ion-item>
-      <ion-item>
+      <ion-item *ngIf="this.student.city !== '' ">
         <ion-label position="stacked">City</ion-label>
         <ion-note color = "dark"> {{this.student.city}} </ion-note>
       </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Currently disabled?</ion-label>
-        <ion-checkbox  checked="false" color="dark"></ion-checkbox>
+      <ion-item *ngIf="this.student.nationality !== null ">
+        <ion-label position="stacked">RSA citizen</ion-label>
+        <ion-checkbox  checked= "{{this.student.nationality}}" color="dark"></ion-checkbox>
       </ion-item>
     </ion-list>
     <!-- Academic Information -->
     <h1>View Academic Information</h1>
     <ion-list>
-      <ion-item>
+      <ion-item *ngIf="this.student.current_academic_level !== '' ">
         <ion-label position="stacked">Academic Level</ion-label>
         <ion-note color = "dark"> {{this.student.current_academic_level}} </ion-note>
       </ion-item>
@@ -72,30 +73,14 @@
         <ion-note color = "dark"> {{this.student.grade}} </ion-note>
       </ion-item>
 
-      <ion-item *ngIf="this.student.current_academic_level === ''">
-        <ion-label position="stacked">Current Grade</ion-label>
-        <ion-note color = "dark"> N/A </ion-note>
-      </ion-item>
-
-      <ion-item *ngIf="current_academic_level !== ''">
+      <ion-item *ngIf="this.student.current_academic_level !== ''">
         <ion-label position="stacked">Syllabus</ion-label>
         <ion-note color = "dark"> {{this.student.syllabus}} </ion-note>
       </ion-item>
 
-      
-      <ion-item *ngIf="current_academic_level === '' ">
-        <ion-label position="stacked">Syllabus</ion-label>
-        <ion-note color = "dark"> N/A </ion-note>
-      </ion-item>
-
-      <ion-item *ngIf="current_academic_level !== ''">
+      <ion-item *ngIf="this.student.current_academic_level !== ''">
         <ion-label position="stacked">Average</ion-label>
         <ion-note color = "dark"> {{this.student.average}} </ion-note>
-      </ion-item>
-
-      <ion-item *ngIf="current_academic_level === ''">
-        <ion-label position="stacked">Average</ion-label>
-        <ion-note color = "dark"> N/A </ion-note>
       </ion-item>
 
       <!-- Info for uni students -->
