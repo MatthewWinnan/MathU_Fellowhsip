@@ -30,7 +30,11 @@ const routes: Routes = [
   {
     path: 'student-view-profile',
     loadChildren: () => import('./page/student/student-view-profile/student-view-profile.module').then( m => m.ViewStudentPageModule)
+  },  {
+    path: 'logout',
+    loadChildren: () => import('./page/logout/logout.module').then( m => m.LogoutPageModule)
   },
+
 ];
 
 @NgModule({
