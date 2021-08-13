@@ -14,26 +14,49 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <h2 class="ion-text-center">Sign In</h2>
-  <ion-list>
-    <ion-item>
-      <!-- <ion-label>Username</ion-label> -->
-      <ion-input placeholder="Email Address" type="text" [(ngModel)]="email_address"></ion-input>
-    </ion-item>
+  <form [formGroup]="loginUser" (ngSubmit)="loginSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Email Address</ion-label>
+        <ion-input formControlName="email_address" inputmode="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.email_address">
+        <ng-container *ngIf="email_address.hasError(error.type) && (email_address.dirty || email_address.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
 
-    <ion-item>
-      <!-- <ion-label>Password</ion-label> -->
-      <ion-input [(ngModel)]="password" placeholder="Password" name="password" [type]="showPassword ? 'text' : 'password'"></ion-input>
-      <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
-    </ion-item>
-  </ion-list>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
 
-  <div class="ion-text-center">
-    <ion-button color="primary" (click)="logMeIn()">Sign In</ion-button>
-  </div>
+        <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'"></ion-input>
+        <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+
+        <!-- <ion-input formControlName="bursary_name" autocapitalize inputmode="text"></ion-input> -->
+      </ion-item>
+      <div *ngFor="let error of errorMessages.password">
+        <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+    </ion-list>
+
+    <ion-list class="ion-text-center">
+      <ion-button [disabled]="!loginUser.valid" type="submit" color="">
+        Submit
+      </ion-button>
+    </ion-list>
+  </form>
   <br>
   &nbsp;<ion-router-link href="./forgot-password" class="underline">Forgot Password</ion-router-link>
+
+  <!-- <div class="ion-text-center">
+    <ion-button color="primary" (click)="logMeIn()">Sign In</ion-button>
+  </div>
+  <br> -->
+  
 
   <!-- <ion-card>
     <ion-card-content>

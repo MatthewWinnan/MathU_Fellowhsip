@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { Form, FormBuilder, Validators } from '@angular/forms';
+import { LoginApiService } from '../../service/login-api.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -8,23 +11,75 @@ import { Storage } from '@ionic/storage-angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  the_message : string = "";
+
   showPassword = false;
   passwordToggleIcon = 'eye';
-  email_address : string="";
-  password : string="";
 
-  constructor(private router:Router, public storage: Storage) { 
-    this.getValue();
+  constructor(
+    private router:Router, 
+    public storage: Storage, 
+    private formBuilder: FormBuilder,
+    public login_api: LoginApiService,
+    public toastController: ToastController
+  ) { 
+    //this.getValue();
   }
+
+  get email_address() {
+    return this.loginUser.get('email_address');
+  }
+  get password() {
+    return this.loginUser.get('password');
+  }
+
+  public errorMessages = {
+    email_address: [
+      { type: 'required', message: 'Name is required' },
+      { type: 'pattern', message: 'Please enter a valid email address' }
+    ],
+    password: [
+      { type: 'required', message: 'Name is required' }
+    ]
+  }
+
+  loginUser = this.formBuilder.group({
+    email_address: ['', 
+    [
+      Validators.required, 
+      Validators.pattern("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$")]
+    ],
+    password: ['', [Validators.required]]
+  });
 
   ngOnInit() {
   }
 
-  logMeIn(){
-    // put in code 
-    this.setValue();
-    this.router.navigate(['./view-profile']);
+  public loginSubmit() {
+    let login_data = this.loginUser.value;
+    console.log(login_data);
+
+    this.login_api.login_a_user(login_data).subscribe((res) => {
+      console.log("SUCCESS ===", res);
+      this.the_message = "You have been successfully logged in";
+      this.printMessage();
+      this.setValue(res);
+      this.getValue();  //remove later (to test)
+      //this.router.navigate(['./view-profile']);
+      //uuncomment later
+    }, (error:any) => {
+      this.the_message = error.statusText;
+      //this.the_message = 'error';// error;
+      this.printMessage();
+      console.log("ERROR ===", error);
+    });
+
+    
+
+
+
   }
+
 
   goBack(){
     this.router.navigate(['./landing-page']);
@@ -40,8 +95,8 @@ export class LoginPage implements OnInit {
     }
   }
 
-  setValue(){
-    this.storage.set('name', this.email_address);
+  setValue(value){
+    this.storage.set('name', value);
   }
 
   getValue(){
@@ -50,6 +105,17 @@ export class LoginPage implements OnInit {
     }, (err)=>{
       console.log("empty");
     })
+  }
+
+  async printMessage() {
+    const toast = this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: this.the_message
+    });
+
+    (await toast).present();
+    this.the_message = "";
   }
 
 }
