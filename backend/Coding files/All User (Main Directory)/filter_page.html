@@ -7,6 +7,10 @@
   <body>
     <form action="filters.php" method="post">
 
+      Please enter your Student ID: <input type="text" name="student_id"><br><br>
+
+      Please select your filters below:<br><br>
+
       <select id="study_field" name="study_field" required>
       	<option  value="null">Choose your Study Field</option>
       	<option  value="Engineering">Engineering</option>
@@ -30,7 +34,7 @@
 
       <select id="academic_level" name="academic_level" required>
       	<option  value="null">Choose your Academic Level</option>
-      	<option  value="High School">HighSchool</option>
+      	<option  value="HighSchool">High School</option>
         <option  value="Undergraduate">Undergraduate</option>
         <option  value="Postgraduate">Postgraduate</option>
       </select><br><br>
@@ -55,6 +59,7 @@
         <option  value="NorthWest">North West</option>
         <option  value="FreeState">Free State</option>
       </select><br><br>
+
       <button type="submit">Confirm</button>
     </form>
     <br>
