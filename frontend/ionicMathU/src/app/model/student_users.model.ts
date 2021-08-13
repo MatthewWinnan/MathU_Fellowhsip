@@ -6,7 +6,7 @@ export class student_users{
     student_id = "";
     first_name_of_student = "";
     last_name_of_student = "";
-    data_of_birth = NONE_TYPE;
+    data_of_birth = "";
     email_address = "";
     password = "";
     validated = 0;
@@ -22,7 +22,7 @@ export class student_users{
     currently_studying = "";
     year_of_study = "";
     study_institution = "";
-    continue_studies = 0;
+    continue_studies = null;
     gpa = 0.0;
     description_of_student = "";
     regisered_date = "";

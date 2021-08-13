@@ -96,6 +96,26 @@ export class ViewProfilePage implements OnInit {
   }
 
   public addStudentDetails() {
+    this.student.first_name_of_student = this.addStudent_details.value.first_name_of_student;
+    this.student.last_name_of_student = this.addStudent_details.value.last_name_of_student;
+    this.student.data_of_birth = this.addStudent_details.value.data_of_birth;
+    this.student.email_address = this.addStudent_details.value.email_address;
+    //password: [''],  
+    this.student.contact_number = this.addStudent_details.value.contact_number;
+    this.student.disability = this.addStudent_details.value.disability;
+    this.student.nationality = this.addStudent_details.value.RSA_citizen;
+    this.student.province = this.addStudent_details.value.province;
+    this.student.city = this.addStudent_details.value.city;
+    this.student.current_academic_level = this.addStudent_details.value.current_academic_level;
+    this.student.grade = this.addStudent_details.value.grade;
+    this.student.syllabus = this.addStudent_details.value.syllabus;
+    this.student.average = this.addStudent_details.value.average;
+    this.student.currently_studying = this.addStudent_details.value.currently_studying;
+    this.student.year_of_study = this.addStudent_details.value.year_of_study;
+    this.student.study_institution = this.addStudent_details.value.study_institution;
+    this.student.continue_studies = this.addStudent_details.value.continue_studies;
+    this.student.gpa = this.addStudent_details.value.gpa;
+    this.student.description_of_student = this.addStudent_details.value.description_of_student;
     console.log(this.addStudent_details.value);
     this.studentData.setStudent(this.student);
     this.router.navigate(['./student-view-profile']);

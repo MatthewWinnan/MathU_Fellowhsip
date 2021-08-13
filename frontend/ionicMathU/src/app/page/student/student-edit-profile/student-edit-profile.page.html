@@ -39,6 +39,10 @@
         <ion-label position="floating">Date of birth</ion-label>
         <ion-datetime formControlName="data_of_birth" displayFormat="YYYY MM DD" placeholder={{this.student.date_of_birth}} ></ion-datetime>
       </ion-item>
+      <ion-item>
+        <ion-label position="floating">Currently disabled?</ion-label>
+        <ion-checkbox formControlName="disability" checked={{this.student.disability}} color="dark"></ion-checkbox>
+      </ion-item>
     </ion-list>
     <!-- Citizenship and residence information -->
     <h3>Residential Information</h3>
@@ -64,10 +68,6 @@
       <ion-item>
         <ion-label position="floating">City</ion-label>
         <ion-input formControlName="city" placeholder="{{this.student.city}}" type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Currently disabled?</ion-label>
-        <ion-checkbox formControlName="disability" checked={{this.student.disability}} color="dark"></ion-checkbox>
       </ion-item>
     </ion-list>
     <!-- Academic Information -->
