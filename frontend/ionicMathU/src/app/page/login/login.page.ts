@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,13 @@ export class LoginPage implements OnInit {
   showPassword = false;
   passwordToggleIcon = 'eye';
 
-  constructor(private router:Router) { 
+  email_address: string = "";
+  password: string = "";
+
+  constructor(
+    private router:Router,
+    private storageService: StorageService
+  ) { 
 
   }
 
@@ -19,7 +26,12 @@ export class LoginPage implements OnInit {
 
   logMeIn(){
     // put in code 
-    this.router.navigate(['./student-view-profile']);
+    //console.log(this.email_address + " " + this.password);
+    
+    this.storageService.store('user', this.email_address);
+
+
+    this.router.navigate(['./view-profile']);
   }
 
   goBack(){

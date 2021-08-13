@@ -5,11 +5,15 @@
         <ion-title>
           <ion-item>
             <ion-thumbnail slot="start">
-              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+              <!-- <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"> -->
             </ion-thumbnail>
             <ion-label>
-              <h3>XYZ Sweets</h3>
-              <p>Raaga Krishna Velthapu</p>
+              <h3>
+                XYZ Sweets
+                {{getEmail()}}
+
+              </h3>
+              <!-- <p>Raaga Krishna Velthapu</p> -->
             </ion-label>
           </ion-item>
         </ion-title>
@@ -54,7 +58,7 @@
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item>
+          <ion-item routerLink="/log-out">
             <ion-icon name="power" slot="start"></ion-icon>
             <ion-label>Log Out</ion-label>
           </ion-item>
