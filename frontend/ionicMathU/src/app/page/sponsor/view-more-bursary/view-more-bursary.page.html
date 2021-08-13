@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-button fill = "none" slot = "start" routerLink="/view-bursary">
+      <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
+    </ion-button>
+
+    <ion-title>{{ bursary_name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Bursary Name</ion-card-subtitle>
+    <ion-card-title>{{ bursary_name }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Bursary type</ion-card-subtitle>
+    <ion-card-title>{{ bursary_type }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Work Back Duration</ion-card-subtitle>
+    <ion-card-title>{{ WB_duration }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Age Group</ion-card-subtitle>
+    <ion-card-title> {{ min_age }} - {{ max_age }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Academic Level</ion-card-subtitle>
+    <ion-card-title>{{ academic_level  }} </ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Study Field</ion-card-subtitle>
+    <ion-card-title>{{ study_field }} </ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Minimum Study Year Required</ion-card-subtitle>
+    <ion-card-title>{{ minimum_year_required }} </ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Minimum Average</ion-card-subtitle>
+    <ion-card-title>{{ min_average }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>RSA citizen</ion-card-subtitle>
+    <ion-card-title>{{ RSA_citizen }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Students with Financial Need</ion-card-subtitle>
+    <ion-card-title>{{ financial_need }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Willing to Study Further</ion-card-subtitle>
+    <ion-card-title>{{ study_further }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Disability</ion-card-subtitle>
+    <ion-card-title>{{ disability }} </ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Province in South Africa</ion-card-subtitle>
+    <ion-card-title>{{ province }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Bursary Covers For</ion-card-subtitle>
+    <ion-card-title>{{ bursary_covers }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Bursary last for (years)</ion-card-subtitle>
+    <ion-card-title>{{ bursary_duration }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Closing Date for Applications </ion-card-subtitle>
+    <ion-card-title>{{ closing_date }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Closing Date for Further Communication </ion-card-subtitle>
+    <ion-card-title> {{shortlist_date}} </ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Bursary Description</ion-card-subtitle>
+    <ion-card-title>{{ bursary_description }}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Email Address</ion-card-subtitle>
+    <ion-card-title>{{ email_adress }} </ion-card-title>
+  </ion-card-header>
+</ion-card>
+
+
+
+</ion-content>

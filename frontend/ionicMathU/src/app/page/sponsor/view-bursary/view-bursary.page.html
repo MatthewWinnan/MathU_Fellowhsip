@@ -29,18 +29,47 @@
   </ion-list>
 
   <ion-card *ngFor="let item of jsonData">
-    <ion-item>
-      <ion-card-header>
-        <ion-card-subtitle>{{item.bursary_type}}</ion-card-subtitle>
+    
+    <ion-card-header>
+      <ion-card-subtitle>{{item.bursary_type}}</ion-card-subtitle>
+
+      <ion-item>
         <ion-card-title>{{item.bursary_name}}</ion-card-title>
-      </ion-card-header>
-      <ion-button fill="outline" slot="end">View</ion-button>
-    </ion-item>
+      </ion-item>
+
+      <ion-card-content> 
+       <ion-label> {{item.bursary_description}} </ion-label>
+      </ion-card-content>
+
+      
+
+      
+        
+     <ion-row center>
+      <ion-card-content>
+        <ion-button fill="none"  (click)="openDeactivate()" size = "small" alt="deactivated">
+          <ion-icon name="ban-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+
+      <ion-card-content >
+        <ion-button fill="none"  routerLink="/view-more-bursary"  size = "small" alt="view-applicants">
+          <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+     </ion-card-content>
+      
+      <ion-card-content >
+        <ion-button fill="none"  routerLink="/view-applicants"  size = "small" alt="view-applicants">
+          <ion-icon name="people-outline" ></ion-icon>
+        </ion-button>
+     </ion-card-content>
+     
+   </ion-row>
   
-    <ion-card-content>
-      {{item.bursary_description}}
-    </ion-card-content>
+    </ion-card-header>
+    
   </ion-card>
+  
   <!-- <ion-list>
     <ion-item *ngFor="let item of jsonData">
       <p>

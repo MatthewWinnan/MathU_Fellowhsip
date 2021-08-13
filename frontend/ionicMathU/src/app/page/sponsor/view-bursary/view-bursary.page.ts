@@ -28,47 +28,56 @@ export class ViewBursaryPage implements OnInit {
       {
         "bursary_name": "Bursary1",
         "status": "Closed",
-        "bursary_type": "Full Bursary"
+        "bursary_type": "Full Bursary",
+        "bursary_description" : " looking for student with 65%"
       },
       {
         "bursary_name": "why",
         "status": "Deactivated",
-        "bursary_type": "Bursary"
+        "bursary_type": "Bursary",
+        "bursary_description" : " looking for student with 65%"
       },
       {
         "bursary_name": "123",
         "status": "Closed",
-        "bursary_type": "Work Back"
+        "bursary_type": "Work Back",
+        "bursary_description" : " looking for student with 65%"
       },
       {
         "bursary_name": "ouch",
         "status": "Closed",
-        "bursary_type": "Bursary"
+        "bursary_type": "Bursary",
+        "bursary_description" : " looking for student with 65%"
       },
       {
         "bursary_name": "clap",
         "status": "Open",
-        "bursary_type": "Partial Bursary"
+        "bursary_type": "Partial Bursary",
+        "bursary_description" : " looking for student with 65%"
       },
       {
         "bursary_name": "nop",
         "status": "Open",
-        "bursary_type": "Partial Bursary"
+        "bursary_type": "Partial Bursary",
+        "bursary_description" : " looking for student with 65%"
       },
       {
         "bursary_name": "sga",
         "status": "Deactivated",
-        "bursary_type": "Bursary"
+        "bursary_type": "Bursary",
+        "bursary_description" : " looking for student with 65%"
       },
       {
         "bursary_name": "zyx",
         "status": "Open",
-        "bursary_type": "Partial Bursary"
+        "bursary_type": "Partial Bursary",
+        "bursary_description" : " looking for student with 65%"
       },
       {
         "bursary_name": "abc",
         "status": "Deactivated",
-        "bursary_type": "Partial Bursary"
+        "bursary_type": "Partial Bursary",
+        "bursary_description" : " looking for student with 65%"
       }
     ];
   }
