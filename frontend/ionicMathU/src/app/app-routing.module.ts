@@ -44,6 +44,8 @@ const routes: Routes = [
     loadChildren: () => import('./page/logout/logout.module').then( m => m.LogoutPageModule)
   },
 
+
+
 ];
 
 @NgModule({

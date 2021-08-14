@@ -90,7 +90,26 @@ export class RegisterPage implements OnInit {
     // put in code 
     //console.log(this.company_name, this.company_industry, this.f_name, this.l_name, this.email_address, this.password, this.c_password)
     console.log(this.sponsor);
-    this.router.navigate(['./view-profile']);
+    //this.router.navigate(['./view-profile']);
+    this._apiService.registerSponsor(this.sponsor).subscribe((res:Sponsor_users) => {
+      console.log("REQUEST SUCCESS ===", res);
+      //this.the_message = res;
+      //"Successfully created an account. Check your email for the activation email.";
+      this.the_message = res["message"];
+      this.printMessage();
+      if (this.the_message == "Success!"){
+        this.router.navigate(['./login']);
+      }
+    }, (error:any) => {
+      this.the_message = 'error';// error;
+      this.printMessage();
+      console.log("ERROR ===", error);
+    });
+
+
+
+
+
     // if (this.sponsor.company.company_name == ""){
     //   this.the_message = 'Company name needed';
     //   this.printMessage();
@@ -161,64 +180,10 @@ export class RegisterPage implements OnInit {
     //   // });
 
     // }
-    if (this.company_name == ""){
-      this.the_message = 'Company name needed';
-      this.printMessage();
-    }
-    else if (this.company_industry == ""){
-      this.the_message = 'Company industry needed';
-      this.printMessage();
-    }
-    else if (this.f_name == ""){
-      this.the_message = 'First name needed';
-      this.printMessage();
-    }
-    else if (this.l_name == ""){
-      this.the_message = 'Last name needed';
-      this.printMessage();
-    }
-    else if (this.email_address == ""){
-      this.the_message = 'Email address needed.';
-      this.printMessage();
-    }
-    else if (this.checkEmailAddress(this.email_address) == false){
-      this.the_message = 'Enter a valid email address.';
-      this.printMessage();
-    }
-    else if (this.password == ""){
-      this.the_message = 'Password needed';
-      this.printMessage();
-    }
-    else if (this.password.length < 8){
-      this.the_message = 'Password must be greater than 8 charcters.';
-      this.printMessage();
-    }
-    else if (this.checkUpperCase(this.password) === false){
-      this.the_message = 'Password needs to contain an uppercase letter.';
-      this.printMessage();
-    }
-    else if (this.checkLowerCase(this.password) === false){
-      this.the_message = 'Password needs to contain an lowercase letter.';
-      this.printMessage();
-    }
-    else if (this.checkDigit(this.password) === false){
-      this.the_message = 'Password needs to contain a digit.';
-      this.printMessage();
-    }
-    else if (this.checkSpecialCharacter(this.password) === false){
-      this.the_message = 'Password needs to contain a special character.';
-      this.printMessage();
-    }
-    else if (this.c_password == ""){
-      this.the_message = 'Confirm your password';
-      this.printMessage();
-    }
-    else if (this.password != this.c_password){
-      this.the_message = 'Passwords dont match';
-      this.printMessage();
-    }
-    else{
-      this.router.navigate(['./login']);
+
+
+    //else{
+      //this.router.navigate(['./login']);
       // let data = {
       //   //made dummy variables so project can function
       //   //@Raaga please fix??
@@ -266,7 +231,7 @@ export class RegisterPage implements OnInit {
       //   this.printMessage();
       //   console.log("ERROR ===", error);
       // });
-    }
+    //}
     
   }
 

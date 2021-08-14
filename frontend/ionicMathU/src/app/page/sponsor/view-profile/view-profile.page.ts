@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-profile',
@@ -9,11 +10,17 @@ import { Storage } from '@ionic/storage-angular';
 export class ViewProfilePage implements OnInit {
   gmail: string = "";
 
-  constructor(public storage: Storage) { 
-    this.getValue();
-  }
+  constructor(
+    private menuController: MenuController,
+    public storage: Storage) {
+      this.getValue();
+     }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.menuController.enable(true, 'spo');
   }
 
   getValue(){

@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage-angular';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { LoginApiService } from '../../service/login-api.service';
 import { ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginPage implements OnInit {
     public storage: Storage, 
     private formBuilder: FormBuilder,
     public login_api: LoginApiService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public navCtrl: NavController
   ) { 
     this.storage.clear();
     this.getValue();
@@ -81,14 +83,16 @@ export class LoginPage implements OnInit {
           //console.log("Sponsor logged in");
           //console.log(res["Sponsor"]["company_id"]);
           //this.getValue();  //remove later (to test)
-          this.router.navigate(['./view-profile']);
+          //this.router.navigate(['./view-profile']); //sponsor
+          this.navCtrl.navigateRoot('/view-profile');
         }
         if (res["Student"]){
           //console.log("Student logged in");
           //console.log(res["Student"]["first_name"]);
           //this.setValue(res);
           //this.getValue();  //remove later (to test)
-          this.router.navigate(['./student-view-profile']);
+          //this.router.navigate(['./student-view-profile']); //student
+          this.navCtrl.navigateRoot('/student-view-profile');
         }
       }
     }, (error:any) => {
