@@ -9,11 +9,13 @@ import { MenuController } from '@ionic/angular';
 })
 export class ViewProfilePage implements OnInit {
   gmail: string = "";
+  userType: string = "";
 
   constructor(
     private menuController: MenuController,
     public storage: Storage) {
-      this.getValue();
+      //this.getValue();
+      this.getUserType();
      }
 
   ngOnInit() {
@@ -21,6 +23,16 @@ export class ViewProfilePage implements OnInit {
 
   ionViewWillEnter() {
     this.menuController.enable(true, 'spo');
+  }
+
+  getUserType(){
+    this.storage.get('name').then( (val) => {
+      console.log("hi");
+      console.log(val);
+      this.userType = val["role"];
+    }, (err)=>{
+      this.userType = "";
+    })
   }
 
   getValue(){

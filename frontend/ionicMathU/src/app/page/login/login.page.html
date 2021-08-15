@@ -16,7 +16,10 @@
 
 <ion-content padding>
   <h2 class="ion-text-center">Sign In</h2>
-  <form [formGroup]="loginUser" (ngSubmit)="loginSubmit()">
+  <p class="ion-text-center" *ngIf="isChecking">
+    <ion-spinner name="crescent"></ion-spinner>
+  </p>
+  <form [formGroup]="loginUser" (ngSubmit)="loginSubmit()" *ngIf="!isChecking">
     <ion-list>
       <ion-item>
         <ion-label position="floating">Email Address</ion-label>

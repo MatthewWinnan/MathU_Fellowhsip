@@ -18,13 +18,13 @@ export class LogoutPage implements OnInit {
   ) { 
     this.storage.set('name', "");
     this.storage.clear();
-    this.navCtrl.navigateRoot('login');
-    //this.router.navigate(['login']);
+    this.navCtrl.navigateRoot('landing-page');
+    //this.router.navigate(['landing-page']);
 
    }
 
   ngOnInit() {
-    //this.router.navigate(['login']);
+    //this.router.navigate(['landing-page']);
   }
 
 }
