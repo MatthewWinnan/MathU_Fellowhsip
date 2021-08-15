@@ -43,10 +43,6 @@ const routes: Routes = [
     path: 'logout',
     loadChildren: () => import('./page/logout/logout.module').then( m => m.LogoutPageModule)
   },
-  {
-    path: 'menu',
-    loadChildren: () => import('./page/menu/menu.module').then( m => m.MenuPageModule)
-  },
 
 
 

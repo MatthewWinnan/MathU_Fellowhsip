@@ -27,8 +27,7 @@ export class ViewProfilePage implements OnInit {
 
   getUserType(){
     this.storage.get('name').then( (val) => {
-      console.log("hi");
-      console.log(val);
+      //console.log(val);
       this.userType = val["role"];
     }, (err)=>{
       this.userType = "";
