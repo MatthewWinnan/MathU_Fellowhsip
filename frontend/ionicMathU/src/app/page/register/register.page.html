@@ -75,12 +75,30 @@
             </ion-item>
 
             <ion-item>
-              <ion-select value="Select Company Industry" okText="Okay" cancelText="Dismiss" [(ngModel)]="sponsor.company.company_industry">
-                <ion-select-option value="Select Company Industry">Select Company Industry</ion-select-option>
-                <ion-select-option value="IT">IT</ion-select-option>
-                <ion-select-option value="etc">etc</ion-select-option>
-                <ion-select-option value="etc">etc</ion-select-option>
-                <ion-select-option value="etc">etc</ion-select-option>
+              <ion-select placeholder="Select Company Industry" okText="Okay" cancelText="Dismiss" [(ngModel)]="sponsor.company.company_industry" interface="action-sheet">
+                <ion-select-option value="IT & Telecommunications">IT & Telecommunications</ion-select-option>
+                <ion-select-option value="Banking, Finance, Insurance, Stockbroking">Banking, Finance, Insurance, Stockbroking</ion-select-option>
+                <ion-select-option value="Engineering, Technical, Production & Manufacturing">Engineering, Technical, Production & Manufacturing</ion-select-option>
+                <ion-select-option value="Sales & Purchasing">Sales & Purchasing</ion-select-option>
+                <ion-select-option value="Accounting, Auditing">Accounting, Auditing</ion-select-option>
+                <ion-select-option value="FMCG, Rental, Wholesale & Supply Chain">FMCG, Rental, Wholesale & Supply Chain</ion-select-option>
+                <ion-select-option value="Health, Fitness, Medical & Optometry">Health, Fitness, Medical & Optometry</ion-select-option>
+                <ion-select-option value="Admin, Office Support & Services">Admin, Office Support & Services</ion-select-option>
+                <ion-select-option value="Human Resources & Recruitment">Human Resources & Recruitment</ion-select-option>
+                <ion-select-option value="Transport, Logistics & Freight">Transport, Logistics & Freight</ion-select-option>
+                <ion-select-option value="Media, Advertising, PR, Publishing & Marketing">Media, Advertising, PR, Publishing & Marketing</ion-select-option>
+                <ion-select-option value="Construction, Design, Architecture & Property">Construction, Design, Architecture & Property</ion-select-option>
+                <ion-select-option value="General Management">General Management</ion-select-option>
+                <ion-select-option value="Legal">Legal</ion-select-option>
+                <ion-select-option value="Agriculture, Forestry, Environmental & Fishing">Agriculture, Forestry, Environmental & Fishing</ion-select-option>
+                <ion-select-option value="Education & Training">Education & Training</ion-select-option>
+                <ion-select-option value="Mining">Mining</ion-select-option>
+                <ion-select-option value="Hospitality, Hotel, Catering, Tourism & Travel">Hospitality, Hotel, Catering, Tourism & Travel</ion-select-option>
+                <ion-select-option value="SEHQ & Security Work">SEHQ & Security Work</ion-select-option>
+                <ion-select-option value="R&D, Science & Scientific Research">R&D, Science & Scientific Research</ion-select-option>
+                <ion-select-option value="Chemical, Petrochemical, Oil & Gas">Chemical, Petrochemical, Oil & Gas</ion-select-option>
+                <ion-select-option value="Government & NGO">Government & NGO</ion-select-option>
+                <ion-select-option value="Textile/Clothing">Textile/Clothing</ion-select-option>
               </ion-select>
             </ion-item>
         
