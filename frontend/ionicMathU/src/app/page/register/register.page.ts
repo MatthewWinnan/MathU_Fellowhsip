@@ -6,6 +6,8 @@ import { __await } from 'tslib';
 import { Sponsor_users } from '../../model/sponsor_users';
 import { Company } from '../../model/company';
 import { student_users } from '../../model/student_users';
+import { Form, FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+//import { group } from 'console';
 
 @Component({
   selector: 'app-register',
@@ -13,37 +15,129 @@ import { student_users } from '../../model/student_users';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  sponsor = new Sponsor_users() ;
-  //Student initialize credentials
-  student : student_users;
-  student_name : string="";
-  student_surname : string="";
-  //Sponsor initialize credentials
-  sponor : Sponsor_users;
-  company_name : string = "";
-  company_industry : string = "";
-  f_name : string = "";
-  l_name : string = "";
-  email_address : string = "";
-  password : string = "";
-  c_password : string = "";
   the_message : string = "";
+
   //Password variables
   showPassword = false;
   passwordToggleIcon = 'eye';
   c_showPassword = false;
   c_passwordToggleIcon = 'eye';
 
+  //form input fields --> Student only
+  //??
+
+  //form input fields --> Sponsor only
+  addSponsor: FormGroup;
+  get company_name() {
+    return this.addSponsor.get('company_name');
+  }
+  get company_industry() {
+    return this.addSponsor.get('company_industry');
+  }
+
+  //for input fields --> common for both
+  get first_name() {
+    return this.addSponsor.get('first_name');
+  }
+  get last_name() {
+    return this.addSponsor.get('last_name');
+  }
+  get email_address() {
+    return this.addSponsor.get('email_address');
+  }
+  get password() {
+    return this.addSponsor.get('password');
+  }
+  get c_password() {
+    return this.addSponsor.get('c_password');
+  }
+
+  // errorMessages
+  public errorMessages = {
+    company_name: [
+      { type: 'required', message: 'Company Name is required' },
+    ],
+    company_industry: [
+      { type: 'required', message: 'Company Industry is required' },
+    ],
+    first_name: [
+      { type: 'required', message: 'First Name is required' },
+      { type: 'maxlength', message: 'First Name cannot be longer than 100 charcters'}
+    ],
+    last_name: [
+      { type: 'required', message: 'Last Name is required' },
+      { type: 'maxlength', message: 'Last Name cannot be longer than 100 charcters'}
+    ],
+    email_address: [
+      { type: 'required', message: 'Email is required' },
+      { type: 'pattern', message: 'Please enter a valid email address' },
+    ],
+    password: [
+      { type: 'required', message: 'Password is required' },
+      { type: 'minlength', message: 'Password has to be longer than 8 characters'}
+    ],
+    // c_password: [
+    //   { type: 'required', message: 'Password is required' }
+    // ],
+
+  }
+
+  
+
+
+
+  sponsor = new Sponsor_users() ;
+  //Student initialize credentials
+  student : student_users;
+  student_name : string="";
+  student_surname : string="";
+  //Sponsor initialize credentials
+  //sponor : Sponsor_users;
+  //company_name : string = "";
+  //company_industry : string = "";
+  //f_name : string = "";
+  //l_name : string = "";
+  //email_address : string = "";
+  //password : string = "";
+  //c_password : string = "";
+  
+  
+
   constructor(
+    private formBuilder: FormBuilder,
     private router:Router,
     public _apiService: ApiService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    
   ) { 
     this.sponsor.company = new Company();
    }
 
-  ngOnInit() {
+  ngOnInit() { 
+    this.addSponsor = this.formBuilder.group({
+      company_name: ['', [Validators.required]],
+      company_industry: ['', [Validators.required]],
+      first_name: ['', [Validators.required, Validators.maxLength(100)]],
+      last_name: ['', [Validators.required, Validators.maxLength(100)]],
+      email_address: ['', 
+        [
+          Validators.required,
+          Validators.pattern("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$")
+        ]
+      ],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      c_password: [''],
+    },
+    {
+      validator: [this.MustMatch('password', 'c_password')],
+    });
+
   }
+
+  get sponsorControl() {
+    return this.addSponsor.controls;
+  }
+
   //register code for the students
   registerMe_Student(){
     // put in code 
@@ -84,6 +178,28 @@ export class RegisterPage implements OnInit {
     this.router.navigate(['./student-view-profile']);
   }
 
+  public addSponsorSubmit() {
+    if(this.addSponsor.invalid){
+      return;
+    }
+    else{
+      this._apiService.registerSponsor(this.sponsor).subscribe((res:Sponsor_users) => {
+        console.log("REQUEST SUCCESS ===", res);
+        //this.the_message = res;
+        //"Successfully created an account. Check your email for the activation email.";
+        this.the_message = res["message"];
+        this.printMessage();
+        if (this.the_message == "Success!"){
+          this.router.navigate(['./login']);
+        }
+      }, (error:any) => {
+        this.the_message = 'error';// error;
+        this.printMessage();
+        console.log("ERROR ===", error);
+      });
+    }
+  }
+
 
   //Register code for the sponsors
   registerMeSponsor(){
@@ -105,185 +221,7 @@ export class RegisterPage implements OnInit {
       this.printMessage();
       console.log("ERROR ===", error);
     });
-
-
-
-
-
-    // if (this.sponsor.company.company_name == ""){
-    //   this.the_message = 'Company name needed';
-    //   this.printMessage();
-    // }
-    // else if (this.sponsor.company.company_industry == ""){
-    //   this.the_message = 'Company industry needed';
-    //   this.printMessage();
-    // }
-    // else if (this.sponsor.first_name_of_user == ""){
-    //   this.the_message = 'First name needed';
-    //   this.printMessage();
-    // }
-    // else if (this.sponsor.last_name_of_user == ""){
-    //   this.the_message = 'Last name needed';
-    //   this.printMessage();
-    // }
-    // else if (this.sponsor.email_address == ""){
-    //   this.the_message = 'Email address needed.';
-    //   this.printMessage();
-    // }
-    // else if (this.checkEmailAddress(this.sponsor.email_address) == false){
-    //   this.the_message = 'Enter a valid email address.';
-    //   this.printMessage();
-    // }
-    // else if (this.sponsor.password == ""){
-    //   this.the_message = 'Password needed';
-    //   this.printMessage();
-    // }
-    // else if (this.sponsor.password.length < 8){
-    //   this.the_message = 'Password must be greater than 8 charcters.';
-    //   this.printMessage();
-    // }
-    // else if (this.checkUpperCase(this.sponsor.password) === false){
-    //   this.the_message = 'Password needs to contain an uppercase letter.';
-    //   this.printMessage();
-    // }
-    // else if (this.checkLowerCase(this.sponsor.password) === false){
-    //   this.the_message = 'Password needs to contain an lowercase letter.';
-    //   this.printMessage();
-    // }
-    // else if (this.checkDigit(this.sponsor.password) === false){
-    //   this.the_message = 'Password needs to contain a digit.';
-    //   this.printMessage();
-    // }
-    // else if (this.checkSpecialCharacter(this.sponsor.password) === false){
-    //   this.the_message = 'Password needs to contain a special character.';
-    //   this.printMessage();
-    // }
-    // else if (this.c_password == ""){
-    //   this.the_message = 'Confirm your password';
-    //   this.printMessage();
-    // }
-    // else if (this.sponsor.password != this.c_password){
-    //   this.the_message = 'Passwords dont match';
-    //   this.printMessage();
-    // }
-    // else{
-    //   // this._apiService.registerSponsor(this.sponsor).subscribe((res:sponsor_users) => {
-    //   //   console.log("SUCCESS ===", res);
-    //   //   //this.the_message = res;
-    //   //   //"Successfully created an account. Check your email for the activation email.";
-    //   //   this.printMessage();
-    //   //   this.router.navigate(['./login']);
-    //   // }, (error:any) => {
-    //   //   this.the_message = 'error';// error;
-    //   //   this.printMessage();
-    //   //   console.log("ERROR ===", error);
-    //   // });
-
-    // }
-
-
-    //else{
-      //this.router.navigate(['./login']);
-      // let data = {
-      //   //made dummy variables so project can function
-      //   //@Raaga please fix??
-      //   id : 20,
-      //   sponsor_id : "",
-      //   first_name_of_user : "",
-      //   last_name_of_user : "",
-      //   email_address : this.email_address,
-      //   password : this.password,
-      //   company_id : 0,
-      //   isSuperAdmin : "",
-      //   manageBursaries	: "",
-      //   manageApplications : "",
-      //   inactive : "",
-      //   isVerified : "",
-      //   regisered_date : "",
-      //   last_login : "",
-
-      //   // company_name : this.company_name, 
-      //   // company_industry : this.company_industry,
-      //   // f_name : this.f_name,
-      //   // l_name : this.l_name,
-      //   // email_address : this.email_address,
-      //   // password : this.password,
-      // }
-
-      // this._apiService.registerSponsor(data).subscribe((res:sponsor_users) => {
-      //   console.log("SUCCESS ===", res);
-      //   //this.the_message = res;
-      //   //"Successfully created an account. Check your email for the activation email.";
-      //   this.printMessage();
-      //   //Receive or send?
-      //   this.company_name = "";
-      //   this.company_industry = "";
-      //   this.f_name = "";
-      //   this.l_name = "";
-      //   this.email_address = "";
-      //   this.password = "";
-      //   this.c_password = "";
-      //   this.the_message = "";
-
-      //   this.router.navigate(['./login']);
-      // }, (error:any) => {
-      //   this.the_message = 'error';// error;
-      //   this.printMessage();
-      //   console.log("ERROR ===", error);
-      // });
-    //}
     
-  }
-
-  checkUpperCase(pass: string):boolean{
-    for (var i=0 ; i<pass.length ; i++){
-      if (pass[i] === pass[i].toUpperCase()){
-        return true;
-      }
-    }
-    return false;
-  }
-
-  checkLowerCase(pass: string):boolean{
-    for (var i=0 ; i<pass.length ; i++){
-      if (pass[i] === pass[i].toLowerCase()){
-        return true;
-      }
-    }
-    return false;
-  }
-
-  checkDigit(pass: string):boolean{
-    for (var i=0 ; i<pass.length ; i++){ 
-      const d = pass.charCodeAt(i);
-      //console.log(pass[i] + ": " + d.toString());
-      if (d <48 || d >57){
-        //console.log("it is false");
-      }
-      else{
-        return true;
-      }
-    }
-    return false;
-  }
-
-  checkSpecialCharacter(pass: string):boolean{
-    var format = /[!@#$%^&*()_+\-=\[\]{};'`~:"\\|,.<>\/?]+/;
-    if (format.test(pass)){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
-
-  checkEmailAddress(email_add: string):boolean{
-    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (email_add.match(regexEmail)) {
-      return true; 
-    } else {
-      return false; 
-    }
   }
 
   togglePassword():void{
@@ -317,4 +255,27 @@ export class RegisterPage implements OnInit {
     this.the_message = "";
   }
 
+  MustMatch(controlName: string, matchingControlName: string): ValidatorFn{
+    return (controls: AbstractControl) => {
+      let control = controls.get(controlName);
+      let matchingControl = controls.get(matchingControlName);
+
+      if (matchingControl.errors && !matchingControl.errors.matching) {
+        return null;
+      }
+
+      if (control.value !== matchingControl.value){
+        controls.get(matchingControlName).setErrors({ matching: true });
+        return{
+          matching: true
+        };
+      }
+      else{
+        return null;
+      }
+      
+
+    };
+    
+  }
 }
