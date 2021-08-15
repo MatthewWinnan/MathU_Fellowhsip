@@ -15,6 +15,9 @@ import { Form, FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn 
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  //password: null; 
+  public barLabel: string = "Password strength:";  
+
   the_message : string = "";
 
   //Password variables
@@ -178,6 +181,7 @@ export class RegisterPage implements OnInit {
     this.router.navigate(['./student-view-profile']);
   }
 
+  //Register code for the sponsors
   public addSponsorSubmit() {
     if(this.addSponsor.invalid){
       return;
@@ -200,29 +204,6 @@ export class RegisterPage implements OnInit {
     }
   }
 
-
-  //Register code for the sponsors
-  registerMeSponsor(){
-    // put in code 
-    //console.log(this.company_name, this.company_industry, this.f_name, this.l_name, this.email_address, this.password, this.c_password)
-    console.log(this.sponsor);
-    //this.router.navigate(['./view-profile']);
-    this._apiService.registerSponsor(this.sponsor).subscribe((res:Sponsor_users) => {
-      console.log("REQUEST SUCCESS ===", res);
-      //this.the_message = res;
-      //"Successfully created an account. Check your email for the activation email.";
-      this.the_message = res["message"];
-      this.printMessage();
-      if (this.the_message == "Success!"){
-        this.router.navigate(['./login']);
-      }
-    }, (error:any) => {
-      this.the_message = 'error';// error;
-      this.printMessage();
-      console.log("ERROR ===", error);
-    });
-    
-  }
 
   togglePassword():void{
     this.showPassword = !this.showPassword;

@@ -150,7 +150,8 @@
 
               <ion-item>
                 <ion-label position="floating">Password</ion-label>
-                <ion-input formControlName="password" placeholder="Password" [type]="showPassword ? 'text' : 'password'"></ion-input>
+                <ion-input formControlName="password" placeholder="Password" 
+                  [type]="showPassword ? 'text' : 'password'"></ion-input>
                 <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
               </ion-item>
               <div *ngFor="let error of errorMessages.password">
@@ -158,6 +159,8 @@
                   <small class="error-message">{{error.message}}</small>
                 </ng-container>
               </div>
+              <app-password-strength-bar [passwordToCheck]="addSponsor.value.password" [barLabel]="barLabel">  
+              </app-password-strength-bar> 
 
               <ion-item>
                 <ion-label position="floating">Confirm Password</ion-label>
