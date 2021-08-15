@@ -18,12 +18,12 @@ export class LandingPagePage implements OnInit {
     this.storage.create();
   }
 
-  GoToLogin(){
-    this.router.navigate(['./login']);
-  }
+  // GoToLogin(){
+  //   this.router.navigate(['./login']);
+  // }
 
-  GoToRegister(){
-    this.router.navigate(['./register']);
-  }
+  // GoToRegister(){
+  //   this.router.navigate(['./register']);
+  // }
 
 }
