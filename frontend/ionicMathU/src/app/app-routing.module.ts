@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ResolverService } from './service/resolver.service';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
   {
     path: 'student-view-profile',
     loadChildren: () => import('./page/student/student-view-profile/student-view-profile.module').then( m => m.ViewStudentPageModule)
-  },  {
+  },
+  {
     path: 'edit-bursary',
     loadChildren: () => import('./page/sponsor/edit-bursary/edit-bursary.module').then( m => m.EditBursaryPageModule)
   },
@@ -40,6 +42,13 @@ const routes: Routes = [
   },
   {
     path: 'view-more-bursary',
+    loadChildren: () => import('./page/sponsor/view-more-bursary/view-more-bursary.module').then( m => m.ViewMoreBursaryPageModule)
+  },
+  {
+    path: 'view-more-bursary/:id',
+    resolve: {
+      myData: ResolverService
+    },
     loadChildren: () => import('./page/sponsor/view-more-bursary/view-more-bursary.module').then( m => m.ViewMoreBursaryPageModule)
   },
   {
