@@ -187,13 +187,20 @@ export class RegisterPage implements OnInit {
       return;
     }
     else{
+      this.sponsor.company.company_name = this.addSponsor.value.company_name;
+      this.sponsor.company.company_industry = this.addSponsor.value.company_industry;
+      this.sponsor.first_name_of_user = this.addSponsor.value.first_name;
+      this.sponsor.last_name_of_user = this.addSponsor.value.last_name;
+      this.sponsor.email_address = this.addSponsor.value.email_address;
+      this.sponsor.password = this.addSponsor.value.password;
+
       this._apiService.registerSponsor(this.sponsor).subscribe((res:Sponsor_users) => {
         console.log("REQUEST SUCCESS ===", res);
         //this.the_message = res;
-        //"Successfully created an account. Check your email for the activation email.";
+        //"Success! Check your email for the activation email.";
         this.the_message = res["message"];
         this.printMessage();
-        if (this.the_message == "Success!"){
+        if (this.the_message.substring(0,7) == "Success"){
           this.router.navigate(['./login']);
         }
       }, (error:any) => {
