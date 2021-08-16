@@ -55,12 +55,15 @@ export class RegisterPage implements OnInit {
     this.student.date_of_birth = this.student.date_of_birth.substring(0,10);
     console.log(this.student);
 
-    this._apiService.registerStudent(this.student).subscribe((res:student_users) => {
+    this._apiService.registerStudent(this.student).subscribe((res) => {
       console.log("SUCCESS ===", res);
-      //this.the_message = res;
+      this.the_message = res["message"];
       //"Successfully created an account. Check your email for the activation email.";
       this.printMessage();
-      this.router.navigate(['./login']);
+      console.log(this.the_message.substring(0,7));
+      if (this.the_message.substring(0,7) == "Success"){
+        this.router.navigate(['./login']);
+      }
     }, (error:any) => {
       this.the_message = 'error';// error;
       this.printMessage();
