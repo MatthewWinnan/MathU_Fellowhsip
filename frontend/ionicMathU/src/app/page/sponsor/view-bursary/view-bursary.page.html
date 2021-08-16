@@ -31,41 +31,47 @@
   <ion-card *ngFor="let item of jsonData">
     
     <ion-card-header>
-      <ion-card-subtitle>{{item.bursary_type}}</ion-card-subtitle>
-
       <ion-item>
         <ion-card-title>{{item.bursary_name}}</ion-card-title>
       </ion-item>
+      <!-- <ion-card-subtitle>{{item.bursary_type}}</ion-card-subtitle> -->
 
       <ion-card-content> 
-       <ion-label> {{item.bursary_description}} </ion-label>
-      </ion-card-content>
-
-      
-
-      
+        Bursary Type: {{item.bursary_type}}
+        <br>
+        <p align="justify">{{item.bursary_description.substr(0,100) + "..."}} </p>
+        <div class="ion-text-center">
+          <ion-button fill="none" (click)="openDeactivate()" size="small" slot="end">
+            <ion-icon name="ban-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="none" routerLink="/view-more-bursary" size="small">
+          <!-- <ion-button fill="none" (click)="openViewInfo()" size="small"> -->
+            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="none" routerLink="/view-applicants" size="small">
+            <ion-icon name="people-outline" ></ion-icon>
+          </ion-button>
+        </div>
         
-     <ion-row center>
-      <ion-card-content>
-        <ion-button fill="none"  (click)="openDeactivate()" size = "small" alt="deactivated">
-          <ion-icon name="ban-outline"></ion-icon>
-        </ion-button>
+        
+          <!-- <ion-row class="ion-text-center" center>
+            <ion-card-content>
+            <ion-button fill="none" (click)="openDeactivate()" size="small" alt="deactivated" slot="start">
+              <ion-icon name="ban-outline"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+          <ion-card-content class="ion-text-center">
+            <ion-button fill="none"  routerLink="/view-more-bursary" size="small" alt="View Full Information">
+              <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+          <ion-card-content>
+            <ion-button fill="none"  routerLink="/view-applicants"  size="small" alt="view-applicants" slot="end">
+              <ion-icon name="people-outline" ></ion-icon>
+            </ion-button>
+          </ion-card-content> 
+        </ion-row>-->
       </ion-card-content>
-
-      <ion-card-content >
-        <ion-button fill="none"  routerLink="/view-more-bursary"  size = "small" alt="view-applicants">
-          <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-        </ion-button>
-     </ion-card-content>
-      
-      <ion-card-content >
-        <ion-button fill="none"  routerLink="/view-applicants"  size = "small" alt="view-applicants">
-          <ion-icon name="people-outline" ></ion-icon>
-        </ion-button>
-     </ion-card-content>
-     
-   </ion-row>
-  
     </ion-card-header>
     
   </ion-card>
