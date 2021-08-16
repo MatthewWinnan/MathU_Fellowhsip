@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
     public toastController: ToastController,
     public navCtrl: NavController
   ) { 
-    this.storage.clear();
+    //this.storage.clear();
     this.getValue();
   }
 
@@ -81,6 +81,7 @@ export class LoginPage implements OnInit {
         this.isChecking = false;
       }
       else{
+        this.storage.clear();
         this.the_message = "You have been successfully logged in";
         this.printMessage();
         this.isChecking = false;
@@ -178,14 +179,14 @@ export class LoginPage implements OnInit {
 
   getValue(){
     this.storage.get('name').then( (val) => {
-      //console.log(val);
       if (val != null){
-        if (val["Sponsor"] != null){
-          console.log(val["Sponsor"]["company_id"]);
-        }
-        else if (val["Student"] != null){
-          console.log(val["Student"]["first_name"]);
-        }
+        console.log(val);
+        // if (val["Sponsor"] != null){
+        //   console.log(val["Sponsor"]["company_id"]);
+        // }
+        // else if (val["Student"] != null){
+        //   console.log(val["Student"]["first_name"]);
+        // }
       }
       else{
         console.log("val is nothing")

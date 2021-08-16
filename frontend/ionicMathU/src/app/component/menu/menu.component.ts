@@ -23,6 +23,8 @@ export class MenuComponent implements OnInit {
 
   getstudentName(){
     this.storage.get('name').then( (val) => { 
+      //console.log("menu");
+      //console.log(val);
       if (val["student"]){
         this.studentName = val["student"]["first_name_of_student"] + " " + val["student"]["last_name_of_student"];
       }

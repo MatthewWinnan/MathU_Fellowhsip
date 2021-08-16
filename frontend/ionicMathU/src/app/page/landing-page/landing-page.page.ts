@@ -16,6 +16,7 @@ export class LandingPagePage implements OnInit {
 
   ngOnInit() {
     this.storage.create();
+    this.storage.set('name', "");
   }
 
   // GoToLogin(){

@@ -53,7 +53,10 @@
     </ion-list>
   </form>
   <br>
-  &nbsp;<ion-router-link href="./forgot-password" class="underline">Forgot Password</ion-router-link>
+  &nbsp;
+  <ion-router-link href="./forgot-password" class="underline"  *ngIf="!isChecking">
+    Forgot Password
+  </ion-router-link>
 
   <!-- <div class="ion-text-center">
     <ion-button color="primary" (click)="logMeIn()">Sign In</ion-button>

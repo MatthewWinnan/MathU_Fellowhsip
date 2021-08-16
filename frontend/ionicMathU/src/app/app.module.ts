@@ -7,12 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { MenuComponent } from './component/menu/menu.component';
+//import { MenuComponent } from './component/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    //MenuComponent
   ],
   entryComponents: [],
   imports: [

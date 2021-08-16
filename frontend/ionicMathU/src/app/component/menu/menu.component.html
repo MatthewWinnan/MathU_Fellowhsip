@@ -6,10 +6,15 @@
           <!-- <ion-thumbnail slot="start">
             <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
           </ion-thumbnail> -->
-          <ion-label>
+          <ion-label *ngIf="userType != 'Student'">
             <h3> {{ companyName }} </h3>
             <p> {{ sponsorName }} </p>
           </ion-label>
+          <ion-label *ngIf="userType == 'Student'">
+            <h3>Student</h3>
+            <p> {{ studentName }} </p>
+          </ion-label>
+
         </ion-item>
       </ion-title>
     </ion-toolbar>
@@ -17,7 +22,21 @@
   
   <ion-content>
     <ion-list>
-      <ion-menu-toggle>
+      <ion-menu-toggle *ngIf="userType == 'Student'">
+        <ion-item routerLink="/student-view-profile">
+          <ion-icon name="person-circle" slot="start"></ion-icon>
+          <ion-label>View Profile</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle *ngIf="userType == 'Student'">
+        <ion-item>
+          <ion-icon name="reader" slot="start"></ion-icon>
+          <ion-label>Shortlist</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+
+      <ion-menu-toggle *ngIf="userType == 'SuperAdmin' || userType=='Employee' || userType=='ManageBursary' || userType=='ManageApplications'">
         <ion-item routerLink="/view-profile">
           <ion-icon name="person-circle" slot="start"></ion-icon>
           <ion-label>View Profile</ion-label>
@@ -54,7 +73,7 @@
         </ion-item>
       </ion-menu-toggle> -->
       <ion-menu-toggle>
-        <ion-item routerLink="logout">
+        <ion-item routerLink="/logout">
           <ion-icon name="power" slot="start"></ion-icon>
           <ion-label>Log Out</ion-label>
         </ion-item>
@@ -63,51 +82,3 @@
   </ion-content>
 </ion-menu>
 <ion-router-outlet id="main-menu-SuperAdmin"></ion-router-outlet>
-
-<ion-menu menuId="stu" contentId="main-menu-Student">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>
-          <ion-item>
-            <!-- <ion-thumbnail slot="start">
-              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-            </ion-thumbnail> -->
-            <ion-label>
-              <h3>Student</h3>
-              <!-- <p>Joshua Delfel Luus</p> -->
-              <p> {{ studentName }} </p>
-            </ion-label>
-          </ion-item>
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <ion-menu-toggle>
-        <ion-item routerLink="/view-profile">
-          <ion-icon name="person-circle" slot="start"></ion-icon>
-          <ion-label>Home</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-      <ion-menu-toggle>
-        <ion-item routerLink="/view-profile">
-          <ion-icon name="person-circle" slot="start"></ion-icon>
-          <ion-label>View Profile</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-      <ion-menu-toggle>
-        <ion-item routerLink="/view-bursary">
-          <ion-icon name="reader" slot="start"></ion-icon>
-          <ion-label>Shortlist</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-      <ion-menu-toggle>
-        <ion-item routerLink="logout">
-          <ion-icon name="power" slot="start"></ion-icon>
-          <ion-label>Log Out</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-<ion-router-outlet id="main-menu-Student"></ion-router-outlet>

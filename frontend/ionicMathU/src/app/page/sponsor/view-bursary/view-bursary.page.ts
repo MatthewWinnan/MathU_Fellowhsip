@@ -17,7 +17,7 @@ export class ViewBursaryPage implements OnInit {
 
   getValue(){
     this.storage.get('name').then( (val) => {
-      this.gmail = "value is " + val;
+      this.gmail = "value is " + val["role"];
     }, (err)=>{
       this.gmail = "empty";
     })
