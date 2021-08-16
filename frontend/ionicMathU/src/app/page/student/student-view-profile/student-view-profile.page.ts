@@ -20,7 +20,7 @@ export class ViewProfilePage implements OnInit {
 
     { 
       this.student = this.studentData.getStudent();
-      console.log(this.student.last_name_of_student);
+      console.log(this.student.last_name);
     }
 
   public gotoEdit() {

@@ -14,7 +14,7 @@ export class ViewProfilePage implements OnInit {
   student : student_users;
   name: any = '';
   surname: any = '';
-  dob : Date;
+  dob = '';
   email : any;
   number : any;
   student_city : any;
@@ -38,9 +38,9 @@ export class ViewProfilePage implements OnInit {
 
     ) {
       this.student = this.studentData.getStudent();
-      this.name = this.student.first_name_of_student;
-      this.surname = this.student.last_name_of_student;
-      this.dob = this.student.data_of_birth;
+      this.name = this.student.first_name;
+      this.surname = this.student.last_name;
+      this.dob = this.student.date_of_birth;
       this.email = this.student.email_address;
       this.number = this.student.contact_number;
       this.student_city = this.student.city;
@@ -61,7 +61,7 @@ export class ViewProfilePage implements OnInit {
   addStudent_details = this.formBuilder.group({
     first_name_of_student: [''],
     last_name_of_student: [''],
-    data_of_birth: [Date],
+    data_of_birth: [''],
     email_address: [''],
     //password: [''],  
     contact_number: [''],
@@ -132,9 +132,9 @@ export class ViewProfilePage implements OnInit {
   }
 
   public addStudentDetails() {
-    this.student.first_name_of_student = this.addStudent_details.value.first_name_of_student;
-    this.student.last_name_of_student = this.addStudent_details.value.last_name_of_student;
-    this.student.data_of_birth = this.addStudent_details.value.data_of_birth;
+    this.student.first_name = this.addStudent_details.value.first_name_of_student;
+    this.student.last_name = this.addStudent_details.value.last_name_of_student;
+    this.student.date_of_birth = this.addStudent_details.value.data_of_birth;
     this.student.email_address = this.addStudent_details.value.email_address;
     //password: [''],  
     this.student.contact_number = this.addStudent_details.value.contact_number;

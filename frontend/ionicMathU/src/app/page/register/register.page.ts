@@ -15,18 +15,23 @@ import { student_users } from '../../model/student_users.model';
 export class RegisterPage implements OnInit {
   sponsor = new Sponsor_users() ;
   //Student initialize credentials
-  student : student_users;
-  student_name : string="";
-  student_surname : string="";
+  student = new student_users() ;
+  student_c_password : string = "";
+
+  //student : student_users;
+  //student_name : string="";
+  //student_surname : string="";
+
   //Sponsor initialize credentials
-  sponor : Sponsor_users;
-  company_name : string = "";
-  company_industry : string = "";
-  f_name : string = "";
-  l_name : string = "";
-  email_address : string = "";
-  password : string = "";
-  c_password : string = "";
+  // sponor : Sponsor_users;
+  // company_name : string = "";
+  // company_industry : string = "";
+  // f_name : string = "";
+  // l_name : string = "";
+  // email_address : string = "";
+  // password : string = "";
+  // c_password : string = "";
+
   the_message : string = "";
   //Password variables
   showPassword = false;
@@ -47,41 +52,50 @@ export class RegisterPage implements OnInit {
   //register code for the students
   registerMe_Student(){
     // put in code 
-    //console.log(this.company_name, this.company_industry, this.f_name, this.l_name, this.email_address, this.password, this.c_password)
-    if (this.student_name == ""){
-      this.the_message = 'Please enter a name';
-      this.printMessage();
-    }
-    else if (this.student_surname == ""){
-      this.the_message = 'Please eneter your surname';
-      this.printMessage();
-    }
-    else{
-      let data = {
-        //made dummy variables so project can function
-        id : 0,
-        student_id : "",
-        first_name_of_student : "",
-        last_name_of_student : "",
-        email_address : "",
-        password : "",
-      inactive : "",
-      isVerified : "",
-      regisered_date : "",
-      last_login : "",
+    this.student.date_of_birth = this.student.date_of_birth.substring(0,10);
+    console.log(this.student);
 
-        // company_name : this.company_name, 
-        // company_industry : this.company_industry,
-        // f_name : this.f_name,
-        // l_name : this.l_name,
-        // email_address : this.email_address,
-        // password : this.password,
-      }
+    this._apiService.registerStudent(this.student).subscribe((res:student_users) => {
+      console.log("SUCCESS ===", res);
+      //this.the_message = res;
+      //"Successfully created an account. Check your email for the activation email.";
+      this.printMessage();
+      this.router.navigate(['./login']);
+    }, (error:any) => {
+      this.the_message = 'error';// error;
+      this.printMessage();
+      console.log("ERROR ===", error);
+    });
+    //console.log(this.company_name, this.company_industry, this.f_name, this.l_name, this.email_address, this.password, this.c_password)
+    // if (this.student_name == ""){
+    //   this.the_message = 'Please enter a name';
+    //   this.printMessage();
+    // }
+    // else if (this.student_surname == ""){
+    //   this.the_message = 'Please eneter your surname';
+    //   this.printMessage();
+    // }
+    // else{
+    //   let data = {
+    //     //made dummy variables so project can function
+    //     id : 0,
+    //     student_id : "",
+    //     first_name_of_student : "",
+    //     last_name_of_student : "",
+    //     email_address : "",
+    //     password : "",
+    //     inactive : "",
+    //     isVerified : "",
+    //     regisered_date : "",
+    //     last_login : "",
+
+    //   }
       
-    }
+    //}
     // console.log(this.student_name, this.student_surname);
     //this.router.navigate(['./login']);
-    this.router.navigate(['./student-view-profile']);
+
+    //this.router.navigate(['./student-view-profile']);
   }
 
 
@@ -161,64 +175,66 @@ export class RegisterPage implements OnInit {
     //   // });
 
     // }
-    if (this.company_name == ""){
-      this.the_message = 'Company name needed';
-      this.printMessage();
-    }
-    else if (this.company_industry == ""){
-      this.the_message = 'Company industry needed';
-      this.printMessage();
-    }
-    else if (this.f_name == ""){
-      this.the_message = 'First name needed';
-      this.printMessage();
-    }
-    else if (this.l_name == ""){
-      this.the_message = 'Last name needed';
-      this.printMessage();
-    }
-    else if (this.email_address == ""){
-      this.the_message = 'Email address needed.';
-      this.printMessage();
-    }
-    else if (this.checkEmailAddress(this.email_address) == false){
-      this.the_message = 'Enter a valid email address.';
-      this.printMessage();
-    }
-    else if (this.password == ""){
-      this.the_message = 'Password needed';
-      this.printMessage();
-    }
-    else if (this.password.length < 8){
-      this.the_message = 'Password must be greater than 8 charcters.';
-      this.printMessage();
-    }
-    else if (this.checkUpperCase(this.password) === false){
-      this.the_message = 'Password needs to contain an uppercase letter.';
-      this.printMessage();
-    }
-    else if (this.checkLowerCase(this.password) === false){
-      this.the_message = 'Password needs to contain an lowercase letter.';
-      this.printMessage();
-    }
-    else if (this.checkDigit(this.password) === false){
-      this.the_message = 'Password needs to contain a digit.';
-      this.printMessage();
-    }
-    else if (this.checkSpecialCharacter(this.password) === false){
-      this.the_message = 'Password needs to contain a special character.';
-      this.printMessage();
-    }
-    else if (this.c_password == ""){
-      this.the_message = 'Confirm your password';
-      this.printMessage();
-    }
-    else if (this.password != this.c_password){
-      this.the_message = 'Passwords dont match';
-      this.printMessage();
-    }
-    else{
-      this.router.navigate(['./login']);
+    
+    // if (this.company_name == ""){
+    //   this.the_message = 'Company name needed';
+    //   this.printMessage();
+    // }
+    // else if (this.company_industry == ""){
+    //   this.the_message = 'Company industry needed';
+    //   this.printMessage();
+    // }
+    // else if (this.f_name == ""){
+    //   this.the_message = 'First name needed';
+    //   this.printMessage();
+    // }
+    // else if (this.l_name == ""){
+    //   this.the_message = 'Last name needed';
+    //   this.printMessage();
+    // }
+    // else if (this.email_address == ""){
+    //   this.the_message = 'Email address needed.';
+    //   this.printMessage();
+    // }
+    // else if (this.checkEmailAddress(this.email_address) == false){
+    //   this.the_message = 'Enter a valid email address.';
+    //   this.printMessage();
+    // }
+    // else if (this.password == ""){
+    //   this.the_message = 'Password needed';
+    //   this.printMessage();
+    // }
+    // else if (this.password.length < 8){
+    //   this.the_message = 'Password must be greater than 8 charcters.';
+    //   this.printMessage();
+    // }
+    // else if (this.checkUpperCase(this.password) === false){
+    //   this.the_message = 'Password needs to contain an uppercase letter.';
+    //   this.printMessage();
+    // }
+    // else if (this.checkLowerCase(this.password) === false){
+    //   this.the_message = 'Password needs to contain an lowercase letter.';
+    //   this.printMessage();
+    // }
+    // else if (this.checkDigit(this.password) === false){
+    //   this.the_message = 'Password needs to contain a digit.';
+    //   this.printMessage();
+    // }
+    // else if (this.checkSpecialCharacter(this.password) === false){
+    //   this.the_message = 'Password needs to contain a special character.';
+    //   this.printMessage();
+    // }
+    // else if (this.c_password == ""){
+    //   this.the_message = 'Confirm your password';
+    //   this.printMessage();
+    // }
+    // else if (this.password != this.c_password){
+    //   this.the_message = 'Passwords dont match';
+    //   this.printMessage();
+    // }
+    //else{
+      //this.router.navigate(['./login']);
+
       // let data = {
       //   //made dummy variables so project can function
       //   //@Raaga please fix??
@@ -266,7 +282,7 @@ export class RegisterPage implements OnInit {
       //   this.printMessage();
       //   console.log("ERROR ===", error);
       // });
-    }
+    //}
     
   }
 

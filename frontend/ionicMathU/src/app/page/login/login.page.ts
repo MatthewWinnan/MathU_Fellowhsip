@@ -36,9 +36,9 @@ export class LoginPage implements OnInit {
     if (User.user_id[0]=="s")
     {
       //We can assign the return object depending on who logged in to here
-      this.student.email_address="mcwinnan@gmail.com";
-      this.student.first_name_of_student="Matthew";
-      this.student.last_name_of_student="Winnan";
+      this.student.email_address = "mcwinnan@gmail.com";
+      this.student.first_name = "Matthew";
+      this.student.last_name = "Winnan";
       this.navParamService.setStudent(this.student);
       this.router.navigate(['./student-view-profile']);
 
