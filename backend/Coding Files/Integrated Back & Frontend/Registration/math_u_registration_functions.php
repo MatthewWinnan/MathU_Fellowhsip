@@ -94,10 +94,10 @@ function AddToUsers($email, $usrID, $mysqli){
 //This function inserts a new student into the student table and returns ID of Insertion
 //---------------------------------------------------------------------------------------
 
-function AddStudent($first_name, $last_name, $email, $hashed_pass, $mysqli){
+function AddStudent($first_name, $last_name, $email, $hashed_pass, $dob, $mysqli){
 
   $date = date("Y-m-d");
-  $sql = "INSERT INTO student (First_name, Last_name, Email_address, Password, Registerred_date, Validated, Banned, Number_of_reports) VALUES ('$first_name', '$last_name','$email', '$hashed_pass', '$date', FALSE, FALSE, '0')";
+  $sql = "INSERT INTO student (First_name, Last_name, Date_of_birth, Email_address, Password, Registerred_date, Validated, Banned, Number_of_reports) VALUES ('$first_name', '$last_name','$dob', '$email', '$hashed_pass', '$date', FALSE, FALSE, '0')";
 
   if($mysqli->query($sql) === TRUE){
     return $mysqli->insert_id;
