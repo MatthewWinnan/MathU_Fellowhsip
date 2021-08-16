@@ -1,109 +1,52 @@
 <?php
-//====================================
+
 include 'math_u_db_connection.php';
 include 'math_u_registration_functions.php';
-include_once 'all_classes.php';
+include 'all_classes.php';
 
-//====================================
-//Tables Needed: all_users, company, sponsor_users, student
-//Validate Emails for uniqueness
-//Hash All Passwords
-//Generate ID's for both types of users
-//Insert into the DB
-//==========================MAIN==============================================//
-//---------------
-//Company Section
-//---------------
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
-if (isset($data["company"]["company_name"])and isset($data["company"]["company_industry"]) and isset($data["email_address"])){
-	//-------------------------------//
-	$co_name = $data["company"]["company_name"];
-	$industry = $data["company"]["company_industry"];
-	//------------------------------//
-	//INSERT NEW COMPANY INTO THE DB & GET THE INSERT ID
-	$email = $data["email_address"];
-	$email = strtolower($email);
-	$isUnique = isUniqueEmail($email,$mysqli);
-	//--------------------------------------------------
-	$new_user = new all_users();
-	//------------------------//
-	//CHECK EMAIL IS UNIQUE
-	//-----------------------//
-	if ($isUnique === TRUE){
-		$company_id = addCompany($co_name, $industry, $mysqli);
+if(isset($data['email_address']) and isset($data['password']) and isset($data['first_name']) and isset($data['last_name'])){
 
-		if ($company_id > 0){
-		//-------------------
-		//Super Admin Section
-		//-------------------
-			if (isset($data["first_name_of_user"])and isset($data["last_name_of_user"]) and isset($data["password"])){
-				//------------------------//
-				$f_name = $data["first_name_of_user"];
-				$l_name = $data["last_name_of_user"];
-				$pass = $data["password"];
+  $email = $data['email_address'];
+  $pass = $data['password'];
+  $first_name = $data['first_name'];
+  $last_name = $data['last_name'];
+  $dob = $data["date_of_birth"];//what's the name
+  $isUnique = isUniqueEmail($email, $mysqli);
+  $hashed_pass = GenerateHashPassword($pass);
+  
+  $new_user = new all_users();
+  if ($isUnique === TRUE){
 
+      $student_id = AddStudent($first_name, $last_name, $email, $hashed_pass, $dob, $mysqli);
 
-				//INSERT INTO SPONSOR_USERS
-				$hashed_password = GenerateHashPassword($pass);
-				$spr_id = addSponsor($f_name, $l_name, $email,$hashed_password, $company_id, $mysqli);
-				//--------------------------------------------------------------------
-				if ($spr_id != 0){
-					//GENERATE SPONSOR ID
-					$new_id = GenerateUserID($spr_id,0);
+      $u_id = GenerateUserID($student_id, 1);
 
-					//UPDATE SPONSOR ID
-					//--------------------------------------------------------
-					if (UpdateSponsorID($new_id, $spr_id, $mysqli)===TRUE){
+  		if (UpdateStudentID($student_id, $u_id, $mysqli)===TRUE){
 
-						//Add to All_USERS TABLE
-						//-------------------------------------------------
-						if (AddToUsers($email, $new_id, $mysqli)===TRUE){
-							$new_user->message= "Success!";
-							echo json_encode($new_user);
-						}
-						else{
-							$new_user->message = "Could not account add to all users";
-		          echo json_encode($new_user);
-						}
-						//-------------------------------------------------
-					}
-					else {
-						$new_user->message= "Could not update sponsor ID";
-		        echo json_encode($new_user);
-					}
-					//---------------------------------------------------------
+  		  if (AddToUsers($email, $u_id, $mysqli) === TRUE){
+          
+          $new_user->message = "Success! Your Account has been created. Check your email to verify account.";
+          echo json_encode($new_user);
+  		  }
+        else {
+			
+          $new_user->message= "ERROR CONNECTION TO SERVER (ALL USERS) FAILED";
+          echo json_encode($new_user);
+        }
+  	    }
+      else {
+        $new_user->message= "ERROR CONNECTION TO SERVER (STUDENT) FAILED";
+        echo json_encode($new_user);
+      }
+    }
+    else {
+      $new_user->message = "Email address already exists!";
+      echo json_encode($new_user);
+    }
+  }
+  
 
-				}
-				else{
-					$new_user->message = "Could not Add Admin!";
-	        echo json_encode($new_user);
-				}
-				//-------------------------------------------------------------------------
-			}
-			else{
-				$new_user->message = "Please Provide the correct details for the Super Admin!";
-				echo json_encode($new_user);
-			}
-		}
-		else{
-			$new_user->message = "Could not Insert New Company Try Again!";
-			echo json_encode($new_user);
-		}
-	}
-	else{
-		$new_user->message = "Email not unique!";
-		echo json_encode($new_user);
-	}
-}
-else{
-	$new_user->message = "Form is incomplete!";
-	echo json_encode($new_user);
-}
-
-//==========================END===============================================//
-//==============================
-//List of functions
-//==============================
-?>
+ ?>
