@@ -7,7 +7,7 @@
 
     <ion-title class = "ion-text-center">Employee View</ion-title>
 
-    <ion-button fill="none"  slot = "end" (click)="editEmployee()">
+    <ion-button fill="none"  slot = "end" (click)="addEmployee()">
       <ion-icon name="add-outline"  size= "small" ></ion-icon>
      </ion-button>
 
@@ -40,11 +40,11 @@
       <ion-item> {{ item.Rights }}</ion-item>
 
       <ion-toolbar>      
-        <ion-button fill="none"  color= "black" slot= "start"  (click)="addEmployee()">
+        <ion-button fill="none"  color= "black" slot= "start"  (click)="modifyEmployee()">
           <ion-icon name="brush-outline"  size= "small" ></ion-icon>
         </ion-button>
 
-        <ion-button fill="none"  color= "black"   slot = "end" (click)="editEmployee()">
+        <ion-button fill="none"  color= "black"   slot = "end" (click)="deactivate()">
           <ion-icon name="close-circle-outline"  size= "small" ></ion-icon>
         </ion-button>
       </ion-toolbar>  

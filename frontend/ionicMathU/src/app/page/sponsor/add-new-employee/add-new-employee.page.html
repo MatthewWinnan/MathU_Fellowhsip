@@ -1,9 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-new-employee</ion-title>
+
+    <ion-button fill = "none" slot = "start" (click)= "closeAdd()">
+      
+        <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
+      
+    </ion-button>
+
+    <ion-title>New Employee</ion-title>
+
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+First Name Last Name employee email adress select role  manageBursaries 
+<ion-card-header>
+  <ion-card-subtitle></ion-card-subtitle>
+  <ion-card-title></ion-card-title>
+  
+  <ion-item> 
+    <ion-input placeholder="First Name"></ion-input> 
+  </ion-item> 
+
+  <br/>
+
+  <ion-item> 
+    <ion-input placeholder="Last Name"></ion-input> 
+  </ion-item>
+
+  <br/>
+
+  <ion-item> 
+    <ion-input placeholder="Employee Email Adress"></ion-input> 
+  </ion-item>
+
+  <br/>
+
+  <ion-select placeholder="Select Employee Role">
+    <ion-select-option> Bursaries Manager</ion-select-option>
+    <ion-select-option> Form Manager</ion-select-option>
+    <ion-select-option>Super Admin</ion-select-option>
+  </ion-select>
+
+  <ion-button (click)="Addmember()">Add</ion-button>
+
+
+</ion-card-header>
 
 </ion-content>

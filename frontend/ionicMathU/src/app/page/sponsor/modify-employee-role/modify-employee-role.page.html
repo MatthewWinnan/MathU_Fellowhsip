@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>modify-employee-role</ion-title>
+
+    <ion-button fill = "none" slot = "start" (click)= "closeModify()">
+      
+      <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
+    
+  </ion-button>
+
+    <ion-title> Change Role</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-select placeholder="Select Employee Role">
+    <ion-select-option> Bursaries Manager</ion-select-option>
+    <ion-select-option> Form Manager</ion-select-option>
+    <ion-select-option>Super Admin</ion-select-option>
+  </ion-select>
 
+  <ion-button (click)="saveRole()">Save</ion-button>
 </ion-content>

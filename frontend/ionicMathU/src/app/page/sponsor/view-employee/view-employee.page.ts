@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AddNewEmployeePage } from '../add-new-employee/add-new-employee.page';
+import { DeactivatePage } from '../deactivate/deactivate.page';
+import { ModifyEmployeeRolePage } from '../modify-employee-role/modify-employee-role.page';
 
 
 @Component({
@@ -66,5 +68,20 @@ today: number = Date.now()
     return await modal.present()
   }
  
+  async modifyEmployee() {
+    const modal = await this.ModalCtrl.create({
+      component : ModifyEmployeeRolePage 
+    })
+
+    return await modal.present()
+  }
+
+  async deactivate() {
+    const modal = await this.ModalCtrl.create({
+      component : DeactivatePage 
+    })
+
+    return await modal.present()
+  }
 
 }

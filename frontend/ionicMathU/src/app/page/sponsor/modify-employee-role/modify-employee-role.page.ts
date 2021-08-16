@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular'
 
 @Component({
   selector: 'app-modify-employee-role',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModifyEmployeeRolePage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, public ModalCtrl: ModalController) { }
 
   ngOnInit() {
   }
+
+  closeModify() {this.ModalCtrl.dismiss()}
 
 }

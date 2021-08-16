@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular'
 
 @Component({
   selector: 'app-add-new-employee',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddNewEmployeePage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, public ModalCtrl: ModalController) { }
 
   ngOnInit() {
   }
+
+  viewEmployees() {
+    this.router.navigate(['./../view-employee'])
+  }
+
+  addmember() {
+    this.router.navigate(['./../view-employee'])
+  }
+
+  closeAdd() {this.ModalCtrl.dismiss()}
 
 }

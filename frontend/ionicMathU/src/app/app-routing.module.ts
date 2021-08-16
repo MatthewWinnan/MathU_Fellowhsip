@@ -30,6 +30,10 @@ const routes: Routes = [
     path: 'modify-employee-role',
     loadChildren: () => import('./page/sponsor/modify-employee-role/modify-employee-role.module').then( m => m.ModifyEmployeeRolePageModule)
   },
+  {
+    path: 'deactivate',
+    loadChildren: () => import('./page/sponsor/deactivate/deactivate.module').then( m => m.DeactivatePageModule)
+  },
 
 ];
 
