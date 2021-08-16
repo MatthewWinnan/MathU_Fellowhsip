@@ -1,7 +1,7 @@
 <?php
 //====================================
 include 'math_u_db_connection.php';
-include 'math_u_registration.php';
+include 'math_u_registration_functions.php';
 include_once 'all_classes.php';
 
 //====================================
@@ -17,13 +17,13 @@ include_once 'all_classes.php';
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
-if (isset($data["company_name"])and isset($data["industry"]) and isset($data["email"])){
+if (isset($data["company"]["company_name"])and isset($data["company"]["company_industry"]) and isset($data["email_address"])){
 	//-------------------------------//
-	$co_name = $data["company_name"];
-	$industry = $data["industry"];
+	$co_name = $data["company"]["company_name"];
+	$industry = $data["company"]["company_industry"];
 	//------------------------------//
 	//INSERT NEW COMPANY INTO THE DB & GET THE INSERT ID
-	$email = $data["email"];
+	$email = $data["email_address"];
 	$email = strtolower($email);
 	$isUnique = isUniqueEmail($email,$mysqli);
 	//--------------------------------------------------
@@ -38,10 +38,10 @@ if (isset($data["company_name"])and isset($data["industry"]) and isset($data["em
 		//-------------------
 		//Super Admin Section
 		//-------------------
-			if (isset($data["fname"])and isset($data["lname"]) and isset($data["password"])){
+			if (isset($data["first_name_of_user"])and isset($data["last_name_of_user"]) and isset($data["password"])){
 				//------------------------//
-				$f_name = $data["fname"];
-				$l_name = $data["lname"];
+				$f_name = $data["first_name_of_user"];
+				$l_name = $data["last_name_of_user"];
 				$pass = $data["password"];
 
 

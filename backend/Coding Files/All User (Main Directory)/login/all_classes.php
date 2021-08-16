@@ -169,7 +169,7 @@ class sponsor_users{
 	public $last_name_of_user;
 	public $email_address;
 	public int $company_id;
-	public bool $isSuperAmin;
+	public bool $isSuperAdmin;
 	public bool $manageBursaries;
     public bool $manageApplications;
 	public bool $inactive;
