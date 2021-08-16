@@ -14,7 +14,7 @@ function QueryStudents($email, $mysqli){
 //function to QuerySponsors, returns a ID
 //================================================
 function QuerySponsors($email, $mysqli){
-	 
+
 	$email = strtolower($email);
 	$sql = "SELECT * FROM sponsor_users WHERE email_address = '".$email."'";
 	$result = $mysqli->query($sql);
@@ -49,7 +49,7 @@ function UpdateSponsorID($s_id, int $id, $mysqli){
 //function this function echo results in JSON format
 //================================================
 function Display($result){
-	//Check results is not an empty array 
+	//Check results is not an empty array
 	if ($result != null){
 		echo json_encode($result);
 	}

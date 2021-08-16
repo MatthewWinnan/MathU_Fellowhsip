@@ -4,7 +4,7 @@
 //======================================================================================
 
 //==================
-//LIST OF FUNCTIONS 
+//LIST OF FUNCTIONS
 //==================
 
 //-----------------
@@ -12,8 +12,8 @@
 //-----------------
 //==========================================
 function UpdateLogo($file,int $id, $mysqli){
-	//Delete previous post 
-	
+	//Delete previous post
+
 }
 //=========================================
 function UpdateURL($url, int $id, $mysqli){
@@ -21,7 +21,7 @@ function UpdateURL($url, int $id, $mysqli){
 	if ($mysqli->query($sql)=== TRUE){
 		return true;
 	}
-	else return false;	
+	else return false;
 }
 //=================================================
 function UpdateDescription($des, int $id, $mysqli){
@@ -37,7 +37,7 @@ function UpdateDescription($des, int $id, $mysqli){
 //--------------------------
 //==========================================
 function GetEmployee(int $comp_id, $mysqli){
-	
+
 }
 //================================================
 function DeactivateEmployee(int $usr_ID, $mysqli){
@@ -97,7 +97,7 @@ function DenyApplicant(int $id, $mysqli){
 		return true;
 	}
 	else return false;
-	
+
 }
 //=========================================
 function AcceptApplicant(int $id, $mysqli){
@@ -106,7 +106,7 @@ function AcceptApplicant(int $id, $mysqli){
 		return true;
 	}
 	else return false;
-	
+
 }
 
 ?>
