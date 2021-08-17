@@ -11,12 +11,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-select placeholder="Select Employee Role">
-    <ion-select-option> Bursaries Manager</ion-select-option>
-    <ion-select-option> Form Manager</ion-select-option>
-    <ion-select-option>Super Admin</ion-select-option>
-  </ion-select>
+</ion-content>
+<ion-item>
+  <ion-label> Bursaries Manager</ion-label>
+<ion-checkbox checked = 'false'></ion-checkbox>
+</ion-item>
+
+<ion-item>
+  <ion-label>Form Manager</ion-label>
+<ion-checkbox checked = 'false'></ion-checkbox>
+</ion-item>
+
+<ion-item>
+  <ion-label>Super Admin</ion-label>
+<ion-checkbox checked = 'false'></ion-checkbox>
+</ion-item>
 
   <ion-button (click)="saveRole()">Save</ion-button>
 </ion-content>

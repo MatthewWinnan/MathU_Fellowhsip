@@ -15,7 +15,7 @@
 
 <ion-content>
 
-First Name Last Name employee email adress select role  manageBursaries 
+ 
 <ion-card-header>
   <ion-card-subtitle></ion-card-subtitle>
   <ion-card-title></ion-card-title>
@@ -38,14 +38,25 @@ First Name Last Name employee email adress select role  manageBursaries
 
   <br/>
 
-  <ion-select placeholder="Select Employee Role">
-    <ion-select-option> Bursaries Manager</ion-select-option>
-    <ion-select-option> Form Manager</ion-select-option>
-    <ion-select-option>Super Admin</ion-select-option>
-  </ion-select>
+  <ion-item>
+    <ion-label> Bursaries Manager</ion-label>
+  <ion-checkbox checked = 'false'></ion-checkbox>
+  </ion-item>
 
-  <ion-button (click)="Addmember()">Add</ion-button>
+  <ion-item>
+    <ion-label>Form Manager</ion-label>
+  <ion-checkbox checked = 'false'></ion-checkbox>
+  </ion-item>
 
+  <ion-item>
+    <ion-label>Super Admin</ion-label>
+  <ion-checkbox checked = 'false'></ion-checkbox>
+  </ion-item>
+
+  <br/>
+  <div class='ion-text-center'>
+  <ion-button  (click)="Addmember()">Add</ion-button>
+  </div>
 
 </ion-card-header>
 
