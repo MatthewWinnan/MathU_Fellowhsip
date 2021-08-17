@@ -5,7 +5,7 @@ import { ViewMoreBursaryPage } from '../view-more-bursary/view-more-bursary.page
 import { ViewMoreBursaryPageModule } from '../view-more-bursary/view-more-bursary.module';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
-import { Company } from 'src/app/model/Company';
+import { Company } from '../../../model/company';
 import { BursaryService } from '../../../service/bursary.service';
 
 @Component({
