@@ -73,7 +73,7 @@ export class ViewEmployeePage implements OnInit {
     this.ourCompany.comapny_logo = "";
     this.ourCompany.company_description = "";
     this.ourCompany.company_URL = "";
-    this.ourCompany.number_of_reports = "";
+    this.ourCompany.number_of_reports = 0;
   }
 
   ngOnInit() {
@@ -100,39 +100,39 @@ export class ViewEmployeePage implements OnInit {
       },
       {
         "sponsor_id": "S0020",
-        "first_name_of_user": "Apple",
-        "last_name_of_user": "Red",
-        "email_address": "apple@gmail.com",
+        "first_name_of_user": "Pear",
+        "last_name_of_user": "Green",
+        "email_address": "pear@gmail.com",
         "company_id ": this.ourCompany.company_id,
-        "isSuperAdmin": true,  //if isSuperAdmin is true, then 
-        "manageBursaries": true,  //manageBursaries also true
-        "manageApplications": true, //manageApplications also true
+        "isSuperAdmin": false,  //if isSuperAdmin is false, then normal employee
+        "manageBursaries": true,
+        "manageApplications": true,
         "inactive": false,
         "isVerified": false,
         "company": this.ourCompany
       },
       {
         "sponsor_id": "S0020",
-        "first_name_of_user": "Apple",
-        "last_name_of_user": "Red",
-        "email_address": "apple@gmail.com",
+        "first_name_of_user": "Cherry",
+        "last_name_of_user": "Sour",
+        "email_address": "sour@gmail.com",
         "company_id ": this.ourCompany.company_id,
-        "isSuperAdmin": true,  //if isSuperAdmin is true, then 
-        "manageBursaries": true,  //manageBursaries also true
-        "manageApplications": true, //manageApplications also true
+        "isSuperAdmin": false,
+        "manageBursaries": false,
+        "manageApplications": true,
         "inactive": false,
         "isVerified": false,
         "company": this.ourCompany
       },
       {
         "sponsor_id": "S0020",
-        "first_name_of_user": "Apple",
-        "last_name_of_user": "Red",
-        "email_address": "apple@gmail.com",
+        "first_name_of_user": "Plum",
+        "last_name_of_user": "Soft",
+        "email_address": "plum@gmail.com",
         "company_id ": this.ourCompany.company_id,
-        "isSuperAdmin": true,  //if isSuperAdmin is true, then 
-        "manageBursaries": true,  //manageBursaries also true
-        "manageApplications": true, //manageApplications also true
+        "isSuperAdmin": false, 
+        "manageBursaries": true, 
+        "manageApplications": false,
         "inactive": false,
         "isVerified": false,
         "company": this.ourCompany
