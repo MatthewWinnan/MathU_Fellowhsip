@@ -27,28 +27,27 @@
         <ion-item>
           <ion-card-title>{{item.bursary_name}}</ion-card-title>
         </ion-item>
-
-        <ion-card-content> 
-          Bursary Type: {{item.bursary_type}}
-          <br>
-          <p align="justify">{{item.bursary_description.substr(0,100) + "..."}} </p>
-          <div class="ion-text-center">
-            <ion-button fill="none" (click)="openDeactivate()" size="small" slot="end">
-              <ion-icon name="ban-outline"></ion-icon>
-            </ion-button>
-            <!-- <ion-button fill="none" routerLink="/view-more-bursary" size="small"> -->
-            <ion-button fill="none" (click)="openViewInfo(item)" size="small">
-              <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-            </ion-button>
-            <ion-button fill="none" routerLink="/view-applicants" size="small">
-              <ion-icon name="people-outline" ></ion-icon>
-            </ion-button>
-            <ion-button fill="none" (click)="editBursary(item)" size="small">
-              <ion-icon name="pencil-outline" ></ion-icon>
-            </ion-button>
-          </div>
-        </ion-card-content>
       </ion-card-header>
+      <ion-card-content> 
+        Bursary Type: {{item.bursary_type}}
+        <br>
+        <p align="justify">{{item.bursary_description.substr(0,100) + "..."}} </p>
+        <div class="ion-text-center">
+          <ion-button fill="none" (click)="openDeactivate()" size="small" slot="end">
+            <ion-icon name="ban-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="none" (click)="editBursary(item)" size="small">
+            <ion-icon name="pencil-outline" ></ion-icon>
+          </ion-button>
+          <ion-button fill="none" (click)="openViewInfo(item)" size="small">
+            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="none" routerLink="/view-applicants" size="small">
+            <ion-icon name="people-outline" ></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+      
     </ion-card>
   </div>
 

@@ -37,6 +37,11 @@ const routes: Routes = [
     loadChildren: () => import('./page/sponsor/edit-bursary/edit-bursary.module').then( m => m.EditBursaryPageModule)
   },
   {
+    path: 'edit-bursary/:id',
+    resolve:{ myData: ResolverService },
+    loadChildren: () => import('./page/sponsor/edit-bursary/edit-bursary.module').then( m => m.EditBursaryPageModule)
+  },
+  {
     path: 'view-bursary',
     loadChildren: () => import('./page/sponsor/view-bursary/view-bursary.module').then( m => m.ViewBursaryPageModule)
   },
@@ -46,15 +51,14 @@ const routes: Routes = [
   },
   {
     path: 'view-more-bursary/:id',
-    resolve: {
-      myData: ResolverService
-    },
+    resolve: { myData: ResolverService },
     loadChildren: () => import('./page/sponsor/view-more-bursary/view-more-bursary.module').then( m => m.ViewMoreBursaryPageModule)
   },
   {
     path: 'view-applicants',
     loadChildren: () => import('./page/sponsor/view-applicants/view-applicants.module').then( m => m.ViewApplicantsPageModule)
-  },  {
+  },
+  {
     path: 'add-bursary',
     loadChildren: () => import('./page/sponsor/add-bursary/add-bursary.module').then( m => m.AddBursaryPageModule)
   },

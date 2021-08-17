@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IonNav } from '@ionic/angular';
+//import { IonNav } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-more-bursary',

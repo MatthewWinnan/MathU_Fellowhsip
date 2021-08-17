@@ -83,4 +83,9 @@ export class ViewBursaryPage implements OnInit {
     this.router.navigateByUrl('view-more-bursary/1');
   }
 
+  editBursary(editB){
+    this.dataService.setData(1, editB);
+    this.router.navigateByUrl('edit-bursary/1')
+  }
+
 }
