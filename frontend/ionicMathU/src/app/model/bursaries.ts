@@ -1,4 +1,4 @@
-import { Company } from './Company';
+import { Company } from './company';
 
 export class Bursary {
     bursary_id? : 0;    //created in backend 
@@ -24,7 +24,7 @@ export class Bursary {
     email_address = "";     //compulsary
     bursary_duration = 0;       //compulsary
     isVisible = true;       //mostly true 
-    bursary_status: "Open";     //will be coded
+    bursary_status?: "";     //will be coded
 
     company? : Company;
 

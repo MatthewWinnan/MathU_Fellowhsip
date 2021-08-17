@@ -23,7 +23,7 @@ export class BursaryService {
   }
 
   getAllBursary(data:Company){
-    return this.http.post<Bursary[]>('http://localhost/mathU_backend/math_u_create_bursary.php', data);
+    return this.http.post<Bursary[]>('http://localhost/mathU_backend/math_u_get_bursary.php', data);
     //change file name
   }
 }

@@ -11,8 +11,8 @@
 </ion-header>
 
 <ion-content>
-  <h2 class="ion-text-center">Edit Bursary</h2>
-  <form [formGroup]="editBursary" (ngSubmit)="editBursarySubmit()">
+  <h2 class="ion-text-center">Add Bursary</h2>
+  <form [formGroup]="addBursary" (ngSubmit)="addBursarySubmit()">
     <ion-list>
       <ion-item>
         <ion-label position="floating">Bursary Name</ion-label>
@@ -212,7 +212,7 @@
       </div>
     </ion-list>
     <ion-list class="ion-text-center">
-      <ion-button [disabled]="!editBursary.valid" type="submit" color="">
+      <ion-button [disabled]="!addBursary.valid" type="submit" color="">
         Submit
       </ion-button>
     </ion-list>

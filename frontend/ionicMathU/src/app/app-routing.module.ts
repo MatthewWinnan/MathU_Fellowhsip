@@ -54,7 +54,11 @@ const routes: Routes = [
   {
     path: 'view-applicants',
     loadChildren: () => import('./page/sponsor/view-applicants/view-applicants.module').then( m => m.ViewApplicantsPageModule)
+  },  {
+    path: 'add-bursary',
+    loadChildren: () => import('./page/sponsor/add-bursary/add-bursary.module').then( m => m.AddBursaryPageModule)
   },
+
 
 ];
 

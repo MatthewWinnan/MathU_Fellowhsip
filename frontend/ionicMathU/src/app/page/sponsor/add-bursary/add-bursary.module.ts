@@ -2,17 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 //import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { EditBursaryPageRoutingModule } from './edit-bursary-routing.module';
-import { EditBursaryPage } from './edit-bursary.page';
+
+import { AddBursaryPageRoutingModule } from './add-bursary-routing.module';
+
+import { AddBursaryPage } from './add-bursary.page';
 
 @NgModule({
   imports: [
     CommonModule,
+    //FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    EditBursaryPageRoutingModule
+    AddBursaryPageRoutingModule
   ],
-  declarations: [EditBursaryPage]
+  declarations: [AddBursaryPage]
 })
-export class EditBursaryPageModule {}
+export class AddBursaryPageModule {}

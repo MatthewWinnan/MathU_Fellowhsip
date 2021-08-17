@@ -15,8 +15,8 @@ import { BursaryService } from '../../../service/bursary.service';
 })
 export class ViewBursaryPage implements OnInit {
   //bursary = new Bursary();
-  // jsonData:Bursary[] = [];
-  jsonData:any = [];
+  jsonData:Bursary[] = [];
+  //jsonData:any = [];
   b_status : string = "Open";
   ourCompany = new Company();
 
