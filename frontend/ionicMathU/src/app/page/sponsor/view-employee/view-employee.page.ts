@@ -94,7 +94,7 @@ export class ViewEmployeePage implements OnInit {
         "isSuperAdmin": true,  //if isSuperAdmin is true, then 
         "manageBursaries": true,  //manageBursaries also true
         "manageApplications": true, //manageApplications also true
-        "inactive": false,
+        "inactive": true,
         "isVerified": false,
         "company": this.ourCompany
       },
