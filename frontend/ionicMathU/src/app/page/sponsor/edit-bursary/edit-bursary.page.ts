@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { Bursary } from '../../../model/bursaries';
+import { BursaryService } from '../../../service/bursary.service';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-bursary',
@@ -8,6 +11,8 @@ import { Bursary } from '../../../model/bursaries';
   styleUrls: ['./edit-bursary.page.scss'],
 })
 export class EditBursaryPage implements OnInit {
+  the_message : string = "";
+
   dateToday = new Date().toISOString().substring(0,10);
 
   get bursary_name() {
@@ -141,7 +146,12 @@ export class EditBursaryPage implements OnInit {
 
   bursary = new Bursary() ;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    public toastController: ToastController,
+    private router:Router,
+    public _apiService: BursaryService,
+  ) { }
 
   ngOnInit() {
   }
@@ -170,17 +180,20 @@ export class EditBursaryPage implements OnInit {
     this.bursary.email_address = this.addBursary.value.email_address_bursary;
     this.bursary.bursary_duration = this.addBursary.value.bursary_duration;
     console.log(this.bursary);
-    //console.log(this.addBursary.value.age_group.lower);
-    //console.log(this.addBursary.value.age_group.upper);
-    //console.log(this.addBursary.value.RSA_citizen.detail.checked);
-
-
-    //student_bursary
-    //id    bursary_id    student_id     shortlisted (true or false)     bursary_status 
-    //1       b1           s_1            false                           decline 
-
-
+    
     //send api request 
+    this._apiService.addBursary(this.bursary).subscribe((res:Bursary) => {
+      console.log("REQUEST SUCCESS ===", res);
+      this.the_message = res["message"];
+      this.printMessage();
+      if (this.the_message.substring(0,7) == "Success"){
+        this.router.navigate(['./view-bursary']);
+      }
+    }, (error:any) => {
+      this.the_message = 'error';// error;
+      this.printMessage();
+      console.log("ERROR ===", error);
+    });
   }
 
   _rangeChange(event :any){
@@ -197,5 +210,16 @@ export class EditBursaryPage implements OnInit {
 
   dateChanged(){
     return (this.addBursary.get('closing_date').value.substring(0,10));
+  }
+
+  async printMessage() {
+    const toast = this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: this.the_message
+    });
+
+    (await toast).present();
+    this.the_message = "";
   }
 }
