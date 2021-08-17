@@ -32,7 +32,7 @@
           <li *ngIf="item.manageApplications">Manage Applications</li>
         </ul>
       </ion-item>
-      <ion-toolbar>      
+      <ion-toolbar *ngIf="!item.inactive">
         <ion-button fill="none"  color= "black" slot= "start"  (click)="modifyEmployee()">
           <ion-icon name="brush-outline"  size= "small" ></ion-icon>
         </ion-button>

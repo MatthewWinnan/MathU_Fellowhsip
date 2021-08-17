@@ -22,41 +22,6 @@ export class ViewEmployeePage implements OnInit {
   //for now, creating a dummy Company
   ourCompany = new Company();
 
-  FirstName: string = 'First Name';
-
-  SuperAdminDetails = [{
-    firstName : 'Dan',
-    lastName : 'James',
-    adress : 'Danjames@gmail.com',
-  }]
-
-  EmployeeDetails = [
-    {
-      FirstName : 'Joshua',
-      LastName : 'Akinsola',
-      Adress: 'jakinsola@gmail.com',
-      Rights: 'Manage Bursary/Manage Applications',
-    },
-    {
-      FirstName : 'Matt',
-      LastName : 'Johnson',
-      Adress: 'Matt@gmail.com',
-      Rights: 'Manage Bursary/Manage Applications',
-    },
-    {
-      FirstName : 'Josh',
-      LastName : 'Luus',
-      Adress: 'JoshLu@gmail.com',
-      Rights: 'Manage Bursary/Manage Applications',
-    },
-    {
-      FirstName : 'Raaga',
-      LastName : 'N',
-      Adress: 'Raaga@gmail.com',
-      Rights: 'Manage Bursary/Manage Applications',
-    },
-  ];
-
   today: number = Date.now()
 
   constructor(
