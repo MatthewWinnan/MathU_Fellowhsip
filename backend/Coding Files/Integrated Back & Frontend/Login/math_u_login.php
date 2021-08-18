@@ -10,14 +10,15 @@ include 'math_u_functions.php';
 include_once 'all_classes.php';
 require 'hash_password.php';
 //INPUT MANAGEMENT
+//$input = '{"email_address": "dflorrian@jbsr.com", "password": "dimitri"}';
+
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
-
 //---------------------------------------START MAIN ---------------------------------------------//
 //===========================================================
 $email = $data['email_address'];
 $password = $data['password'];
-
+//echo "INSIDE!";
 //===========================================================
 //query email -> echo error if no match found -> All_Users
 $usrID = QueryAllUsers($email,$mysqli);
@@ -28,8 +29,9 @@ if ($usrID != ""){
 	$tblName = DecodeID($usrID);
 //===========================================================
 //Query Sponsor_Users / Query Students Table to get password
-
+	//echo "INSIDE 2!";
 	if ($tblName == "sponsor_users"){
+		//echo "INSIDE SPONSOR!";
 		$spr = QuerySponsors($email, $mysqli);
 		//Validate $spr not null
 		//===========================================================
@@ -39,47 +41,50 @@ if ($usrID != ""){
 			$flag_bit = 1;
 
             //-----------------Check if sponsor is verified-------------------------
-            $query1 = "SELECT * FROM sponsor_users WHERE Email_address='".$email."'";
+            $query1 = "SELECT * FROM sponsor_users WHERE email_address='".$email."'";
             $result = $mysqli->query($query1); 
             $row1 = $result->fetch_assoc();
             $isVerified = $row1['isVerified'];
             //-----------------------------------------------------------------------
-            $query2 = "SELECT * FROM sponsor_users WHERE Email_address='".$email."'";
+            $query2 = "SELECT * FROM sponsor_users WHERE email_address='".$email."'";
             $result = $mysqli->query($query2); 
             $row2 = $result->fetch_assoc();
             $inactive = $row2['inactive'];
             //-----------------------------------------------------------------------
             if($isVerified == 1){
-                Display($isVerified);
+                //Display($isVerified);
 
-                if($inactive ==1){
-                    Display($results);
+                if($inactive ==0){
+					$results = ComparePasswords($password, $spr->fetch_assoc(), $flag_bit, $mysqli);
+			
+					//===========================================================
+					//Go to Homepage if match found
+					if ($results != null){
+						Display($results);
+					}
+					else{
+						$user = new all_users();
+						$user->message= "Password is Incorrect!";
+						Display($user);
+					}
+                    //Display($results);
                     
                 } else {
                     $user = new all_users();
-                    $user->message= "Account is Inactive";                  
+                    $user->message= "Account is Inactive";  
+					Display($user);
                 }
                 
             } else {
 				$user = new all_users();
 				$user->message= "Account is not Verified";
+				Display($user);
             }
 			
 
             //-----------------------Check if sponsor is verified END--------------------------
 
-			$results = ComparePasswords($password, $spr->fetch_assoc(), $flag_bit, $mysqli);
 			
-			//===========================================================
-			//Go to Homepage if match found
-			if ($results != null){
-				Display($results);
-			}
-			else{
-				$user = new all_users();
-				$user->message= "Password is Incorrect!";
-				Display($user);
-			}
 			
 			//===========================================================
 		}
@@ -93,32 +98,57 @@ if ($usrID != ""){
 		
 	}
 	else{
+		//echo "INSIDE STUDENT!";
 		$std = QueryStudents($email,$mysqli);
 		//Validate $spr not null
 		//===========================================================
-		
+		//-----------------Check if sponsor is verified-------------------------
+		$query1 = "SELECT * FROM student WHERE Email_address='$email'";
+		$result = $mysqli->query($query1); 
+		//echo $mysqli->error;
+		$row1 = $result->fetch_assoc();
+		$isVerified = $row1['Validated'];
+		//-----------------------------------------------------------------------
+		$query2 = "SELECT * FROM student WHERE Email_address='$email'";
+		$result = $mysqli->query($query2); 
+		//echo $mysqli->error;
+		$row2 = $result->fetch_assoc();
+		$banned = $row2['Banned'];
+	
+		//-----------------------------------------------------------------------
 		//Compare Passwords 
 		if ($std->num_rows > 0){
 			$flag_bit = 0;
-			$results = ComparePasswords($password, $std->fetch_assoc(), $flag_bit, $mysqli);
-		
-			//===========================================================
-			//Go to Homepage if match found 
-			if ($results != null){
-				Display($results);
-			}
-			else{
+			//echo "INSIDE 3!";
+			if($isVerified == 1){
+                //Display($isVerified);
+				//echo "INSIDE 4!";
+                if($banned ==0){
+					$results = ComparePasswords($password, $std->fetch_assoc(), $flag_bit, $mysqli);
+			
+					//===========================================================
+					//Go to Homepage if match found
+					if ($results != null){
+						Display($results);
+					}
+					else{
+						$user = new all_users();
+						$user->message= "Password is Incorrect!";
+						Display($user);
+					}
+                    //Display($results);
+                    
+                } else {
+                    $user = new all_users();
+                    $user->message= "Account is banned. Contact Support.";
+					Display($user);					
+                }
+                
+            } else {
 				$user = new all_users();
-				$user->message= "Password is Incorrect!";
+				$user->message= "Account is not Verified";
 				Display($user);
-			}
-			//===========================================================
-		}
-		else{
-			//empty Object
-			$user = new all_users();
-			$user->message= "Password is Incorrect!";
-			Display($user);
+            }
 		}
 	}
 }
@@ -192,6 +222,8 @@ function ComparePasswords($password, $row,int $flag,$mysqli){
 				//create object to send to the frontend
 				$user = new all_users();
 				$user->Sponsor = new sponsor_users($row["id"], $row["first_name_of_user"],$row["last_name_of_user"], $row["email_address"],  $row["company_id"], $row["isSuperAdmin"], $row["manageBursaries"], $row["manageApplications"], $row["inactive"], $row["isVerified"]);
+				
+				$user->Company = GetCompanyClass($row["company_id"], $mysqli);
 				return $user;
 				
 			}
@@ -222,6 +254,17 @@ function ComparePasswords($password, $row,int $flag,$mysqli){
 		return null;
 	}
 	
+}
+
+function GetCompanyClass($comp_id, $mysqli){
+	$sql = "SELECT * FROM company WHERE Company_ID=$comp_id";
+	$result = $mysqli->query($sql);
+	
+	if ($result->num_rows > 0){
+		$row = $result->fetch_assoc();
+		$newCompany = new company($row["company_id"], $row["company_logo"], $row["company_industry"], $row["company_description"], $row["company_URL"], $row["number_of_reports"], $row["company_name"]);
+		return $newCompany;
+	}else return null;
 }
 //===================================================
 //Creating a Session (Void function) 

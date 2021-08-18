@@ -49,7 +49,8 @@ function GetCompanyClass($comp_id, $mysqli){
 	$result = $mysqli->query($sql);
 	
 	if ($result->num_rows > 0){
-		$newCompany = new company($row["company_id"], $row["comapny_logo"], $row["company_industry"], $row["company_description"], $row["company_URL"], $row["number_of_reports"], $row["company_name"]);
+		$row = $result->fetch_assoc();
+		$newCompany = new company($row["company_id"], $row["company_logo"], $row["company_industry"], $row["company_description"], $row["company_URL"], $row["number_of_reports"], $row["company_name"]);
 		return $newCompany;
 	}else return null;
 }
