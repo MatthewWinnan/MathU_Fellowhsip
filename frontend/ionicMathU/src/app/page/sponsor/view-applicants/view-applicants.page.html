@@ -11,15 +11,45 @@
 
 <ion-content>
 
-<ion-card>
+<ion-card *ngFor="let item of Applicants">
 
   <ion-card-header>
-    <ion-card-subtitle>Applicant Name</ion-card-subtitle>
-
-    <ion-card-title>
-      {{applicant_name}}
-    </ion-card-title>
+    <ion-card-subtitle>Applicant </ion-card-subtitle>
+    
+      <ion-item>
+        First Name: {{item.applicant_name}}
+      </ion-item>
+      <br/>
+      <ion-item>
+        Last Name: {{ item.applicant_lastName }}
+      </ion-item> 
+      <br/>
+      <ion-item>
+        Average: {{ item.applicant_average }}
+      </ion-item>
+    
   </ion-card-header>
+
+  <ion-row class ="ion-text-center">
+    <ion-card-content>
+      <ion-button fill="none"  (click)="declineStu()" size = "small" alt="Decline Student">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+
+    <ion-card-content >
+      <ion-button fill="none"  routerLink ="/view-more-applicants"  size = "small" alt="view more applicants">
+        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+      </ion-button>
+   </ion-card-content>
+    
+    <ion-card-content >
+      <ion-button fill="none"  (click)="acceptStu()"  size = "small" alt="Accept Student">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </ion-button>
+   </ion-card-content>
+   
+ </ion-row>
 </ion-card>
 
 </ion-content>

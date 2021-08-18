@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { AcceptStuPage } from '../accept-stu/accept-stu.page';
+import { DeclineStuPage } from '../decline-stu/decline-stu.page';
 
 @Component({
   selector: 'app-view-applicants',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewApplicantsPage implements OnInit {
 
-  constructor() { }
+  constructor(public ModalCtrl: ModalController) { }
 
   ngOnInit() {
   }
@@ -26,6 +29,25 @@ export class ViewApplicantsPage implements OnInit {
     applicant_name: 'Marcus',
     applicant_lastName: 'Rashford',
     applicant_average: '80%'
-  },
-]
+  },]
+
+  
+
+  async declineStu() {
+    const modal = await this.ModalCtrl.create({
+      component : DeclineStuPage
+    })
+
+    return await modal.present()
+    
+  }
+
+  async acceptStu() {
+    const modal = await this.ModalCtrl.create({
+      component : AcceptStuPage
+    })
+
+    return await modal.present()
+  }
+
 }

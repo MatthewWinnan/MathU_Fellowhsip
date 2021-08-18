@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-button fill = "none" slot = "start" (click) = "closeAccept()">
+      <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
+    </ion-button>
+
+    <ion-title>Accept</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card >
+
+    <ion-card-header>
+      <ion-card-subtitle>Applicant </ion-card-subtitle>
+      <ion-card-title>Are you sure you want to add this student to the shortlist</ion-card-title>
+      
+      <ion-card-content >
+        <ion-button   routerLink ="/view-more-applicants"  size = "small" alt="Add">
+          Add
+        </ion-button>
+     </ion-card-content>
+
+    </ion-card-header>
+  
+    
+  </ion-card>
+
+</ion-content>

@@ -46,6 +46,18 @@ const routes: Routes = [
     path: 'view-applicants',
     loadChildren: () => import('./page/sponsor/view-applicants/view-applicants.module').then( m => m.ViewApplicantsPageModule)
   },
+  {
+    path: 'view-more-applicants',
+    loadChildren: () => import('./page/sponsor/view-more-applicants/view-more-applicants.module').then( m => m.ViewMoreApplicantsPageModule)
+  },
+  {
+    path: 'decline-stu',
+    loadChildren: () => import('./page/sponsor/decline-stu/decline-stu.module').then( m => m.DeclineStuPageModule)
+  },
+  {
+    path: 'accept-stu',
+    loadChildren: () => import('./page/sponsor/accept-stu/accept-stu.module').then( m => m.AcceptStuPageModule)
+  },
 
 ];
 
