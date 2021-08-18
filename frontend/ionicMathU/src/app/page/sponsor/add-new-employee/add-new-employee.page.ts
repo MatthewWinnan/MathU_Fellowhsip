@@ -123,18 +123,6 @@ export class AddNewEmployeePage implements OnInit {
     this.sa_test = this.addEmployee.value.super_admin;
     //console.log(this.sa_test);
   }
-  updateBur(event: Event){
-    console.log(this.sa_test);
-    if(this.addEmployee.value.super_admin){
-      this.sa_test = false;
-    }
-    //this.sa_test = this.addEmployee.value.super_admin;
-    //console.log(this.sa_test);
-  }
-  updateApp(event: Event){
-    //this.sa_test = this.addEmployee.value.super_admin;
-    //console.log(this.sa_test);
-  }
 
   // viewEmployees() {
   //   this.router.navigate(['./../view-employee'])

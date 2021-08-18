@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalController, Platform } from '@ionic/angular';
 import { Company } from 'src/app/model/Company';
 import { Sponsor_users } from 'src/app/model/sponsor_users';
+import { DataService } from 'src/app/service/data.service';
 import { AddNewEmployeePage } from '../add-new-employee/add-new-employee.page';
 import { DeactivatePage } from '../deactivate/deactivate.page';
 import { ModifyEmployeeRolePage } from '../modify-employee-role/modify-employee-role.page';
@@ -27,7 +28,8 @@ export class ViewEmployeePage implements OnInit {
   constructor(
     private router: Router, 
     public ModalCtrl: ModalController,
-    private platform: Platform
+    private platform: Platform,
+    private dataService: DataService
   ) { 
     this.platform.ready().then(()=>{
       this.initialiseEmployeeData();
@@ -64,7 +66,20 @@ export class ViewEmployeePage implements OnInit {
         "company": this.ourCompany
       },
       {
-        "sponsor_id": "S0020",
+        "sponsor_id": "S0025",
+        "first_name_of_user": "Apricot",
+        "last_name_of_user": "Peach",
+        "email_address": "apricot@gmail.com",
+        "company_id ": this.ourCompany.company_id,
+        "isSuperAdmin": true,  //if isSuperAdmin is true, then 
+        "manageBursaries": true,  //manageBursaries also true
+        "manageApplications": true, //manageApplications also true
+        "inactive": false,
+        "isVerified": false,
+        "company": this.ourCompany
+      },
+      {
+        "sponsor_id": "S0027",
         "first_name_of_user": "Pear",
         "last_name_of_user": "Green",
         "email_address": "pear@gmail.com",
@@ -77,7 +92,7 @@ export class ViewEmployeePage implements OnInit {
         "company": this.ourCompany
       },
       {
-        "sponsor_id": "S0020",
+        "sponsor_id": "S0029",
         "first_name_of_user": "Cherry",
         "last_name_of_user": "Sour",
         "email_address": "sour@gmail.com",
@@ -90,7 +105,7 @@ export class ViewEmployeePage implements OnInit {
         "company": this.ourCompany
       },
       {
-        "sponsor_id": "S0020",
+        "sponsor_id": "S0030",
         "first_name_of_user": "Plum",
         "last_name_of_user": "Soft",
         "email_address": "plum@gmail.com",
@@ -119,12 +134,9 @@ export class ViewEmployeePage implements OnInit {
     return await modal.present()
   }
  
-  async modifyEmployee() {
-    const modal = await this.ModalCtrl.create({
-      component : ModifyEmployeeRolePage 
-    })
-
-    return await modal.present()
+  modifyEmployee(editEmployeeItem) {
+    this.dataService.setEmployeeData(1, editEmployeeItem);
+    this.router.navigateByUrl('modify-employee-role/1');
   }
 
   async deactivate() {
