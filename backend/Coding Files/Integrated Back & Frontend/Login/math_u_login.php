@@ -37,6 +37,37 @@ if ($usrID != ""){
 		//Compare Passwords 
 		if ($spr->num_rows > 0){
 			$flag_bit = 1;
+
+            //-----------------Check if sponsor is verified-------------------------
+            $query1 = "SELECT * FROM sponsor_users WHERE Email_address='".$email."'";
+            $result = $mysqli->query($query1); 
+            $row1 = $result->fetch_assoc();
+            $isVerified = $row1['isVerified'];
+            //-----------------------------------------------------------------------
+            $query2 = "SELECT * FROM sponsor_users WHERE Email_address='".$email."'";
+            $result = $mysqli->query($query2); 
+            $row2 = $result->fetch_assoc();
+            $inactive = $row2['inactive'];
+            //-----------------------------------------------------------------------
+            if($isVerified == 1){
+                Display($isVerified);
+
+                if($inactive ==1){
+                    Display($results);
+                    
+                } else {
+                    $user = new all_users();
+                    $user->message= "Account is Inactive";                  
+                }
+                
+            } else {
+				$user = new all_users();
+				$user->message= "Account is not Verified";
+            }
+			
+
+            //-----------------------Check if sponsor is verified END--------------------------
+
 			$results = ComparePasswords($password, $spr->fetch_assoc(), $flag_bit, $mysqli);
 			
 			//===========================================================
