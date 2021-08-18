@@ -5,5 +5,5 @@ export class Company {
     comapny_logo? : string;
     company_description? : string;
     company_URL? : string; 
-    number_of_reports = "";
+    number_of_reports = 0;
 }

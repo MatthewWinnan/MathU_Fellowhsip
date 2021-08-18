@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵCompiler_compileModuleAndAllComponentsSync__POST_R3__ } from '@angular/core';
 import { Bursary } from '../../../model/bursaries';
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/service/data.service';
+import { Company } from '../../../model/company';
+import { BursaryService } from '../../../service/bursary.service';
 
 @Component({
   selector: 'app-view-bursary',
@@ -8,78 +12,49 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['./view-bursary.page.scss'],
 })
 export class ViewBursaryPage implements OnInit {
-  //bursary = new Bursary();
-  // jsonData:Bursary[] = [];
-  jsonData:any = [];
-  b_status : string = "Open";
+  isFetching = false;
+  jsonData:Bursary[] = [];
+  jsonData_length = 0;
+  ourCompany = new Company();
 
-  constructor( private platform: Platform) { 
+  fruits:string[] = ["A", "B", "C", "D"];
+
+  constructor(
+    private platform: Platform,
+    public navCtrl:NavController,
+    private router:Router,
+    private dataService: DataService,
+    public _apiService: BursaryService,
+  ) { 
     this.platform.ready().then(()=>{
+      //ourCompany is stored in LocalStorage (when user logs in)
+      this.ourCompany.company_id = 0;
+      this.ourCompany.company_name = "Google";
+      this.ourCompany.company_industry = "IT & Telecommunications";
+      this.ourCompany.comapny_logo = "";
+      this.ourCompany.company_description = "";
+      this.ourCompany.company_URL = "";
       this.initializeJSONData();
     });
-    //this.initializeJSONData();
   }
 
   ngOnInit() {
   }
 
   initializeJSONData() {
-    this.jsonData = [
-      {
-        "bursary_name": "Bursary1",
-        "status": "Closed",
-        "bursary_type": "Full Bursary",
-        "bursary_description" : " looking for student with 65%"
-      },
-      {
-        "bursary_name": "why",
-        "status": "Deactivated",
-        "bursary_type": "Bursary",
-        "bursary_description" : " looking for student with 65%"
-      },
-      {
-        "bursary_name": "123",
-        "status": "Closed",
-        "bursary_type": "Work Back",
-        "bursary_description" : " looking for student with 65%"
-      },
-      {
-        "bursary_name": "ouch",
-        "status": "Closed",
-        "bursary_type": "Bursary",
-        "bursary_description" : " looking for student with 65%"
-      },
-      {
-        "bursary_name": "clap",
-        "status": "Open",
-        "bursary_type": "Partial Bursary",
-        "bursary_description" : " looking for student with 65%"
-      },
-      {
-        "bursary_name": "nop",
-        "status": "Open",
-        "bursary_type": "Partial Bursary",
-        "bursary_description" : " looking for student with 65%"
-      },
-      {
-        "bursary_name": "sga",
-        "status": "Deactivated",
-        "bursary_type": "Bursary",
-        "bursary_description" : " looking for student with 65%"
-      },
-      {
-        "bursary_name": "zyx",
-        "status": "Open",
-        "bursary_type": "Partial Bursary",
-        "bursary_description" : " looking for student with 65%"
-      },
-      {
-        "bursary_name": "abc",
-        "status": "Deactivated",
-        "bursary_type": "Partial Bursary",
-        "bursary_description" : " looking for student with 65%"
+    this.isFetching = true;
+    // all bursaries with company_id that are 
+    this._apiService.getAllBursary(this.ourCompany).subscribe((res:Bursary[]) => {
+      console.log("REQUEST SUCCESS ===", res);
+      this.jsonData = res;
+      if(res!=null){
+        this.jsonData_length = this.jsonData.length;
       }
-    ];
+      this.isFetching = false;
+    }, (error:any) => {
+      console.log("ERROR ===", error);
+      this.jsonData = [];
+    });
   }
 
   filterBursary(ev:any) {
@@ -93,6 +68,24 @@ export class ViewBursaryPage implements OnInit {
         }
       )
     }
+  }
+
+  openDeactivate(){
+    alert("Are you sure?");
+  }
+
+  openViewInfo(viewInfoItem){ //passData
+    //console.log("clicked");
+    //this.navCtrl.navigateForward('./view-more-bursary/view-more-bursary.page');
+    
+    //console.log(viewInfoItem);
+    this.dataService.setData(1, viewInfoItem);
+    this.router.navigateByUrl('view-more-bursary/1');
+  }
+
+  editBursary(editB){
+    this.dataService.setData(1, editB);
+    this.router.navigateByUrl('edit-bursary/1')
   }
 
 }

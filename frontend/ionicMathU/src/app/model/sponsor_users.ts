@@ -1,4 +1,4 @@
-import { Company } from './Company';
+import { Company } from './company';
 
 export class Sponsor_users{
     sponsor_id? = "";

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ResolverService } from './service/resolver.service';
 
 const routes: Routes = [
   {
@@ -30,8 +31,14 @@ const routes: Routes = [
   {
     path: 'student-view-profile',
     loadChildren: () => import('./page/student/student-view-profile/student-view-profile.module').then( m => m.ViewStudentPageModule)
-  },  {
+  },
+  {
     path: 'edit-bursary',
+    loadChildren: () => import('./page/sponsor/edit-bursary/edit-bursary.module').then( m => m.EditBursaryPageModule)
+  },
+  {
+    path: 'edit-bursary/:id',
+    resolve:{ myData: ResolverService },
     loadChildren: () => import('./page/sponsor/edit-bursary/edit-bursary.module').then( m => m.EditBursaryPageModule)
   },
   {
@@ -43,10 +50,16 @@ const routes: Routes = [
     loadChildren: () => import('./page/sponsor/view-more-bursary/view-more-bursary.module').then( m => m.ViewMoreBursaryPageModule)
   },
   {
+    path: 'view-more-bursary/:id',
+    resolve: { myData: ResolverService },
+    loadChildren: () => import('./page/sponsor/view-more-bursary/view-more-bursary.module').then( m => m.ViewMoreBursaryPageModule)
+  },
+  {
     path: 'view-applicants',
     loadChildren: () => import('./page/sponsor/view-applicants/view-applicants.module').then( m => m.ViewApplicantsPageModule)
   },
   {
+
     path: 'view-more-applicants',
     loadChildren: () => import('./page/sponsor/view-more-applicants/view-more-applicants.module').then( m => m.ViewMoreApplicantsPageModule)
   },
@@ -58,8 +71,19 @@ const routes: Routes = [
     path: 'accept-stu',
     loadChildren: () => import('./page/sponsor/accept-stu/accept-stu.module').then( m => m.AcceptStuPageModule)
   },
+{
+    path: 'add-bursary',
+    loadChildren: () => import('./page/sponsor/add-bursary/add-bursary.module').then( m => m.AddBursaryPageModule)
+  },
+  {
+    path: 'edit-bursary',
+    loadChildren: () => import('./page/sponsor/edit-bursary/edit-bursary.module').then( m => m.EditBursaryPageModule)
+  },
+
+
 
 ];
+
 
 @NgModule({
   imports: [

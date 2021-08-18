@@ -4,78 +4,56 @@
     <ion-button slot="start" fill="none">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-button>
-    <ion-button slot="end" routerLink="/edit-bursary" fill="none">
+    <ion-button slot="end" routerLink="/add-bursary" fill="none">
       <ion-icon name="add"></ion-icon> 
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2 class="ion-text-center">View Bursary</h2>
-  <!-- fetch bursaries from database on page load -->
   <ion-list>
-    <!-- <ion-item>
-      <ion-label position="floating">Bursary Status</ion-label>
-      <ion-select (ngModel)="b_status" (ionChange)="filterBursary($event)">
-        <ion-select-option value="Open">Open</ion-select-option>
-        <ion-select-option value="Closed">Closed</ion-select-option>
-        <ion-select-option value="Deactivated">Deactivated</ion-select-option>
-      </ion-select>
-    </ion-item> -->
-
     <ion-item>
       <ion-searchbar placeholder="Bursary Name" (ionInput)="filterBursary($event)"></ion-searchbar>
     </ion-item>
   </ion-list>
 
-  <ion-card *ngFor="let item of jsonData">
-    
-    <ion-card-header>
-      <ion-card-subtitle>{{item.bursary_type}}</ion-card-subtitle>
+  <p class="ion-text-center" *ngIf="isFetching">
+    <ion-spinner name="crescent"></ion-spinner>
+  </p>
 
-      <ion-item>
-        <ion-card-title>{{item.bursary_name}}</ion-card-title>
-      </ion-item>
-
+  <div *ngIf="!isFetching && jsonData_length>=1">
+    <ion-card *ngFor="let item of jsonData">
+      <ion-card-header>
+        <ion-item>
+          <ion-card-title>{{item.bursary_name}}</ion-card-title>
+        </ion-item>
+      </ion-card-header>
       <ion-card-content> 
-       <ion-label> {{item.bursary_description}} </ion-label>
+        Bursary Type: {{item.bursary_type}}
+        <br>
+        <p align="justify">{{item.bursary_description.substr(0,100) + "..."}} </p>
+        <div class="ion-text-center">
+          <ion-button fill="none" (click)="openDeactivate()" size="small" slot="end">
+            <ion-icon name="ban-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="none" (click)="editBursary(item)" size="small">
+            <ion-icon name="pencil-outline" ></ion-icon>
+          </ion-button>
+          <ion-button fill="none" (click)="openViewInfo(item)" size="small">
+            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="none" routerLink="/view-applicants" size="small">
+            <ion-icon name="people-outline" ></ion-icon>
+          </ion-button>
+        </div>
       </ion-card-content>
-
       
+    </ion-card>
+  </div>
 
-      
-        
-     <ion-row center>
-      <ion-card-content>
-        <ion-button fill="none"  (click)="openDeactivate()" size = "small" alt="deactivated">
-          <ion-icon name="ban-outline"></ion-icon>
-        </ion-button>
-      </ion-card-content>
-
-      <ion-card-content >
-        <ion-button fill="none"  routerLink="/view-more-bursary"  size = "small" alt="view-applicants">
-          <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-        </ion-button>
-     </ion-card-content>
-      
-      <ion-card-content >
-        <ion-button fill="none"  routerLink="/view-applicants"  size = "small" alt="view-applicants">
-          <ion-icon name="people-outline" ></ion-icon>
-        </ion-button>
-     </ion-card-content>
-     
-   </ion-row>
-  
-    </ion-card-header>
-    
-  </ion-card>
-  
-  <!-- <ion-list>
-    <ion-item *ngFor="let item of jsonData">
-      <p>
-        {{item.bursary_name}} of status {{item.status}} with {{item.bursary_type}}
-      </p>
-    </ion-item>
-  </ion-list> -->
+  <div class="ion-text-center" *ngIf="!isFetching && jsonData_length<1">
+    No Bursaries posted. <br>
+    Click on the "plus" symbol to post a bursary. 
+  </div>
   
 </ion-content>
