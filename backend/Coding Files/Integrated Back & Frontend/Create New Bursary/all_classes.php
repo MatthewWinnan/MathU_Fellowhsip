@@ -111,9 +111,10 @@ class bursary{
 	public $shortlist_date;//=
 	public $isVisible;//=
 	public $bursary_description;//=
-	public $bursary_covers = array();
+	public $bursary_covers = [];
 	
 	public company $Company;
+	public $Applicants = [];
 	
 	public function __construct($company_id, $bursary_name, $bursary_type, $WB_duration, $closing_date, $min_age, $max_age, $academic_level, $study_field, $minimum_year_required, $bursary_duration, $min_average, $RSA_citizen, $financial_need,
 	 $study_further, $disability, $province, $email_address, $shortlist_date, $isVisible, $bursary_description){
@@ -124,7 +125,7 @@ class bursary{
 		 $this->closing_date = $closing_date;
 		 $this->min_age = $min_age;
 		 $this->max_age = $max_age;
-		 $this->academic_level = $acad_level;
+		 $this->academic_level = $academic_level;
 		 $this->study_field = $study_field;
 		 $this->minimum_year_required = $minimum_year_required;
 		 $this->bursary_duration = $bursary_duration;

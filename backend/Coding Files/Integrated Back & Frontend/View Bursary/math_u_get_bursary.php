@@ -13,7 +13,7 @@ include 'all_classes.php';
 	"number_of_reports": 0
 }';*/
 
-
+//$input ='{"company_id":1}';
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
@@ -35,7 +35,8 @@ function GetBursaries($comp_id, $mysqli){
 			$newBursary->bursary_id = $row["Bursary_ID"];
 			//add to the array
 			
-			$newBursary->bursary_covers = GetBursaryCovers($row["Bursary_ID"], $msqli);
+			$newBursary->bursary_covers = GetBursaryCovers($row["Bursary_ID"], $mysqli);
+			$newBursary->Applicants = GetApplicants($row["Bursary_ID"], $mysqli);
 			//add to the array
 			$list[$counter]= $newBursary;
 			$counter = $counter+1;
@@ -72,5 +73,36 @@ function GetBursaryCovers($bursary_id, $mysqli){
 		
 	}else return null;
 	
+}
+
+//=================================================
+function GetApplicants($bursary_id, $mysqli){
+	$sql = "SELECT * FROM student_bursaries WHERE Bursary_ID=$bursary_id";
+	$result = $mysqli->query($sql);
+	
+	$student = [];
+	$counter = 0;
+	
+	if ($result->num_rows > 0){
+		while($row = $result->fetch_assoc()){
+			$student[$counter]=getStudent($row["Student_ID"], $mysqli);
+			$counter = $counter+1;
+		}
+		return $student;
+		
+	}else return null;
+}
+
+function getStudent($student_id, $mysqli){
+	$sql = "SELECT * FROM student WHERE ID=$student_id";
+	$result = $mysqli->query($sql);
+	
+	if ($result->num_rows > 0){
+		$row = $result->fetch_assoc();
+	
+		$user = new student($row["ID"], $row["First_name"], $row["Last_name"], $row["Date_of_birth"], $row["Email_address"], $row["Validated"], $row["Nationality"], $row["Contact_number"], $row["City"], $row["Province"], $row["Disability"], $row["Current_academic_level"], $row["Grade"], $row["Syllabus"], $row["Average"], $row["Currently_studying"], $row["Year_of_study"], $row["Study_institution"], $row["Continue_studies"], $row["GPA"], $row["Description_of_student"], $row["Bursarred"], $row["Current_bursaries"], $row["Workback"], $row["Website"], $row["Number_of_reports"],$row["Banned"]);
+		return $user;
+	}
+	else return null;
 }
 ?>
