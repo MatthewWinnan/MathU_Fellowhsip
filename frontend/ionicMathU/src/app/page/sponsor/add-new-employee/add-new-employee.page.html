@@ -1,63 +1,70 @@
 <ion-header>
   <ion-toolbar>
-
     <ion-button fill = "none" slot = "start" (click)= "closeAdd()">
-      
-        <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
-      
+      <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
     </ion-button>
-
-    <ion-title>New Employee</ion-title>
-
-    
+    <ion-title>Add a New Employee</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
- 
-<ion-card-header>
-  <ion-card-subtitle></ion-card-subtitle>
-  <ion-card-title></ion-card-title>
+<ion-content> 
   
-  <ion-item> 
-    <ion-input placeholder="First Name"></ion-input> 
-  </ion-item> 
+  <form [formGroup]="addEmployee" (ngSubmit)="addEmployeeSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input formControlName="first_name" autocapitalize inputmode="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.first_name">
+        <ng-container *ngIf="first_name.hasError(error.type) && (first_name.dirty || first_name.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
 
-  <br/>
+      <ion-item>
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input formControlName="last_name" autocapitalize inputmode="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.last_name">
+        <ng-container *ngIf="last_name.hasError(error.type) && (last_name.dirty || last_name.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
 
-  <ion-item> 
-    <ion-input placeholder="Last Name"></ion-input> 
-  </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email Address</ion-label>
+        <ion-input formControlName="email_address" autocapitalize inputmode="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.email_address">
+        <ng-container *ngIf="email_address.hasError(error.type) && (email_address.dirty || email_address.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
 
-  <br/>
+      <ion-item>
+        <ion-label>Super Admin</ion-label>
+        <ion-checkbox formControlName="super_admin" 
+          [(checked)]="sa_test" 
+          (ionChange)="updateSuper($event)"
+        color="dark"
+        ></ion-checkbox>
+      </ion-item>
 
-  <ion-item> 
-    <ion-input placeholder="Employee Email Adress"></ion-input> 
-  </ion-item>
+      <ion-item *ngIf="!sa_test">
+        <ion-label>Manage Bursaries</ion-label>
+        <ion-checkbox formControlName="manage_bursary" [(checked)]="sa_test" color="dark"></ion-checkbox>
+      </ion-item>
 
-  <br/>
+      <ion-item *ngIf="!sa_test">
+        <ion-label>Manage Applications</ion-label>
+        <ion-checkbox formControlName="manage_applications" [(checked)]="sa_test" color="dark"></ion-checkbox>
+      </ion-item>
+    </ion-list>
 
-  <ion-item>
-    <ion-label> Bursaries Manager</ion-label>
-  <ion-checkbox checked = 'false'></ion-checkbox>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Form Manager</ion-label>
-  <ion-checkbox checked = 'false'></ion-checkbox>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Super Admin</ion-label>
-  <ion-checkbox checked = 'false'></ion-checkbox>
-  </ion-item>
-
-  <br/>
-  <div class='ion-text-center'>
-  <ion-button  (click)="Addmember()">Add</ion-button>
-  </div>
-
-</ion-card-header>
-
+    <ion-list class="ion-text-center">
+      <ion-button [disabled]="!addEmployee.valid" type="submit" color="">
+        Submit
+      </ion-button>
+    </ion-list>
+  </form>
 </ion-content>
