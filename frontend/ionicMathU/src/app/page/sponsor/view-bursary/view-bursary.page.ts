@@ -16,9 +16,7 @@ export class ViewBursaryPage implements OnInit {
   jsonData:Bursary[] = [];
   jsonData_length = 0;
   ourCompany = new Company();
-
-  fruits:string[] = ["A", "B", "C", "D"];
-
+  
   constructor(
     private platform: Platform,
     public navCtrl:NavController,

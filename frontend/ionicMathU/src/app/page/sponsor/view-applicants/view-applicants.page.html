@@ -1,55 +1,40 @@
 <ion-header>
   <ion-toolbar>
-
-    <ion-button fill = "none" slot = "start" routerLink="/view-bursary">
+    <ion-button fill="none" slot="start" routerLink="/view-bursary">
       <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
     </ion-button>
-
     <ion-title>Applicants</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card *ngFor="let item of applicantsData">
+    <ion-card-header>
+      <ion-card-subtitle>Applicant </ion-card-subtitle>
+        <ion-item>
+          {{item.first_name}}  {{ item.last_name }}
+        </ion-item>
+        <br/>
+        <ion-item>
+          Currently in {{item.current_academic_level}}
+          <!-- Average: {{ item.applicant_average }} -->
+        </ion-item>
+    </ion-card-header>
 
-<ion-card *ngFor="let item of Applicants">
-
-  <ion-card-header>
-    <ion-card-subtitle>Applicant </ion-card-subtitle>
-    
-      <ion-item>
-        First Name: {{item.applicant_name}}
-      </ion-item>
-      <br/>
-      <ion-item>
-        Last Name: {{ item.applicant_lastName }}
-      </ion-item> 
-      <br/>
-      <ion-item>
-        Average: {{ item.applicant_average }}
-      </ion-item>
-    
-  </ion-card-header>
-
-  <ion-row class ="ion-text-center">
-    <ion-card-content>
+    <div class="ion-text-center">
       <ion-button fill="none"  (click)="declineStu()" size = "small" alt="Decline Student">
         <ion-icon name="close-circle-outline"></ion-icon>
       </ion-button>
-    </ion-card-content>
 
-    <ion-card-content >
-      <ion-button fill="none"  routerLink ="/view-more-applicants"  size = "small" alt="view more applicants">
+      <!-- <ion-button fill="none"  routerLink ="/view-more-applicants"  size = "small" alt="view more applicants"> -->
+      <ion-button fill="none" (click)="openViewInfo(item)" size="small">
         <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
       </ion-button>
-   </ion-card-content>
     
-    <ion-card-content >
       <ion-button fill="none"  (click)="acceptStu()"  size = "small" alt="Accept Student">
         <ion-icon name="checkmark-circle-outline"></ion-icon>
       </ion-button>
-   </ion-card-content>
-   
- </ion-row>
-</ion-card>
+    </div>
+  </ion-card>
 
 </ion-content>
