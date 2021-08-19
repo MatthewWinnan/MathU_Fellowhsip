@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
-import { AcceptStuPage } from '../accept-stu/accept-stu.page';
-import { DeclineStuPage } from '../decline-stu/decline-stu.page';
 import { student_users } from '../../../model/student_users';
 import { Company } from 'src/app/model/company';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-applicants',
@@ -15,12 +14,13 @@ import { DataService } from 'src/app/service/data.service';
 export class ViewApplicantsPage implements OnInit {
   applicantsData:student_users[] = [];
   ourCompany = new Company();
-
+  status: string = '';
   constructor(
     public ModalCtrl: ModalController,
     private platform: Platform,
     private router:Router,
     private dataService: DataService,
+    private alert: AlertController,
   ) { 
     this.platform.ready().then(()=>{
       //ourCompany is stored in LocalStorage (when user logs in)
@@ -141,22 +141,65 @@ export class ViewApplicantsPage implements OnInit {
     ]
   }
 
-  async declineStu() {
-    const modal = await this.ModalCtrl.create({
-      component : DeclineStuPage
-    })
+  // async declineStu() {
+  //   const modal = await this.ModalCtrl.create({
+  //     component : DeclineStuPage
+  //   })
 
-    return await modal.present()
+  //   return await modal.present()
     
-  }
+  // }
 
-  async acceptStu() {
-    const modal = await this.ModalCtrl.create({
-      component : AcceptStuPage
+  // async acceptStu() {
+  //   const modal = await this.ModalCtrl.create({
+  //     component : AcceptStuPage
+  //   })
+
+  //   return await modal.present()
+  // }
+
+  acceptDialogue() {
+    this.alert.create({
+      header: "Confirmation!",
+      subHeader: "Are you sure you would like to accept this student into the shortlist?",
+      buttons:[{
+        text: "Accept",
+        handler:(data) => {
+          this.status = 'Confirmed!'
+        } 
+    },
+    { 
+      text: "Cancel",
+      handler: (data) => {
+        this.status = "Cancelled!"
+      }
+    }]
+    }).then((confirmElement) => {
+      confirmElement.present()
     })
-
-    return await modal.present()
   }
+
+  declineDialogue() {
+    this.alert.create({
+      header: "Decline!",
+      subHeader: "Are you sure you would like to decline this student?",
+      buttons:[{
+        text: "Decline",
+        handler:(data) => {
+          this.status = 'Declined!'
+        } 
+    },
+    { 
+      text: "Cancel",
+      handler: (data) => {
+        this.status = "Cancelled!"
+      }
+    }]
+    }).then((confirmElement) => {
+      confirmElement.present()
+    })
+  }
+
 
   openViewInfo(applicantItem){
     this.dataService.setData(1, applicantItem);
