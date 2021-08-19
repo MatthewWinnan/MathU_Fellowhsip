@@ -7,6 +7,7 @@ import { Sponsor_users } from 'src/app/model/sponsor_users';
 import { Company } from 'src/app/model/Company';
 
 
+
 @Component({
   selector: 'app-add-new-employee',
   templateUrl: './add-new-employee.page.html',
@@ -17,6 +18,8 @@ export class AddNewEmployeePage implements OnInit {
   ourCompany = new Company();
 
   sa_test = false;
+
+
 
   get first_name() {
     return this.addEmployee.get('first_name');
@@ -146,5 +149,9 @@ export class AddNewEmployeePage implements OnInit {
     (await toast).present();
     this.the_message = "";
   }
+
+  
+
+
 
 }

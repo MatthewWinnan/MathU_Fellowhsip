@@ -5,8 +5,8 @@ import { Company } from 'src/app/model/Company';
 import { Sponsor_users } from 'src/app/model/sponsor_users';
 import { DataService } from 'src/app/service/data.service';
 import { AddNewEmployeePage } from '../add-new-employee/add-new-employee.page';
-import { DeactivatePage } from '../deactivate/deactivate.page';
 import { ModifyEmployeeRolePage } from '../modify-employee-role/modify-employee-role.page';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -25,11 +25,13 @@ export class ViewEmployeePage implements OnInit {
 
   today: number = Date.now()
 
+  status: string ='';
   constructor(
     private router: Router, 
     public ModalCtrl: ModalController,
     private platform: Platform,
-    private dataService: DataService
+    private dataService: DataService,
+    private alert : AlertController,
   ) { 
     this.platform.ready().then(()=>{
       this.initialiseEmployeeData();
@@ -139,12 +141,34 @@ export class ViewEmployeePage implements OnInit {
     this.router.navigateByUrl('modify-employee-role/1');
   }
 
-  async deactivate() {
-    const modal = await this.ModalCtrl.create({
-      component : DeactivatePage 
-    })
+  // async deactivate() {
+  //   const modal = await this.ModalCtrl.create({
+  //     component : DeactivatePage 
+  //   })
 
-    return await modal.present()
+  //   return await modal.present()
+  // }
+
+
+  deactivate() {
+    this.alert.create({
+      header: "Confirmation!",
+      subHeader: "Are you sure you would like to Deactivate this employee account?",
+      buttons:[{
+        text: "Deactivate",
+        handler:(data) => {
+          this.status = 'Confirmed!'
+        } 
+    },
+    { 
+      text: "Cancel",
+      handler: (data) => {
+        this.status = "Cancelled!"
+      }
+    }]
+    }).then((confirmElement) => {
+      confirmElement.present()
+    })
   }
 
 }
