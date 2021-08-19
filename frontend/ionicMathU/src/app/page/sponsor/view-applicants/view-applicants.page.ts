@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { student_users } from '../../../model/student_users';
-import { Company } from 'src/app/model/company';
+import { Company } from '../../../model/company';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/service/data.service';
+import { DataService } from '../../../service/data.service';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -44,7 +44,7 @@ export class ViewApplicantsPage implements OnInit {
         student_id: "U0001",
         first_name: "Jadon",
         last_name: "Sancho",
-        date_of_birth: "03-03-2010",
+        date_of_birth: "03-03-2005",
         email_address: "jadon@gmail.com",
         nationality: false,
         contact_number: "+27 80 783 7823",
@@ -60,7 +60,7 @@ export class ViewApplicantsPage implements OnInit {
         study_institution: "",  //for not High Schoool
         continue_studies: false, //for not High Schoool
         gpa: 0.0, //for not High Schoool
-        description_of_student: "I am a very hard-working child",
+        description_of_student: "I am a very hard-working learner",
         bursarred: false,
         current_bursaries: "", //only if bursarred is true
         workback: 2,
@@ -72,11 +72,11 @@ export class ViewApplicantsPage implements OnInit {
           },
           {
             subject_name: "Maths",
-            marks: 90.0
+            marks: 75.0
           },
           {
             subject_name: "Afrikaans",
-            marks: 90.0
+            marks: 85.0
           },
           {
             subject_name: "Life Orientation",
@@ -88,11 +88,11 @@ export class ViewApplicantsPage implements OnInit {
         student_id: "U0002",
         first_name: "Daniel",
         last_name: "James",
-        date_of_birth: "03-03-1998",
+        date_of_birth: "03-03-1999",
         email_address: "daniel@gmail.com",
         nationality: false,
         contact_number: "+27 80 783 0000",
-        city: "Unknown",
+        city: "Johannesburg",
         province: "Free State",
         disability: false,
         current_academic_level: "Undergraduate",
@@ -100,11 +100,11 @@ export class ViewApplicantsPage implements OnInit {
         syllabus: "",  //for high school
         average: 0.0, //for high school
         currently_studying: "Civil Engineering",  //for not High Schoool
-        year_of_study: "Year 1",  //for not High Schoool
-        study_institution: "TUKS",  //for not High Schoool
+        year_of_study: "Year 3",  //for not High Schoool
+        study_institution: "University of Pretoria",  //for not High Schoool
         continue_studies: false, //for not High Schoool
-        gpa: 90.0, //for not High Schoool
-        description_of_student: "I am a very hard-working child",
+        gpa: 75.0, //for not High Schoool
+        description_of_student: "I am an ambitious learner",
         bursarred: false,
         current_bursaries: "", //only if bursarred is true
         workback: 2,
@@ -115,7 +115,7 @@ export class ViewApplicantsPage implements OnInit {
         student_id: "U0010",
         first_name: "Marcus",
         last_name: "Rashford",
-        date_of_birth: "03-03-1987",
+        date_of_birth: "03-03-1994",
         email_address: "marcus.rashford@gmail.com",
         nationality: false,
         contact_number: "+27 80 783 8000",
@@ -131,7 +131,7 @@ export class ViewApplicantsPage implements OnInit {
         study_institution: "UJ",  //for not High Schoool
         continue_studies: false, //for not High Schoool
         gpa: 70.0, //for not High Schoool
-        description_of_student: "I am a very hard-working child",
+        description_of_student: "I am a inquisitive learner",
         bursarred: false,
         current_bursaries: "", //only if bursarred is true
         workback: 2,
