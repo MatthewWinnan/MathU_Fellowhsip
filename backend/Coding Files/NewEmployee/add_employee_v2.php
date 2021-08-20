@@ -35,10 +35,10 @@ function runProgram(){
     }
 
   } else {
-    $EmployeeExists = new Exists();
-    $EmployeeExists->message = "Employee already exists";
+    $EmployeeExist = new Exist();
+    $EmployeeExist->message = "Employee already exists";
 
-    return json_encode($EmployeeExists);
+    return json_encode($EmployeeExist);
   }
 }
 
@@ -140,7 +140,7 @@ function isEmployeeExists(){
 
   $dup = $mysqli->query("SELECT * FROM `sponsor_users` WHERE `email_address` = '$email'");
   if(mysqli_num_rows($dup)==0){
-    return true;                   //Fetches all the company employees for the 'view employees' page that pops up
+    return true;
   } else {
   // echo "Employee already exists";
   // $EmployeeExists() = new Exists();
@@ -153,7 +153,7 @@ function isEmployeeExists(){
 //==============================================================================
 //==============================================================================
 
-function sendEmail(){ //===================================================================={{{{{{{{{{{[[[{{{{[[SHOULD BE MODIFIED TO SEND EMAILS FROM AN ONLINE SERVER]]}}}}]]]}}}}}}}}}}}
+function sendEmail(){ //=========={{{{{{{{{{{[[[{{{{[[SHOULD BE MODIFIED TO SEND EMAILS FROM AN ONLINE SERVER]]}}}}]]]}}}}}}}}}}}
 
   $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows');
 
