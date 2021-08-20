@@ -36,7 +36,7 @@ function runProgram(){
 
   } else {
     $EmployeeExists = new Exists();
-    $EmployeeExist->message = "Employee already exists";
+    $EmployeeExists->message = "Employee already exists";
 
     return json_encode($EmployeeExists);
   }
