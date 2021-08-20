@@ -35,10 +35,10 @@ function runProgram(){
     }
 
   } else {
-    $EmployeeExist = new Exist();
-    $EmployeeExist->message = "Employee already exists";
+    $employeeExists = new Exists();
+    $employeeExists->message = "Employee already exists";
 
-    return json_encode($EmployeeExist);
+    return json_encode($employeeExists);
   }
 }
 
