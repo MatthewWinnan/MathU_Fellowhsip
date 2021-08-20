@@ -14,7 +14,7 @@ import { AlertController } from '@ionic/angular';
 export class ViewApplicantsPage implements OnInit {
   applicantsData:student_users[] = [];
   ourCompany = new Company();
-  status: string = '';
+  //status: string = '';
   constructor(
     public ModalCtrl: ModalController,
     private platform: Platform,
@@ -168,23 +168,6 @@ export class ViewApplicantsPage implements OnInit {
     ]
   }
 
-  // async declineStu() {
-  //   const modal = await this.ModalCtrl.create({
-  //     component : DeclineStuPage
-  //   })
-
-  //   return await modal.present()
-    
-  // }
-
-  // async acceptStu() {
-  //   const modal = await this.ModalCtrl.create({
-  //     component : AcceptStuPage
-  //   })
-
-  //   return await modal.present()
-  // }
-
   acceptDialogue(acceptItem) {
     console.log(acceptItem);
     this.alert.create({
@@ -194,7 +177,7 @@ export class ViewApplicantsPage implements OnInit {
       buttons:[{
         text: "Accept",
         handler:(data) => {
-          this.status = 'Confirmed!'
+          //this.status = 'Confirmed!'
           console.log(acceptItem.first_name + " " + acceptItem.last_name + " has been accepted to " 
           + "Bursary xyz");
         } 
@@ -202,7 +185,7 @@ export class ViewApplicantsPage implements OnInit {
     { 
       text: "Cancel",
       handler: (data) => {
-        this.status = "Cancelled!"
+        //this.status = "Cancelled!"
       }
     }]
     }).then((confirmElement) => {
@@ -219,7 +202,7 @@ export class ViewApplicantsPage implements OnInit {
       buttons:[{
         text: "Decline",
         handler:(data) => {
-          this.status = 'Declined!'
+          //this.status = 'Declined!'
           console.log(acceptItem.first_name + " " + acceptItem.last_name + " has been declined to " 
           + "Bursary xyz");
         } 
@@ -227,7 +210,8 @@ export class ViewApplicantsPage implements OnInit {
     { 
       text: "Cancel",
       handler: (data) => {
-        this.status = "Cancelled!"
+        //this.status = "Cancelled!"
+
       }
     }]
     }).then((confirmElement) => {
