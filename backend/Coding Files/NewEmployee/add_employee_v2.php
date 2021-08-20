@@ -74,9 +74,6 @@ function addNewEmployee(){ //Adds new employee to the database and sends email.
   // $input = file_get_contents('php://input');
   // $data = json_decode($input, true);
 
-
-  $role = $data['role_of_employee'];
-
   $sponsor_id = ucfirst($data['sponsor_id']);
   $first_name = $data['first_name_of_user'];
   $last_name = $data['last_name_of_user'];
