@@ -41,6 +41,33 @@ export class ViewApplicantsPage implements OnInit {
     // all applicants who applied for a certain bursary
     this.applicantsData = [
       {
+        student_id: "U0100",
+        first_name: "Newbie",
+        last_name: "Newest",
+        date_of_birth: "03-03-1994",
+        email_address: "marcus.rashford@gmail.com",
+        nationality: null,
+        contact_number: "",
+        city: "",
+        province: "",
+        disability: null,
+        current_academic_level: "",
+        grade: 0.0, //for high school
+        syllabus: "",  //for high school
+        average: 0.0, //for high school
+        currently_studying: "",  //for not High Schoool
+        year_of_study: "",  //for not High Schoool
+        study_institution: "",  //for not High Schoool
+        continue_studies: null, //for not High Schoool
+        gpa: 0.0, //for not High Schoool
+        description_of_student: "",
+        bursarred: null,
+        current_bursaries: "", //only if bursarred is true
+        workback: 0,
+        website: "",
+        marks: []
+      },
+      {
         student_id: "U0001",
         first_name: "Jadon",
         last_name: "Sancho",
@@ -158,14 +185,18 @@ export class ViewApplicantsPage implements OnInit {
   //   return await modal.present()
   // }
 
-  acceptDialogue() {
+  acceptDialogue(acceptItem) {
+    console.log(acceptItem);
     this.alert.create({
       header: "Confirmation!",
-      subHeader: "Are you sure you would like to accept this student into the shortlist?",
+      subHeader: "Are you sure you would like to accept " + acceptItem.first_name + " " + 
+        acceptItem.last_name + " into the shortlist for " + "Bursary xyz" + "?",
       buttons:[{
         text: "Accept",
         handler:(data) => {
           this.status = 'Confirmed!'
+          console.log(acceptItem.first_name + " " + acceptItem.last_name + " has been accepted to " 
+          + "Bursary xyz");
         } 
     },
     { 
@@ -179,14 +210,18 @@ export class ViewApplicantsPage implements OnInit {
     })
   }
 
-  declineDialogue() {
+  declineDialogue(acceptItem) {
+    console.log(acceptItem);
     this.alert.create({
       header: "Decline!",
-      subHeader: "Are you sure you would like to decline this student?",
+      subHeader: "Are you sure you would like to decline " + acceptItem.first_name + " " + 
+        acceptItem.last_name + " into the shortlist for the bursary " + "Bursary xyz" + "?",
       buttons:[{
         text: "Decline",
         handler:(data) => {
           this.status = 'Declined!'
+          console.log(acceptItem.first_name + " " + acceptItem.last_name + " has been declined to " 
+          + "Bursary xyz");
         } 
     },
     { 

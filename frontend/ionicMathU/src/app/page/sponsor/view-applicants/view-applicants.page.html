@@ -22,16 +22,13 @@
     </ion-card-header>
 
     <div class="ion-text-center">
-      <ion-button fill="none"  (click)="declineDialogue()" size = "small" alt="Decline Student">
+      <ion-button fill="none"  (click)="declineDialogue(item)" size = "small">
         <ion-icon name="close-circle-outline"></ion-icon>
       </ion-button>
-
-      <!-- <ion-button fill="none"  routerLink ="/view-more-applicants"  size = "small" alt="view more applicants"> -->
       <ion-button fill="none" (click)="openViewInfo(item)" size="small">
         <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
       </ion-button>
-    
-      <ion-button fill="none"  (click)="acceptDialogue()"  size = "small" alt="Accept Student">
+      <ion-button fill="none"  (click)="acceptDialogue(item)"  size = "small" alt="Accept Student">
         <ion-icon name="checkmark-circle-outline"></ion-icon>
       </ion-button>
     </div>

@@ -5,33 +5,40 @@
       <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
     </ion-button>
 
-    <ion-title>Student Information</ion-title>
+    <ion-title>Information of {{data.first_name}} {{data.last_name}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item>Date of Birth : {{ data.date_of_birth }} --> display age</ion-item>
+  <ion-item>
+    Email address : {{ data.email_address }} --> only display if student accepted
+  </ion-item>
+  <ion-item *ngIf="data.nationality">
+    RSA citizen	
+  </ion-item>
+  <ion-item>Contact number : {{ data.contact_number }}</ion-item>
 
-  <ion-item>First Name : {{ first_name }}</ion-item>
-  <ion-item>Last Name : {{ last_name }}</ion-item>
-  <ion-item>Date of Birth : {{ DOB }}</ion-item>
-  <ion-item>Email address : {{ email_adress }}</ion-item>
-  <ion-item>Nationality	: {{ nationality }}</ion-item>
-  <ion-item>Contact number : {{ contact_number }}</ion-item>
-  <ion-item>City : {{ city }}</ion-item>
-  <ion-item>Province : {{ province }}</ion-item>
-  <ion-item>Disability : {{ disability }}</ion-item>
-  <ion-item>Current Academic Level : {{ CAL }}</ion-item>
-  <ion-item>Grade : {{ grade }}</ion-item>
-  <ion-item>Syllabus : {{ syllabus }}</ion-item>
-  <ion-item>Average	: {{ average }}</ion-item>
-  <ion-item>Study Further? : {{ study_further }}</ion-item>
-  <ion-item>Year of Study	: {{ year_of_study }}</ion-item>
-  <ion-item>Study Institution :	{{ study_institution }}</ion-item>
-  <ion-item>Continue Studies	: {{ continue_studies }}</ion-item>
-  <ion-item>Description of Student:  {{ desc_of_student}}</ion-item>
-  <ion-item>Registered Date	: {{ reg_date }}</ion-item>
-  <ion-item>Bursarred	: {{ bursarred }}</ion-item>
-  <ion-item>Workback? : {{ workback }}</ion-item>
+  <ion-item>
+    Address: --> display address
+  </ion-item>
+  <ion-item>City : {{ data.city }}</ion-item>
+  <ion-item>Province : {{ data.province }}</ion-item>
+  
+  <ion-item *ngIf="data.disability">Disability : {{ data.disability }}</ion-item>
+  
+  <ion-item>Current Academic Level : {{ data.CAL }}</ion-item>
+  <ion-item>Grade : {{ data.grade }}</ion-item>
+  <ion-item>Syllabus : {{ data.syllabus }}</ion-item>
+  <ion-item>Average	: {{ data.average }}</ion-item>
+  <ion-item>Study Further : {{ data.study_further }}</ion-item>
+  <ion-item>Year of Study	: {{ data.year_of_study }}</ion-item>
+  <ion-item>Study Institution :	{{ data.study_institution }}</ion-item>
+  <ion-item>Continue Studies	: {{ data.continue_studies }}</ion-item>
+  <ion-item>Description of Student:  {{ data.desc_of_student}}</ion-item>
+  <ion-item>Registered Date	: {{ data.reg_date }}</ion-item>
+  <ion-item>Bursarred	: {{ data.bursarred }}</ion-item>
+  <ion-item>Workback : {{ data.workback }}</ion-item>
   
 
   <ion-item></ion-item>
