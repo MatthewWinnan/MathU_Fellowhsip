@@ -102,8 +102,13 @@ export class LoginPage implements OnInit {
           this.user.sponsor_users.inactive = res["Sponsor"]["inactive"];
           this.user.sponsor_users.isVerified = res["Sponsor"]["isVerified"];
           this.user.sponsor_users.company = new Company();
-          this.user.sponsor_users.company.company_id = res["Sponsor"]["company_id"]
-          //do for rest
+          //this.user.sponsor_users.company.company_id = res["Sponsor"]["company_id"];
+          this.user.sponsor_users.company.company_id = res["Company"]["company_id"];
+          this.user.sponsor_users.company.company_name = res["Company"]["company_name"];
+          this.user.sponsor_users.company.company_industry = res["Company"]["company_industry"];
+          this.user.sponsor_users.company.company_description = res["Company"]["company_description"];
+          this.user.sponsor_users.company.company_logo = res["Company"]["company_logo"];
+          this.user.sponsor_users.company.number_of_reports = res["Company"]["number_of_reports"];
 
           if (res["Sponsor"]["isSuperAmin"]){    //fix spelling error
             this.user.role = 'SuperAdmin';

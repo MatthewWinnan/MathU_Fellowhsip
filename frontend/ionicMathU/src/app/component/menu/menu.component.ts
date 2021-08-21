@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit {
   getcompanyName(){
     this.storage.get('name').then( (val) => { 
       if (val["sponsor_users"]){
-        this.companyName = val["sponsor_users"]["company_id"];
+        this.companyName = val["sponsor_users"]["company"]["company_name"];
         //val["Sponsor"]["company"]["company_name"]; //replace later
       }
       
