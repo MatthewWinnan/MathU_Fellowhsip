@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, Platform } from '@ionic/angular';
-import { Company } from 'src/app/model/Company';
+import { Company } from '../../../model/company';
 import { Sponsor_users } from 'src/app/model/sponsor_users';
 import { DataService } from 'src/app/service/data.service';
 import { AddNewEmployeePage } from '../add-new-employee/add-new-employee.page';
-import { ModifyEmployeeRolePage } from '../modify-employee-role/modify-employee-role.page';
+//import { ModifyEmployeeRolePage } from '../modify-employee-role/modify-employee-role.page';
 import { AlertController } from '@ionic/angular';
 
 
@@ -39,7 +39,7 @@ export class ViewEmployeePage implements OnInit {
     this.ourCompany.company_id = 1;
     this.ourCompany.company_name = "Google";
     this.ourCompany.company_industry = "Logal";
-    this.ourCompany.comapny_logo = "";
+    this.ourCompany.company_logo = "";
     this.ourCompany.company_description = "";
     this.ourCompany.company_URL = "";
     this.ourCompany.number_of_reports = 0;

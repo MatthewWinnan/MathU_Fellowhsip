@@ -204,7 +204,7 @@ export class RegisterPage implements OnInit {
           this.router.navigate(['./login']);
         }
       }, (error:any) => {
-        this.the_message = 'error';// error;
+        this.the_message = error.statusText;
         this.printMessage();
         console.log("ERROR ===", error);
       });

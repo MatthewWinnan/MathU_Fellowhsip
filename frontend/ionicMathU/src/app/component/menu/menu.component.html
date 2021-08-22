@@ -37,7 +37,7 @@
 
 
       <ion-menu-toggle *ngIf="userType == 'SuperAdmin' || userType=='Employee' || userType=='ManageBursary' || userType=='ManageApplications'">
-        <ion-item routerLink="/view-profile">
+        <ion-item routerLink="/edit-profile">
           <ion-icon name="person-circle" slot="start"></ion-icon>
           <ion-label>View Profile</ion-label>
         </ion-item>
@@ -55,7 +55,7 @@
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle *ngIf="userType == 'SuperAdmin'">
-        <ion-item>
+        <ion-item routerLink="/view-employee">
           <ion-icon name="people" slot="start"></ion-icon>
           <ion-label>View Employees</ion-label>
         </ion-item>

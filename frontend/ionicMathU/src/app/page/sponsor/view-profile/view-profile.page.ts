@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { MenuController } from '@ionic/angular';
+import { Company } from '../../../model/company';
 
 @Component({
   selector: 'app-view-profile',
@@ -9,26 +10,23 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./view-profile.page.scss'],
 })
 export class ViewProfilePage implements OnInit {
-  gmail: string = "";
+  ourCompany = new Company();
   userType: string = "";
 
   constructor(
     private router: Router,
     private menuController: MenuController,
-    public storage: Storage) {
-      //this.getValue();
+    public storage: Storage
+  ) {
       this.getUserType();
-     }
+      this.getCompanyDetails();
+  }
 
   ngOnInit() { }
 
   editProfile() {
     // put in code 
     this.router.navigate(['./../edit-profile']);
-
-  }
-  ionViewWillEnter() {
-    this.menuController.enable(true, 'spo');
   }
 
   getUserType(){
@@ -40,25 +38,18 @@ export class ViewProfilePage implements OnInit {
     })
   }
 
-  getValue(){
+  
+
+  getCompanyDetails(){
     this.storage.get('name').then( (val) => {
-      //console.log(val);
-      //if (val != null){
-        //if (val["Sponsor"] != null){
-          this.gmail = "Company ID is " + val["Sponsor"]["company_id"]; 
-          //console.log(val["Sponsor"]["company_id"]);
-        //}
-        //else if (val["Student"] != null){
-          //console.log(val["Student"]["first_name"]);
-        //}
-      //}
-      //else{
-        //console.log("val is nothing")
-      //}
+      this.ourCompany = <Company>val["sponsor_users"]["company"];
+      console.log("View profile");
+      console.log(this.ourCompany);
     }, (err)=>{
-      this.gmail = "";
-      //console.log(err);
-    })
+      console.log("company detials error " + err);
+      //let dummyCompany = new Company();
+      //return <Company>dummyCompany;
+    })    
   }
 
 

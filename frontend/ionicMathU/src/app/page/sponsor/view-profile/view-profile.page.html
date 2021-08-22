@@ -6,7 +6,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-button fill="none" slot = "end" (click)="editProfile()">
-      <ion-icon name="brush-outline" size= "small" ></ion-icon>
+      <ion-icon name="brush" size= "small" ></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -16,44 +16,50 @@
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Company Name</ion-card-subtitle>
-      <ion-card-title>C incorparated</ion-card-title>
-
+      <ion-card-title>{{ourCompany.company_name}}</ion-card-title>
     </ion-card-header>
   </ion-card>
 
   <ion-card>
     <ion-card-header>
-      
       <ion-card-subtitle>Company Industry</ion-card-subtitle>
-      <ion-card-title>Engineering Industry</ion-card-title>
+      <ion-card-title>{{ourCompany.company_industry}}</ion-card-title>
     </ion-card-header>
-     
   </ion-card>
 
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Company Logo</ion-card-subtitle>
       <br>
-      <img src= "assets/mathu-fellows-logo_final.png" alt = "code-logo" width = 200px height = 200 px>
-      
+      {{ourCompany.company_logo}}
     </ion-card-header>
-  
-  </ion-card>
+  </ion-card> -->
 
   <ion-card>
     <ion-card-header>
-      
       <ion-card-subtitle>Company Description</ion-card-subtitle>
-      <ion-card-title>This company aims to provide financial assistance for students</ion-card-title>
+      <ion-card-title>
+        <p *ngIf="!ourCompany.company_description">
+          Click on the Edit Profile to add a Company Description
+        </p>
+        <p *ngIf="ourCompany.company_description">
+          {{ourCompany.company_description}}
+        </p>
+      </ion-card-title>
     </ion-card-header>
-      
  </ion-card>
 
  <ion-card>
   <ion-card-header>
-    
     <ion-card-subtitle>Company URL</ion-card-subtitle>
-    <ion-card-title>http....</ion-card-title>
+    <ion-card-title>
+      <p *ngIf="!ourCompany.company_URL">
+        Click on the Edit Profile to add a Company URL
+      </p>
+      <p *ngIf="ourCompany.company_URL">
+        {{ourCompany.company_URL}}
+      </p>
+    </ion-card-title>
   </ion-card-header>
   
 </ion-card>

@@ -88,7 +88,6 @@ export class ModifyEmployeeRolePage implements OnInit {
       console.log(this.data);
       // this.router.navigate(['./../view-employee'])
     }
-    
   }
 
   async printMessage() {

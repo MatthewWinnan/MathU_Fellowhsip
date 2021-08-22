@@ -106,8 +106,9 @@ export class LoginPage implements OnInit {
           this.user.sponsor_users.company.company_id = res["Company"]["company_id"];
           this.user.sponsor_users.company.company_name = res["Company"]["company_name"];
           this.user.sponsor_users.company.company_industry = res["Company"]["company_industry"];
-          this.user.sponsor_users.company.company_description = res["Company"]["company_description"];
           this.user.sponsor_users.company.company_logo = res["Company"]["company_logo"];
+          this.user.sponsor_users.company.company_description = res["Company"]["company_description"];
+          this.user.sponsor_users.company.company_URL = res["Company"]["company_URL"];
           this.user.sponsor_users.company.number_of_reports = res["Company"]["number_of_reports"];
 
           if (res["Sponsor"]["isSuperAmin"]){    //fix spelling error
@@ -131,7 +132,7 @@ export class LoginPage implements OnInit {
           //this.getValue();  //remove later (to test)
           //this.router.navigate(['./view-profile']); //sponsor
 
-          this.navCtrl.navigateRoot('/view-profile');
+          this.navCtrl.navigateRoot('/edit-profile');
         }
         if (res["Student"]){
           this.user.student = new student_users();

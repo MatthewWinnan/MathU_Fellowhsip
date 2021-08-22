@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular'
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Sponsor_users } from 'src/app/model/sponsor_users';
-import { Company } from 'src/app/model/Company';
+import { Company } from '../../../model/company';
 
 
 
@@ -85,7 +85,7 @@ export class AddNewEmployeePage implements OnInit {
     this.ourCompany.company_id = 0;
     this.ourCompany.company_name = "Google";
     this.ourCompany.company_industry = "IT & Telecommunications";
-    this.ourCompany.comapny_logo = "";
+    this.ourCompany.company_logo = "";
     this.ourCompany.company_description = "";
     this.ourCompany.company_URL = "";
   }

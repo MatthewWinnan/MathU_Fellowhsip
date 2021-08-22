@@ -19,7 +19,7 @@ export class ApiService {
 
   registerSponsor(data : Sponsor_users) {
     //console.log(data);
-    //return this.http.post<Sponsor_users>('http://localhost/mathU_backend/math_u_addSponsor.php', data);
-    return this.http.post<Sponsor_users>('http://mathufellows.epizy.com/math_u_addSponsor.php', data);
+    return this.http.post<Sponsor_users>('http://localhost/mathU_backend/math_u_addSponsor.php', data);
+    //return this.http.post<Sponsor_users>('http://mathufellows.epizy.com/math_u_addSponsor.php', data);
   }
 }
