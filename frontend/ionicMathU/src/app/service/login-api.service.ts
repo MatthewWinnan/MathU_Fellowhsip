@@ -17,6 +17,6 @@ export class LoginApiService {
 
   login_a_user(data:any){
     //return this.http.post<any>('http://localhost/mathU_backend/math_u_login.php', data);
-    return this.http.post<any>('https://mathufellows.epizy.com/math_u_login.php', data);
+    return this.http.post<any>('http://mathufellows.epizy.com/math_u_login.php', data);
   }
 }
