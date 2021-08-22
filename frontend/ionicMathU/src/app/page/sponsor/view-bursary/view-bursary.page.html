@@ -1,0 +1,54 @@
+<app-menu></app-menu>
+<ion-header>
+  <ion-toolbar>
+    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-button slot="end" routerLink="/edit-bursary" fill="none">
+      <ion-icon name="add"></ion-icon> 
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2 class="ion-text-center">View Bursary</h2>
+  {{ gmail }}
+  <!-- fetch bursaries from database on page load -->
+  <ion-list>
+    <!-- <ion-item>
+      <ion-label position="floating">Bursary Status</ion-label>
+      <ion-select (ngModel)="b_status" (ionChange)="filterBursary($event)">
+        <ion-select-option value="Open">Open</ion-select-option>
+        <ion-select-option value="Closed">Closed</ion-select-option>
+        <ion-select-option value="Deactivated">Deactivated</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+
+    <ion-item>
+      <ion-searchbar placeholder="Bursary Name" (ionInput)="filterBursary($event)"></ion-searchbar>
+    </ion-item>
+  </ion-list>
+
+  <ion-card *ngFor="let item of jsonData">
+    <ion-item>
+      <ion-card-header>
+        <ion-card-subtitle>{{item.bursary_type}}</ion-card-subtitle>
+        <ion-card-title>{{item.bursary_name}}</ion-card-title>
+      </ion-card-header>
+      <ion-button fill="outline" slot="end">View</ion-button>
+    </ion-item>
+  
+    <ion-card-content>
+      {{item.bursary_description}}
+    </ion-card-content>
+  </ion-card>
+  <!-- <ion-list>
+    <ion-item *ngFor="let item of jsonData">
+      <p>
+        {{item.bursary_name}} of status {{item.status}} with {{item.bursary_type}}
+      </p>
+    </ion-item>
+  </ion-list> -->
+  
+</ion-content>

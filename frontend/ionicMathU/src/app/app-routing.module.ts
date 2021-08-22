@@ -5,7 +5,7 @@ import { ResolverService } from './service/resolver.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login', //to change default page
+    redirectTo: 'landing-page', //to change default page
     pathMatch: 'full'
   },
   {
@@ -37,6 +37,37 @@ const routes: Routes = [
     resolve: { myData: ResolverService },
     loadChildren: () => import('./page/sponsor/modify-employee-role/modify-employee-role.module').then( m => m.ModifyEmployeeRolePageModule)
   },
+  {
+    path: 'landing-page',
+    loadChildren: () => import('./page/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./page/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./page/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  {
+    path: 'student-view-profile',
+    loadChildren: () => import('./page/student/student-view-profile/student-view-profile.module').then( m => m.ViewStudentPageModule)
+  },
+  {
+    path: 'edit-bursary',
+    loadChildren: () => import('./page/sponsor/edit-bursary/edit-bursary.module').then( m => m.EditBursaryPageModule)
+  },
+  {
+    path: 'view-bursary',
+    loadChildren: () => import('./page/sponsor/view-bursary/view-bursary.module').then( m => m.ViewBursaryPageModule)
+  },
+  {
+    path: 'logout',
+    loadChildren: () => import('./page/logout/logout.module').then( m => m.LogoutPageModule)
+  },
+
+
+
 
 ];
 

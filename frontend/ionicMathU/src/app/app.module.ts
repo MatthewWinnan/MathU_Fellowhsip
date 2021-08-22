@@ -5,11 +5,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
+import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage-angular';
+//import { MenuComponent } from './component/menu/menu.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    //MenuComponent
+  ],
   entryComponents: [],
   imports: [
     BrowserModule, 
@@ -17,9 +24,13 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    SuperTabsModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: 'exdb'
+    })
   ],
-  providers: [ 
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
