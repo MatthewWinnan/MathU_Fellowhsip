@@ -122,19 +122,19 @@ export class ViewEmployeePage implements OnInit {
       }
     ];
 
-    this.isFetching = true;
-    // all bursaries with company_id that are 
-    this._apiService.getEmployees(this.ourCompany).subscribe((res:Sponsor_users[]) => {
-      console.log("REQUEST SUCCESS ===", res);
-      this.employeesData = res;
-      if(res!=null){
-        this.jsonData_length = this.employeesData.length;
-      }
-      this.isFetching = false;
-    }, (error:any) => {
-      console.log("ERROR ===", error);
-      this.employeesData = [];
-    });
+    // this.isFetching = true;
+    // // all bursaries with company_id that are 
+    // this._apiService.getEmployees(this.ourCompany).subscribe((res:Sponsor_users[]) => {
+    //   console.log("REQUEST SUCCESS ===", res);
+    //   this.employeesData = res;
+    //   if(res!=null){
+    //     this.jsonData_length = this.employeesData.length;
+    //   }
+    //   this.isFetching = false;
+    // }, (error:any) => {
+    //   console.log("ERROR ===", error);
+    //   this.employeesData = [];
+    // });
   }
 
   async addEmployee() {

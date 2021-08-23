@@ -12,7 +12,12 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="userType == 'SuperAdmin'">
+  <p class="ion-text-center" *ngIf="isFetching">
+    <ion-spinner name="crescent"></ion-spinner>
+  </p>
+
+  <div *ngIf="userType == 'SuperAdmin' && !isFetching">
+    <!-- && jsonData_length>=1 -->
     <ion-card *ngFor = 'let item of employeesData'>
       <ion-card-header>
         <ion-card-subtitle>
