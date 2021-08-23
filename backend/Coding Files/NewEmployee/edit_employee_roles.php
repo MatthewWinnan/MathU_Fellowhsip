@@ -4,7 +4,7 @@ function editEmployeeRole(){
 
   // Connection
 
-  $mysqli = new mysqli('localhost', 'root', '', 'math_u_fellows');
+  include 'math_u_db_connection.php';
 
   // included in case code does not run
   $input = file_get_contents('php://input');
@@ -44,7 +44,6 @@ function editEmployeeRole(){
     $sql = "UPDATE `sponsor_users` SET `isSuperAdmin`= 0, `manageBursaries`= 1, `manageApplications`= 1
     WHERE `sponsor_id`='$sponsor_id' AND `company_id`='$company_id' ";
     $entry = $mysqli->query($sql);
-    echo "both";
 
   }
 
@@ -52,7 +51,7 @@ function editEmployeeRole(){
     $updateRole = new Role();
     $updateRole->message = "Role Updated.";
 
-    echo json_encode($updateRole);
+    // echo json_encode($updateRole);
 
     return json_encode($updateRole);
 
@@ -60,7 +59,7 @@ function editEmployeeRole(){
     $updateRole = new Role();
     $updateRole->message = "Failed updating employee role.";
 
-    echo json_encode($updateRole);
+    // echo json_encode($updateRole);
 
     return json_encode($updateRole);
   }
