@@ -48,12 +48,12 @@
           <ion-label>View Bursary</ion-label>
         </ion-item>
       </ion-menu-toggle>
-      <ion-menu-toggle *ngIf="userType == 'SuperAdmin' || userType=='Employee' || userType=='ManageApplications'">
+      <!-- <ion-menu-toggle *ngIf="userType == 'SuperAdmin' || userType=='Employee' || userType=='ManageApplications'">
         <ion-item>
           <ion-icon name="terminal" slot="start"></ion-icon>
           <ion-label>View Applicants</ion-label>
         </ion-item>
-      </ion-menu-toggle>
+      </ion-menu-toggle> -->
       <ion-menu-toggle *ngIf="userType == 'SuperAdmin'">
         <ion-item routerLink="/view-employee">
           <ion-icon name="people" slot="start"></ion-icon>

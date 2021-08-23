@@ -11,6 +11,9 @@
 
 
 <ion-content>
+  <p *ngIf="userType == 'SuperAdmin'">
+    This is a super Admin
+  </p>
   <form [formGroup]="editProfile" (ngSubmit)="editProfileSubmit()">
     <ion-list>
       <ion-item>

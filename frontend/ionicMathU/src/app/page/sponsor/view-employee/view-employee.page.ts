@@ -7,7 +7,8 @@ import { DataService } from 'src/app/service/data.service';
 import { AddNewEmployeePage } from '../add-new-employee/add-new-employee.page';
 //import { ModifyEmployeeRolePage } from '../modify-employee-role/modify-employee-role.page';
 import { AlertController } from '@ionic/angular';
-
+import { AllUsers } from '../../../model/all_users';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-view-employee',
@@ -15,27 +16,27 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./view-employee.page.scss'],
 })
 export class ViewEmployeePage implements OnInit {
+  ourCompany = new Company();
+  allUsersDetials = new AllUsers();
+  userType: string = "";
   //all sub-employees of a company are a normal sponsor_user (with different rights)
   //employeesData:Sponsor_users[] = [];
   employeesData:any[] = [];
 
-  //extract Company object from LocalStorage
-  //for now, creating a dummy Company
-  ourCompany = new Company();
+  today: number = Date.now();
 
-  today: number = Date.now()
-
-  status: string ='';
   constructor(
     private router: Router, 
     public ModalCtrl: ModalController,
     private platform: Platform,
     private dataService: DataService,
     private alert : AlertController,
+    public storage: Storage,
   ) { 
     this.platform.ready().then(()=>{
       this.initialiseEmployeeData();
     });
+    this.getUserType();
     this.ourCompany.company_id = 1;
     this.ourCompany.company_name = "Google";
     this.ourCompany.company_industry = "Logal";
@@ -141,33 +142,35 @@ export class ViewEmployeePage implements OnInit {
     this.router.navigateByUrl('modify-employee-role/1');
   }
 
-  // async deactivate() {
-  //   const modal = await this.ModalCtrl.create({
-  //     component : DeactivatePage 
-  //   })
-
-  //   return await modal.present()
-  // }
-
-
-  deactivate() {
+  deactivate(employeeItem) {
     this.alert.create({
       header: "Confirmation!",
       subHeader: "Are you sure you would like to Deactivate this employee account?",
       buttons:[{
         text: "Deactivate",
         handler:(data) => {
-          this.status = 'Confirmed!'
+          employeeItem.inactive = true;
+          console.log(employeeItem);
+          //send request to backend
         } 
     },
     { 
       text: "Cancel",
       handler: (data) => {
-        this.status = "Cancelled!"
+        //this.status = "Cancelled!"
       }
     }]
     }).then((confirmElement) => {
       confirmElement.present()
+    })
+  }
+
+  getUserType(){
+    this.storage.get('name').then( (val) => {
+      //console.log(val);
+      this.userType = val["role"];
+    }, (err)=>{
+      this.userType = "";
     })
   }
 

@@ -32,3 +32,23 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.error-message {
+    color: var(--ion-color-danger);
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: left;
+}
+
+.vertical-center {
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    display: flex;
+    //align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    //flex-wrap: wrap;
+    align-content: space-around;
+    height: 100%;
+}
