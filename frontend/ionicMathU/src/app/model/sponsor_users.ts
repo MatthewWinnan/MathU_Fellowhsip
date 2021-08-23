@@ -5,7 +5,7 @@ export class Sponsor_users{
     first_name_of_user = "";
     last_name_of_user = "";
     email_address = "";
-    password = "";
+    password? = "";
     company_id? = 0;
     isSuperAdmin? = false;
     manageBursaries?	= false;

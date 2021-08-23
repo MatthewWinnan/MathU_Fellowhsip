@@ -11,109 +11,42 @@
 
 
 <ion-content>
-  <p *ngIf="userType == 'SuperAdmin'">
-    This is a super Admin
-  </p>
-  <form [formGroup]="editProfile" (ngSubmit)="editProfileSubmit()">
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating">Company Name </ion-label>
-        <ion-input inputmode="text" disabled [value]="ourCompany.company_name">
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Company Industry </ion-label>
-        <ion-input inputmode="text" disabled [value]="ourCompany.company_industry">
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Company Description </ion-label>
-        <ion-input formControlName="company_description" 
-          autocapitalize inputmode="text" [value]="ourCompany.company_description">
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Company URL </ion-label>
-        <ion-input formControlName="company_URL" inputmode="text" [value]="ourCompany.company_URL">
-        </ion-input>
-      </ion-item>
-    </ion-list>
-
-    <ion-list class="ion-text-center">
-      <ion-button [disabled]="!editProfile.valid" type="submit" color="">
-        Edit Profile
-      </ion-button>
-    </ion-list>
-  </form>
-
-
-
-
-
-  <!-- <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Company Name</ion-card-subtitle>
-      <ion-card-title>
-      C incorparated
-    </ion-card-title> 
-
-    </ion-card-header>
-  
-    <ion-card-content></ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      
-      <ion-card-subtitle>Company Industry</ion-card-subtitle>
-      <ion-card-title>
-        Engineering
-      </ion-card-title>
-    </ion-card-header>
-     
-  </ion-card>
-  
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Company Logo</ion-card-subtitle>
-      <br>
-      
-       <img src="assets/mathu-fellows-logo_final.png" width = 200px height = 200 px />
-       
-      
-    </ion-card-header>
-  
-  </ion-card>
-
-  <ion-card>
-      <ion-card-header>
-        
-        <ion-card-subtitle>Company Description</ion-card-subtitle>
-        <ion-card-title>
-          <ion-item>
-          <ion-input placeholder = "Company Description"></ion-input>
-          </ion-item>
-        </ion-card-title>
-      </ion-card-header>
-    
-      
-   </ion-card>
-
-   <ion-card>
-    <ion-card-header>
-      
-      <ion-card-subtitle>Company URL</ion-card-subtitle>
-      <ion-card-title>
+  <!-- <div class="vertical-center"> -->
+  <div>
+    <form [formGroup]="editProfile" (ngSubmit)="editProfileSubmit()">
+      <ion-list>
         <ion-item>
-          <ion-input placeholder = "Company URL"></ion-input>
+          <ion-label position="floating">Company Name </ion-label>
+          <ion-input inputmode="text" disabled [value]="ourCompany.company_name">
+          </ion-input>
         </ion-item>
-      </ion-card-title>
-    </ion-card-header>
   
-    
- </ion-card> -->
-
+        <ion-item>
+          <ion-label position="floating">Company Industry </ion-label>
+          <ion-input inputmode="text" disabled [value]="ourCompany.company_industry">
+          </ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Company Description </ion-label>
+          <ion-input formControlName="company_description" 
+            autocapitalize inputmode="text" [value]="ourCompany.company_description">
+          </ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Company URL </ion-label>
+          <ion-input formControlName="company_URL" inputmode="text" [value]="ourCompany.company_URL">
+          </ion-input>
+        </ion-item>
+      </ion-list>
+  
+      <ion-list class="ion-text-center">
+        <ion-button [disabled]="!editProfile.valid" type="submit" color="">
+          Edit Profile
+        </ion-button>
+      </ion-list>
+    </form>
+  </div>
 </ion-content>
 

@@ -18,7 +18,7 @@
     <p class="ion-text-center" *ngIf="isChecking">
       <ion-spinner name="crescent"></ion-spinner>
     </p>
-    <form [formGroup]="loginUser" (ngSubmit)="loginSubmit()" *ngIf="!isChecking" class="ion-text-center">
+    <form [formGroup]="loginUser" (ngSubmit)="loginSubmit()" *ngIf="!isChecking">
       <ion-list>
         <ion-item>
           <ion-label position="floating">Email Address</ion-label>
@@ -41,16 +41,15 @@
           </ng-container>
         </div>
       </ion-list>
-
+      <ion-router-link href="./forgot-password" class="underline"  *ngIf="!isChecking" 
+           style="margin-left: 10px;">
+          Forgot Password
+      </ion-router-link>
       <ion-list class="ion-text-center">
         <ion-button [disabled]="!loginUser.valid" type="submit" color="">
           Submit
         </ion-button>
       </ion-list>
     </form>
-    <br>
-    <ion-router-link href="./forgot-password" class="underline"  *ngIf="!isChecking" style="margin-left:10px;">
-      Forgot Password
-    </ion-router-link>
   </div>
 </ion-content>

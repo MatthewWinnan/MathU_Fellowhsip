@@ -9,6 +9,7 @@ import { AddNewEmployeePage } from '../add-new-employee/add-new-employee.page';
 import { AlertController } from '@ionic/angular';
 import { AllUsers } from '../../../model/all_users';
 import { Storage } from '@ionic/storage-angular';
+import { EmployeesService } from '../../../service/employees.service';
 
 @Component({
   selector: 'app-view-employee',
@@ -16,12 +17,14 @@ import { Storage } from '@ionic/storage-angular';
   styleUrls: ['./view-employee.page.scss'],
 })
 export class ViewEmployeePage implements OnInit {
+  isFetching = false;
   ourCompany = new Company();
   allUsersDetials = new AllUsers();
   userType: string = "";
   //all sub-employees of a company are a normal sponsor_user (with different rights)
-  //employeesData:Sponsor_users[] = [];
-  employeesData:any[] = [];
+  employeesData:Sponsor_users[] = [];
+  jsonData_length = 0;
+  //employeesData:any[] = [];
 
   today: number = Date.now();
 
@@ -32,35 +35,32 @@ export class ViewEmployeePage implements OnInit {
     private dataService: DataService,
     private alert : AlertController,
     public storage: Storage,
+    public _apiService: EmployeesService,
   ) { 
     this.platform.ready().then(()=>{
+      this.getUserType();
+      this.getCompanyDetails();
       this.initialiseEmployeeData();
-    });
-    this.getUserType();
-    this.ourCompany.company_id = 1;
-    this.ourCompany.company_name = "Google";
-    this.ourCompany.company_industry = "Logal";
-    this.ourCompany.company_logo = "";
-    this.ourCompany.company_description = "";
-    this.ourCompany.company_URL = "";
-    this.ourCompany.number_of_reports = 0;
+    });    
   }
 
   ngOnInit() {
+  }
+
+  initialiseEmployeeData(){
+    console.log(this.ourCompany);
     //send a request to backend to get all Sponsor_users in the same company
     //company info will be stored in the LocalStorage after login
 
     //for now, creating dummy dataset
-  }
 
-  initialiseEmployeeData(){
     this.employeesData = [
       {
         "sponsor_id": "S0020",
         "first_name_of_user": "Apple",
         "last_name_of_user": "Red",
         "email_address": "apple@gmail.com",
-        "company_id ": this.ourCompany.company_id,
+        "company_id": this.ourCompany.company_id,
         "isSuperAdmin": true,  //if isSuperAdmin is true, then 
         "manageBursaries": true,  //manageBursaries also true
         "manageApplications": true, //manageApplications also true
@@ -73,7 +73,7 @@ export class ViewEmployeePage implements OnInit {
         "first_name_of_user": "Apricot",
         "last_name_of_user": "Peach",
         "email_address": "apricot@gmail.com",
-        "company_id ": this.ourCompany.company_id,
+        "company_id": this.ourCompany.company_id,
         "isSuperAdmin": true,  //if isSuperAdmin is true, then 
         "manageBursaries": true,  //manageBursaries also true
         "manageApplications": true, //manageApplications also true
@@ -86,7 +86,7 @@ export class ViewEmployeePage implements OnInit {
         "first_name_of_user": "Pear",
         "last_name_of_user": "Green",
         "email_address": "pear@gmail.com",
-        "company_id ": this.ourCompany.company_id,
+        "company_id": this.ourCompany.company_id,
         "isSuperAdmin": false,  //if isSuperAdmin is false, then normal employee
         "manageBursaries": true,
         "manageApplications": true,
@@ -99,7 +99,7 @@ export class ViewEmployeePage implements OnInit {
         "first_name_of_user": "Cherry",
         "last_name_of_user": "Sour",
         "email_address": "sour@gmail.com",
-        "company_id ": this.ourCompany.company_id,
+        "company_id": this.ourCompany.company_id,
         "isSuperAdmin": false,
         "manageBursaries": false,
         "manageApplications": true,
@@ -112,7 +112,7 @@ export class ViewEmployeePage implements OnInit {
         "first_name_of_user": "Plum",
         "last_name_of_user": "Soft",
         "email_address": "plum@gmail.com",
-        "company_id ": this.ourCompany.company_id,
+        "company_id": this.ourCompany.company_id,
         "isSuperAdmin": false, 
         "manageBursaries": true, 
         "manageApplications": false,
@@ -120,13 +120,21 @@ export class ViewEmployeePage implements OnInit {
         "isVerified": false,
         "company": this.ourCompany
       }
-    ]
-  }
+    ];
 
-  editEmployee() {
-    // put in code 
-    this.router.navigate(['./../edit-employee']);
-
+    this.isFetching = true;
+    // all bursaries with company_id that are 
+    this._apiService.getEmployees(this.ourCompany).subscribe((res:Sponsor_users[]) => {
+      console.log("REQUEST SUCCESS ===", res);
+      this.employeesData = res;
+      if(res!=null){
+        this.jsonData_length = this.employeesData.length;
+      }
+      this.isFetching = false;
+    }, (error:any) => {
+      console.log("ERROR ===", error);
+      this.employeesData = [];
+    });
   }
 
   async addEmployee() {
@@ -172,6 +180,14 @@ export class ViewEmployeePage implements OnInit {
     }, (err)=>{
       this.userType = "";
     })
+  }
+
+  getCompanyDetails(){
+    this.storage.get('name').then( (val) => {
+      this.ourCompany = <Company>val["sponsor_users"]["company"];
+    }, (err)=>{
+      console.log("company detials error " + err);
+    })    
   }
 
 }
