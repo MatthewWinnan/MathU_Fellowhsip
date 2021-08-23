@@ -27,7 +27,7 @@ export class ViewApplicantsPage implements OnInit {
       this.ourCompany.company_id = 0;
       this.ourCompany.company_name = "Google";
       this.ourCompany.company_industry = "IT & Telecommunications";
-      this.ourCompany.comapny_logo = "";
+      this.ourCompany.company_logo = "";
       this.ourCompany.company_description = "";
       this.ourCompany.company_URL = "";
       this.initializeJSONData();
