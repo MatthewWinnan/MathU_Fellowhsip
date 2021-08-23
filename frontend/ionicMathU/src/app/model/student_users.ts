@@ -24,7 +24,7 @@ export class student_users{
     continue_studies? = false;
     gpa? = 0.0;
     description_of_student? = "";
-    //regisered_date = "";      //will not be used in frontend at all
+    //registered_date = "";      //will not be used in frontend at all
     bursarred? = false;
     current_bursaries? = "";
     workback? = 0;
