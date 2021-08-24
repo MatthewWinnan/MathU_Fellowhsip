@@ -189,7 +189,7 @@ export class ViewApplicantsPage implements OnInit {
   acceptDialogue(acceptItem) {
     console.log(acceptItem);
     this.alert.create({
-      header: "Confirmation!",
+      header: "Confirmation",
       subHeader: "Are you sure you would like to accept " + acceptItem.first_name + " " + 
         acceptItem.last_name + " into the shortlist for " + "Bursary xyz" + "?",
       buttons:[{
@@ -214,7 +214,7 @@ export class ViewApplicantsPage implements OnInit {
   declineDialogue(acceptItem) {
     console.log(acceptItem);
     this.alert.create({
-      header: "Decline!",
+      header: "Decline",
       subHeader: "Are you sure you would like to decline " + acceptItem.first_name + " " + 
         acceptItem.last_name + " into the shortlist for the bursary " + "Bursary xyz" + "?",
       buttons:[{

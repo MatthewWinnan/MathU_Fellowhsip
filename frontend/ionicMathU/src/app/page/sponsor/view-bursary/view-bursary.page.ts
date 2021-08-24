@@ -1,6 +1,6 @@
 import { Component, OnInit, ɵCompiler_compileModuleAndAllComponentsSync__POST_R3__ } from '@angular/core';
 import { Bursary } from '../../../model/bursaries';
-import { AlertController, NavController, Platform } from '@ionic/angular';
+import { AlertController, NavController, Platform, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { Company } from '../../../model/company';
@@ -12,6 +12,7 @@ import { BursaryService } from '../../../service/bursary.service';
   styleUrls: ['./view-bursary.page.scss'],
 })
 export class ViewBursaryPage implements OnInit {
+  the_message : string = "";
   isFetching = false;
   jsonData:Bursary[] = [];
   jsonData_length = 0;
@@ -24,6 +25,7 @@ export class ViewBursaryPage implements OnInit {
     private dataService: DataService,
     public _apiService: BursaryService,
     private alert: AlertController,
+    public toastController: ToastController,
   ) { 
     this.platform.ready().then(()=>{
       //ourCompany is stored in LocalStorage (when user logs in)
@@ -160,15 +162,26 @@ export class ViewBursaryPage implements OnInit {
   openDeactivate(deactivateItem:Bursary){
     // console.log(deactivateItem);
     this.alert.create({
-      header: "Deactivate " + deactivateItem.bursary_name + "!",
+      header: "Deactivate: " + deactivateItem.bursary_name + "!",
       subHeader: "Warning: Once deactivated, you will not be able to re-activate the bursary!",
       buttons:[{
         text: "Deactivate",
         handler:(data) => {
           deactivateItem.isVisible = false;
-          console.log(deactivateItem.bursary_name + " has been deactivated.");
           this.router.navigateByUrl('view-bursary');
-          //send request to backend 
+          //send api request 
+          this._apiService.deactivateBursary(deactivateItem).subscribe((res:Bursary) => {
+            console.log("REQUEST SUCCESS ===", res);
+            this.the_message = deactivateItem.bursary_name + " has been deactivated.";
+            this.printMessage();
+            if (this.the_message.substring(0,7) == "Success"){
+              this.router.navigateByUrl('./view-bursary');
+            }
+          }, (error:any) => {
+            this.the_message = 'error';// error;
+            this.printMessage();
+            console.log("ERROR ===", error);
+          });
           //display toast
         } 
     },
@@ -196,6 +209,17 @@ export class ViewBursaryPage implements OnInit {
   viewApplicants(viewAppItem){
     this.dataService.setData(1, viewAppItem);
     this.router.navigateByUrl('view-applicants/1')
+  }
+
+  async printMessage() {
+    const toast = this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: this.the_message
+    });
+
+    (await toast).present();
+    this.the_message = "";
   }
 
 }

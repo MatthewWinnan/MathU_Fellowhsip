@@ -28,5 +28,11 @@ export class BursaryService {
 
   editBursary(data:Bursary){
     return this.http.post<any>('http://localhost/mathU_backend/math_u_edit_bursary.php', data);
+    //change file name 
+  }
+
+  deactivateBursary(data:Bursary){
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_deactivate_bursary.php', data);
+    //change file name 
   }
 }
