@@ -164,7 +164,8 @@ export class EditBursaryPage implements OnInit {
       bursary_name: [this.data.bursary_name, [Validators.required, Validators.maxLength(100)]],
       bursary_type: [this.data.bursary_type, [Validators.required]],
       WB_duration: [this.data.WB_duration],
-      age_group: [''],  
+      age_group: [{"Lower": this.data.min_age, 
+                "Upper": this.data.max_age}],  
       academic_level: [this.data.academic_level, [Validators.required]],
       study_field: [this.data.study_field],
       minimum_year_required: [this.data.minimum_year_required],
@@ -187,6 +188,8 @@ export class EditBursaryPage implements OnInit {
         ]
       ]
     });
+    this.addBursary.value.age_group.lower = this.data.min_age;
+    this.addBursary.value.age_group.upper = this.data.max_age;
   }
 
   public addBursarySubmit() {

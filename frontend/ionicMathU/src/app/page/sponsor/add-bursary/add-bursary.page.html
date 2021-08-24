@@ -1,17 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
-    <ion-button slot="start" fill="none">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
+    <ion-button fill = "none" slot = "start" routerLink="/view-bursary">
+      <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
     </ion-button>
-    <ion-button slot="end" fill="none">
-      <ion-icon></ion-icon>
-    </ion-button>
+    <ion-title>Add Bursary </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h2 class="ion-text-center">Add Bursary</h2>
   <form [formGroup]="addBursary" (ngSubmit)="addBursarySubmit()">
     <ion-list>
       <ion-item>
@@ -50,7 +46,8 @@
 
       <ion-item>
         <ion-label position="floating">Age Group</ion-label>
-        <ion-range formControlName="age_group" dual-knobs pin snaps min="13" step="1" max="40" color="dark" value="25">
+        <ion-range formControlName="age_group" dual-knobs pin snaps min="13" step="1" max="40" 
+          color="dark" value="25" (ionChange)="_rangeChange($event)">
           <ion-label slot="start" size="small">13</ion-label>
           <ion-label slot="end">40</ion-label>
         </ion-range>
