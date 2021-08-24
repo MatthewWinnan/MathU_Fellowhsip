@@ -59,6 +59,12 @@ export class StudentHomePage implements OnInit {
   viewLessStr: string = "View Less";
   i = 0;
   moreBursaries: any = '';
+  valueLeft: boolean;
+  valueRight: boolean;
+  listBurs = [
+    "burs1", "burs2", "burs3"
+  ];
+
 
 
   constructor(
@@ -66,6 +72,18 @@ export class StudentHomePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    /* Upon initiation Values for left and right cycle button is set */
+    /* Right */
+    if (i >= this.listBurs.length) {
+      this.valueRight = false
+    }
+    if (i < this.listBurs.length) {
+      this.valueRight = true
+    }
+    if (i > 0) {
+      this.valueLeft = true
+    }
+
   }
 
   /* the option on the right hand side to see if the nextBursary() must be used or applyBursary() */
@@ -81,27 +99,26 @@ export class StudentHomePage implements OnInit {
   nextBursary() {
     // there needs to be a list option to make sure that button will be disabled if end of list is reached.
     // list represents the list of bursaries that meet the filter criteria
-    let list = [
-      "a", "b", 1
-    ];
-    
-    if (i >= list.length) {
-      alert("End of bursary list reached.")
-      this.moreBursaries = 'disabled'
-    } 
-
-    if (i < list.length)
-    {
-      console.log("Next Bursary Brought In");
+    if (i < this.listBurs.length) {
       i++
+      console.log("Next Bursary Brought In. Viewing Bursary: ", i);
+      this.valueLeft = true
+      if (i >= this.listBurs.length) {
+        this.valueRight = false
+      } 
     }
-
-
-
   }
 
   prevBursary() {
-    console.log("Previous Bursary Brought In")
+    if (i > 0) {
+      i--
+      console.log("Previous Bursary Is Back. Viewing Bursary: ", i, "List length is: ", this.listBurs.length);
+      this.valueLeft = true
+      this.valueRight = true
+      if (i <= 0) {
+        this.valueLeft = false
+      } 
+    }
   }
   
   applyBursary() {

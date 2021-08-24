@@ -143,22 +143,61 @@
     </ion-card>
   </div>
 
-
     <div class="bottomNavigation bar bar-footer ">
-      <ion-button fill="none" (click)="leftOption()">
-        <ion-icon name="{{showValid ? 'close-outline' : 'chevron-back-outline'}}" slot="start"></ion-icon>
-      </ion-button>
-  
-      <ion-button (click)="viewMore()">
-        <ion-label>
-          {{showValid ? 'View Less' : 'View More'}}
-        </ion-label>
-      </ion-button>
-  
-      <ion-button  fill="none" (click)="rightOption()">
-        <ion-icon name="{{showValid ? 'checkmark-outline' : 'chevron-forward-outline'}}" slot="start"></ion-icon>
-      </ion-button>
-    </div>
+        
+      <div *ngIf="showValid; else cycleBlock">
 
+        <ion-button fill="none" (click)="leftOption()">
+          <ion-icon name='close-outline' slot="start"></ion-icon>
+        </ion-button>
+
+        <ion-button (click)="viewMore()">
+          <ion-label>
+            {{showValid ? 'View Less' : 'View More'}}
+          </ion-label>
+        </ion-button>
+
+        <ion-button fill="none" (click)="rightOption()">
+          <ion-icon name='checkmark-outline' slot="end"></ion-icon>
+        </ion-button>
+      </div>
+
+      <ng-template #cycleBlock>
+
+        <div *ngIf="valueLeft; else elseLeft">
+          <ion-button fill="none" (click)="leftOption()">
+            <ion-icon name='chevron-back-outline' slot="start"></ion-icon>
+          </ion-button>
+        </div>
+
+        <ng-template #elseLeft>
+          <ion-button disabled fill="none" (click)="leftOption()">
+            <ion-icon disabled name='chevron-back-outline' slot="start"></ion-icon>
+          </ion-button>
+        </ng-template>
+
+        <ion-button (click)="viewMore()">
+          <ion-label>
+            {{showValid ? 'View Less' : 'View More'}}
+          </ion-label>
+        </ion-button>
+
+        <div *ngIf="valueRight; else elseRight">
+          <ion-button fill="none" (click)="rightOption()">
+            <ion-icon name='chevron-forward-outline' slot="end"></ion-icon>
+          </ion-button>
+        </div>
+
+        <ng-template #elseRight>
+          <ion-button disabled fill="none" (click)="rightOption()">
+            <ion-icon name='chevron-forward-outline' slot="end"></ion-icon>
+          </ion-button>
+        </ng-template>
+
+
+      </ng-template>
+
+      
+    </div>
 
 </ion-content>
