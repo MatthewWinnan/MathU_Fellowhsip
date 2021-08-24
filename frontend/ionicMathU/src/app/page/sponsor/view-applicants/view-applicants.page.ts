@@ -46,20 +46,20 @@ export class ViewApplicantsPage implements OnInit {
           date_of_birth: "03-03-1994",
           email_address: "marcus.rashford@gmail.com",
           nationality: false,
-          contact_number: "",
-          city: "",
-          province: "",
+          contact_number: "084 992 3456",
+          city: "Cape Town",
+          province: "Western Cape",
           disability: null,
-          current_academic_level: "",
-          grade: 0.0, //for high school
+          current_academic_level: "High School",
+          grade: 12.0, //for high school
           syllabus: "",  //for high school
-          average: 0.0, //for high school
+          average: 75.0, //for high school
           currently_studying: "",  //for not High Schoool
           year_of_study: "",  //for not High Schoool
           study_institution: "",  //for not High Schoool
           continue_studies: null, //for not High Schoool
           gpa: 0.0, //for not High Schoool
-          description_of_student: "",
+          description_of_student: "very ambitious",
           bursarred: null,
           current_bursaries: "", //only if bursarred is true
           workback: 0,

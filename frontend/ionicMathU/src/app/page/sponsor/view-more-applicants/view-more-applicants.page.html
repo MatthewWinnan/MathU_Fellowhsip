@@ -6,6 +6,12 @@
     </ion-button>
 
     <ion-title>{{data.student.first_name}} {{data.student.last_name}} </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons> 
+    <!-- #remove when done -->
+
   </ion-toolbar>
 </ion-header>
 
@@ -30,10 +36,12 @@
       <b>Address: </b>
       {{ data.student.city }}, {{ data.student.province }}
     </p>
+
     <p *ngIf="data.student.city=='' && data.student.province!==''">
       <b>Address: </b>
       {{ data.student.province }}
     </p>
+
     <p *ngIf="data.student.city!=='' && data.student.province==''">
       <b>Address: </b>
       {{ data.student.city }}
@@ -43,50 +51,54 @@
       Disability : {{ data.student.disability }}
     </p>
 
-    <p *ngIf="data.student.current_academic_level=='High School'">
+    <p *ngIf="data.student.current_academic_level=='High School'" >
       Currently in {{ data.student.grade }} with the {{ data.student.syllabus }} syllabus. 
       <br/>
       Current average: {{ data.student.average }}
       <br/>
-
+    </p>
+    <div ng-repeat = "item in student.marks">
+    <p >
       Current subjects: 
       <br/>
-        {{data.student.marks.length}}
-        {{data.student.marks}} --> fix
-    </p>
+         <!-- {{data.student.marks.length}}  -->
+        {{item.subject_name }} fix 
+   </p>
+  </div>
 
-    <p *ngIf="data.student.current_academic_level=='Undergraduate' || 
+    <!-- <p *ngIf="data.student.current_academic_level=='Undergraduate' || 
       data.student.current_academic_level=='Postgraduate'">
       Currently studying {{data.student.currently_studying}} ({{ data.student.year_of_study }})
        at {{ data.student.study_institution }} ({{data.student.current_academic_level}})
        <br/>
        Current average: {{data.student.gpa}}
-    </p>
+    </p> -->
 
-    <p *ngIf="data.student.website">
+    <!-- <p *ngIf="data.student.website">
       <b>Personal website/LinkedIn profile:</b>
       {{data.student.website}}
-    </p>
+    </p> -->
 
-    <p *ngIf='data.student.continue_studies'>
+    <!-- <p *ngIf='data.student.continue_studies'>
       Willing to study further
-    </p>
+    </p> -->
 
-    <p *ngIf='data.student.bursarred'>
+    <!-- <p *ngIf='data.student.bursarred'>
       Current bursary: {{data.student.current_bursaries}}
-    </p>
+    </p> -->
 
-    <p *ngIf='data.student.workback !== 0'>
+    <!-- <p *ngIf='data.student.workback !== 0'>
       Willing to work back for {{ data.student.workback }} years 
-    </p>
+    </p> -->
 
-    <p *ngIf="data.status == 'Accepted'">
+    <!-- <p *ngIf="data.status == 'Accepted'">
       <b>Email address: </b>
       {{ data.student.email_address }}
-    </p>
-    <p *ngIf='data.student.contact_number!=="" && data.status=="Accepted"'>
+    </p> -->
+
+    <!-- <p *ngIf='data.student.contact_number!=="" && data.status=="Accepted"'>
       <b>Contact number: </b>
       {{ data.student.contact_number }}
-    </p>
+    </p>  -->
   </div> 
 </ion-content>
