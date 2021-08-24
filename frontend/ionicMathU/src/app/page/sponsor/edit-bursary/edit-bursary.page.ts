@@ -158,7 +158,7 @@ export class EditBursaryPage implements OnInit {
   ngOnInit() {
     if(this.route.snapshot.data['myData']){
       this.data = this.route.snapshot.data['myData'];
-      console.log(this.data);
+      //console.log(this.data);
     }
     this.addBursary = this.formBuilder.group({
       bursary_name: [this.data.bursary_name, [Validators.required, Validators.maxLength(100)]],
@@ -218,7 +218,7 @@ export class EditBursaryPage implements OnInit {
     console.log(this.bursary);
     
     //send api request 
-    this._apiService.addBursary(this.bursary).subscribe((res:Bursary) => {
+    this._apiService.editBursary(this.bursary).subscribe((res:Bursary) => {
       console.log("REQUEST SUCCESS ===", res);
       this.the_message = res["message"];
       this.printMessage();
