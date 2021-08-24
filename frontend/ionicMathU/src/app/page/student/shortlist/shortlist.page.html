@@ -6,46 +6,36 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="student-menu"></ion-menu-button>
     </ion-buttons>
-    <ion-button fill="none" slot="end">
-      <ion-icon name=""></ion-icon>
+    <ion-button  (click)="refreshPage()" fill="none" slot="end">
+      <ion-icon name="refresh-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        Bursary Name
-      </ion-col>
-      <ion-col>
-        Company Name
-      </ion-col>
-      <ion-col>
-        View
-      </ion-col>
-      <ion-col>
-        Select
-      </ion-col>
-    </ion-row>
-    
-    <ion-button *ngFor="let burs of bursaryShortlist" routerLink="/student-home">
-      <ion-row>
-        <ion-col>
-          {{ burs.bursName }}
-        </ion-col>
-        <ion-col>
-          {{ burs.bursCompName }}
-        </ion-col>
-        <ion-col>
-      
-        </ion-col>
-        <ion-col>
-      
-        </ion-col>
-      </ion-row>
-    </ion-button>
-  </ion-grid>
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
+
+  <ion-list *ngFor="let burs of bursaryShortlist">
+    <ion-item-sliding>
+      <ion-item>
+        <ion-avatar>
+          <img src="{{ burs.bursIcon }}" alt="{{ burs.bursIcon }}">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ burs.bursName }}</h2>
+          <h3>{{ burs.bursCompName }}</h3>
+          <p>{{ burs.bursStatus }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="goToBursaryView(burs.bursID)">View Bursary</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
 </ion-content>
