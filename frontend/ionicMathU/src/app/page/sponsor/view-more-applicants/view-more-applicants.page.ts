@@ -20,7 +20,7 @@ export class ViewMoreApplicantsPage implements OnInit {
   ngOnInit() {
     if(this.route.snapshot.data['myData']){
       this.data = this.route.snapshot.data['myData'];
-      console.log(this.data);
+      //console.log(this.data);
       this.calculateAge();
     }
   }

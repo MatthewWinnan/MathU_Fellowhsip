@@ -3,7 +3,7 @@ import { Form, FormBuilder, Validators } from '@angular/forms';
 import { Bursary } from '../../../model/bursaries';
 import { BursaryService } from '../../../service/bursary.service';
 import { ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-bursary',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./edit-bursary.page.scss'],
 })
 export class EditBursaryPage implements OnInit {
-
+  data:Bursary;
   the_message : string = "";
 
   dateToday = new Date().toISOString().substring(0,10);
@@ -152,9 +152,41 @@ export class EditBursaryPage implements OnInit {
     public toastController: ToastController,
     private router:Router,
     public _apiService: BursaryService,
+    private route:ActivatedRoute, 
   ) { }
 
   ngOnInit() {
+    if(this.route.snapshot.data['myData']){
+      this.data = this.route.snapshot.data['myData'];
+      console.log(this.data);
+    }
+    this.addBursary = this.formBuilder.group({
+      bursary_name: [this.data.bursary_name, [Validators.required, Validators.maxLength(100)]],
+      bursary_type: [this.data.bursary_type, [Validators.required]],
+      WB_duration: [this.data.WB_duration],
+      age_group: [''],  
+      academic_level: [this.data.academic_level, [Validators.required]],
+      study_field: [this.data.study_field],
+      minimum_year_required: [this.data.minimum_year_required],
+      min_average: [this.data.min_average],
+      RSA_citizen: [this.data.RSA_citizen],
+      financial_need: [this.data.financial_need],
+      study_further: [this.data.study_further],
+      disability: [this.data.disability],
+      province: [this.data.province],
+      bursary_covers_for: [this.data.bursary_covers],
+      bursary_duration: [this.data.bursary_duration, [Validators.required]],
+      closing_date: [this.data.closing_date, [Validators.required]],
+      shortlist_date: [this.data.shortlist_date, [Validators.required]],
+      bursary_description: [this.data.bursary_description, [Validators.required]],
+      email_address_bursary: [
+        this.data.email_address, 
+        [
+          Validators.required, 
+          Validators.pattern("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$")
+        ]
+      ]
+    });
   }
 
   public addBursarySubmit() {

@@ -1,22 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
-    <ion-button slot="start" fill="none">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
+    <ion-button fill = "none" slot = "start" routerLink="/view-bursary">
+      <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
     </ion-button>
-    <ion-button slot="end" fill="none">
-      <ion-icon></ion-icon>
-    </ion-button>
+    <ion-title>Editing {{ data.bursary_name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h2 class="ion-text-center">Edit Bursary</h2>
   <form [formGroup]="addBursary" (ngSubmit)="addBursarySubmit()">
     <ion-list>
       <ion-item>
         <ion-label position="floating">Bursary Name</ion-label>
-        <ion-input formControlName="bursary_name" autocapitalize inputmode="text"></ion-input>
+        <ion-input formControlName="bursary_name" autocapitalize inputmode="text" [value]="data.bursary_name"></ion-input>
       </ion-item>
       <div *ngFor="let error of errorMessages.bursary_name">
         <ng-container *ngIf="bursary_name.hasError(error.type) && (bursary_name.dirty || bursary_name.touched)">
