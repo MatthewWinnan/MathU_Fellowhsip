@@ -35,16 +35,17 @@
         <p align="justify">{{item.bursary_description.substr(0,100) + "..."}} </p>
         <div class="ion-text-center">
           <ion-button fill="none" (click)="openDeactivate(item)" size="small" slot="end">
-            <ion-icon name="ban-outline"></ion-icon>
+            <ion-icon name="ban"></ion-icon>
           </ion-button>
           <ion-button fill="none" (click)="editBursary(item)" size="small">
-            <ion-icon name="pencil-outline" ></ion-icon>
+            <ion-icon name="pencil" ></ion-icon>
           </ion-button>
           <ion-button fill="none" (click)="openViewInfo(item)" size="small">
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+            <ion-icon name="ellipsis-horizontal"></ion-icon>
           </ion-button>
-          <ion-button fill="none" routerLink="/view-applicants" size="small">
-            <ion-icon name="people-outline" ></ion-icon>
+          <!-- <ion-button fill="none" routerLink="/view-applicants" size="small"> -->
+          <ion-button fill="none" (click)="viewApplicants(item)" size="small">
+            <ion-icon name="people" ></ion-icon>
           </ion-button>
         </div>
       </ion-card-content>

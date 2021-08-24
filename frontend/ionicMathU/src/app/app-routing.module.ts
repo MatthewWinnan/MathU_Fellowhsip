@@ -59,6 +59,11 @@ const routes: Routes = [
     loadChildren: () => import('./page/sponsor/view-applicants/view-applicants.module').then( m => m.ViewApplicantsPageModule)
   },
   {
+    path: 'view-applicants/:id',
+    resolve: { myData: ResolverService },
+    loadChildren: () => import('./page/sponsor/view-applicants/view-applicants.module').then( m => m.ViewApplicantsPageModule)
+  },
+  {
     path: 'view-more-applicants',
     loadChildren: () => import('./page/sponsor/view-more-applicants/view-more-applicants.module').then( m => m.ViewMoreApplicantsPageModule)
   },

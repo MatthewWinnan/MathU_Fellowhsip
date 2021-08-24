@@ -3,34 +3,54 @@
     <ion-button fill="none" slot="start" routerLink="/view-bursary">
       <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
     </ion-button>
-    <ion-title>Applicants</ion-title>
+    <ion-title>Applicants for {{data.bursary_name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Bursary Status</ion-label>
+      <ion-select (ngModel)="b_status" (ionChange)="filterBursary($event)">
+        <ion-select-option value="Pending">Pending</ion-select-option>
+        <ion-select-option value="Accepted">Accepted</ion-select-option>
+        <ion-select-option value="Declined">Declined</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
   <ion-card *ngFor="let item of applicantsData">
     <ion-card-header>
-      <ion-card-subtitle>Applicant </ion-card-subtitle>
-        <ion-item>
-          {{item.first_name}}  {{ item.last_name }}
-        </ion-item>
-        <br/>
-        <ion-item>
-          Currently in {{item.current_academic_level}}
-          <!-- Average: {{ item.applicant_average }} -->
-        </ion-item>
+      <ion-card-subtitle>
+        Applicant (Status: {{item.status}}) 
+        <br/><br/>
+        Applied date: {{item.application_date}}
+      </ion-card-subtitle>
+      <ion-item>
+        {{item.student.first_name}}  {{ item.student.last_name }}
+      </ion-item>
+      <ion-item *ngIf="item.student.current_academic_level">
+        <p *ngIf="item.student.current_academic_level == 'High School'">
+          Currently in {{item.student.current_academic_level}}, Grade {{item.student.grade}}
+        </p>
+        <p *ngIf="item.student.current_academic_level != 'High School'">
+          Currently in {{item.student.study_institution}} for {{item.student.current_academic_level}}
+        </p>
+        <!-- Average: {{ item.applicant_average }} -->
+      </ion-item>
     </ion-card-header>
 
     <div class="ion-text-center">
-      <ion-button fill="none"  (click)="acceptDialogue(item)"  size = "small" alt="Accept Student">
-        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <ion-button fill="none"  (click)="declineDialogue(item)" size = "small">
+        <ion-icon name="close-circle"></ion-icon>
       </ion-button>
       <ion-button fill="none" (click)="openViewInfo(item)" size="small">
-        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
       </ion-button>
-      <ion-button fill="none"  (click)="declineDialogue(item)" size = "small">
-        <ion-icon name="close-circle-outline"></ion-icon>
+      <ion-button fill="none"  (click)="acceptDialogue(item)"  size = "small" alt="Accept Student">
+        <ion-icon name="checkmark-circle"></ion-icon>
       </ion-button>
+      
     </div>
   </ion-card>
 
