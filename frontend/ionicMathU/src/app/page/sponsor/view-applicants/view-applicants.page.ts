@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, Platform } from '@ionic/angular';
+import { ModalController, Platform, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../service/data.service';
 import { AlertController } from '@ionic/angular';
 import { Student_bursary } from '../../../model/student_bursary';
+import { BursaryService } from 'src/app/service/bursary.service';
+import { Bursary } from 'src/app/model/bursaries';
 
 @Component({
   selector: 'app-view-applicants',
@@ -11,6 +13,9 @@ import { Student_bursary } from '../../../model/student_bursary';
   styleUrls: ['./view-applicants.page.scss'],
 })
 export class ViewApplicantsPage implements OnInit {
+  isFetching = false;
+  applicantsData_length = 0;
+  the_message : string = "";
   data;
   applicantsData:Student_bursary[] = [];
   //status: string = '';
@@ -20,7 +25,9 @@ export class ViewApplicantsPage implements OnInit {
     private router:Router,
     private dataService: DataService,
     private alert: AlertController,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    public _apiService: BursaryService,
+    public toastController: ToastController,
   ) { 
   }
 
@@ -33,6 +40,20 @@ export class ViewApplicantsPage implements OnInit {
 
   initializeJSONData() {
     // all applicants who applied for a certain bursary
+    //send api request 
+    // this.isFetching = true;
+    // this._apiService.getBursaryApplications(this.data).subscribe((res:Student_bursary[]) => {
+    //   console.log("REQUEST SUCCESS ===", res);
+    //   this.applicantsData = res;
+    //   if(res!=null){
+    //     this.applicantsData_length = this.applicantsData.length;
+    //   }
+    //   this.isFetching = false;
+    // }, (error:any) => {
+    //   console.log("ERROR ===", error);
+    //   this.applicantsData = [];
+    // });
+
     this.applicantsData = [
       {
         bursary_id: this.data.bursary_id,
@@ -253,6 +274,17 @@ export class ViewApplicantsPage implements OnInit {
         }
       )
     }
+  }
+
+  async printMessage() {
+    const toast = this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: this.the_message
+    });
+
+    (await toast).present();
+    this.the_message = "";
   }
 
 }
