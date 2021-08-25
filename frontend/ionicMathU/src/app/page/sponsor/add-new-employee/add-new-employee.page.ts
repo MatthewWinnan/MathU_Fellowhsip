@@ -117,7 +117,7 @@ export class AddNewEmployeePage implements OnInit {
         this.Subemployee.manageApplications = this.addEmployee.value.manage_applications;
       }
       console.log(this.Subemployee);
-        //send api request 
+      //send api request 
       this._apiService.addEmployee(this.Subemployee).subscribe((res) => {
         console.log("REQUEST SUCCESS ===", res);
         this.the_message = res["message"];

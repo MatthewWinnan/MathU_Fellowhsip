@@ -111,7 +111,7 @@ export class LoginPage implements OnInit {
           this.user.sponsor_users.company.company_URL = res["Company"]["company_URL"];
           this.user.sponsor_users.company.number_of_reports = res["Company"]["number_of_reports"];
 
-          if (res["Sponsor"]["isSuperAmin"]){    //fix spelling error
+          if (res["Sponsor"]["isSuperAdmin"]){ 
             this.user.role = 'SuperAdmin';
           }
           else{

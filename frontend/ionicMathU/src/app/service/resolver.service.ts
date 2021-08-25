@@ -11,6 +11,6 @@ export class ResolverService {
 
   resolve(route: ActivatedRouteSnapshot){
     let id = route.paramMap.get('id');
-    return this.dataService.getEmployeeData(id);
+    return this.dataService.getData(id);
   }
 }

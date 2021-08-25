@@ -27,4 +27,8 @@ export class EmployeesService {
   getEmployees(data:Company){
     return this.http.post<Sponsor_users[]>('http://localhost/mathU_backend/math_u_viewEmployees.php', data);
   }
+
+  modifyEmployee(data:Sponsor_users){
+    return this.http.post<any>('http://localhost/mathU_backend/edit_employee_roles.php', data);
+  }
 }

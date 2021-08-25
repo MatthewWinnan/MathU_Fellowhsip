@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular'
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { Sponsor_users } from 'src/app/model/sponsor_users';
 import { ToastController } from '@ionic/angular';
+import { EmployeesService } from '../../../service/employees.service';
 
 @Component({
   selector: 'app-modify-employee-role',
@@ -36,6 +37,7 @@ export class ModifyEmployeeRolePage implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     public toastController: ToastController,
+    public _apiService: EmployeesService,
   ) { 
     this.route.queryParams.subscribe(info=> {
       if(info && info.myData){
@@ -86,7 +88,20 @@ export class ModifyEmployeeRolePage implements OnInit {
         this.data.manageApplications = this.modifyEmployee.value.manage_applications;
       }
       console.log(this.data);
-      // this.router.navigate(['./../view-employee'])
+      //send api request 
+      this._apiService.modifyEmployee(this.data).subscribe((res) => {
+        console.log("REQUEST SUCCESS ===", res);
+        this.the_message = res["message"];
+        this.printMessage();
+        if (this.the_message.substring(0,7) == "Success"){
+          console.log("go to differnet page");
+          // this.router.navigate(['./../view-employee'])
+        }
+      }, (error:any) => {
+        this.the_message = 'error';// error;
+        this.printMessage();
+        console.log("ERROR ===", error);
+      });
     }
   }
 

@@ -10,11 +10,11 @@ export class DataService {
 
   constructor() { }
 
-  setEmployeeData(id, data){
+  setData(id, data){
     this.employeeData[id] = data;
   }
 
-  getEmployeeData(id){
+  getData(id){
     return this.employeeData[id];
   }
 }

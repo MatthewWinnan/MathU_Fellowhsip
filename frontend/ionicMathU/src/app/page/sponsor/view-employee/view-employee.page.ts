@@ -127,7 +127,7 @@ export class ViewEmployeePage implements OnInit {
     // all bursaries with company_id that are 
     this._apiService.getEmployees(this.ourCompany).subscribe((res:Sponsor_users[]) => {
       console.log("REQUEST SUCCESS ===", res);
-      this.employeesData = res["Employees"];
+      this.employeesData = res;
       this.isFetching = false;
     }, (error:any) => {
       console.log("ERROR ===", error);
@@ -144,7 +144,7 @@ export class ViewEmployeePage implements OnInit {
   }
  
   modifyEmployee(editEmployeeItem) {
-    this.dataService.setEmployeeData(1, editEmployeeItem);
+    this.dataService.setData(1, editEmployeeItem);
     this.router.navigateByUrl('modify-employee-role/1');
   }
 
