@@ -36,7 +36,7 @@ function GetBursaries($comp_id, $mysqli){
 			//add to the array
 			
 			$newBursary->bursary_covers = GetBursaryCovers($row["Bursary_ID"], $mysqli);
-			$newBursary->Applicants = GetApplicants($row["Bursary_ID"], $mysqli);
+			//$newBursary->Applicants = GetApplicants($row["Bursary_ID"], $mysqli);
 			//add to the array
 			$list[$counter]= $newBursary;
 			$counter = $counter+1;
@@ -46,7 +46,7 @@ function GetBursaries($comp_id, $mysqli){
 }
 //=========================================
 function GetCompanyClass($comp_id, $mysqli){
-	$sql = "SELECT * FROM company WHERE Company_ID=$comp_id";
+	$sql = "SELECT * FROM company WHERE company_id=$comp_id";
 	$result = $mysqli->query($sql);
 	
 	if ($result->num_rows > 0){
