@@ -41,13 +41,13 @@
     </ion-card-header>
 
     <div class="ion-text-center">
-      <ion-button fill="none"  (click)="declineDialogue(item)" size = "small">
+      <ion-button fill="none" (click)="declineDialogue(item)" size="small" *ngIf="item.status != 'Declined'">
         <ion-icon name="close-circle"></ion-icon>
       </ion-button>
       <ion-button fill="none" (click)="openViewInfo(item)" size="small">
         <ion-icon name="ellipsis-horizontal"></ion-icon>
       </ion-button>
-      <ion-button fill="none"  (click)="acceptDialogue(item)"  size = "small" alt="Accept Student">
+      <ion-button fill="none" (click)="acceptDialogue(item)" size="small" *ngIf="item.status != 'Accepted'">
         <ion-icon name="checkmark-circle"></ion-icon>
       </ion-button>
       
