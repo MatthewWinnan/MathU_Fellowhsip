@@ -22,9 +22,9 @@
   <ion-card *ngFor="let item of applicantsData">
     <ion-card-header>
       <ion-card-subtitle>
-        Applicant (Status: {{item.status}}) 
+        Applicant (Status: {{item.Status}}) 
         <br/><br/>
-        Applied date: {{item.application_date}}
+        Applied date: {{item.Application_Date}}
       </ion-card-subtitle>
       <ion-item>
         {{item.student.first_name}}  {{ item.student.last_name }}
@@ -41,13 +41,13 @@
     </ion-card-header>
 
     <div class="ion-text-center">
-      <ion-button fill="none" (click)="declineDialogue(item)" size="small" *ngIf="item.status != 'Declined'">
+      <ion-button fill="none" (click)="declineDialogue(item)" size="small" *ngIf="item.Status != 'Declined'">
         <ion-icon name="close-circle"></ion-icon>
       </ion-button>
       <ion-button fill="none" (click)="openViewInfo(item)" size="small">
         <ion-icon name="ellipsis-horizontal"></ion-icon>
       </ion-button>
-      <ion-button fill="none" (click)="acceptDialogue(item)" size="small" *ngIf="item.status != 'Accepted'">
+      <ion-button fill="none" (click)="acceptDialogue(item)" size="small" *ngIf="item.Status != 'Accepted'">
         <ion-icon name="checkmark-circle"></ion-icon>
       </ion-button>
       

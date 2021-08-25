@@ -57,10 +57,10 @@ export class ViewApplicantsPage implements OnInit {
 
     // this.applicantsData = [
     //   {
-    //     bursary_id: this.data.bursary_id,
-    //     student_id: 0,
-    //     application_date: "02-01-2021",
-    //     status: "Pending",
+    //     Bursary_ID: this.data.bursary_id,
+    //     Student_ID: 0,
+    //     Application_Date: "02-01-2021",
+    //     Status: "Pending",
     //     student: {
     //       student_id: "U0100",
     //       first_name: "Newbie",
@@ -90,10 +90,10 @@ export class ViewApplicantsPage implements OnInit {
     //     }
     //   },
     //   {
-    //     bursary_id: this.data.bursary_id,
-    //     student_id: 0,
-    //     application_date: "02-10-2021",
-    //     status: "Accepted",
+    //     Bursary_ID: this.data.bursary_id,
+    //     Student_ID: 0,
+    //     Application_Date: "02-10-2021",
+    //     Status: "Accepted",
     //     student: {
     //       student_id: "U0001",
     //       first_name: "Jadon",
@@ -140,10 +140,10 @@ export class ViewApplicantsPage implements OnInit {
     //     }
     //   },
     //   {
-    //     bursary_id: this.data.bursary_id,
-    //     student_id: 0,
-    //     application_date: "02-03-2021",
-    //     status: "Declined",
+    //     Bursary_ID: this.data.bursary_id,
+    //     Student_ID: 0,
+    //     Application_Date: "02-03-2021",
+    //     Status: "Declined",
     //     student: {
     //       student_id: "U0002",
     //       first_name: "Daniel",
@@ -173,10 +173,10 @@ export class ViewApplicantsPage implements OnInit {
     //     }
     //   },
     //   {
-    //     bursary_id: this.data.bursary_id,
-    //     student_id: 0,
-    //     application_date: "02-03-2021",
-    //     status: "Accepted",
+    //     Bursary_ID: this.data.bursary_id,
+    //     Student_ID: 0,
+    //     Application_Date: "02-03-2021",
+    //     Status: "Accepted",
     //     student: {
     //       student_id: "U0010",
     //       first_name: "Marcus",
@@ -271,7 +271,7 @@ export class ViewApplicantsPage implements OnInit {
     if (val && val.trim()!= ''){
       this.applicantsData = this.applicantsData.filter(
         (item)=>{
-          return (item.status.toLowerCase().indexOf(val.toLowerCase()) > -1);
+          return (item.Status.toLowerCase().indexOf(val.toLowerCase()) > -1);
         }
       )
     }

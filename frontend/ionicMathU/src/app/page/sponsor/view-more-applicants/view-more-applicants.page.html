@@ -93,12 +93,12 @@
       Willing to work back for {{ data.student.workback }} years 
     </div>
 
-    <div class="applicant-info" *ngIf="data.status == 'Accepted'">
+    <div class="applicant-info" *ngIf="data.Status == 'Accepted'">
       <b>Email address: </b>
       {{ data.student.email_address }}
     </div>
 
-    <div class="applicant-info" *ngIf='data.student.contact_number!=="" && data.status=="Accepted"'>
+    <div class="applicant-info" *ngIf='data.student.contact_number!=="" && data.Status=="Accepted"'>
       <b>Contact number: </b>
       {{ data.student.contact_number }}
     </div> 

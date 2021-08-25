@@ -3,10 +3,10 @@ import { student_users } from "./student_users";
 
 
 export class Student_bursary{
-    bursary_id: 0;
-    student_id: 0;
-    application_date?: string;
-    status: string;
+    Bursary_ID: 0;
+    Student_ID: 0;
+    Application_Date?: string;
+    Status: string;
 
     bursary?: Bursary;  //bursary is not needed again sponsor side 
     student: student_users;
