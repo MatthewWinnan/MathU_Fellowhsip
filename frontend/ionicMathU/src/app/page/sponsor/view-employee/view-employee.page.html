@@ -17,8 +17,8 @@
   </p>
 
   <div *ngIf="userType == 'SuperAdmin' && !isFetching">
-    <!-- && jsonData_length>=1 -->
-    <ion-card *ngFor = 'let item of employeesData'>
+    {{employeesData}}
+    <!-- <ion-card *ngFor = 'let item of employeesData'>
       <ion-card-header>
         <ion-card-subtitle>
           <p *ngIf="item.isSuperAdmin">Super Admin</p>
@@ -44,7 +44,7 @@
           </ion-button>
         </ion-toolbar>  
       </ion-card-header>
-    </ion-card>
+    </ion-card> -->
   </div>
 
   <div *ngIf="userType != 'SuperAdmin'" class="ion-text-center vertical-center">

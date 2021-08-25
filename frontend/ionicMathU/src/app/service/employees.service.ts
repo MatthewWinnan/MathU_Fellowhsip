@@ -20,12 +20,11 @@ export class EmployeesService {
     this.headers.append("Access-Control-Allow-Origin", "http://localhost:8100");
   }
 
-  // addBursary(data:Bursary){
-  //   return this.http.post<any>('http://localhost/mathU_backend/math_u_create_bursary.php', data);
-  // }
+  addEmployee(data:Sponsor_users){
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_addEmployee.php', data);
+  }
 
   getEmployees(data:Company){
-    return this.http.post<Sponsor_users[]>('http://localhost/mathU_backend/math_u_get_employees.php', data);
-    //change file name
+    return this.http.post<Sponsor_users[]>('http://localhost/mathU_backend/math_u_viewEmployees.php', data);
   }
 }

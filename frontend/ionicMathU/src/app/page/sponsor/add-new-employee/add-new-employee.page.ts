@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular'
+import { ModalController, Platform } from '@ionic/angular'
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Sponsor_users } from 'src/app/model/sponsor_users';
 import { Company } from '../../../model/company';
-
+import { EmployeesService } from '../../../service/employees.service';
+import { Storage } from '@ionic/storage-angular';
 
 
 @Component({
@@ -16,10 +17,9 @@ import { Company } from '../../../model/company';
 export class AddNewEmployeePage implements OnInit {
   the_message : string = "";
   ourCompany = new Company();
+  userType: string = "";
 
   sa_test = false;
-
-
 
   get first_name() {
     return this.addEmployee.get('first_name');
@@ -80,14 +80,14 @@ export class AddNewEmployeePage implements OnInit {
     private router: Router, 
     public toastController: ToastController,
     public ModalCtrl: ModalController,
-    
+    public _apiService: EmployeesService,
+    private platform: Platform,
+    public storage: Storage,
   ) { 
-    this.ourCompany.company_id = 0;
-    this.ourCompany.company_name = "Google";
-    this.ourCompany.company_industry = "IT & Telecommunications";
-    this.ourCompany.company_logo = "";
-    this.ourCompany.company_description = "";
-    this.ourCompany.company_URL = "";
+    this.platform.ready().then(()=>{
+      this.getUserType();
+      this.getCompanyDetails();
+    });
   }
 
   ngOnInit() {
@@ -117,7 +117,22 @@ export class AddNewEmployeePage implements OnInit {
         this.Subemployee.manageApplications = this.addEmployee.value.manage_applications;
       }
       console.log(this.Subemployee);
-      // this.router.navigate(['./../view-employee'])
+        //send api request 
+      this._apiService.addEmployee(this.Subemployee).subscribe((res) => {
+        console.log("REQUEST SUCCESS ===", res);
+        this.the_message = res["message"];
+        this.printMessage();
+        if (this.the_message.substring(0,7) == "Success"){
+          console.log("go to differnet page");
+          // this.router.navigate(['./../view-employee'])
+        }
+      }, (error:any) => {
+        this.the_message = 'error';// error;
+        this.printMessage();
+        console.log("ERROR ===", error);
+      });
+
+      
     }
     
   }
@@ -150,6 +165,22 @@ export class AddNewEmployeePage implements OnInit {
     this.the_message = "";
   }
 
+  getUserType(){
+    this.storage.get('name').then( (val) => {
+      //console.log(val);
+      this.userType = val["role"];
+    }, (err)=>{
+      this.userType = "";
+    })
+  }
+
+  getCompanyDetails(){
+    this.storage.get('name').then( (val) => {
+      this.ourCompany = <Company>val["sponsor_users"]["company"];
+    }, (err)=>{
+      console.log("company detials error " + err);
+    })    
+  }
   
 
 

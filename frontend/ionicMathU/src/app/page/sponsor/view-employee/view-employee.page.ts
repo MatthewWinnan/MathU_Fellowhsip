@@ -24,7 +24,6 @@ export class ViewEmployeePage implements OnInit {
   //all sub-employees of a company are a normal sponsor_user (with different rights)
   employeesData:Sponsor_users[] = [];
   jsonData_length = 0;
-  //employeesData:any[] = [];
 
   today: number = Date.now();
 
@@ -40,20 +39,19 @@ export class ViewEmployeePage implements OnInit {
     this.platform.ready().then(()=>{
       this.getUserType();
       this.getCompanyDetails();
-      this.initialiseEmployeeData();
-    });    
+      //this.initialiseEmployeeData();
+    });
   }
 
   ngOnInit() {
   }
 
   initialiseEmployeeData(){
-    console.log(this.ourCompany);
     //send a request to backend to get all Sponsor_users in the same company
     //company info will be stored in the LocalStorage after login
 
     //for now, creating dummy dataset
-
+    /*
     this.employeesData = [
       {
         "sponsor_id": "S0020",
@@ -121,20 +119,19 @@ export class ViewEmployeePage implements OnInit {
         "company": this.ourCompany
       }
     ];
+    */
 
-    // this.isFetching = true;
-    // // all bursaries with company_id that are 
-    // this._apiService.getEmployees(this.ourCompany).subscribe((res:Sponsor_users[]) => {
-    //   console.log("REQUEST SUCCESS ===", res);
-    //   this.employeesData = res;
-    //   if(res!=null){
-    //     this.jsonData_length = this.employeesData.length;
-    //   }
-    //   this.isFetching = false;
-    // }, (error:any) => {
-    //   console.log("ERROR ===", error);
-    //   this.employeesData = [];
-    // });
+    this.isFetching = true;
+    // all bursaries with company_id that are 
+    this._apiService.getEmployees(this.ourCompany).subscribe((res:Sponsor_users[]) => {
+      console.log("REQUEST SUCCESS ===", res);
+      this.employeesData = res;
+      this.isFetching = false;
+      console.log(this.employeesData);
+    }, (error:any) => {
+      console.log("ERROR ===", error);
+      this.employeesData = [];
+    });
   }
 
   async addEmployee() {
@@ -185,6 +182,9 @@ export class ViewEmployeePage implements OnInit {
   getCompanyDetails(){
     this.storage.get('name').then( (val) => {
       this.ourCompany = <Company>val["sponsor_users"]["company"];
+      console.log("in company details ");
+      console.log(this.ourCompany);
+      this.initialiseEmployeeData();
     }, (err)=>{
       console.log("company detials error " + err);
     })    
