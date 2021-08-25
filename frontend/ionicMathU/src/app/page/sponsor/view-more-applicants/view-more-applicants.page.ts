@@ -29,7 +29,7 @@ export class ViewMoreApplicantsPage implements OnInit {
   }
 
   calculateAge(){
-    let dob = new Date(this.data.student.date_of_birth);
+    let dob = new Date(this.data.Student.date_of_birth);
     let timeDiff = Math.abs(Date.now() - dob.getTime());
     let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
     return age;

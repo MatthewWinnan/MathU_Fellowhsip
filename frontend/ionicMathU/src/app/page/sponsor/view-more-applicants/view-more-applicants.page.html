@@ -5,7 +5,7 @@
       <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
     </ion-button>
 
-    <ion-title>{{data.student.first_name}} {{data.student.last_name}} </ion-title>
+    <ion-title>{{data.Student.first_name}} {{data.Student.last_name}} </ion-title>
 
     <ion-buttons slot="end">
     </ion-buttons> 
@@ -20,87 +20,88 @@
       {{calculateAge()}}
     </div>
 
-    <div class="applicant-info" *ngIf='data.student.description_of_student !== ""'>
+    <div class="applicant-info" *ngIf='data.Student.description_of_student !== ""'>
       <b>A short Description of Me: </b>
       <br/>
-      {{ data.student.description_of_student}}
+      {{ data.Student.description_of_student}}
     </div>
 
-    <div class="applicant-info" *ngIf="data.student.nationality">
+    <div class="applicant-info" *ngIf="data.Student.nationality">
       RSA citizen	
     </div>
 
-    <div class="applicant-info" *ngIf="data.student.city!=='' && data.student.province!==''">
+    <div class="applicant-info" *ngIf="data.Student.city!=='' && data.Student.province!==''">
       <b>Address: </b>
-      {{ data.student.city }}, {{ data.student.province }}
+      {{ data.Student.city }}, {{ data.Student.province }}
     </div>
-    <div class="applicant-info" *ngIf="data.student.city=='' && data.student.province!==''">
+    <div class="applicant-info" *ngIf="data.Student.city=='' && data.Student.province!==''">
       <b>Address: </b>
-      {{ data.student.province }}
+      {{ data.Student.province }}
     </div>
-    <div class="applicant-info" *ngIf="data.student.city!=='' && data.student.province==''">
+    <div class="applicant-info" *ngIf="data.Student.city!=='' && data.Student.province==''">
       <b>Address: </b>
-      {{ data.student.city }}
+      {{ data.Student.city }}
     </div>
     
-    <div class="applicant-info" *ngIf="data.student.disability">
+    <div class="applicant-info" *ngIf="data.Student.disability">
       <b>Disability: </b>
-      {{ data.student.disability }}
+      {{ data.Student.disability }}
     </div>
 
-    <div class="applicant-info" *ngIf="data.student.current_academic_level=='High School'" >
-      Currently in {{ data.student.grade }} with the {{ data.student.syllabus }} syllabus. 
+    <div class="applicant-info" *ngIf="data.Student.current_academic_level=='High School'" >
+      Currently in {{ data.Student.grade }} with the {{ data.Student.syllabus }} syllabus. 
     </div>
 
-    <div class="applicant-info" *ngIf="data.student.current_academic_level=='Undergraduate' || 
-      data.student.current_academic_level=='Postgraduate'">
-      Currently studying {{data.student.currently_studying}} ({{ data.student.year_of_study }})
-       at {{ data.student.study_institution }} ({{data.student.current_academic_level}})
+    <div class="applicant-info" *ngIf="data.Student.current_academic_level=='Undergraduate' || 
+      data.Student.current_academic_level=='Postgraduate'">
+      Currently studying {{data.Student.currently_studying}} ({{ data.Student.year_of_study }})
+       at {{ data.Student.study_institution }} ({{data.Student.current_academic_level}})
     </div>
 
-    <div class="applicant-info" *ngIf="data.student.current_academic_level=='High School'" >
+    <div class="applicant-info" *ngIf="data.Student.current_academic_level=='High School' && 
+    data.Student.average != null" >
       <b>Current average: </b>
-      {{ data.student.average }}
+      {{ data.Student.average }}
     </div>
 
-    <div class="applicant-info" *ngIf="data.student.current_academic_level=='Undergraduate' || 
-      data.student.current_academic_level=='Postgraduate'">
+    <div class="applicant-info" *ngIf="(data.Student.current_academic_level=='Undergraduate' || 
+      data.Student.current_academic_level=='Postgraduate') && data.Student.gpa != null">
       <b>Current average: </b>
-      {{data.student.gpa}}
+      {{data.Student.gpa}}
     </div>
 
-    <div class="applicant-info" *ngIf="data.student.marks.length > 0">
+    <div class="applicant-info" *ngIf="data.Student.Students_marks.length > 0">
       <b>Current subjects: </b>
-      <ul *ngFor="let item of data.student.marks" class="marks-list">
+      <ul *ngFor="let item of data.Student.Students_marks" class="marks-list">
         <li>{{item.subject_name}}: {{item.marks}}</li>
       </ul>
     </div>
 
-    <div class="applicant-info" *ngIf="data.student.website">
+    <div class="applicant-info" *ngIf="data.Student.website">
       <b>Personal website/LinkedIn profile:</b>
-      {{data.student.website}}
+      {{data.Student.website}}
     </div>
 
-    <div class="applicant-info" *ngIf='data.student.continue_studies'>
+    <div class="applicant-info" *ngIf='data.Student.continue_studies'>
       Willing to study further
     </div>
 
-    <div class="applicant-info" *ngIf='data.student.bursarred'>
-      Current bursary: {{data.student.current_bursaries}}
+    <div class="applicant-info" *ngIf='data.Student.bursarred'>
+      Current bursary: {{data.Student.current_bursaries}}
     </div>
 
-    <div class="applicant-info" *ngIf='data.student.workback !== 0'>
-      Willing to work back for {{ data.student.workback }} years 
+    <div class="applicant-info" *ngIf='data.Student.workback !== 0'>
+      Willing to work back for {{ data.Student.workback }} years 
     </div>
 
     <div class="applicant-info" *ngIf="data.Status == 'Accepted'">
       <b>Email address: </b>
-      {{ data.student.email_address }}
+      {{ data.Student.email_address }}
     </div>
 
-    <div class="applicant-info" *ngIf='data.student.contact_number!=="" && data.Status=="Accepted"'>
+    <div class="applicant-info" *ngIf='data.Student.contact_number!=="" && data.Status=="Accepted"'>
       <b>Contact number: </b>
-      {{ data.student.contact_number }}
+      {{ data.Student.contact_number }}
     </div> 
   </div> 
 </ion-content>

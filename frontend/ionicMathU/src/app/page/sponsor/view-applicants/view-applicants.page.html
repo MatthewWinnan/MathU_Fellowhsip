@@ -27,14 +27,14 @@
         Applied date: {{item.Application_Date}}
       </ion-card-subtitle>
       <ion-item>
-        {{item.student.first_name}}  {{ item.student.last_name }}
+        {{item.Student.first_name}}  {{ item.Student.last_name }}
       </ion-item>
-      <ion-item *ngIf="item.student.current_academic_level">
-        <p *ngIf="item.student.current_academic_level == 'High School'">
-          Currently in {{item.student.current_academic_level}}, Grade {{item.student.grade}}
+      <ion-item *ngIf="item.Student.current_academic_level">
+        <p *ngIf="item.Student.current_academic_level == 'High School'">
+          Currently in {{item.Student.current_academic_level}}, Grade {{item.Student.grade}}
         </p>
-        <p *ngIf="item.student.current_academic_level != 'High School'">
-          Currently in {{item.student.study_institution}} for {{item.student.current_academic_level}}
+        <p *ngIf="item.Student.current_academic_level != 'High School'">
+          Currently in {{item.Student.study_institution}} for {{item.Student.current_academic_level}}
         </p>
         <!-- Average: {{ item.applicant_average }} -->
       </ion-item>

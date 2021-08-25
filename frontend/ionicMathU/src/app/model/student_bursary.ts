@@ -9,6 +9,6 @@ export class Student_bursary{
     Status: string;
 
     bursary?: Bursary;  //bursary is not needed again sponsor side 
-    student: student_users;
+    Student: student_users;
         //student with no current_academic_level cannot be here!! --> make sure
 }

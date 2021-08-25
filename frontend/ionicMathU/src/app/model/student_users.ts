@@ -34,5 +34,5 @@ export class student_users{
     number_of_reports? = 0;
     banned? = false;
 
-    marks?:Students_marks[];
+    Students_marks?:Students_marks[];
 }
