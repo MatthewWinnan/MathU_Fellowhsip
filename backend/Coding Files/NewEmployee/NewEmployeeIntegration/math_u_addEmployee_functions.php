@@ -113,6 +113,7 @@ function viewEmployees($mysqli, $company_id){      //Fetches all the company emp
       $el = getCompany($company_id, $mysqli);
       $employees = array_merge($employees, $el);
 
+
       $viewEmployees = new allEmployees();
       $viewEmployees->Employees = $employees;
 
