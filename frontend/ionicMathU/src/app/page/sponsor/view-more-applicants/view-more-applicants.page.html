@@ -1,16 +1,14 @@
 <ion-header>
   <ion-toolbar>
 
-    <ion-button fill = "none" slot = "start" routerLink="/view-applicants">
+    <ion-button fill = "none" slot = "start" (click)="backToAllApplicants()">
       <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
     </ion-button>
 
     <ion-title>{{data.student.first_name}} {{data.student.last_name}} </ion-title>
 
     <ion-buttons slot="end">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons> 
-    <!-- #remove when done -->
 
   </ion-toolbar>
 </ion-header>
