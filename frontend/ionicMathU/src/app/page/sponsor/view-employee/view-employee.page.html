@@ -20,31 +20,32 @@
     <ion-card *ngFor = 'let item of employeesData'>
       <ion-card-header>
         <ion-card-subtitle>
-          <p *ngIf="item.isSuperAdmin">Super Admin</p>
-          <p *ngIf="!item.isSuperAdmin">Employee</p>
-          <p *ngIf="item.inactive">(Deactivated)</p>
+          <!-- <p *ngIf="item.isSuperAdmin">Super Admin</p>
+          <p *ngIf="!item.isSuperAdmin">Employee</p> -->
+          <p *ngIf="item.isSuperAdmin == 1">Super Admin</p>
+          <p *ngIf="item.isSuperAdmin == 0">Employee</p>
+          <p *ngIf="item.inactive == 1">(Deactivated)</p>
+          <!-- <p *ngIf="item.inactive">(Deactivated)</p> -->
         </ion-card-subtitle>
         <ion-item> {{ item.first_name_of_user }} {{ item.last_name_of_user }} </ion-item>
         <ion-item> {{ item.email_address }}</ion-item>
         <ion-item>
           <ul>
-            <li *ngIf="item.manageBursaries">Manage Bursaries</li>
-            <li *ngIf="item.manageApplications">Manage Applications</li>
+            <li *ngIf="item.manageBursaries == 1">Manage Bursaries</li>
+            <li *ngIf="item.manageApplications == 1">Manage Applications</li>
+            <!-- <li *ngIf="item.manageBursaries">Manage Bursaries</li>
+            <li *ngIf="item.manageApplications">Manage Applications</li> -->
           </ul>
         </ion-item>
-        <ion-toolbar *ngIf="!item.inactive">
-          {{ loggedSponsor.sponsor_id }}
-          <br/>
-          <!-- {{ item.sponsor_id }} -> fix --> 
-          <div>
-            <ion-button fill="none" color="black" slot="start" (click)="modifyEmployee(item)">
-              <ion-icon name="brush" size="small"></ion-icon>
-            </ion-button>
-    
-            <ion-button fill="none" color="black" slot="end" (click)="deactivate(item)">
-              <ion-icon name="close-circle" size="small" ></ion-icon>
-            </ion-button>
-          </div>
+        <!-- <ion-toolbar *ngIf="!item.inactive"> -->
+        <ion-toolbar *ngIf="item.inactive == 0 && loggedSponsor.email_address !== item.email_address">
+          <ion-button fill="none" color="black" slot="start" (click)="modifyEmployee(item)">
+            <ion-icon name="brush" size="small"></ion-icon>
+          </ion-button>
+  
+          <ion-button fill="none" color="black" slot="end" (click)="deactivate(item)">
+            <ion-icon name="close-circle" size="small" ></ion-icon>
+          </ion-button>
         </ion-toolbar>  
       </ion-card-header>
     </ion-card>

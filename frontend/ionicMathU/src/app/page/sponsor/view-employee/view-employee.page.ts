@@ -39,8 +39,8 @@ export class ViewEmployeePage implements OnInit {
   ) { 
     this.platform.ready().then(()=>{
       this.getUserType();
-      this.getCompanyDetails();
       this.getLoggedSponsor();
+      this.getCompanyDetails();
       //this.initialiseEmployeeData();
     });
   }
@@ -183,8 +183,8 @@ export class ViewEmployeePage implements OnInit {
   getCompanyDetails(){
     this.storage.get('name').then( (val) => {
       this.ourCompany = <Company>val["sponsor_users"]["company"];
-      console.log("in company details ");
-      console.log(this.ourCompany);
+      //console.log("in company details ");
+      //console.log(this.ourCompany);
       this.initialiseEmployeeData();
     }, (err)=>{
       console.log("company detials error " + err);
@@ -194,8 +194,8 @@ export class ViewEmployeePage implements OnInit {
   getLoggedSponsor(){
     this.storage.get('name').then( (val) => {
       this.loggedSponsor = <Sponsor_users>val["sponsor_users"];
-      console.log("in logged in sponsor details ");
-      console.log(this.loggedSponsor);
+      //console.log("in logged in sponsor details ");
+      //console.log(this.loggedSponsor);
     }, (err)=>{
       console.log("logged in sponsor error " + err);
     })    
