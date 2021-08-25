@@ -49,7 +49,7 @@ export class LoginPage implements OnInit {
       { type: 'pattern', message: 'Please enter a valid email address' }
     ],
     password: [
-      { type: 'required', message: 'Name is required' }
+      { type: 'required', message: 'Password is required' }
     ]
   }
 
