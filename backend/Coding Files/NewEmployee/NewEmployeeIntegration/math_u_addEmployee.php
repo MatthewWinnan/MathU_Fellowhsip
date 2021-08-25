@@ -16,7 +16,7 @@ $data = json_decode($input, true);
 $first_name = $data['first_name_of_user'];
 $last_name = $data['last_name_of_user'];
 $email = strtolower($data['email_address']);
-$password = GenerateHashPassword($data['password']);
+$password = null;
 $company_id = $data['company_id'];
 $isSuperAdmin = $data['isSuperAdmin'];
 $manageBursaries = $data['manageBursaries'];
@@ -49,7 +49,7 @@ if($e_ex == true){
   if($a_n_e == true){
 
       $new_user->message = "Employee successfully added!";
-      
+
       echo json_encode($new_user);
 
   } else {
