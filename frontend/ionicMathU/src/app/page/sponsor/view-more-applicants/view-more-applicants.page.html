@@ -17,88 +17,92 @@
 
 <ion-content padding >
   <div padding style="margin:15px">
-    <p>
+    <div class="applicant-info">
       <b>Age:</b> 
       {{calculateAge()}}
-    </p>
+    </div>
 
-    <p *ngIf='data.student.description_of_student !== ""'>
+    <div class="applicant-info" *ngIf='data.student.description_of_student !== ""'>
       <b>A short Description of Me: </b>
       <br/>
       {{ data.student.description_of_student}}
-    </p>
+    </div>
 
-    <p *ngIf="data.student.nationality">
+    <div class="applicant-info" *ngIf="data.student.nationality">
       RSA citizen	
-    </p>
+    </div>
 
-    <p *ngIf="data.student.city!=='' && data.student.province!==''">
+    <div class="applicant-info" *ngIf="data.student.city!=='' && data.student.province!==''">
       <b>Address: </b>
       {{ data.student.city }}, {{ data.student.province }}
-    </p>
-
-    <p *ngIf="data.student.city=='' && data.student.province!==''">
+    </div>
+    <div class="applicant-info" *ngIf="data.student.city=='' && data.student.province!==''">
       <b>Address: </b>
       {{ data.student.province }}
-    </p>
-
-    <p *ngIf="data.student.city!=='' && data.student.province==''">
+    </div>
+    <div class="applicant-info" *ngIf="data.student.city!=='' && data.student.province==''">
       <b>Address: </b>
       {{ data.student.city }}
-    </p>
+    </div>
     
-    <p *ngIf="data.student.disability">
-      Disability : {{ data.student.disability }}
-    </p>
+    <div class="applicant-info" *ngIf="data.student.disability">
+      <b>Disability: </b>
+      {{ data.student.disability }}
+    </div>
 
-    <p *ngIf="data.student.current_academic_level=='High School'" >
+    <div class="applicant-info" *ngIf="data.student.current_academic_level=='High School'" >
       Currently in {{ data.student.grade }} with the {{ data.student.syllabus }} syllabus. 
-      <br/>
-      Current average: {{ data.student.average }}
-      <br/>
-    </p>
-    <div ng-repeat = "item in student.marks">
-    <p >
-      Current subjects: 
-      <br/>
-         <!-- {{data.student.marks.length}}  -->
-        {{item.subject_name }} fix 
-   </p>
-  </div>
+    </div>
 
-    <!-- <p *ngIf="data.student.current_academic_level=='Undergraduate' || 
+    <div class="applicant-info" *ngIf="data.student.current_academic_level=='Undergraduate' || 
       data.student.current_academic_level=='Postgraduate'">
       Currently studying {{data.student.currently_studying}} ({{ data.student.year_of_study }})
        at {{ data.student.study_institution }} ({{data.student.current_academic_level}})
-       <br/>
-       Current average: {{data.student.gpa}}
-    </p> -->
+    </div>
 
-    <!-- <p *ngIf="data.student.website">
+    <div class="applicant-info" *ngIf="data.student.current_academic_level=='High School'" >
+      <b>Current average: </b>
+      {{ data.student.average }}
+    </div>
+
+    <div class="applicant-info" *ngIf="data.student.current_academic_level=='Undergraduate' || 
+      data.student.current_academic_level=='Postgraduate'">
+      <b>Current average: </b>
+      {{data.student.gpa}}
+    </div>
+
+    <div class="applicant-info" *ngIf="data.student.marks.length > 0">
+      <b>Current subjects: </b>
+      <ul *ngFor="let item of data.student.marks" class="marks-list">
+        <li>{{item.subject_name}}: {{item.marks}}</li>
+      </ul>
+    </div>
+
+    <div class="applicant-info" *ngIf="data.student.website">
       <b>Personal website/LinkedIn profile:</b>
       {{data.student.website}}
-    </p> -->
+    </div>
 
-    <!-- <p *ngIf='data.student.continue_studies'>
+    <div class="applicant-info" *ngIf='data.student.continue_studies'>
       Willing to study further
-    </p> -->
+    </div>
 
-    <!-- <p *ngIf='data.student.bursarred'>
+    <div class="applicant-info" *ngIf='data.student.bursarred'>
       Current bursary: {{data.student.current_bursaries}}
-    </p> -->
+    </div>
 
-    <!-- <p *ngIf='data.student.workback !== 0'>
+    <div class="applicant-info" *ngIf='data.student.workback !== 0'>
       Willing to work back for {{ data.student.workback }} years 
-    </p> -->
+    </div>
 
-    <!-- <p *ngIf="data.status == 'Accepted'">
+    <div class="applicant-info" *ngIf="data.status == 'Accepted'">
       <b>Email address: </b>
       {{ data.student.email_address }}
-    </p> -->
+    </div>
 
-    <!-- <p *ngIf='data.student.contact_number!=="" && data.status=="Accepted"'>
+    <div class="applicant-info" *ngIf='data.student.contact_number!=="" && data.status=="Accepted"'>
       <b>Contact number: </b>
       {{ data.student.contact_number }}
-    </p>  -->
+    </div> 
   </div> 
 </ion-content>
