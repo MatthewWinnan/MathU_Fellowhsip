@@ -29,8 +29,8 @@ function addNewEmployee($first_name,$last_name,$email,$password,$company_id,$isS
 
 
   } else {
-    $sql = "INSERT INTO `sponsor_users` (`sponsor_id`, `first_name_of_user`, `last_name_of_user`, `email_address`, `password`, `company_id`, `isSuperAdmin`, `manageBursaries`,  `manageApplications`, `inactive`, `isVerified`,`regisered_date`)
-    VALUES ('$sponsor_id', '$first_name', '$last_name', '$email', '$password', '$company_id', 0, 1, 1, 0, 0, '$regdate')";
+    $sql = "INSERT INTO `sponsor_users` (`first_name_of_user`, `last_name_of_user`, `email_address`, `password`, `company_id`, `isSuperAdmin`, `manageBursaries`,  `manageApplications`, `inactive`, `isVerified`,`regisered_date`)
+    VALUES ('$first_name', '$last_name', '$email', '$password', '$company_id', 0, 1, 1, 0, 0, '$regdate')";
     $entry = $mysqli->query($sql);
 
   }
@@ -85,7 +85,7 @@ function viewEmployees($mysqli, $company_id){      //Fetches all the company emp
   }
 
 
-    $sql = "SELECT `first_name_of_user`, `last_name_of_user`, `email_address` FROM `sponsor_users` WHERE `company_id` = '$company_id'";
+    $sql = "SELECT `sponsor_id`, `first_name_of_user`, `last_name_of_user`, `email_address`, `company_id`, `isSuperAdmin`, `manageBursaries`, `manageApplications`, `inactive`, `isVerified` FROM `sponsor_users` WHERE `company_id` = '$company_id'";
     $entry = $mysqli->query($sql);
 
     if($entry){
@@ -95,9 +95,22 @@ function viewEmployees($mysqli, $company_id){      //Fetches all the company emp
 
       while ($row = mysqli_fetch_array($entry, MYSQLI_ASSOC)) {
 
+        foreach ($row as $key => $value) {
+          if($value == 1){
+            $row[$key] = 'true';
+          } else {
+            // $value = 'false';
+            $row[$key] = 'false';
+          };
+        }
+
         $employees[$p] = $row;
         $p += 1;
       }
+
+      $el = getCompany($company_id, $mysqli);
+      $employees = array_merge($employees, $el);
+
       $viewEmployees = new allEmployees();
       $viewEmployees->Employees = $employees;
 
@@ -150,6 +163,21 @@ function addAU($sponsor_id, $email, $mysqli){
 //==============================================================================
 //==============================================================================
 
+function getCompany($company_id, $mysqli){
+  $sql = "SELECT `company_id`, `company_name`, `company_industry`, `number_of_reports`, `company_logo`, `company_description`, `company_URL`
+          FROM `company` WHERE `company_id` = $company_id";
+  $op = array($mysqli->query($sql));
+  $op = $mysqli->query($sql);
 
+  if($op){
+    return mysqli_fetch_array($op, MYSQLI_ASSOC) ;
+  } else {
+    return $myqli->errno;
+  }
+}
+
+//==============================================================================
+//==============================================================================
+//==============================================================================
 
 ?>
