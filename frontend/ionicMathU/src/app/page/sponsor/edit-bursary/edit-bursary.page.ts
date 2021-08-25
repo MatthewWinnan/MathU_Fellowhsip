@@ -194,7 +194,8 @@ export class EditBursaryPage implements OnInit {
 
   public addBursarySubmit() {
     //console.log(this.addBursary.value);
-    this.bursary.company_id = 0; //fix it
+    this.bursary.company_id = this.data.company_id; //fix it
+    this.bursary.bursary_id = this.data.bursary_id;
     this.bursary.bursary_name = this.addBursary.value.bursary_name;
     this.bursary.bursary_type = this.addBursary.value.bursary_type;
     this.bursary.bursary_description = this.addBursary.value.bursary_description;
@@ -215,6 +216,9 @@ export class EditBursaryPage implements OnInit {
     this.bursary.shortlist_date = this.addBursary.value.shortlist_date.substring(0,10);
     this.bursary.email_address = this.addBursary.value.email_address_bursary;
     this.bursary.bursary_duration = this.addBursary.value.bursary_duration;
+    this.bursary.isVisible = this.data.isVisible;
+    this.bursary.bursary_status = this.data.bursary_status;
+    this.bursary.company = this.data.company;
     console.log(this.bursary);
     
     //send api request 

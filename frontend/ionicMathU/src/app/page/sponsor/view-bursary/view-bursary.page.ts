@@ -133,7 +133,7 @@ export class ViewBursaryPage implements OnInit {
     // this.jsonData_length = this.jsonData.length;
 
     this.isFetching = true;
-    console.log(this.ourCompany);
+    //console.log(this.ourCompany);
     // all bursaries with company_id that are 
     this._apiService.getAllBursary(this.ourCompany).subscribe((res:Bursary[]) => {
       console.log("REQUEST SUCCESS ===", res);
@@ -171,19 +171,20 @@ export class ViewBursaryPage implements OnInit {
         handler:(data) => {
           deactivateItem.isVisible = false;
           this.router.navigateByUrl('view-bursary');
+          console.log(deactivateItem);
           //send api request 
-          this._apiService.deactivateBursary(deactivateItem).subscribe((res:Bursary) => {
-            console.log("REQUEST SUCCESS ===", res);
-            this.the_message = deactivateItem.bursary_name + " has been deactivated.";
-            this.printMessage();
-            if (this.the_message.substring(0,7) == "Success"){
-              this.router.navigateByUrl('./view-bursary');
-            }
-          }, (error:any) => {
-            this.the_message = 'error';// error;
-            this.printMessage();
-            console.log("ERROR ===", error);
-          });
+          // this._apiService.deactivateBursary(deactivateItem).subscribe((res:Bursary) => {
+          //   console.log("REQUEST SUCCESS ===", res);
+          //   this.the_message = deactivateItem.bursary_name + " has been deactivated.";
+          //   this.printMessage();
+          //   if (this.the_message.substring(0,7) == "Success"){
+          //     this.router.navigateByUrl('./view-bursary');
+          //   }
+          // }, (error:any) => {
+          //   this.the_message = 'error';// error;
+          //   this.printMessage();
+          //   console.log("ERROR ===", error);
+          // });
           //display toast
         } 
     },

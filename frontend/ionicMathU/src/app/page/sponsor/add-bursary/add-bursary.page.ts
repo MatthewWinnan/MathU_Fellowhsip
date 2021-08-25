@@ -187,7 +187,7 @@ export class AddBursaryPage implements OnInit {
       this.the_message = res["message"];
       this.printMessage();
       if (this.the_message.substring(0,7) == "Success"){
-        this.router.navigateByUrl('./view-bursary');
+        this.router.navigateByUrl('view-bursary');
       }
     }, (error:any) => {
       this.the_message = 'error';// error;
