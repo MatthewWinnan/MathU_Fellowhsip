@@ -85,7 +85,7 @@ function viewEmployees($mysqli, $company_id){      //Fetches all the company emp
   }
 
 
-    $sql = "SELECT `first_name_of_user`, `last_name_of_user`, `email_address`, `isSuperAdmin`, `manageBursaries`, `manageApplications`, `inactive` FROM `sponsor_users` WHERE `company_id` = '$company_id'";
+    $sql = "SELECT `sponsor_id`, `first_name_of_user`, `last_name_of_user`, `email_address`, `company_id`, `isSuperAdmin`, `manageBursaries`, `manageApplications`, `inactive`, `isVerified` FROM `sponsor_users` WHERE `company_id` = '$company_id'";
     $entry = $mysqli->query($sql);
 
     if($entry){
@@ -107,6 +107,10 @@ function viewEmployees($mysqli, $company_id){      //Fetches all the company emp
         $employees[$p] = $row;
         $p += 1;
       }
+
+      $el = getCompany($company_id, $mysqli);
+      $employees = array_merge($employees, $el);
+
       $viewEmployees = new allEmployees();
       $viewEmployees->Employees = $employees;
 
@@ -159,6 +163,21 @@ function addAU($sponsor_id, $email, $mysqli){
 //==============================================================================
 //==============================================================================
 
+function getCompany($company_id, $mysqli){
+  $sql = "SELECT `company_id`, `company_name`, `company_industry`, `number_of_reports`, `company_logo`, `company_description`, `company_URL`
+          FROM `company` WHERE `company_id` = $company_id";
+  $op = array($mysqli->query($sql));
+  $op = $mysqli->query($sql);
 
+  if($op){
+    return mysqli_fetch_array($op, MYSQLI_ASSOC) ;
+  } else {
+    return $myqli->errno;
+  }
+}
+
+//==============================================================================
+//==============================================================================
+//==============================================================================
 
 ?>
