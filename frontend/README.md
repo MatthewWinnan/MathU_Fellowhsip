@@ -8,6 +8,7 @@ Front end development happens here
 ## Student Side 
 Branches:
 1. feature-student-mainPage
+2. feature-student-pagesTogether
 
 
 ### Student Main Page (View Bursary)
@@ -27,12 +28,29 @@ The burger menu has the following:
 1. rightOption() to decide which to use:
     1. nextBursary() will cycle through the available bursaries that meet the filter criteria forwards
     2. applyBursary() will cycle through the available bursaries that meet the filter criteria backwards
+        1. Also sees if student is verified. (If not then alert is pushed forward and the student is notified thus.)
 2. leftOption() to decide which to use:
     1. prevBursary()
     2. dismissBursary()
+        1. 1. Also sees if student is verified. (If not then alert is pushed forward and the student is notified thus.)
 3. viewMore() to show more information about the bursary
 4. filter()
 
 Have not made the function able to connect to the backend yet. 
+
+### Shortlist Page
+Here Made a demo list of all the bursaries that student has applied for.
+- Swipe right to view the specific bursary.
+- Swipe left to delete application to that specific bursary
+
+Each specific bursary shows:
+1. Bursary Name
+2. Company Name
+3. Burary status:
+    1. Pending or
+    2. Accepted or
+    3. Declined
+
+- Swipe the whole screen down to refresh page
 
 ### Last updated (13 August 2021)

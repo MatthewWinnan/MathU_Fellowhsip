@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Bursary } from 'src/app/model/bursary';
 import { Company } from 'src/app/model/company';
+import { student_users } from 'src/app/model/student_users'
+import { AlertController } from '@ionic/angular';
+
 
 let bursary = new Bursary;
 let company = new Company;
+let student = new student_users
 let someArray = ["company_id", "bursary_id"];
 let i = 0;
 
@@ -51,7 +55,11 @@ export class StudentHomePage implements OnInit {
   ];
   dateForFurtherCommunication: string = bursary.shortlist_date;   
 
+  /* Student Account Verified */
+  studentIsVerified = student.isVerified
 
+  /* Bursary Id */
+  bursID = bursary.bursary_id
 
   /* Rest of the Logic */
   showValid: boolean = false;
@@ -68,7 +76,8 @@ export class StudentHomePage implements OnInit {
 
 
   constructor(
-    private router: Router
+    private router: Router,
+    public alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -83,6 +92,11 @@ export class StudentHomePage implements OnInit {
     if (i > 0) {
       this.valueLeft = true
     }
+
+    this.getBuraries()
+
+
+
 
   }
 
@@ -122,11 +136,11 @@ export class StudentHomePage implements OnInit {
   }
   
   applyBursary() {
-    console.log("applyBursary()")
-  }
+    this.studentIsVerified ? console.log('You are Verified. Proceed to apply for the Bursary') : this.presentAlert('apply for')
+    }
 
   dismissBursary() {
-    console.log("dismissBursary()")
+    this.studentIsVerified ? console.log('You are Verified. Proceed to decline Bursary') : this.presentAlert('dismiss')
   }
 
   viewMore() {
@@ -138,8 +152,33 @@ export class StudentHomePage implements OnInit {
   filter() {
     console.log("Filter()")
   }
+  /* Alert Option */
+  async presentAlert(str:string) {
 
 
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Account Verification',
+      subHeader: 'To ' +str+ ' the bursary, account must be verified.',
+      message: 'Please go to profile page to make sure that the criteria fields are valid and submit to verify account. Then try again.',
+      buttons: ['OK, got it']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+  }
+
+  /* Get Bursary That meet the filter Criteria */
+  getBuraries() {
+    console.log("Get all Buraries that meet the criteria")
+    /* present the first bursary in the list */
+    this.getSpecificBursary(0)
+  }
 
 
+  /* Get burary with certain ID */
+  getSpecificBursary(bursID) {
+    console.log("Get a bursary with certain id", bursID)
+  }
 }
