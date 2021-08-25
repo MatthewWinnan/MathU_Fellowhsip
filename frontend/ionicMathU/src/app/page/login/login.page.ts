@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
 
   logMeIn(){
     // put in code 
-    this.router.navigate(['./menu']);
+    this.router.navigate(['./student-home']);
 
   }
 

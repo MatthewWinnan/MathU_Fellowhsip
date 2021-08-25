@@ -14,8 +14,20 @@ let company = new Company
 export class ShortlistPage implements OnInit {
 
   bursaryShortlist = [
-    {bursName: "MechEng", bursCompName: "Sasol", bursID: 0, bursIcon: company.comapny_logo, bursStatus: "Pending"},
-    {bursName: "CivEng", bursCompName: "Hatch", bursID: 1, bursIcon: company.comapny_logo, bursStatus: "Accepted" }
+    {
+      bursName: "MechEng", 
+      bursCompName: "Sasol", 
+      bursID: 0, 
+      bursIcon: company.company_logo, 
+      bursStatus: "Pending"
+    },
+    {
+      bursName: "CivEng", 
+      bursCompName: "Hatch", 
+      bursID: 1, 
+      bursIcon: company.company_logo, 
+      bursStatus: "Accepted" 
+    }
   ]
 
   constructor() { }

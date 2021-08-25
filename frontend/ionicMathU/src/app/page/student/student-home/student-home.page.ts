@@ -17,7 +17,7 @@ let i = 0;
 export class StudentHomePage implements OnInit {
 
   /* Form Variables */
-  companyLogo = company.comapny_logo;
+  companyLogo = company.company_logo;
   companyName = company.company_name;
   companyIndustry = company.company_industry;
   bursaryName = bursary.bursary_name;
@@ -130,13 +130,13 @@ export class StudentHomePage implements OnInit {
   }
 
   viewMore() {
-    console.log("viewMore()")
-    this.showValid = !this.showValid
-    console.log(i)
+    console.log("viewMore()");
+    this.showValid = !this.showValid;
+    console.log(i);
   }
 
   filter() {
-    console.log("Filter()")
+    console.log("Filter()");
   }
 
 
