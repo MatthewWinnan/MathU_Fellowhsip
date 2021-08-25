@@ -17,6 +17,7 @@ export class ViewBursaryPage implements OnInit {
   jsonData:Bursary[] = [];
   jsonData_length = 0;
   ourCompany = new Company();
+  allBursaries:Bursary[] = [];
   
   constructor(
     private platform: Platform,
@@ -138,6 +139,7 @@ export class ViewBursaryPage implements OnInit {
     this._apiService.getAllBursary(this.ourCompany).subscribe((res:Bursary[]) => {
       console.log("REQUEST SUCCESS ===", res);
       this.jsonData = res;
+      this.allBursaries = this.jsonData;
       if(res!=null){
         this.jsonData_length = this.jsonData.length;
       }
@@ -149,7 +151,8 @@ export class ViewBursaryPage implements OnInit {
   }
 
   filterBursary(ev:any) {
-    this.initializeJSONData();
+    //this.initializeJSONData();
+    this.jsonData = this.allBursaries;
     const val = ev.target.value;
     if (val && val.trim()!= ''){
       this.jsonData = this.jsonData.filter(
