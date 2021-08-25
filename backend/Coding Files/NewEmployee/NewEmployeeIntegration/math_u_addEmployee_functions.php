@@ -85,7 +85,7 @@ function viewEmployees($mysqli, $company_id){      //Fetches all the company emp
   }
 
 
-    $sql = "SELECT `first_name_of_user`, `last_name_of_user`, `email_address` FROM `sponsor_users` WHERE `company_id` = '$company_id'";
+    $sql = "SELECT `first_name_of_user`, `last_name_of_user`, `email_address`, `isSuperAdmin`, `manageBursaries`, `manageApplications`, `inactive` FROM `sponsor_users` WHERE `company_id` = '$company_id'";
     $entry = $mysqli->query($sql);
 
     if($entry){
