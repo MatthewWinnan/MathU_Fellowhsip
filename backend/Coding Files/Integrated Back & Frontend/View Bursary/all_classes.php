@@ -4,6 +4,42 @@
 //---------------------------
 //FRONTEND
 /*
+student{
+	id? = 0;
+    student_id? = "";
+    first_name = "";
+    last_name = "";
+    date_of_birth = "";
+    email_address = "";
+    password? = "";
+    validated? = 0;
+    nationality? = false;
+    contact_number? = "";
+    city? = "";
+    province? = "";
+    disability? = false;
+    current_academic_level? = "";
+    grade? = 0.0;
+    syllabus? = "";
+    average? = 0.0;
+    currently_studying? = "";
+    year_of_study? = "";
+    study_institution? = "";
+    continue_studies? = false;
+    gpa? = 0.0;
+    description_of_student? = "";
+    //registered_date = "";      //will not be used in frontend at all
+    bursarred? = false;
+    current_bursaries? = "";
+    workback? = 0;
+    //Filters is linked to another table 
+    website? = "";
+	//last_login = "";      //will not be used in frontend at all
+    number_of_reports? = 0;
+    banned? = false;
+
+    marks?:Students_marks[];
+	}
 For Sponsor Register:
 {
     "sponsor_id": "",
@@ -223,66 +259,101 @@ class sponsor_users{
 //STUDENT
 //--------------
 class student{
+	/*student{
+	id? = 0;
+    student_id? = "";
+    first_name = "";
+    last_name = "";
+    date_of_birth = "";
+    email_address = "";
+    password? = "";
+    validated? = 0;
+    nationality? = false;
+    contact_number? = "";
+    city? = "";
+    province? = "";
+    disability? = false;
+    current_academic_level? = "";
+    grade? = 0.0;
+    syllabus? = "";
+    average? = 0.0;
+    currently_studying? = "";
+    year_of_study? = "";
+    study_institution? = "";
+    continue_studies? = false;
+    gpa? = 0.0;
+    description_of_student? = "";
+    //registered_date = "";      //will not be used in frontend at all
+    bursarred? = false;
+    current_bursaries? = "";
+    workback? = 0;
+    //Filters is linked to another table 
+    website? = "";
+	//last_login = "";      //will not be used in frontend at all
+    number_of_reports? = 0;
+    banned? = false;*/
+
 
 	public $id;
 	public $first_name;
 	public $last_name;
-	public $dob;
-	public $email;
+	public $date_of_birth;
+	public $email_address;
 	public $validated;
 	public $nationality;
-	public $contact;
+	public $contact_number;
 	public $city;
 	public $province;
 	public $disability;
-	public $current_acad;
+	public $current_academic_level;
 	public $grade;
 	public $syllabus;
 	public $average;
-	public $current_study;
-	public $yearstudy;
-	public $studyinst;
-	public $cont_studies;
+	public $currently_studying;
+	public $year_of_study;
+	public $study_institution;
+	public $continue_studies;
 	public $gpa;
-	public $studentbio;
+	public $description_of_student;
 	public $bursarred;
-	public $current_bursary;
+	public $current_bursaries;
 	public $workback;
 	public $website;
-	public $num_reports;
+	public $number_of_reports;
 	public $banned;
+	public marks Students_marks=[];
 	
 	
 	public subject_marks $Subjects_marks;
 	public filters $Filter;
 	
-	public function __construct($id, $first_name, $last_name, $dob, $email, $validated, $nationality, $contact, $city, $province, $disability, $current_acad, $grade, $syllabus, $average, $current_study, $yearstudy, $studyinst, $cont_studies, $gpa, $studentbio, $bursarred, $current_bursary, $workback, $website, $num_reports,$banned){
+	public function __construct($id, $first_name, $last_name, $date_of_birth, $email_address, $validated, $nationality, $contact_number, $city, $province, $disability, $current_academic_level, $grade, $syllabus, $average, $currently_studying, $year_of_study, $study_institution, $continue_studies, $gpa, $description_of_student, $bursarred, $current_bursaries, $workback, $website, $number_of_reports,$banned){
 		 $this->id = $id;
 		 $this->first_name = $first_name;
 		 $this->last_name = $last_name;
-		 $this->dob = $dob;
-		 $this->email = $email;
+		 $this->date_of_birth = $date_of_birth;
+		 $this->email_address = $email_address;
 		 $this->validated = $validated;
 		 $this->nationality = $nationality;
-		 $this->contact = $contact;
+		 $this->contact_number = $contact_number;
 		 $this->city = $city;
 		 $this->province = $province;
 		 $this->disability = $disability;
-		 $this->current_acad = $current_acad;
+		 $this->current_academic_level = $current_academic_level;
 		 $this->grade = $grade;
 		 $this->syllabus = $syllabus;
 		 $this->average = $average;
-		 $this->current_study = $current_study;
-		 $this->yearstudy = $yearstudy;
-		 $this->studyinst = $studyinst;
-		 $this->cont_studies = $cont_studies;
+		 $this->currently_studying = $currently_studying;
+		 $this->year_of_study = $year_of_study;
+		 $this->study_institution = $study_institution;
+		 $this->continue_studies = $continue_studies;
 		 $this->gpa = $gpa;
-		 $this->studentbio = $studentbio;
+		 $this->description_of_student = $description_of_student;
 		 $this->bursarred = $bursarred;
-		 $this->current_bursary = $current_bursary;
+		 $this->current_bursaries = $current_bursaries;
 		 $this->workback = $workback;
 		 $this->website = $website;
-		 $this->num_reports = $num_reports;
+		 $this->number_of_reports = $number_of_reports;
 		 $this->banned = $banned;
 	 }
 }
@@ -293,17 +364,19 @@ class student{
 class student_bursaries{
 
 	public student $Student;
-	public bursary $Bursary;
+	//public bursary $Bursary;
 	public $Bursary_ID;
 	public $Student_ID;
-	public $ShortListed;
+	//public $ShortListed;
 	public $Status;
+	public $Application_Date;
 
-	public function __construct($Bursary_ID, $Student_ID, $ShortListed, $Status){
+	public function __construct($Bursary_ID, $Student_ID, $Status, $Application_Date){
 		$this->Bursary_ID = $Bursary_ID;
 		$this->Student_ID = $Student_ID;
-		$this->ShortListed = $ShortListed;
+		//$this->ShortListed = $ShortListed;
 		$this->Status = $Status;
+		$this->Application_Date = $Application_Date;
 	}
 
 }
@@ -318,7 +391,7 @@ class subjects{
 //--------------
 //SUBJECT MARKS
 //--------------
-class subjects_marks{
+class marks{
 
 	public $Student_ID;
 	public $Subject_name;

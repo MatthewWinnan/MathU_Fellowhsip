@@ -1,6 +1,5 @@
 <?php
 include 'all_classes.php';
-include 'math_u_db_connection.php';
 //GET APPLICANTS 
 $input = '{"company_id": 0,
         "bursary_name": "Retirement",
@@ -34,7 +33,7 @@ $input = '{"company_id": 0,
 //$input = file_get_contents('php://input');
 $data = json_decode($input, true);
 $bursary_id = $data["bursary_id"];
-$Applicants = GetApplicants($busary_id, $mysqli);
+$Applicants = GetApplicants($bursary_id, $mysqli);
 echo json_encode($Applicants);
 //----------------------------------------------------
 //LIST OF APPLICANTS
@@ -51,7 +50,9 @@ function GetApplicants($bursary_id, $mysqli){
 	
 	if ($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
-			$student[$counter]=getStudent($row["Student_ID"], $mysqli);
+			$applicant = new student_bursaries($row["Bursary_ID"], $row["Student_ID"], $row["Status"], $row["Application_Date"]);
+			$applicant->Student=getStudent($row["Student_ID"], $mysqli);
+			$student[$counter]=$applicant;
 			$counter = $counter+1;
 		}
 		return $student;
