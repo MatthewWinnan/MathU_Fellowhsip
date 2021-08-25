@@ -95,6 +95,15 @@ function viewEmployees($mysqli, $company_id){      //Fetches all the company emp
 
       while ($row = mysqli_fetch_array($entry, MYSQLI_ASSOC)) {
 
+        foreach ($row as $key => $value) {
+          if($value == 1){
+            $row[$key] = 'true';
+          } else {
+            // $value = 'false';
+            $row[$key] = 'false';
+          };
+        }
+
         $employees[$p] = $row;
         $p += 1;
       }
