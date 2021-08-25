@@ -17,16 +17,14 @@
   </p>
 
   <div *ngIf="userType == 'SuperAdmin' && !isFetching">
-    {{employeesData}}
-    <!-- <ion-card *ngFor = 'let item of employeesData'>
+    <ion-card *ngFor = 'let item of employeesData'>
       <ion-card-header>
         <ion-card-subtitle>
           <p *ngIf="item.isSuperAdmin">Super Admin</p>
           <p *ngIf="!item.isSuperAdmin">Employee</p>
           <p *ngIf="item.inactive">(Deactivated)</p>
         </ion-card-subtitle>
-        <ion-item> {{ item.first_name_of_user }} </ion-item>
-        <ion-item> {{ item.last_name_of_user }} </ion-item>
+        <ion-item> {{ item.first_name_of_user }} {{ item.last_name_of_user }} </ion-item>
         <ion-item> {{ item.email_address }}</ion-item>
         <ion-item>
           <ul>
@@ -35,16 +33,21 @@
           </ul>
         </ion-item>
         <ion-toolbar *ngIf="!item.inactive">
-          <ion-button fill="none" color="black" slot="start" (click)="modifyEmployee(item)">
-            <ion-icon name="brush" size="small"></ion-icon>
-          </ion-button>
-  
-          <ion-button fill="none" color="black" slot="end" (click)="deactivate(item)">
-            <ion-icon name="close-circle" size="small" ></ion-icon>
-          </ion-button>
+          {{ loggedSponsor.sponsor_id }}
+          <br/>
+          <!-- {{ item.sponsor_id }} -> fix --> 
+          <div>
+            <ion-button fill="none" color="black" slot="start" (click)="modifyEmployee(item)">
+              <ion-icon name="brush" size="small"></ion-icon>
+            </ion-button>
+    
+            <ion-button fill="none" color="black" slot="end" (click)="deactivate(item)">
+              <ion-icon name="close-circle" size="small" ></ion-icon>
+            </ion-button>
+          </div>
         </ion-toolbar>  
       </ion-card-header>
-    </ion-card> -->
+    </ion-card>
   </div>
 
   <div *ngIf="userType != 'SuperAdmin'" class="ion-text-center vertical-center">

@@ -18,6 +18,7 @@ import { EmployeesService } from '../../../service/employees.service';
 })
 export class ViewEmployeePage implements OnInit {
   isFetching = false;
+  loggedSponsor = new Sponsor_users();
   ourCompany = new Company();
   allUsersDetials = new AllUsers();
   userType: string = "";
@@ -39,6 +40,7 @@ export class ViewEmployeePage implements OnInit {
     this.platform.ready().then(()=>{
       this.getUserType();
       this.getCompanyDetails();
+      this.getLoggedSponsor();
       //this.initialiseEmployeeData();
     });
   }
@@ -125,9 +127,8 @@ export class ViewEmployeePage implements OnInit {
     // all bursaries with company_id that are 
     this._apiService.getEmployees(this.ourCompany).subscribe((res:Sponsor_users[]) => {
       console.log("REQUEST SUCCESS ===", res);
-      this.employeesData = res;
+      this.employeesData = res["Employees"];
       this.isFetching = false;
-      console.log(this.employeesData);
     }, (error:any) => {
       console.log("ERROR ===", error);
       this.employeesData = [];
@@ -187,6 +188,16 @@ export class ViewEmployeePage implements OnInit {
       this.initialiseEmployeeData();
     }, (err)=>{
       console.log("company detials error " + err);
+    })    
+  }
+
+  getLoggedSponsor(){
+    this.storage.get('name').then( (val) => {
+      this.loggedSponsor = <Sponsor_users>val["sponsor_users"];
+      console.log("in logged in sponsor details ");
+      console.log(this.loggedSponsor);
+    }, (err)=>{
+      console.log("logged in sponsor error " + err);
     })    
   }
 
