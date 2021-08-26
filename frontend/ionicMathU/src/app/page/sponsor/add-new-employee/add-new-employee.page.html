@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="none" slot="start" routerLink="/view-employee/1">
+      <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
+    </ion-button>
+    <ion-title>Add a New Employee</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+  <form [formGroup]="addEmployee" (ngSubmit)="addEmployeeSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input formControlName="first_name" autocapitalize inputmode="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.first_name">
+        <ng-container *ngIf="first_name.hasError(error.type) && (first_name.dirty || first_name.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input formControlName="last_name" autocapitalize inputmode="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.last_name">
+        <ng-container *ngIf="last_name.hasError(error.type) && (last_name.dirty || last_name.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Email Address</ion-label>
+        <ion-input formControlName="email_address" autocapitalize inputmode="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.email_address">
+        <ng-container *ngIf="email_address.hasError(error.type) && (email_address.dirty || email_address.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label>Super Admin</ion-label>
+        <ion-checkbox formControlName="super_admin" 
+          [(checked)]="sa_test" 
+          (ionChange)="updateSuper($event)"
+        color="dark"
+        ></ion-checkbox>
+      </ion-item>
+
+      <ion-item *ngIf="!sa_test">
+        <ion-label>Manage Bursaries</ion-label>
+        <ion-checkbox formControlName="manage_bursary" [(checked)]="sa_test" color="dark"></ion-checkbox>
+      </ion-item>
+
+      <ion-item *ngIf="!sa_test">
+        <ion-label>Manage Applications</ion-label>
+        <ion-checkbox formControlName="manage_applications" [(checked)]="sa_test" color="dark"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="ion-text-center">
+      <ion-button [disabled]="!addEmployee.valid" type="submit" color="">
+        Add
+      </ion-button>
+    </ion-list>
+  </form>
+</ion-content>

@@ -9,7 +9,7 @@ export class ResolverService {
 
   constructor(private dataService:DataService) { }
 
-  resolve(route:ActivatedRouteSnapshot){
+  resolve(route: ActivatedRouteSnapshot){
     let id = route.paramMap.get('id');
     return this.dataService.getData(id);
   }

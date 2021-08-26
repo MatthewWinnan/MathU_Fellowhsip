@@ -5,13 +5,13 @@ export class Sponsor_users{
     first_name_of_user = "";
     last_name_of_user = "";
     email_address = "";
-    password = "";
+    password? = "";
     company_id? = 0;
-    isSuperAdmin? = "";
-    manageBursaries?	= "";
-	manageApplications? = "";
-	inactive? = "";
-	isVerified? = "";
+    isSuperAdmin? = false;
+    manageBursaries?	= false;
+	manageApplications? = false;
+	inactive? = false;
+	isVerified? = false;
 
     company? : Company;
 }

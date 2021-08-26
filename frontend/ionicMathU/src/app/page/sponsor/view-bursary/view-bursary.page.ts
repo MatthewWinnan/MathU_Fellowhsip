@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { Company } from '../../../model/company';
 import { BursaryService } from '../../../service/bursary.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-view-bursary',
@@ -18,6 +19,11 @@ export class ViewBursaryPage implements OnInit {
   jsonData_length = 0;
   ourCompany = new Company();
   allBursaries:Bursary[] = [];
+  //bursary = new Bursary();
+  // jsonData:Bursary[] = [];
+  //jsonData:any = [];
+  b_status : string = "Open";
+  gmail = "";
   
   constructor(
     private platform: Platform,
@@ -27,8 +33,13 @@ export class ViewBursaryPage implements OnInit {
     public _apiService: BursaryService,
     private alert: AlertController,
     public toastController: ToastController,
+    public storage: Storage,
   ) { 
-    
+    this.getValue();
+    this.platform.ready().then(()=>{
+      this.initializeJSONData();
+    });
+    //this.initializeJSONData();
   }
 
   ngOnInit() {
@@ -42,6 +53,14 @@ export class ViewBursaryPage implements OnInit {
       this.ourCompany.company_URL = "";
       this.initializeJSONData();
     //});
+  }
+
+  getValue(){
+    this.storage.get('name').then( (val) => {
+      this.gmail = "value is " + val["role"];
+    }, (err)=>{
+      this.gmail = "empty";
+    })
   }
 
   initializeJSONData() {

@@ -17,6 +17,32 @@ const routes: Routes = [
     loadChildren: () => import('./page/sponsor/view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
   },
   {
+    path: 'edit-profile',
+    loadChildren: () => import('./page/sponsor/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+  },
+  {
+    path: 'view-employee',
+    loadChildren: () => import('./page/sponsor/view-employee/view-employee.module').then( m => m.ViewEmployeePageModule)
+  },
+  {
+    path: 'view-employee/:id',
+    resolve: { myData: ResolverService },
+    loadChildren: () => import('./page/sponsor/view-employee/view-employee.module').then( m => m.ViewEmployeePageModule)
+  },
+  {
+    path: 'add-new-employee',
+    loadChildren: () => import('./page/sponsor/add-new-employee/add-new-employee.module').then( m => m.AddNewEmployeePageModule)
+  },
+  {
+    path: 'modify-employee-role',
+    loadChildren: () => import('./page/sponsor/modify-employee-role/modify-employee-role.module').then( m => m.ModifyEmployeeRolePageModule)
+  },
+  {
+    path: 'modify-employee-role/:id',
+    resolve: { myData: ResolverService },
+    loadChildren: () => import('./page/sponsor/modify-employee-role/modify-employee-role.module').then( m => m.ModifyEmployeeRolePageModule)
+  },
+  {
     path: 'landing-page',
     loadChildren: () => import('./page/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
   },
@@ -85,12 +111,15 @@ const routes: Routes = [
     path: 'edit-bursary',
     loadChildren: () => import('./page/sponsor/edit-bursary/edit-bursary.module').then( m => m.EditBursaryPageModule)
   },
+  {
+    path: 'logout',
+    loadChildren: () => import('./page/logout/logout.module').then( m => m.LogoutPageModule)
+  },
+
 
 
 
 ];
-
-
 
 @NgModule({
   imports: [

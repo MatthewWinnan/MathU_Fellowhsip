@@ -1,15 +1,66 @@
+<app-menu></app-menu>
 <ion-header>
   <ion-toolbar>
     <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
     <ion-buttons slot="start">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-icon></ion-icon>
-    </ion-buttons>
+    <ion-button fill="none" slot = "end" (click)="editProfile()">
+      <ion-icon name="brush" size= "small" ></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h2 class="ion-text-center">View Profile</h2>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Company Name</ion-card-subtitle>
+      <ion-card-title>{{ourCompany.company_name}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Company Industry</ion-card-subtitle>
+      <ion-card-title>{{ourCompany.company_industry}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Company Logo</ion-card-subtitle>
+      <br>
+      {{ourCompany.company_logo}}
+    </ion-card-header>
+  </ion-card> -->
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Company Description</ion-card-subtitle>
+      <ion-card-title>
+        <p *ngIf="!ourCompany.company_description">
+          Click on the Edit Profile to add a Company Description
+        </p>
+        <p *ngIf="ourCompany.company_description">
+          {{ourCompany.company_description}}
+        </p>
+      </ion-card-title>
+    </ion-card-header>
+ </ion-card>
+
+ <ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Company URL</ion-card-subtitle>
+    <ion-card-title>
+      <p *ngIf="!ourCompany.company_URL">
+        Click on the Edit Profile to add a Company URL
+      </p>
+      <p *ngIf="ourCompany.company_URL">
+        {{ourCompany.company_URL}}
+      </p>
+    </ion-card-title>
+  </ion-card-header>
+  
+</ion-card>
 </ion-content>
