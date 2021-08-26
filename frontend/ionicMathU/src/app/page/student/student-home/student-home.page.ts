@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Bursary } from 'src/app/model/bursary';
+import { Bursary } from 'src/app/model/bursaries';
 import { Company } from 'src/app/model/company';
 import { student_users } from 'src/app/model/student_users'
 import { AlertController } from '@ionic/angular';
@@ -56,7 +56,7 @@ export class StudentHomePage implements OnInit {
   dateForFurtherCommunication: string = bursary.shortlist_date;   
 
   /* Student Account Verified */
-  studentIsVerified = student.isVerified
+  studentIsVerified = student.validated;
 
   /* Bursary Id */
   bursID = bursary.bursary_id

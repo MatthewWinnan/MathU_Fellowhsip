@@ -1,8 +1,38 @@
+import { Students_marks } from "./subjects_marks";
+
 export class student_users{
+    id? = 0;
     student_id? = "";
-    first_name_of_student? = "";
-    last_name_of_student? = "";
+    first_name = "";
+    last_name = "";
+    date_of_birth = "";
     email_address = "";
-    password = "";
-	isVerified?: boolean = false;
+    password? = "";
+    validated? = 0;
+    nationality? = false;
+    contact_number? = "";
+    city? = "";
+    province? = "";
+    disability? = false;
+    current_academic_level? = "";
+    grade? = 0.0;
+    syllabus? = "";
+    average? = 0.0;
+    currently_studying? = "";
+    year_of_study? = "";
+    study_institution? = "";
+    continue_studies? = false;
+    gpa? = 0.0;
+    description_of_student? = "";
+    //registered_date = "";      //will not be used in frontend at all
+    bursarred? = false;
+    current_bursaries? = "";
+    workback? = 0;
+    //Filters is linked to another table 
+    website? = "";
+	//last_login = "";      //will not be used in frontend at all
+    number_of_reports? = 0;
+    banned? = false;
+
+    Students_marks?:Students_marks[];
 }
