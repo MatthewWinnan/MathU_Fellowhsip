@@ -8,17 +8,17 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list *ngIf="applicantsData_length >= 1">
     <ion-item>
       <ion-label position="floating">Bursary Status</ion-label>
-      <ion-select (ngModel)="b_status" (ionChange)="filterBursary($event)">
+      <ion-select (ngModel)="b_status" (ionChange)="filterStudent($event)">
         <ion-select-option value="Pending">Pending</ion-select-option>
         <ion-select-option value="Accepted">Accepted</ion-select-option>
         <ion-select-option value="Declined">Declined</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
-  
+
   <p class="ion-text-center" *ngIf="isFetching">
     <ion-spinner name="crescent"></ion-spinner>
   </p>
@@ -46,13 +46,13 @@
       </ion-card-header>
   
       <div class="ion-text-center">
-        <ion-button fill="none" (click)="declineDialogue(item)" size="small" *ngIf="item.Status != 'Declined'">
+        <ion-button fill="none" (click)="declineDialogue(item)" size="small" disabled [attr.disabled]="(item.Status=='Declined')?true:false">
           <ion-icon name="close-circle"></ion-icon>
         </ion-button>
-        <ion-button fill="none" (click)="openViewInfo(item)" size="small">
+        <ion-button fill="none" (click)="openViewInfo(item)" size="small" >
           <ion-icon name="ellipsis-horizontal"></ion-icon>
         </ion-button>
-        <ion-button fill="none" (click)="acceptDialogue(item)" size="small" *ngIf="item.Status != 'Accepted'">
+        <ion-button fill="none" (click)="acceptDialogue(item)" size="small" disabled [attr.disabled]="(item.Status=='Accepted')?true:false">
           <ion-icon name="checkmark-circle"></ion-icon>
         </ion-button>
         
@@ -61,6 +61,7 @@
   </div>
 
   <div class="ion-text-center" *ngIf="!isFetching && applicantsData_length<1">
+    <br/>
     No Applicants have applied yet.
   </div>
   

@@ -18,6 +18,7 @@ export class ViewApplicantsPage implements OnInit {
   the_message : string = "";
   data:Bursary;
   applicantsData:Student_bursary[] = [];
+  allApplicants:Student_bursary[] = [];
   //status: string = '';
   constructor(
     public ModalCtrl: ModalController,
@@ -42,10 +43,11 @@ export class ViewApplicantsPage implements OnInit {
     // all applicants who applied for a certain bursary
     //send api request 
     this.isFetching = true;
-    console.log(this.data);
+    //console.log(this.data);
     this._apiService.getBursaryApplications(this.data).subscribe((res:Student_bursary[]) => {
       console.log("REQUEST SUCCESS ===", res);
       this.applicantsData = res;
+      this.allApplicants = this.applicantsData;
       if(res!=null){
         this.applicantsData_length = this.applicantsData.length;
       }
@@ -210,6 +212,7 @@ export class ViewApplicantsPage implements OnInit {
 
   acceptDialogue(acceptItem) {
     console.log(acceptItem);
+    let before = acceptItem.Status;
     this.alert.create({
       header: "Confirmation",
       subHeader: "Are you sure you would like to accept " + acceptItem.first_name + " " + 
@@ -217,9 +220,20 @@ export class ViewApplicantsPage implements OnInit {
       buttons:[{
         text: "Accept",
         handler:(data) => {
-          //this.status = 'Confirmed!'
-          console.log(acceptItem.first_name + " " + acceptItem.last_name + " has been accepted to " 
+          //send request to backend
+          acceptItem.Status = "Accepted";
+          this._apiService.acceptApplicant(acceptItem).subscribe((res) => {
+            console.log("REQUEST SUCCESS ===", res);
+            this.the_message = res["message"];
+            this.printMessage();
+            console.log(acceptItem.first_name + " " + acceptItem.last_name + " has been accepted to " 
           + "Bursary xyz");
+          }, (error:any) => {
+            acceptItem.Status = before;
+            this.the_message = 'error';// error;
+            this.printMessage();
+            console.log("ERROR ===", error);
+          });
         } 
     },
     { 
@@ -235,6 +249,7 @@ export class ViewApplicantsPage implements OnInit {
 
   declineDialogue(acceptItem) {
     console.log(acceptItem);
+    let before = acceptItem.Status;
     this.alert.create({
       header: "Decline",
       subHeader: "Are you sure you would like to decline " + acceptItem.first_name + " " + 
@@ -243,8 +258,19 @@ export class ViewApplicantsPage implements OnInit {
         text: "Decline",
         handler:(data) => {
           //this.status = 'Declined!'
-          console.log(acceptItem.first_name + " " + acceptItem.last_name + " has been declined to " 
-          + "Bursary xyz");
+          //send request to backend
+          acceptItem.Status = "Declined";
+          this._apiService.declineApplicant(acceptItem).subscribe((res) => {
+            console.log("REQUEST SUCCESS ===", res);
+            this.the_message = res["message"];
+            this.printMessage();
+            console.log(acceptItem.first_name + " " + acceptItem.last_name + " has been declined to " + "Bursary xyz");
+          }, (error:any) => {
+            this.the_message = 'error';// error;
+            this.printMessage();
+            acceptItem.Status = before;
+            console.log("ERROR ===", error);
+          });
         } 
     },
     { 
@@ -265,12 +291,14 @@ export class ViewApplicantsPage implements OnInit {
     this.router.navigateByUrl('view-more-applicants/1');
   }
 
-  filterBursary(ev:any) {
-    this.initializeJSONData();
+  filterStudent(ev:any) {
+    //this.initializeJSONData();
+    this.applicantsData = this.allApplicants;
     const val = ev.target.value;
     if (val && val.trim()!= ''){
       this.applicantsData = this.applicantsData.filter(
         (item)=>{
+          this.applicantsData_length = this.applicantsData.length;
           return (item.Status.toLowerCase().indexOf(val.toLowerCase()) > -1);
         }
       )

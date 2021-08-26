@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Bursary } from '../model/bursaries';
 import { Company } from '../model/Company';
+import { Student_bursary } from '../model/student_bursary';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,16 @@ export class BursaryService {
 
   getBursaryApplications(data:Bursary){
     return this.http.post<any>('http://localhost/mathU_backend/mathU_getApplicants.php', data);
-    //change file name 
+  }
+
+  acceptApplicant(data:Student_bursary){
+    return this.http.post<any>('http://localhost/mathU_backend/accept_applicant.php', data);
+    //change file name
+  }
+
+  declineApplicant(data:Student_bursary){
+    return this.http.post<any>('http://localhost/mathU_backend/decline_applicant.php', data);
+    //change file name
   }
 
 }
