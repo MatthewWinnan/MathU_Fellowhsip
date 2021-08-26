@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Student_bursary } from 'src/app/model/student_bursary';
 import { student_users } from 'src/app/model/student_users';
 
@@ -8,11 +9,14 @@ import { student_users } from 'src/app/model/student_users';
   styleUrls: ['./shortlist.page.scss'],
 })
 
+
 export class ShortlistPage implements OnInit {
   bursaryShortlist:Student_bursary[] = [];
   thisStudent:student_users = new student_users;
   
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     //stored in Storage (when login)
@@ -417,8 +421,10 @@ export class ShortlistPage implements OnInit {
     ];
   }
 
-  goToBursaryView(bursID) {
-    console.log("goToBursaryView() ran with the ",  bursID )
+  goToBursaryView(bursID, k) {
+    console.log("goToBursaryView() ran with the ",  bursID );
+    k = bursID
+    this.router.navigate(["/student-home", k])    
   }
 
   deleteApplication(bursID) {

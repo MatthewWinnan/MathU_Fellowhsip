@@ -4,12 +4,11 @@ import { Bursary } from 'src/app/model/bursaries';
 import { Company } from 'src/app/model/company';
 import { student_users } from 'src/app/model/student_users'
 import { AlertController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
-let bursary = new Bursary;
-let company = new Company;
 let student = new student_users
-let someArray = ["company_id", "bursary_id"];
 let i = 0;
 
 @Component({
@@ -24,47 +23,42 @@ export class StudentHomePage implements OnInit {
 
 
   /* Form Variables */
-  companyLogo = company.company_logo;
-  companyName = company.company_name;
-  companyIndustry = company.company_industry;
-  bursaryName = bursary.bursary_name;
-  fieldStudyNeeded = bursary.study_field;
-  offerExpirationDate = bursary.closing_date;
-  bursaryCoversFor = bursary.bursary_covers;
-  latestAverageAbove = bursary.min_average;
+  companyLogo: any;
+  companyName: any;
+  companyIndustry: any;
+  bursaryName: any;
+  fieldStudyNeeded: any;
+  offerExpirationDate: any;
+  bursaryCoversFor: any;
+  latestAverageAbove: any;
 
-  companyDescription = company.company_description;
-  companyURL = company.company_URL;
-  emailAddress = bursary.email_address;
+  companyDescription: any;
+  companyURL: any;
+  emailAddress: any;
 
-  bursaryType: string = bursary.bursary_type;
-  bursaryDuration = bursary.bursary_duration;
-  academicLevel = bursary.academic_level;
-  minYearRequired = bursary.minimum_year_required;
+  bursaryType: any;
+  bursaryDuration: any;
+  academicLevel: any;
+  minYearRequired: any;
 
-  ageMin = bursary.min_age;
-  ageMax = bursary.max_age;
+  ageMin: any;
+  ageMax: any;
 
-  RSACitizenNeeded: boolean = true;
-  forFinancialAssistence: boolean = true;
-  disability: boolean = true;
+  RSACitizenNeeded: any;
+  forFinancialAssistence: any;
+  disability: any;
 
-  studyFurther = bursary.study_further;
+  studyFurther: any;
 
-  documentsNeeded = [
-    {docName: "CV", docCertified: "Yes"},
-    {docName: "ID", docCertified: "Yes"},
-    {docName: "Proof of Registration", docCertified: "Yes"},
-  ];
-  dateForFurtherCommunication: string = bursary.shortlist_date;   
+  documentsNeeded: any;
+
+  dateForFurtherCommunication: any;
+  
 
   /* Student Account Verified */
   studentIsVerified = student.validated;
 
-  /* Bursary Id */
-  bursID = bursary.bursary_id
-
-  /* Rest of the Logic */
+    /* Rest of the Logic */
   showValid: boolean = false;
   viewMoreStr: string = "View More";
   viewLessStr: string = "View Less";
@@ -72,41 +66,64 @@ export class StudentHomePage implements OnInit {
   moreBursaries: any = '';
   valueLeft: boolean;
   valueRight: boolean;
-  listBurs = [
-    "burs1", "burs2", "burs3"
-  ];
+  listBurs = [];
 
-
+  sub: any;
 
   constructor(
     private router: Router,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    let k: number;
+    this.sub = this.route.params.subscribe(params => {
+      console.log(params);
+      k = parseInt(params.id)
+    });
+
     //stored in Storage (when login)
     this.initialiseStudentData();
 
     //get all bursaries
     this.initialiseBursaries();
 
+    // See if a certain bursary needs to be shown
+    this.checkID(k)
+
+    console.log(i)
+
+    this.getBuraries(i)
 
     /* Upon initiation Values for left and right cycle button is set */
     /* Right */
-    if (i >= this.listBurs.length) {
+    if (i >= this.bursariesList.length) {
       this.valueRight = false
     }
-    if (i < this.listBurs.length) {
+    if (i < this.bursariesList.length) {
       this.valueRight = true
     }
     if (i > 0) {
       this.valueLeft = true
     }
 
-    this.getBuraries()
 
+  }
 
-
+  checkID(k) {
+    for (let m = 0; m < this.bursariesList.length; m++) {
+      console.log(k, this.bursariesList[m].bursary_id)
+      if (k == this.bursariesList[m].bursary_id) {
+        i = m
+        break
+      }
+      else {
+        console.log("Can't find Bursary")
+        i = 0
+      }
+      
+    }
 
   }
 
@@ -123,47 +140,47 @@ export class StudentHomePage implements OnInit {
   nextBursary() {
     // there needs to be a list option to make sure that button will be disabled if end of list is reached.
     // list represents the list of bursaries that meet the filter criteria
-    if (i < this.listBurs.length) {
+    if (i < this.bursariesList.length-1) {
       i++
-      console.log("Next Bursary Brought In. Viewing Bursary: ", i);
       this.valueLeft = true
-      if (i >= this.listBurs.length) {
+      if (i >= this.bursariesList.length-1) {
         this.valueRight = false
       } 
     }
+    this.getBuraries(i)
   }
 
   prevBursary() {
     if (i > 0) {
       i--
-      console.log("Previous Bursary Is Back. Viewing Bursary: ", i, "List length is: ", this.listBurs.length);
       this.valueLeft = true
       this.valueRight = true
       if (i <= 0) {
         this.valueLeft = false
       } 
     }
+    this.getBuraries(i)
   }
   
   applyBursary() {
-    this.studentIsVerified ? console.log('You are Verified. Proceed to apply for the Bursary') : this.presentAlert('apply for')
+    /* this.studentIsVerified ? console.log('You are Verified. Proceed to apply for the Bursary') : this.presentAlert('apply for') */
+    console.log('Proceed to apply for the Bursary')
     }
 
   dismissBursary() {
-    this.studentIsVerified ? console.log('You are Verified. Proceed to decline Bursary') : this.presentAlert('dismiss')
+    /* this.studentIsVerified ? console.log('You are Verified. Proceed to decline Bursary') : this.presentAlert('dismiss') */
   }
 
   viewMore() {
     console.log("viewMore()");
     this.showValid = !this.showValid;
-    console.log(i);
   }
 
   filter() {
-    console.log("Filter()");
+    this.presentAlertV2()
   }
   /* Alert Option */
-  async presentAlert(str:string) {
+  /* async presentAlert(str:string) {
 
 
     const alert = await this.alertController.create({
@@ -177,19 +194,61 @@ export class StudentHomePage implements OnInit {
     await alert.present();
 
     const { role } = await alert.onDidDismiss();
+  } */
+  async presentAlertV2() {
+
+
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Not here yet',
+      subHeader: '',
+      message: 'Coming in v1.2',
+      buttons: ["OK, can't wait"]
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
   }
 
   /* Get Bursary That meet the filter Criteria */
-  getBuraries() {
-    console.log("Get all Buraries that meet the criteria")
+  getBuraries(i: number) {
+    this.companyName = this.bursariesList[i].company.company_name;
+    this.companyIndustry = this.bursariesList[i].company.company_industry;
+    this.bursaryName = this.bursariesList[i].bursary_name;
+    this.fieldStudyNeeded = this.bursariesList[i].study_field;
+    this.offerExpirationDate = this.bursariesList[i].closing_date;
+    this.bursaryCoversFor = this.bursariesList[i].bursary_covers;
+    this.latestAverageAbove = this.bursariesList[i].min_average
+
+    this.companyDescription = this.bursariesList[i].company.company_description;
+    this.companyURL = this.bursariesList[i].company.company_URL;
+    this.emailAddress = this.bursariesList[i].email_address;
+
+    this.bursaryType = this.bursariesList[i].bursary_type;
+    this.bursaryDuration = this.bursariesList[i].bursary_duration;
+    this.academicLevel = this.bursariesList[i].academic_level;
+    this.minYearRequired = this.bursariesList[i].minimum_year_required;
+
+    this.ageMin = this.bursariesList[i].min_age;
+    this.ageMax = this.bursariesList[i].max_age;
+
+    this.RSACitizenNeeded = this.bursariesList[i].RSA_citizen;
+    this.forFinancialAssistence = this.bursariesList[i].financial_need;
+    this.disability = this.bursariesList[i].disability;
+
+    this.studyFurther = this.bursariesList[i].study_further;
+
+    /* this.documentsNeeded =  */
+    this.dateForFurtherCommunication = this.bursariesList[i].shortlist_date; 
+
     /* present the first bursary in the list */
-    this.getSpecificBursary(0)
+    this.getSpecificBursary(this.bursariesList[i])
   }
 
 
   /* Get burary with certain ID */
   getSpecificBursary(bursID) {
-    console.log("Get a bursary with certain id", bursID)
   }
 
   initialiseStudentData(){
@@ -416,5 +475,6 @@ export class StudentHomePage implements OnInit {
       }
 
     ];
+
   }
 }

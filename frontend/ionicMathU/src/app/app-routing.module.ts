@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./page/sponsor/view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
   },
   {
-    path: 'student-home',
+    path: 'student-home/:id',
     loadChildren: () => import('./page/student/student-home/student-home.module').then( m => m.StudentHomePageModule)
   },
   {

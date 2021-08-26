@@ -35,13 +35,20 @@
         <ul>
           <li>
             <ion-icon name="clipboard"></ion-icon>
+            Field Needed: 
             {{ fieldStudyNeeded }}</li>
           <li>
             <ion-icon name="calendar"></ion-icon>
+            Expiration Date: 
             {{ offerExpirationDate }}</li>
           <li>
             <ion-icon name="umbrella"></ion-icon>
-            {{ bursaryCoversFor }}</li>
+            Bursary Covers:
+            <ul *ngFor="let cov of bursary_covers, let i = index">
+              <li>{{cov[i]}}</li>
+            </ul>
+            {{ bursaryCoversFor }}
+          </li>
           <li>
             <ion-icon name="trending-up"></ion-icon>
             {{ latestAverageAbove }}% minimum latest average</li>
@@ -148,8 +155,8 @@
 
     <div *ngIf="showValid; else cycleBlock">
 
-      <ion-button fill="none" (click)="leftOption()">
-        <ion-icon name='close-outline' slot="start"></ion-icon>
+      <ion-button disabled fill="none" (click)="leftOption()">
+        <ion-icon name='' slot="start"></ion-icon>
       </ion-button>
 
       <ion-button (click)="viewMore()">
@@ -158,7 +165,7 @@
         </ion-label>
       </ion-button>
 
-      <ion-button fill="none" (click)="rightOption()">
+      <ion-button expand="" fill="" (click)="rightOption()">
         <ion-icon name='checkmark-outline' slot="end"></ion-icon>
       </ion-button>
     </div>
