@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 import { ToastController } from '@ionic/angular';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { AllUsers } from '../../../model/all_users';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -35,7 +36,8 @@ export class EditProfilePage implements OnInit {
     public storage: Storage,
     private formBuilder: FormBuilder,
     public toastController: ToastController,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public _apiService: ApiService,
   ) { 
     this.getUserType();
     this.getCompanyDetails();
@@ -75,10 +77,24 @@ export class EditProfilePage implements OnInit {
 
       this.allUsersDetials.sponsor_users.company = this.ourCompany;
       //send request to backend to update details 
-        //console.log(this.allUsersDetials);
-        this.the_message = "Success!";
+      //send api request 
+      this._apiService.editSponsor(this.ourCompany).subscribe((res) => {
+        console.log("REQUEST SUCCESS ===", res);
+        this.the_message = res["message"];
         this.printMessage();
-        this.setValue(this.allUsersDetials);
+        if (this.the_message.substring(0,7) == "Success"){
+          //console.log("go to differnet page");
+          this.setValue(this.allUsersDetials);
+          this.router.navigateByUrl('edit-employee/1');
+        }
+      }, (error:any) => {
+        this.the_message = 'error';// error;
+        this.printMessage();
+        console.log("ERROR ===", error);
+      });
+        //console.log(this.allUsersDetials);
+        //this.the_message = "Success!";
+        //this.printMessage();
 
       //this is to test if it worked 
       this.getAllUsersDetails();
