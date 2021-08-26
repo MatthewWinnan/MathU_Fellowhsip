@@ -45,6 +45,11 @@ const routes: Routes = [
     path: 'view-bursary',
     loadChildren: () => import('./page/sponsor/view-bursary/view-bursary.module').then( m => m.ViewBursaryPageModule)
   },
+  {
+    path: 'view-bursary/:id',
+    resolve: { myData: ResolverService },
+    loadChildren: () => import('./page/sponsor/view-bursary/view-bursary.module').then( m => m.ViewBursaryPageModule)
+  },
   //{
     //path: 'view-more-bursary',
     //loadChildren: () => import('./page/sponsor/view-more-bursary/view-more-bursary.module').then( m => m.ViewMoreBursaryPageModule)

@@ -14,4 +14,8 @@ export class ForgotPasswordPage implements OnInit {
   ngOnInit() {
   }
 
+  doRefresh(event) {
+    console.log("reload");
+  }
+
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Bursary } from '../../../model/bursaries';
 import { AlertController, NavController, Platform, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { BursaryService } from '../../../service/bursary.service';
   templateUrl: './view-bursary.page.html',
   styleUrls: ['./view-bursary.page.scss'],
 })
-export class ViewBursaryPage implements OnChanges, OnInit, AfterViewInit {
+export class ViewBursaryPage implements OnInit {
   the_message : string = "";
   isFetching = false;
   jsonData:Bursary[] = [];
@@ -32,32 +32,6 @@ export class ViewBursaryPage implements OnChanges, OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    //this.platform.ready().then(()=>{
-      //ourCompany is stored in LocalStorage (when user logs in)
-      this.ourCompany.company_id = 0;
-      this.ourCompany.company_name = "Google";
-      this.ourCompany.company_industry = "IT & Telecommunications";
-      this.ourCompany.company_logo = "";
-      this.ourCompany.company_description = "";
-      this.ourCompany.company_URL = "";
-      this.initializeJSONData();
-    //});
-  }
-
-  ngOnChanges() {
-    //this.platform.ready().then(()=>{
-      //ourCompany is stored in LocalStorage (when user logs in)
-      this.ourCompany.company_id = 0;
-      this.ourCompany.company_name = "Google";
-      this.ourCompany.company_industry = "IT & Telecommunications";
-      this.ourCompany.company_logo = "";
-      this.ourCompany.company_description = "";
-      this.ourCompany.company_URL = "";
-      this.initializeJSONData();
-    //});
-  }
-  
-  ngAfterViewInit() {
     //this.platform.ready().then(()=>{
       //ourCompany is stored in LocalStorage (when user logs in)
       this.ourCompany.company_id = 0;
@@ -253,6 +227,11 @@ export class ViewBursaryPage implements OnChanges, OnInit, AfterViewInit {
 
     (await toast).present();
     this.the_message = "";
+  }
+
+  doRefresh(event) {
+    //window.location.reload();
+    this.initializeJSONData();
   }
 
 }
