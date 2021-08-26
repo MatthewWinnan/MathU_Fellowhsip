@@ -59,12 +59,12 @@ export class ViewProfilePage implements OnInit {
      }
 
   addStudent_details = this.formBuilder.group({
-    first_name_of_student: [''],
-    last_name_of_student: [''],
-    data_of_birth: [''],
-    email_address: [''],
+    first_name_of_student: ['',[Validators.required, Validators.maxLength(100)]],
+    last_name_of_student: ['',[Validators.required, Validators.maxLength(100)]],
+    data_of_birth: ['',[Validators.required]],
+    email_address: ['',[Validators.required, Validators.pattern("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$")]],
     //password: [''],  
-    contact_number: [''],
+    contact_number: ['',[Validators.required, Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$")]],
     city: [''],
     province: [''],
     RSA_citizen: [false],
@@ -72,7 +72,7 @@ export class ViewProfilePage implements OnInit {
     current_academic_level: [''],
     grade: [0],
     syllabus: [''],
-    average: [0.0],
+    average: [60.0,[Validators.min(60)]],
     currently_studying: [''],
     year_of_study: [''],
     study_institution: [''],
@@ -90,6 +90,9 @@ export class ViewProfilePage implements OnInit {
   }
   get data_of_birth() {
     return this.addStudent_details.get('data_of_birth');
+  }
+  get email_adress() {
+    return this.addStudent_details.get('email_adress');
   }
   get contact_number() {
     return this.addStudent_details.get('contact_number');
@@ -130,6 +133,32 @@ export class ViewProfilePage implements OnInit {
   get gpa() {
     return this.addStudent_details.get('gpa');
   }
+
+  public errorMessages = {
+    first_name_of_student: [
+      {type: 'required', message:'Name is required'},
+      {type: 'maxlength', message:'Name cant be longer than 100 characters'},
+    ],
+    last_name_of_student: [
+      {type: 'required', message:'Surname is required'},
+      {type: 'maxlength', message:'Surname cant be longer than 100 characters'},
+    ],
+    data_of_birth: [
+      {type: 'required', message:'Date of Birth is required'},
+    ],
+    contact_number: [
+      {type: 'required', message:'Contact Number is required'},
+      {type: 'pattern', message:'Please enter valid Email Adress'},
+    ],
+    email_adress: [
+      {type: 'required', message:'Email is required'},
+      {type: 'pattern', message:'Please enter valid Email Adress'},
+    ],
+    
+    average: [
+      {type: 'min', message:'Average should atleast be 60'},
+    ],
+  };
 
   public addStudentDetails() {
     this.student.first_name = this.addStudent_details.value.first_name_of_student;

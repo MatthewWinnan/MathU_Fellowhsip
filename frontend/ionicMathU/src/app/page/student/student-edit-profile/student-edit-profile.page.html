@@ -1,15 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
-    <ion-buttons slot="start">
+    
+    <!-- <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
+    </ion-buttons> -->
     <!-- <ion-buttons slot="start">
       <ion-icon name="arrow-back" (click)="goBack()"></ion-icon>
     </ion-buttons> -->
-    <ion-buttons slot="end">
-      <ion-icon></ion-icon>
-    </ion-buttons>
+
+    <ion-button fill = 'none' slot="start" routerLink = "/student-view-profile">
+      <ion-icon name="arrow-back" ></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -19,33 +21,69 @@
   <form [formGroup]="addStudent_details" (ngSubmit)="addStudentDetails()">
     <!-- Basic information -->
     <ion-list>
-      <ion-item>
+      <ion-item >
         <ion-label position="floating">Student name</ion-label>
         <ion-input formControlName="first_name_of_student" type="text" [(ngModel)]="name"></ion-input>
       </ion-item>
+      <div *ngFor = "let error of errorMessages.first_name_of_student">
+        <ng-container *ngIf = "first_name_of_student.hasErrorr(error.type) && (first_name_of_student.dirty || first_name_of_student.touched)" >
+          <small class = "error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
       <ion-item>
         <ion-label position="floating">Student surname</ion-label>
         <ion-input formControlName="last_name_of_student" [(ngModel)]="surname" type="text"></ion-input>
       </ion-item>
+      <div *ngFor = "let error of errorMessages.last_name_of_student">
+        <ng-container *ngIf = "last_name_of_student.hasErrorr(error.type) && (last_name_of_student.dirty || last_name_of_student.touched)" >
+          <small class = "error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
       <ion-item>
         <ion-label position="floating">Email address</ion-label>
         <ion-input formControlName="email_address" [(ngModel)]="email" type="text"></ion-input>
       </ion-item>
+      <div *ngFor = "let error of errorMessages.email_address">
+        <ng-container *ngIf = "email_address.hasErrorr(error.type) && (email_address.dirty || email_address.touched)" >
+          <small class = "error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
       
       <ion-item *ngIf="this.student.contact_number === '' ">
         <ion-label position="floating">Contact number</ion-label>
         <ion-input formControlName="contact_number" placeholder= "Please Enter Your Contact Number" type="text"></ion-input>
       </ion-item>
+      <div *ngFor = "let error of errorMessages.contact_number">
+        <ng-container *ngIf = "contact_number.hasErrorr(error.type) && (contact_number.dirty || contact_number.touched)" >
+          <small class = "error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
 
       <ion-item *ngIf="this.student.contact_number !== '' ">
         <ion-label position="floating">Contact number</ion-label>
         <ion-input formControlName="contact_number" [(ngModel)]="number" type="text"></ion-input>
       </ion-item>
+      <div *ngFor = "let error of errorMessages.contact_number">
+        <ng-container *ngIf = "contact_number.hasErrorr(error.type) && (contact_number.dirty || contact_number.touched)" >
+          <small class = "error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+      
 
       <ion-item *ngIf="this.student.data_of_birth !== null ">
         <ion-label position="floating">Date of birth</ion-label>
         <ion-datetime formControlName="data_of_birth" displayFormat="YYYY MMMM DD"  [(ngModel)]="dob"></ion-datetime>
       </ion-item>
+      <div *ngFor = "let error of errorMessages.data_of_birth">
+        <ng-container *ngIf = "data_of_birth.hasErrorr(error.type) && (data_of_birth.dirty || data_of_birth.touched)" >
+          <small class = "error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+
+
       <ion-item *ngIf="this.student.data_of_birth === null ">
         <ion-label position="floating">Date of birth</ion-label>
         <ion-datetime formControlName="data_of_birth" displayFormat="YYYY MMMM DD" placeholder = " YYYY/MM/DD"></ion-datetime>
@@ -157,6 +195,12 @@
         <ion-label position="floating">Average</ion-label>
         <ion-input formControlName="average" placeholder={{this.student.average}} type="number"></ion-input>
       </ion-item>
+      <div *ngFor = "let error of errorMessages.average">
+        <ng-container *ngIf = "average.hasErrorr(error.type) && (average.dirty || average.touched)" >
+          <small class = "error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
       <!-- Info for uni students -->
       <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
         <ion-label position="floating">Currently Studying</ion-label>
