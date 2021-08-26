@@ -123,8 +123,8 @@ export class AddNewEmployeePage implements OnInit {
         this.the_message = res["message"];
         this.printMessage();
         if (this.the_message.substring(0,7) == "Success"){
-          console.log("go to differnet page");
-          // this.router.navigate(['./../view-employee'])
+          //console.log("go to differnet page");
+          this.router.navigateByUrl('view-employee/1');
         }
       }, (error:any) => {
         this.the_message = 'error';// error;
@@ -181,8 +181,6 @@ export class AddNewEmployeePage implements OnInit {
       console.log("company detials error " + err);
     })    
   }
-  
-
 
 
 }

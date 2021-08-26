@@ -94,8 +94,7 @@ export class ModifyEmployeeRolePage implements OnInit {
         this.the_message = res["message"];
         this.printMessage();
         if (this.the_message.substring(0,7) == "Success"){
-          console.log("go to differnet page");
-          // this.router.navigate(['./../view-employee'])
+          this.router.navigate(['./view-employee/1']);
         }
       }, (error:any) => {
         this.the_message = 'error';// error;

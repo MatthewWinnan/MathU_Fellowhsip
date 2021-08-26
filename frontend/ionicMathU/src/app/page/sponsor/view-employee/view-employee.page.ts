@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController, Platform } from '@ionic/angular';
+import { ModalController, Platform, ToastController } from '@ionic/angular';
 import { Company } from '../../../model/company';
 import { Sponsor_users } from 'src/app/model/sponsor_users';
 import { DataService } from 'src/app/service/data.service';
@@ -17,6 +17,7 @@ import { EmployeesService } from '../../../service/employees.service';
   styleUrls: ['./view-employee.page.scss'],
 })
 export class ViewEmployeePage implements OnInit {
+  the_message : string = "";
   isFetching = false;
   loggedSponsor = new Sponsor_users();
   ourCompany = new Company();
@@ -36,6 +37,7 @@ export class ViewEmployeePage implements OnInit {
     private alert : AlertController,
     public storage: Storage,
     public _apiService: EmployeesService,
+    public toastController: ToastController,
   ) { 
     this.platform.ready().then(()=>{
       this.getUserType();
@@ -158,6 +160,19 @@ export class ViewEmployeePage implements OnInit {
           employeeItem.inactive = true;
           console.log(employeeItem);
           //send request to backend
+          this._apiService.deactivateEmployee(employeeItem).subscribe((res) => {
+            console.log("REQUEST SUCCESS ===", res);
+            this.the_message = res["message"];
+            this.printMessage();
+            if (this.the_message.substring(0,7) == "Success"){
+              this.router.navigate(['./view-employee/1']);
+            }
+          }, (error:any) => {
+            this.the_message = 'error';// error;
+            this.printMessage();
+            console.log("ERROR ===", error);
+          });
+
         } 
     },
     { 
@@ -199,6 +214,21 @@ export class ViewEmployeePage implements OnInit {
     }, (err)=>{
       console.log("logged in sponsor error " + err);
     })    
+  }
+
+  doRefresh(event){
+    this.initialiseEmployeeData();
+  }
+
+  async printMessage() {
+    const toast = this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: this.the_message
+    });
+
+    (await toast).present();
+    this.the_message = "";
   }
 
 }

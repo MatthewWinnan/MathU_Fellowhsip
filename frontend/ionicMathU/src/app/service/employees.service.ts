@@ -31,4 +31,8 @@ export class EmployeesService {
   modifyEmployee(data:Sponsor_users){
     return this.http.post<any>('http://localhost/mathU_backend/edit_employee_roles.php', data);
   }
+
+  deactivateEmployee(data:Sponsor_users){
+    return this.http.post<any>('http://localhost/mathU_backend/deactivate_employee.php', data);
+  }
 }

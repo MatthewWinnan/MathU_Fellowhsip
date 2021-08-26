@@ -25,6 +25,11 @@ const routes: Routes = [
     loadChildren: () => import('./page/sponsor/view-employee/view-employee.module').then( m => m.ViewEmployeePageModule)
   },
   {
+    path: 'view-employee/:id',
+    resolve: { myData: ResolverService },
+    loadChildren: () => import('./page/sponsor/view-employee/view-employee.module').then( m => m.ViewEmployeePageModule)
+  },
+  {
     path: 'add-new-employee',
     loadChildren: () => import('./page/sponsor/add-new-employee/add-new-employee.module').then( m => m.AddNewEmployeePageModule)
   },
