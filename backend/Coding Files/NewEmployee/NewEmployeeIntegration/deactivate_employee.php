@@ -1,6 +1,7 @@
 <?php
 
 include 'math_u_db_connection.php';
+include 'math_u_addEmployee_functions.php';
 
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
@@ -8,12 +9,16 @@ $data = json_decode($input, true);
 $company_id = $data['company_id'];
 $email = $data['email_address'];
 
+$ci = companyIDInEmployee($email,$company_id,$mysqli);
+
 class deactivateEmployee{
   public $message;
 }
 
+if( $ci == true){
+
 $sql = "UPDATE `sponsor_users` SET `inactive`= 1
-        WHERE `company_id`='$company_id' AND 'email_address' = '$email' ";
+        WHERE `company_id`='$company_id' AND `email_address` = '$email' ";
 $entry = $mysqli->query($sql);
 
 if($entry){
@@ -33,7 +38,16 @@ if($entry){
   echo json_encode($deactivate);
 
   // return json_encode($deactivate);
-}
+} } else {
+   $updateRole = new deactivateEmployee();
+   $updateRole->message = "Company ID or Email does not exist OR credentials do not match";
+
+   // echo $mysqli->errno;
+
+   echo json_encode($updateRole);
+
+   return json_encode($updateRole);
+ }
 
 
  ?>
