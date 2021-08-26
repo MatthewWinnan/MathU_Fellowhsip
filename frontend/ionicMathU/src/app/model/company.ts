@@ -1,5 +1,5 @@
 export class Company {
-    company_id = 0;
+    company_id?:number;
     company_name = "";
     company_industry = "";
     company_logo? : string;
