@@ -7,6 +7,12 @@ include 'math_u_db_connection.php';
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
+$email = $data['email_address'];
+$company_id = $data['company_id'];
+$isSuperAdmin = $data['isSuperAdmin'];
+$manageBursaries = $data['manageBursaries'];
+$manageApplications = $data['manageApplications'];
+
 class Role{
   public $message;
 }
@@ -14,13 +20,11 @@ class Role{
 $updateRole = new Role();
 
 // $sponsor_id = ucfirst($data['sponsor_id']);
-$email = $data['email_address'];
-$company_id = $data['company_id'];
-$isSuperAdmin = $data['isSuperAdmin'];
-$manageBursaries = $data['manageBursaries'];
-$manageApplications = $data['manageApplications'];
+
 
 // Update database.
+
+if(isset($email)){
 
 if($isSuperAdmin === 'true' AND $manageApplications === 'true' AND $manageBursaries === 'true'){
 
@@ -64,6 +68,11 @@ if($entry){
   echo json_encode($updateRole);
 
   // return json_encode($updateRole);
+}
+} else {
+  $updateRole->message = "Email does not exist.";
+
+  echo json_encode($updateRole);
 }
 
  ?>
