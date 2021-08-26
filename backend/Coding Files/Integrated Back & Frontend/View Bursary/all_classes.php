@@ -115,6 +115,8 @@ class bursary{
 	
 	public company $Company;
 	public $Applicants = [];
+
+	public $bursary_status;
 	
 	public function __construct($company_id, $bursary_name, $bursary_type, $WB_duration, $closing_date, $min_age, $max_age, $academic_level, $study_field, $minimum_year_required, $bursary_duration, $min_average, $RSA_citizen, $financial_need,
 	 $study_further, $disability, $province, $email_address, $shortlist_date, $isVisible, $bursary_description){

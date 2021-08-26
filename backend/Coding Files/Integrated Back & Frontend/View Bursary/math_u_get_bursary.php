@@ -2,6 +2,7 @@
 
 include 'math_u_db_connection.php';
 include 'all_classes.php';
+include 'math_u_bursary_status_function.php';
 
 /*$input = '{
 	"comapny_id": 0,
@@ -35,11 +36,15 @@ function GetBursaries($comp_id, $mysqli){
 			$newBursary->bursary_id = $row["Bursary_ID"];
 			//add to the array
 			
+			
 			$newBursary->bursary_covers = GetBursaryCovers($row["Bursary_ID"], $mysqli);
 			//$newBursary->Applicants = GetApplicants($row["Bursary_ID"], $mysqli);
 			//add to the array
 			$list[$counter]= $newBursary;
 			$counter = $counter+1;
+
+			//add bursary status
+			$newBursary-> $bursary_status = bursaryStatus($msqli,$company_id);
 		}
 		return $list;
 	}else return null;	
