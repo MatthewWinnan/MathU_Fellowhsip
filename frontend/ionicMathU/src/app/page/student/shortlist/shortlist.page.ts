@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student_bursary } from 'src/app/model/student_bursary';
 import { student_users } from 'src/app/model/student_users';
+import { BursaryService } from 'src/app/service/bursary.service';
 
 @Component({
   selector: 'app-shortlist',
@@ -16,6 +17,7 @@ export class ShortlistPage implements OnInit {
   
   constructor(
     private router: Router,
+    public _apiService: BursaryService,
   ) { }
 
   ngOnInit() {
@@ -131,6 +133,18 @@ export class ShortlistPage implements OnInit {
   }
 
   initialiseShortlist(){
+    // get all bursaries student applied for 
+    // this._apiService.getStudentBursaries(this.thisStudent).subscribe((res:Student_bursary[]) => {
+    //   console.log("REQUEST SUCCESS ===", res);
+    //   this.bursaryShortlist = res;
+    //   if(res!=null){
+    //     //cater for no bursaries found!
+    //   }
+    // }, (error:any) => {
+    //   console.log("ERROR ===", error);
+    //   this.bursaryShortlist = [];
+    // });
+
     this.bursaryShortlist = [
       {
         Bursary_ID: 1,
@@ -415,10 +429,9 @@ export class ShortlistPage implements OnInit {
           }
         }
       },
-      
-
-
     ];
+
+    
   }
 
   goToBursaryView(bursID, k) {
@@ -431,6 +444,6 @@ export class ShortlistPage implements OnInit {
     console.log("deleteApplication() ran with the ",  bursID )
   }
 
-  doRefresh() {
+  doRefresh(event) {
     window.location.reload();
   }}

@@ -7,6 +7,7 @@ import { AlertController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { BursaryService } from 'src/app/service/bursary.service';
+import { Student_bursary } from 'src/app/model/student_bursary';
 
 
 let student = new student_users
@@ -21,6 +22,7 @@ let i = 0;
 export class StudentHomePage implements OnInit {
   thisStudent:student_users = new student_users();
   bursariesList:Bursary[] = [];
+  student_bur = new Student_bursary();
 
 
   /* Form Variables */
@@ -130,8 +132,8 @@ export class StudentHomePage implements OnInit {
   }
 
   /* the option on the right hand side to see if the nextBursary() must be used or applyBursary() */
-  rightOption() {
-    this.showValid ? this.applyBursary() : this.nextBursary()
+  rightOption(thatBursary) {
+    this.showValid ? this.applyBursary(thatBursary) : this.nextBursary()
   }
 
   /* the option on the left hand side to see if the prevBursary() must be used or dismissBursary() */
@@ -164,10 +166,26 @@ export class StudentHomePage implements OnInit {
     this.getBuraries(i)
   }
   
-  applyBursary() {
+  applyBursary(bursary_data:Bursary) {
     /* this.studentIsVerified ? console.log('You are Verified. Proceed to apply for the Bursary') : this.presentAlert('apply for') */
-    console.log('Proceed to apply for the Bursary')
-    }
+    console.log('Proceed to apply for the Bursary');
+    console.log(bursary_data);
+    // this.student_bur.Student_ID = this.thisStudent.id;
+    // this.student_bur.Bursary_ID = bursary_data.bursary_id;
+    // //date set by backend 
+    // this.student_bur.Status = "Pending";
+    // this.student_bur.Student = this.thisStudent;
+    // this.student_bur.bursary = bursary_data;
+    // //send api call
+    // this._apiService.studentApplyBursary(this.student_bur).subscribe((res) => {
+    //   console.log("REQUEST SUCCESS ===", res);
+    //   console.log(res["message"]);
+    //   //display message 
+    // }, (error:any) => {
+    //   console.log("ERROR ===", error);
+    //   console.log('error');
+    // });
+  }
 
   dismissBursary() {
     /* this.studentIsVerified ? console.log('You are Verified. Proceed to decline Bursary') : this.presentAlert('dismiss') */
@@ -358,19 +376,19 @@ export class StudentHomePage implements OnInit {
 
   initialiseBursaries(){
     //console.log(this.ourCompany);
-    // all bursaries with company_id that are 
-    this._apiService.getBursaries(null).subscribe((res:Bursary[]) => {
-      console.log("REQUEST SUCCESS ===", res);
-      this.bursariesList = res;
-      if(res!=null){
-        //cater for no bursaries found!
-      }
-    }, (error:any) => {
-      console.log("ERROR ===", error);
-      this.bursariesList = [];
-    });
+    // get all bursaries that are not deactivated
+    // this._apiService.getBursaries(null).subscribe((res:Bursary[]) => {
+    //   console.log("REQUEST SUCCESS ===", res);
+    //   this.bursariesList = res;
+    //   if(res!=null){
+    //     //cater for no bursaries found!
+    //   }
+    // }, (error:any) => {
+    //   console.log("ERROR ===", error);
+    //   this.bursariesList = [];
+    // });
 
-    /*this.bursariesList = [
+    this.bursariesList = [
       {
         bursary_id: 1,
         company_id: 0,
@@ -528,7 +546,7 @@ export class StudentHomePage implements OnInit {
         }
       },
 
-    ];*/
+    ];
 
   }
 }
