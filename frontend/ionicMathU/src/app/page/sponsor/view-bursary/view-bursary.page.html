@@ -29,7 +29,6 @@
 
   <div *ngIf="!isFetching && jsonData_length>=1">
     <ion-card *ngFor="let item of jsonData">
-    <div *ngIf="item.isVisible">
       <ion-card-header>
         <ion-item>
           <ion-card-title>{{item.bursary_name}}</ion-card-title>
@@ -40,7 +39,7 @@
         <br>
         <p align="justify">{{item.bursary_description.substr(0,100) + "..."}} </p>
         <div class="ion-text-center">
-          <ion-button fill="none" (click)="openDeactivate(item)" size="small" slot="end">
+          <ion-button fill="none" (click)="openDeactivate(item)" size="small" slot="end" [disabled]="!item.isVisible">
             <ion-icon name="ban"></ion-icon>
           </ion-button>
           <ion-button fill="none" (click)="editBursary(item)" size="small">
@@ -55,7 +54,6 @@
           </ion-button>
         </div>
       </ion-card-content>
-    </div>
     </ion-card>
   </div>
 

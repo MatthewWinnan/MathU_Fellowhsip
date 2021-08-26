@@ -177,18 +177,19 @@ export class ViewBursaryPage implements OnInit {
           this.router.navigateByUrl('view-bursary');
           console.log(deactivateItem);
           //send api request 
-          // this._apiService.deactivateBursary(deactivateItem).subscribe((res:Bursary) => {
-          //   console.log("REQUEST SUCCESS ===", res);
-          //   this.the_message = deactivateItem.bursary_name + " has been deactivated.";
-          //   this.printMessage();
-          //   if (this.the_message.substring(0,7) == "Success"){
-          //     this.router.navigateByUrl('./view-bursary');
-          //   }
-          // }, (error:any) => {
-          //   this.the_message = 'error';// error;
-          //   this.printMessage();
-          //   console.log("ERROR ===", error);
-          // });
+          this._apiService.deactivateBursary(deactivateItem).subscribe((res:Bursary) => {
+            console.log("REQUEST SUCCESS ===", res);
+            this.the_message = deactivateItem.bursary_name + " has been deactivated.";
+            this.printMessage();
+            if (this.the_message.substring(0,7) == "Success"){
+              this.router.navigateByUrl('./view-bursary');
+            }
+          }, (error:any) => {
+            deactivateItem.isVisible = true;
+            this.the_message = 'error';
+            this.printMessage();
+            console.log("ERROR ===", error);
+          });
           //display toast
         } 
     },
