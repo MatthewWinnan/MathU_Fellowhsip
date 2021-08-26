@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Company } from 'src/app/model/company';
 import { Student_bursary } from 'src/app/model/student_bursary';
 import { student_users } from 'src/app/model/student_users';
 
@@ -18,6 +17,8 @@ export class ShortlistPage implements OnInit {
   ngOnInit() {
     //stored in Storage (when login)
     this.initialiseStudentData();
+
+
     //api call to backend --> all bursaries with this student 
     this.initialiseShortlist();
   }
@@ -183,11 +184,11 @@ export class ShortlistPage implements OnInit {
         bursary: {
           bursary_id: 5,
           company_id: 1,
-          bursary_name: "MechEng",
-          bursary_type: "Work Back",
-          bursary_description: "This is a good bursary",
-          WB_duration: 4,
-          min_age: 13,
+          bursary_name: "HatchEng",
+          bursary_type: "Bursary",
+          bursary_description: "This is a hatch bursary",
+          WB_duration: 0,
+          min_age: 10,
           max_age: 26,
           academic_level: "Undergraduate",
           study_field: "Law",
