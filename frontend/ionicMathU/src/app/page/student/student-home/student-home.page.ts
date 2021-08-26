@@ -6,6 +6,7 @@ import { student_users } from 'src/app/model/student_users'
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { BursaryService } from 'src/app/service/bursary.service';
 
 
 let student = new student_users
@@ -74,6 +75,7 @@ export class StudentHomePage implements OnInit {
     private router: Router,
     public alertController: AlertController,
     private route: ActivatedRoute,
+    public _apiService: BursaryService,
   ) { }
 
   ngOnInit() {
@@ -355,7 +357,20 @@ export class StudentHomePage implements OnInit {
   }
 
   initialiseBursaries(){
-    this.bursariesList = [
+    //console.log(this.ourCompany);
+    // all bursaries with company_id that are 
+    this._apiService.getBursaries(null).subscribe((res:Bursary[]) => {
+      console.log("REQUEST SUCCESS ===", res);
+      this.bursariesList = res;
+      if(res!=null){
+        //cater for no bursaries found!
+      }
+    }, (error:any) => {
+      console.log("ERROR ===", error);
+      this.bursariesList = [];
+    });
+
+    /*this.bursariesList = [
       {
         bursary_id: 1,
         company_id: 0,
@@ -472,9 +487,48 @@ export class StudentHomePage implements OnInit {
           company_URL: "www.dischem.com",
           number_of_reports: 0,
         }
-      }
+      },
+      {
+        bursary_id: 80,
+        company_id: 50,
+        bursary_name: "Internship Bursary",
+        bursary_type: "Work Back",
+        bursary_description: "This is a good bursary",
+        WB_duration: 4,
+        min_age: 13,
+        max_age: 26,
+        academic_level: "Undergraduate",
+        study_field: "Law",
+        minimum_year_required: 2,
+        min_average: 76,
+        RSA_citizen: true,
+        financial_need: false,
+        study_further: false,
+        disability: true,
+        province: "Gauteng",
+        bursary_covers: [
+            "Accommodation Fees",
+            "Meals",
+            "Books Allowance",
+            "Transport"
+        ],
+        closing_date: "2021-11-16",
+        shortlist_date: "2021-11-20",
+        email_address: "name@gmail.com",
+        bursary_duration: 2,
+        isVisible: true,
+        company: {
+          company_id: 50,
+          company_name: "Ships and Boats",
+          company_industry: "Water",
+          company_logo: "", //not implemented for now
+          company_description: "This is a water company",
+          company_URL: "www.water.com",
+          number_of_reports: 0,
+        }
+      },
 
-    ];
+    ];*/
 
   }
 }

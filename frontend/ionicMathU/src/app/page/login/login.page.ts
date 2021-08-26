@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,10 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router:Router) { 
+  constructor(
+    private router:Router,
+    public navCtrl: NavController
+  ) { 
 
   }
 
@@ -17,7 +21,8 @@ export class LoginPage implements OnInit {
 
   logMeIn(){
     // put in code 
-    this.router.navigate(['./student-home']);
+    //this.router.navigateByUrl('/student-home');
+    this.navCtrl.navigateRoot('/student-home');
 
   }
 
