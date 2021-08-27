@@ -16,47 +16,98 @@
 </ion-header>
 
 
-<ion-content>
-  <h3>Basic Student Details</h3>
+<ion-content padding>
   <form [formGroup]="addStudent_details" (ngSubmit)="addStudentDetails()">
     <!-- Basic information -->
     <ion-list>
-      <ion-item >
-        <ion-label position="floating">Student name</ion-label>
-        <ion-input formControlName="first_name_of_student" type="text" [(ngModel)]="name"></ion-input>
-      </ion-item>
-      <div *ngFor = "let error of errorMessages.first_name_of_student">
-        <ng-container *ngIf = "first_name_of_student.hasErrorr(error.type) && (first_name_of_student.dirty || first_name_of_student.touched)" >
-          <small class = "error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
-
-      <ion-item>
-        <ion-label position="floating">Student surname</ion-label>
-        <ion-input formControlName="last_name_of_student" [(ngModel)]="surname" type="text"></ion-input>
-      </ion-item>
-      <div *ngFor = "let error of errorMessages.last_name_of_student">
-        <ng-container *ngIf = "last_name_of_student.hasErrorr(error.type) && (last_name_of_student.dirty || last_name_of_student.touched)" >
-          <small class = "error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
-
-      <ion-item>
-        <ion-label position="floating">Email address</ion-label>
-        <ion-input formControlName="email_address" [(ngModel)]="email" type="text"></ion-input>
-      </ion-item>
-      <div *ngFor = "let error of errorMessages.email_address">
-        <ng-container *ngIf = "email_address.hasErrorr(error.type) && (email_address.dirty || email_address.touched)" >
-          <small class = "error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
+      <h3>Personal Information</h3>
       
+      <ion-item>
+        <ion-label position="floating">Contact number</ion-label>
+        <ion-input formControlName="contact_number" placeholder= "Please Enter Your Contact Number" type="text"></ion-input>
+      </ion-item>
+      <div *ngFor = "let error of errorMessages.contact_number">
+        <ng-container *ngIf = "contact_number.hasError(error.type) && (contact_number.dirty || contact_number.touched)" >
+          <small class = "error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+      <!-- <ion-item>
+        <ion-label>RSA citizen</ion-label>
+        <ion-checkbox formControlName="rsa_citizen" checked="false" color="dark"></ion-checkbox>
+      </ion-item> -->
+
+      <ion-item>
+        <ion-label>Currently disabled</ion-label>
+        <ion-checkbox formControlName="disability" checked="false" color="dark"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <h3>Residential Information</h3>
+      <!-- city
+           province
+            -->
+    </ion-list>
+
+    <ion-list>
+      <h3>Academic Information</h3>
+      <!-- 
+        current_academic_level -- High School, Undergrad, Postgrad
+
+        Students_marks -- display for all types of students 
+        (cause if you are in first year, then only matric marks)
+
+        if High school -- make it appear if current_academic_level is 'High School'
+          grade -- 10, 11, 12
+          syllabus -- dropdown (Cambridge, CAPS, IEB, Other)
+          average -- number 
+
+        if not 'High School'
+          currently_studying 
+          year_of_study -- dropdown (different for Undergrad and Postgrad)
+          study_institution -- dropdown of unis
+          continue_studies -- checkbox
+          gpa -- number 
+       -->
+    </ion-list>
+
+    <ion-list>
+      <h3>About Me</h3>
+      <!-- 
+        description_of_student -- textarea
+        website -- (personal website/LinkedIn profiile)
+       -->
+    </ion-list>
+
+    <ion-list>
+      <h3>Other Information</h3>
+      <!-- 
+        bursarred -- checkbox
+
+        if bursarred is true
+          current_bursaries -- text
+
+        workback -- checkbox 
+       -->
+    </ion-list>
+      
+    
+    <ion-list class="ion-text-center">
+      <ion-button [disabled]="!addStudent_details.valid" type="submit" color="">
+        Submit
+      </ion-button>
+    </ion-list>
+  </form>
+<ion-content>
+
+<!--     
       <ion-item *ngIf="this.student.contact_number === '' ">
         <ion-label position="floating">Contact number</ion-label>
         <ion-input formControlName="contact_number" placeholder= "Please Enter Your Contact Number" type="text"></ion-input>
       </ion-item>
       <div *ngFor = "let error of errorMessages.contact_number">
-        <ng-container *ngIf = "contact_number.hasErrorr(error.type) && (contact_number.dirty || contact_number.touched)" >
+        <ng-container *ngIf = "contact_number.hasError(error.type) && (contact_number.dirty || contact_number.touched)" >
           <small class = "error-message">{{error.message}}</small>
         </ng-container>
       </div>
@@ -66,7 +117,7 @@
         <ion-input formControlName="contact_number" [(ngModel)]="number" type="text"></ion-input>
       </ion-item>
       <div *ngFor = "let error of errorMessages.contact_number">
-        <ng-container *ngIf = "contact_number.hasErrorr(error.type) && (contact_number.dirty || contact_number.touched)" >
+        <ng-container *ngIf = "contact_number.hasError(error.type) && (contact_number.dirty || contact_number.touched)" >
           <small class = "error-message">{{error.message}}</small>
         </ng-container>
       </div>
@@ -77,7 +128,7 @@
         <ion-datetime formControlName="data_of_birth" displayFormat="YYYY MMMM DD"  [(ngModel)]="dob"></ion-datetime>
       </ion-item>
       <div *ngFor = "let error of errorMessages.data_of_birth">
-        <ng-container *ngIf = "data_of_birth.hasErrorr(error.type) && (data_of_birth.dirty || data_of_birth.touched)" >
+        <ng-container *ngIf = "data_of_birth.hasError(error.type) && (data_of_birth.dirty || data_of_birth.touched)" >
           <small class = "error-message">{{error.message}}</small>
         </ng-container>
       </div>
@@ -94,7 +145,7 @@
         <ion-checkbox formControlName="disability" checked={{this.student.disability}} color="dark"></ion-checkbox>
       </ion-item>
     </ion-list>
-    <!-- Citizenship and residence information -->
+    Citizenship and residence information 
     <h3>Residential Information</h3>
     <ion-list>
 
@@ -142,7 +193,7 @@
       </ion-item>
 
     </ion-list>
-    <!-- Academic Information -->
+
     <h3>Academic Information</h3>
     <ion-list>
       
@@ -163,7 +214,7 @@
         </ion-select>
       </ion-item>
 
-      <!-- Info for only HS students -->
+      Info for only HS students
       <ion-item *ngIf="this.student.grade === 0.0 && current_academic_level.value === 'High School'">
         <ion-label position="float">Current Grade</ion-label>
         <ion-select formControlName="grade" >
@@ -196,17 +247,18 @@
         <ion-input formControlName="average" placeholder={{this.student.average}} type="number"></ion-input>
       </ion-item>
       <div *ngFor = "let error of errorMessages.average">
-        <ng-container *ngIf = "average.hasErrorr(error.type) && (average.dirty || average.touched)" >
+        <ng-container *ngIf = "average.hasError(error.type) && (average.dirty || average.touched)" >
           <small class = "error-message">{{error.message}}</small>
         </ng-container>
       </div>
 
-      <!-- Info for uni students -->
+      Info for uni students
       <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
         <ion-label position="floating">Currently Studying</ion-label>
         <ion-input formControlName="currently_studying" placeholder={{this.student.currently_studying}} type="text"></ion-input>
       </ion-item>
-      <!-- Info for undergrad students -->
+
+      Info for undergrad students
       <ion-item *ngIf="current_academic_level.value === 'Undergraduate'">
         <ion-label position="floating">Year Of Study</ion-label>
         <ion-select formControlName="year_of_study" placeholder = {{this.student.year_of_study}}>
@@ -219,7 +271,8 @@
           <ion-select-option value= "7th" >7th</ion-select-option>
         </ion-select>
       </ion-item>
-      <!-- Info for postgrad -->
+
+      Info for postgrad
       <ion-item *ngIf="current_academic_level.value === 'Postgraduate'">
         <ion-label position="floating">Year Of Study</ion-label>
         <ion-select formControlName="year_of_study" placeholder = {{this.student.year_of_study}}>
@@ -228,7 +281,8 @@
           <ion-select-option value= "PHD" >PHD</ion-select-option>
         </ion-select>
       </ion-item>
-<!-- Info for uni students -->
+
+    Info for uni students
       <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
         <ion-label position="floating">Institution of study</ion-label>
         <ion-select formControlName="study_institution" placeholder = {{this.student.study_institution}}>
@@ -274,93 +328,5 @@
       <ion-label position="floating">Student summary</ion-label>
       <ion-input formControlName="description_of_student" placeholder={{this.student.description_of_student}} type="text"></ion-input>
     </ion-item>
-      <!-- Submit Form -->
-    <ion-button type="submit">
-      Submit
-    </ion-button>
-  </form>
-<ion-content>
 
-
-
-
-
-
-
-
-
-<!-- <ion-content>
-  <super-tabs>
-    <super-tabs-toolbar slot="top" color="light">
-      <super-tab-button>
-        <ion-label>Student details</ion-label>
-      </super-tab-button>
-
-
-      <super-tab-button>
-        <ion-label>Academics</ion-label>
-      </super-tab-button>
-    </super-tabs-toolbar>
-
-    <super-tabs-container>
-      <super-tab>
-        <ion-content>
-          <form [formGroup]="addBursary" (ngSubmit)="addBursarySubmit()"></form>
-          <h3>Student details</h3>
-          <ion-list>
-            <ion-item>
-              <ion-label position="floating">Student name</ion-label>
-              <ion-input placeholder="Student Name" [(ngModel)]="student_name" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Student surname</ion-label>
-              <ion-input placeholder="Student Surname" [(ngModel)]="student_surname" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Email address</ion-label>
-              <ion-input placeholder="Email Address" [(ngModel)]="student_email" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Contact number</ion-label>
-              <ion-input placeholder="Contact Number" [(ngModel)]="student_contact_number" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Date of birth</ion-label>
-              <ion-datetime displayFormat="DD MM YY" placeholder="DD/MM/YY" [(ngModel)]="student_dob"></ion-datetime>
-            </ion-item>
-          </ion-list>
-          <ion-item>
-            <ion-label position="floating">Province</ion-label>
-            <ion-select>
-              <ion-select-option value="Mpumalanga">Mpumalanga</ion-select-option>
-              <ion-select-option value="Eastern Cape">Eastern Cape</ion-select-option>
-              <ion-select-option value="Free State">Free State</ion-select-option>
-              <ion-select-option value="Gauteng">Gauteng</ion-select-option>
-              <ion-select-option value="Limpopo">Limpopo</ion-select-option>
-              <ion-select-option value="Northern Cape">Northern Cape</ion-select-option>
-              <ion-select-option value="North West">North West</ion-select-option>
-              <ion-select-option value="Western Cape">Western Cape</ion-select-option>
-              <ion-select-option value="KwaZulu-Natal">KwaZulu-Natal</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label>RSA citizen</ion-label>
-            <ion-checkbox formControlName="name" checked="false" color="dark"></ion-checkbox>
-          </ion-item>
-
-
-        </ion-content>
-      </super-tab>
-      <super-tab>
-        <ion-content>
-          <h2 class="ion-text-center">Sponsor Sign Up</h2> -->
-          <!-- <h3>Student academics</h3>
-
-        </ion-content>
-
-
-      </super-tab>
-    </super-tabs-container>
-  </super-tabs>
-
-</ion-content> -->
+ -->

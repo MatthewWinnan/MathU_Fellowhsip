@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, Validators } from '@angular/forms';
-import { student_users } from '../../../model/student_users.model';
+import { student_users } from '../../../model/student_users';
 import { Router } from '@angular/router';
 import {NavparamService} from '../../../service/navparam/navparam.service';
+import { Students_marks } from 'src/app/model/subjects_marks';
 @Component({
   selector: 'app-view-profile',
   templateUrl: './student-view-profile.page.html',
@@ -10,21 +11,48 @@ import {NavparamService} from '../../../service/navparam/navparam.service';
 })
 export class ViewProfilePage implements OnInit {
   dateToday = new Date().toISOString().substring(0,10);
-  student : student_users;
-  constructor
-    (
+  thisStudent: student_users = new student_users();
+
+  constructor(
     private formBuilder: FormBuilder,
     private router:Router,
     private studentData:NavparamService
-    ) 
+  ) { 
+    //get data from storage 
+    //for now creating a dummy dataset
+    this.thisStudent.student_id = "U0001";
+    this.thisStudent.first_name = "Jadon";
+    this.thisStudent.last_name = "Sancho";
+    this.thisStudent.date_of_birth = "03-03-2005";
+    this.thisStudent.email_address = "jadon@gmail.com";
+    //the above fields are filled it from register 
+    this.thisStudent.nationality = null;
+    this.thisStudent.contact_number = "";
+    this.thisStudent.city = "";
+    this.thisStudent.province = "";
+    this.thisStudent.disability = null;
+    this.thisStudent.current_academic_level = "";
+    this.thisStudent.grade = 0;
+    this.thisStudent.syllabus = "";
+    this.thisStudent.average = 0;
+    this.thisStudent.currently_studying = "";
+    this.thisStudent.year_of_study = "";
+    this.thisStudent.study_institution = "";
+    this.thisStudent.continue_studies = null;
+    this.thisStudent.gpa = 0;
+    this.thisStudent.description_of_student = "";
+    this.thisStudent.bursarred = null;
+    this.thisStudent.current_bursaries = "";
+    this.thisStudent.workback = 0;
+    this.thisStudent.website = "";
+    this.thisStudent.Students_marks = [];
 
-    { 
-      this.student = this.studentData.getStudent();
-      console.log(this.student.last_name);
-    }
+      //this.student = this.studentData.getStudent();
+      //console.log(this.student.last_name);
+  }
 
   public gotoEdit() {
-    this.studentData.setStudent(this.student);
+    //this.studentData.setStudent(this.student);
     this.router.navigate(['./student-edit-profile']);
     
   }

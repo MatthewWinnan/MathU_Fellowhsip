@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { student_users } from '../../model/student_users.model';
+import { student_users } from '../../model/student_users';
 // import {ViewStudentPageModule} from '../student/student-view-profile/student-view-profile.module';
 // import { NavController } from '@ionic/angular';
 import {NavparamService} from '../../service/navparam/navparam.service';
@@ -26,27 +26,7 @@ export class LoginPage implements OnInit {
 
   logMeIn(){
     //Here we get the user data and send the input data to the login page
-
-    //User data
-    let User = {
-      user_id : "s18045",
-    }
-
-    //Logic to see type of user and route it accordingly
-    if (User.user_id[0]=="s")
-    {
-      //We can assign the return object depending on who logged in to here
-      this.student.email_address = "mcwinnan@gmail.com";
-      this.student.first_name = "Matthew";
-      this.student.last_name = "Winnan";
-      this.navParamService.setStudent(this.student);
-      this.router.navigate(['./student-view-profile']);
-
-    }
-    else if(User.user_id[0]=="u")
-      {
-        this.router.navigate(['./view-profile']);
-      }
+    this.router.navigate(['./student-view-profile']);
 
     // put in code 
 

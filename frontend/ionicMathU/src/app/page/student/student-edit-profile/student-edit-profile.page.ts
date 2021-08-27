@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, Validators } from '@angular/forms';
-import { student_users } from '../../../model/student_users.model';
-import {NavparamService} from '../../../service/navparam/navparam.service';
+import { student_users } from '../../../model/student_users';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,182 +10,151 @@ import { Router } from '@angular/router';
 })
 export class ViewProfilePage implements OnInit {
   dateToday = new Date().toISOString().substring(0,10);
-  student : student_users;
-  name: any = '';
-  surname: any = '';
-  dob = '';
-  email : any;
-  number : any;
-  student_city : any;
-  student_province : any;
-  nation : any;
-  disable : any;
-  academic_level : any;
-  student_grade : any;
-  student_syllabus : any;
-  student_average : any;
-  study : any;
-  year_study : any;
-  institution : any;
-  continue : any;
-  description : any;
+  thisStudent:student_users = new student_users();
 
   constructor(
     private formBuilder: FormBuilder,
-    private studentData:NavparamService,
     private router:Router,
 
     ) {
-      this.student = this.studentData.getStudent();
-      this.name = this.student.first_name;
-      this.surname = this.student.last_name;
-      this.dob = this.student.date_of_birth;
-      this.email = this.student.email_address;
-      this.number = this.student.contact_number;
-      this.student_city = this.student.city;
-      this.student_province = this.student.province;
-      this.nation = this.student.nationality;
-      this.disable = this.student.disability;
-      this.academic_level = this.student.current_academic_level;
-      this.student_grade = this.student.grade;
-      this.student_syllabus = this.student.syllabus;
-      this.student_average = this.student.average;
-      this.study = this.student.currently_studying;
-      this.year_study = this.student.year_of_study;
-      this.institution = this.student.study_institution;
-      this.continue = this.student.continue_studies;
-      this.description = this.student.description_of_student;
+      //get data from storage 
+      //for now creating a dummy dataset
+      this.thisStudent.student_id = "U0001";
+      this.thisStudent.first_name = "Jadon";
+      this.thisStudent.last_name = "Sancho";
+      this.thisStudent.date_of_birth = "03-03-2005";
+      this.thisStudent.email_address = "jadon@gmail.com";
+      //the above fields are filled it from register 
+      this.thisStudent.nationality = null;
+      this.thisStudent.contact_number = "";
+      this.thisStudent.city = "";
+      this.thisStudent.province = "";
+      this.thisStudent.disability = null;
+      this.thisStudent.current_academic_level = "";
+      this.thisStudent.grade = 0;
+      this.thisStudent.syllabus = "";
+      this.thisStudent.average = 0;
+      this.thisStudent.currently_studying = "";
+      this.thisStudent.year_of_study = "";
+      this.thisStudent.study_institution = "";
+      this.thisStudent.continue_studies = null;
+      this.thisStudent.gpa = 0;
+      this.thisStudent.description_of_student = "";
+      this.thisStudent.bursarred = null;
+      this.thisStudent.current_bursaries = "";
+      this.thisStudent.workback = 0;
+      this.thisStudent.website = "";
+      this.thisStudent.Students_marks = [];
+
      }
 
   addStudent_details = this.formBuilder.group({
-    first_name_of_student: ['',[Validators.required, Validators.maxLength(100)]],
-    last_name_of_student: ['',[Validators.required, Validators.maxLength(100)]],
-    data_of_birth: ['',[Validators.required]],
-    email_address: ['',[Validators.required, Validators.pattern("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$")]],
-    //password: [''],  
     contact_number: ['',[Validators.required, Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$")]],
-    city: [''],
-    province: [''],
-    RSA_citizen: [false],
+    // city: [''],
+    // province: [''],
+    // RSA_citizen: [false],
     disability: [false],
-    current_academic_level: [''],
-    grade: [0],
-    syllabus: [''],
-    average: [60.0,[Validators.min(60)]],
-    currently_studying: [''],
-    year_of_study: [''],
-    study_institution: [''],
-    continue_studies: [false],
-    gpa: [0.0],
-    description_of_student: [''],
+    // current_academic_level: [''],
+    // grade: [0],
+    // syllabus: [''],
+    // average: [60.0,[Validators.min(60)]],
+    // currently_studying: [''],
+    // year_of_study: [''],
+    // study_institution: [''],
+    // continue_studies: [false],
+    // gpa: [0.0],
+    // description_of_student: [''],
   });
 
   //Gets for all the form's parameters
-  get student_name() {
-    return this.addStudent_details.get('first_name_of_student');
-  }
-  get student_surname() {
-    return this.addStudent_details.get('last_name_of_student');
-  }
-  get data_of_birth() {
-    return this.addStudent_details.get('data_of_birth');
-  }
-  get email_adress() {
-    return this.addStudent_details.get('email_adress');
-  }
   get contact_number() {
     return this.addStudent_details.get('contact_number');
-  }
-  get province() {
-    return this.addStudent_details.get('province');
-  }
-  get RSA_citizen() {
-    return this.addStudent_details.get('RSA_citizen');
-  }
-  get city() {
-    return this.addStudent_details.get('city');
-  }
-  get current_academic_level() {
-    return this.addStudent_details.get('current_academic_level');
-  }
-  get syllabus() {
-    return this.addStudent_details.get('syllabus');
-  }
-  get grade() {
-    return this.addStudent_details.get('grade');
-  }
-  get average() {
-    return this.addStudent_details.get('average');
-  }
-  get currently_studying() {
-    return this.addStudent_details.get('currently_studying');
-  }
-  get year_of_study() {
-    return this.addStudent_details.get('year_of_study');
-  }
-  get study_institution() {
-    return this.addStudent_details.get('study_institution');
   }
   get disability() {
     return this.addStudent_details.get('disability');
   }
-  get gpa() {
-    return this.addStudent_details.get('gpa');
-  }
+  // get province() {
+  //   return this.addStudent_details.get('province');
+  // }
+  // get RSA_citizen() {
+  //   return this.addStudent_details.get('RSA_citizen');
+  // }
+  // get city() {
+  //   return this.addStudent_details.get('city');
+  // }
+  // get current_academic_level() {
+  //   return this.addStudent_details.get('current_academic_level');
+  // }
+  // get syllabus() {
+  //   return this.addStudent_details.get('syllabus');
+  // }
+  // get grade() {
+  //   return this.addStudent_details.get('grade');
+  // }
+  // get average() {
+  //   return this.addStudent_details.get('average');
+  // }
+  // get currently_studying() {
+  //   return this.addStudent_details.get('currently_studying');
+  // }
+  // get year_of_study() {
+  //   return this.addStudent_details.get('year_of_study');
+  // }
+  // get study_institution() {
+  //   return this.addStudent_details.get('study_institution');
+  // }
+  // get disability() {
+  //   return this.addStudent_details.get('disability');
+  // }
+  // get gpa() {
+  //   return this.addStudent_details.get('gpa');
+  // }
 
   public errorMessages = {
-    first_name_of_student: [
-      {type: 'required', message:'Name is required'},
-      {type: 'maxlength', message:'Name cant be longer than 100 characters'},
-    ],
-    last_name_of_student: [
-      {type: 'required', message:'Surname is required'},
-      {type: 'maxlength', message:'Surname cant be longer than 100 characters'},
-    ],
-    data_of_birth: [
-      {type: 'required', message:'Date of Birth is required'},
-    ],
     contact_number: [
       {type: 'required', message:'Contact Number is required'},
-      {type: 'pattern', message:'Please enter valid Email Adress'},
+      {type: 'pattern', message:'Please enter valid Contact Number'},
     ],
-    email_adress: [
-      {type: 'required', message:'Email is required'},
-      {type: 'pattern', message:'Please enter valid Email Adress'},
-    ],
-    
-    average: [
-      {type: 'min', message:'Average should atleast be 60'},
-    ],
+    disability: [],
+    // average: [
+    //   {type: 'min', message:'Average should atleast be 60'},
+    // ],
   };
 
   public addStudentDetails() {
-    this.student.first_name = this.addStudent_details.value.first_name_of_student;
-    this.student.last_name = this.addStudent_details.value.last_name_of_student;
-    this.student.date_of_birth = this.addStudent_details.value.data_of_birth;
-    this.student.email_address = this.addStudent_details.value.email_address;
-    //password: [''],  
-    this.student.contact_number = this.addStudent_details.value.contact_number;
-    this.student.disability = this.addStudent_details.value.disability;
-    this.student.nationality = this.addStudent_details.value.RSA_citizen;
-    this.student.province = this.addStudent_details.value.province;
-    this.student.city = this.addStudent_details.value.city;
-    this.student.current_academic_level = this.addStudent_details.value.current_academic_level;
-    this.student.grade = this.addStudent_details.value.grade;
-    this.student.syllabus = this.addStudent_details.value.syllabus;
-    this.student.average = this.addStudent_details.value.average;
-    this.student.currently_studying = this.addStudent_details.value.currently_studying;
-    this.student.year_of_study = this.addStudent_details.value.year_of_study;
-    this.student.study_institution = this.addStudent_details.value.study_institution;
-    this.student.continue_studies = this.addStudent_details.value.continue_studies;
-    this.student.gpa = this.addStudent_details.value.gpa;
-    this.student.description_of_student = this.addStudent_details.value.description_of_student;
-    console.log(this.student);
-    this.studentData.setStudent(this.student);
-    this.router.navigate(['./student-view-profile']);
+    console.log(this.addStudent_details.value);
+    this.thisStudent.contact_number = this.addStudent_details.value.contact_number;
+    this.thisStudent.disability = this.addStudent_details.value.disability;
+    //do for all fields 
+
+    //console.log(this.student);
+    //this.router.navigate(['./student-view-profile']);
   }
 
   ngOnInit() {
+    this.addStudent_details = this.formBuilder.group({
+      contact_number: [this.thisStudent.contact_number,
+        [
+          Validators.required, 
+          Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$")
+        ]
+      ],
+      disability: [this.thisStudent.disability],
+      // city: [''],
+      // province: [''],
+      // RSA_citizen: [false],
+      // disability: [false],
+      // current_academic_level: [''],
+      // grade: [0],
+      // syllabus: [''],
+      // average: [60.0,[Validators.min(60)]],
+      // currently_studying: [''],
+      // year_of_study: [''],
+      // study_institution: [''],
+      // continue_studies: [false],
+      // gpa: [0.0],
+      // description_of_student: [''],
+    });
   }
 
 }

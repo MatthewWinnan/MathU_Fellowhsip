@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { student_users } from 'src/app/model/student_users.model';
+import { student_users } from 'src/app/model/student_users';
 import { Observable } from 'rxjs';
 //import { sponsor_users } from '../../model/sponsor_users';
 //import { Observable } from 'rxjs';

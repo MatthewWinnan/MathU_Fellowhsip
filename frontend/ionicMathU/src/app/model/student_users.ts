@@ -1,5 +1,3 @@
-//import { NONE_TYPE } from "@angular/compiler";
-//import { NULL_EXPR } from "@angular/compiler/src/output/output_ast";
 import { Students_marks } from "./subjects_marks";
 
 export class student_users{
@@ -9,8 +7,8 @@ export class student_users{
     last_name = "";
     date_of_birth = "";
     email_address = "";
-    password = "";
-    validated = 0;
+    password? = "";
+    validated? = 0;
     nationality? = false;
     contact_number? = "";
     city? = "";
@@ -26,7 +24,7 @@ export class student_users{
     continue_studies? = false;
     gpa? = 0.0;
     description_of_student? = "";
-    //regisered_date = "";      //will not be used in frontend at all
+    //registered_date = "";      //will not be used in frontend at all
     bursarred? = false;
     current_bursaries? = "";
     workback? = 0;
@@ -36,5 +34,5 @@ export class student_users{
     number_of_reports? = 0;
     banned? = false;
 
-    marks?: Students_marks;
+    Students_marks?:Students_marks[];
 }

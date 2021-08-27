@@ -11,13 +11,13 @@
     </ion-buttons> -->
     
     <ion-button fill = 'none' slot="end"  routerLink="/student-edit-profile">
-      <ion-icon name="brush-outline"></ion-icon>
+      <ion-icon name="brush"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
 
   
   <h1>View Student Details</h1>
@@ -26,13 +26,13 @@
     <!-- <ion-list>
       <ion-item>
         <ion-label position = "stacked">Student name</ion-label>
-        <ion-note color = "dark"> {{this.student.first_name_of_student}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.first_name_of_student}} </ion-note>
       </ion-item> -->
 
       <ion-card >
           <ion-card-header>
             <ion-card-subtitle>Student name</ion-card-subtitle>
-          <ion-card-title>{{this.student.first_name}}</ion-card-title>
+          <ion-card-title>{{thisStudent.first_name}}</ion-card-title>
           </ion-card-header>  
       </ion-card>
 
@@ -41,162 +41,162 @@
 
         <ion-card-header>
           <ion-card-subtitle>Student surname</ion-card-subtitle>
-        <ion-card-title>{{this.student.last_name}}</ion-card-title>
+        <ion-card-title>{{thisStudent.last_name}}</ion-card-title>
         </ion-card-header>  
       </ion-card> 
       
      <ion-card >
         <ion-card-header>
           <ion-card-subtitle>Email address</ion-card-subtitle>
-        <ion-card-title>{{this.student.email_address}}</ion-card-title>
+        <ion-card-title>{{thisStudent.email_address}}</ion-card-title>
         </ion-card-header>  
      </ion-card>
 
-     <ion-card *ngIf="this.student.contact_number !== '' ">
+     <ion-card *ngIf="thisStudent.contact_number !== '' ">
       <ion-card-header>
         <ion-card-subtitle>Contact number</ion-card-subtitle>
-      <ion-card-title>{{this.student.contact_number}}</ion-card-title>
+      <ion-card-title>{{thisStudent.contact_number}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 
-    <ion-card *ngIf="this.student.date_of_birth !== '' " >
+    <ion-card *ngIf="thisStudent.date_of_birth !== '' " >
       <ion-card-header>
         <ion-card-subtitle>Date of birth</ion-card-subtitle>
-      <ion-card-title>{{this.student.date_of_birth | date: 'dd/MM/yyyy'}}</ion-card-title>
+      <ion-card-title>{{thisStudent.date_of_birth | date: 'dd/MM/yyyy'}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 
-    <ion-card *ngIf="this.student.disability !== 'null' ">
+    <ion-card *ngIf="thisStudent.disability !== 'null' ">
       <ion-card-header>
         <ion-card-subtitle>Currently disabled?</ion-card-subtitle>
       <ion-card-title>
-        <ion-checkbox disabled="true"  checked="{{this.student.disability}}" color="dark"></ion-checkbox>
+        <ion-checkbox disabled="true"  checked="{{thisStudent.disability}}" color="dark"></ion-checkbox>
       </ion-card-title>
       </ion-card-header>  
     </ion-card>
 
     
 
-      <!-- <ion-item *ngIf="this.student.contact_number !== '' " >
+      <!-- <ion-item *ngIf="thisStudent.contact_number !== '' " >
         <ion-label position="stacked">Contact number</ion-label>
-        <ion-note color = "dark"> {{this.student.contact_number}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.contact_number}} </ion-note>
       </ion-item>
-      <ion-item *ngIf="this.student.date_of_birth !== null " >
+      <ion-item *ngIf="thisStudent.date_of_birth !== null " >
         <ion-label position="stacked">Date of birth</ion-label>
-        <ion-note color = "dark"> {{this.student.date_of_birth | date: 'dd/MM/yyyy'}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.date_of_birth | date: 'dd/MM/yyyy'}} </ion-note>
       </ion-item>
-      <ion-item *ngIf="this.student.disability !== null ">
+      <ion-item *ngIf="thisStudent.disability !== null ">
         <ion-label position="stacked">Currently disabled?</ion-label>
-        <ion-checkbox disabled="true"  checked="{{this.student.disability}}" color="dark"></ion-checkbox>
+        <ion-checkbox disabled="true"  checked="{{thisStudent.disability}}" color="dark"></ion-checkbox>
       </ion-item> -->
     <!-- </ion-list> -->
     
     <!-- Citizenship and residence information -->
     <h1>View Residential Information</h1>
 
-    <ion-card *ngIf="this.student.province !== '' ">
+    <ion-card *ngIf="thisStudent.province !== '' ">
       <ion-card-header>
         <ion-card-subtitle>Province</ion-card-subtitle>
-      <ion-card-title>{{this.student.province}}</ion-card-title>
+      <ion-card-title>{{thisStudent.province}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 
-    <ion-card *ngIf="this.student.city !== '' ">
+    <ion-card *ngIf="thisStudent.city !== '' ">
       <ion-card-header>
         <ion-card-subtitle>City</ion-card-subtitle>
-      <ion-card-title>{{this.student.city}}</ion-card-title>
+      <ion-card-title>{{thisStudent.city}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 
-    <ion-card *ngIf="this.student.nationality !== 'null' ">
+    <ion-card *ngIf="thisStudent.nationality !== 'null' ">
       <ion-card-header>
         <ion-card-subtitle>RSA Citizen</ion-card-subtitle>
-      <ion-card-title><ion-checkbox disabled="true" checked= "{{this.student.nationality}}" color="dark"></ion-checkbox></ion-card-title>
+      <ion-card-title><ion-checkbox disabled="true" checked= "{{thisStudent.nationality}}" color="dark"></ion-checkbox></ion-card-title>
       </ion-card-header>  
     </ion-card>
 
     <h1>View Academic Information</h1>
 
-    <ion-card *ngIf="this.student.current_academic_level !== '' ">
+    <ion-card *ngIf="thisStudent.current_academic_level !== '' ">
       <ion-card-header>
         <ion-card-subtitle>Academic Level</ion-card-subtitle>
-      <ion-card-title>{{this.student.current_academic_level}}</ion-card-title>
+      <ion-card-title>{{thisStudent.current_academic_level}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 
     <!-- Info for only HS students -->
 
-    <ion-card *ngIf="this.student.current_academic_level === 'High School'">
+    <ion-card *ngIf="thisStudent.current_academic_level === 'High School'">
       <ion-card-header>
         <ion-card-subtitle>Grade</ion-card-subtitle>
-        <ion-card-title>{{this.student.grade}}</ion-card-title>
+        <ion-card-title>{{thisStudent.grade}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 
     <ion-card >
-      <ion-card-header *ngIf="this.student.current_academic_level === 'High School'" >
+      <ion-card-header *ngIf="thisStudent.current_academic_level === 'High School'" >
         <ion-card-subtitle>Syllabus</ion-card-subtitle>
-      <ion-card-title>{{this.student.city}}</ion-card-title>
+      <ion-card-title>{{thisStudent.city}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 
-    <ion-card *ngIf="this.student.current_academic_level === 'High School'">
+    <ion-card *ngIf="thisStudent.current_academic_level === 'High School'">
       <ion-card-header >
         <ion-card-subtitle>Average</ion-card-subtitle>
-      <ion-card-title>{{this.student.average}}</ion-card-title>
+      <ion-card-title>{{thisStudent.average}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 
     
 
-    <ion-card *ngIf="this.student.current_academic_level === 'Undergraduate' || this.student.current_academic_level === 'Postgraduate'">
+    <ion-card *ngIf="thisStudent.current_academic_level === 'Undergraduate' || thisStudent.current_academic_level === 'Postgraduate'">
       <ion-card-header>
         <ion-card-subtitle>Currently Studying</ion-card-subtitle>
-      <ion-card-title>{{this.student.currently_studying}}</ion-card-title>
+      <ion-card-title>{{thisStudent.currently_studying}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 <!-- Info for undergrad students -->
-    <ion-card *ngIf="this.student.current_academic_level === 'Undergraduate'">
+    <ion-card *ngIf="thisStudent.current_academic_level === 'Undergraduate'">
       <ion-card-header>
         <ion-card-subtitle>Year of Study</ion-card-subtitle>
-      <ion-card-title>{{this.student.year_of_study}}</ion-card-title>
+      <ion-card-title>{{thisStudent.year_of_study}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 <!-- Info for Postgrad students -->
-<ion-card *ngIf="this.student.current_academic_level === 'Postgraduate'">
+<ion-card *ngIf="thisStudent.current_academic_level === 'Postgraduate'">
   <ion-card-header>
     <ion-card-subtitle>Year of Study</ion-card-subtitle>
-  <ion-card-title>{{this.student.year_of_study}}</ion-card-title>
+  <ion-card-title>{{thisStudent.year_of_study}}</ion-card-title>
   </ion-card-header>  
 </ion-card>
 <!-- Info for uni students -->
-    <ion-card *ngIf="this.student.current_academic_level === 'Undergraduate' || this.student.current_academic_level === 'Postgraduate'">
+    <ion-card *ngIf="thisStudent.current_academic_level === 'Undergraduate' || thisStudent.current_academic_level === 'Postgraduate'">
       <ion-card-header>
         <ion-card-subtitle>Study Institution</ion-card-subtitle>
-      <ion-card-title>{{this.student.study_institution}}</ion-card-title>
+      <ion-card-title>{{thisStudent.study_institution}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 
-    <ion-card *ngIf="this.student.current_academic_level === 'Undergraduate' || this.student.current_academic_level === 'Postgraduate'">
+    <ion-card *ngIf="thisStudent.current_academic_level === 'Undergraduate' || thisStudent.current_academic_level === 'Postgraduate'">
       <ion-card-header>
         <ion-card-subtitle>Continue studies?</ion-card-subtitle>
-        <ion-checkbox checked="{{this.student.continue_studies}}" color="dark"></ion-checkbox>
+        <ion-checkbox checked="{{thisStudent.continue_studies}}" color="dark"></ion-checkbox>
       </ion-card-header>  
     </ion-card>
 
-    <ion-card *ngIf="this.student.current_academic_level === 'Undergraduate' || this.student.current_academic_level === 'Postgraduate'">
+    <ion-card *ngIf="thisStudent.current_academic_level === 'Undergraduate' || thisStudent.current_academic_level === 'Postgraduate'">
       <ion-card-header>
         <ion-card-subtitle>GPA</ion-card-subtitle>
-      <ion-card-title>{{this.student.gpa}}</ion-card-title>
+      <ion-card-title>{{thisStudent.gpa}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 
-    <h1 *ngIf="this.student.description_of_student !== ''">View About Me</h1>
+    <h1 *ngIf="thisStudent.description_of_student !== ''">View About Me</h1>
 
-    <ion-card *ngIf="this.student.description_of_student !== ''">
+    <ion-card *ngIf="thisStudent.description_of_student !== ''">
       <ion-card-header>
         <ion-card-subtitle>Student Description</ion-card-subtitle>
-      <ion-card-title>{{this.student.description_of_student}}</ion-card-title>
+      <ion-card-title>{{thisStudent.description_of_student}}</ion-card-title>
       </ion-card-header>  
     </ion-card>
 
@@ -205,79 +205,79 @@
     
 
     <!-- <ion-list>
-      <ion-item *ngIf="this.student.province !== '' ">
+      <ion-item *ngIf="thisStudent.province !== '' ">
         <ion-label position="stacked"></ion-label>
-        <ion-note color = "dark"> {{this.student.province}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.province}} </ion-note>
       </ion-item> -->
-      <!-- <ion-item *ngIf="this.student.city !== '' ">
+      <!-- <ion-item *ngIf="thisStudent.city !== '' ">
         <ion-label position="stacked"></ion-label>
-        <ion-note color = "dark"> {{this.student.city}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.city}} </ion-note>
       </ion-item> -->
-      <!-- <ion-item *ngIf="this.student.nationality !== null ">
+      <!-- <ion-item *ngIf="thisStudent.nationality !== null ">
         <ion-label position="stacked">RSA citizen</ion-label>
-        <ion-checkbox disabled="true" checked= "{{this.student.nationality}}" color="dark"></ion-checkbox>
+        <ion-checkbox disabled="true" checked= "{{thisStudent.nationality}}" color="dark"></ion-checkbox>
       </ion-item>
     </ion-list> -->
     <!-- Academic Information -->
 
     <!-- <h1>View Academic Information</h1> -->
     <ion-list>
-      <!-- <ion-item *ngIf="this.student.current_academic_level !== '' ">
+      <!-- <ion-item *ngIf="thisStudent.current_academic_level !== '' ">
         <ion-label position="stacked">Academic Level</ion-label>
-        <ion-note color = "dark"> {{this.student.current_academic_level}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.current_academic_level}} </ion-note>
       </ion-item> -->
       <!-- Info for only HS students -->
-      <!-- <ion-item *ngIf="this.student.current_academic_level === 'High School'">
+      <!-- <ion-item *ngIf="thisStudent.current_academic_level === 'High School'">
         <ion-label position="stacked">Current Grade</ion-label>
-        <ion-note color = "dark"> {{this.student.grade}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.grade}} </ion-note>
       </ion-item> -->
 
-      <!-- <ion-item *ngIf="this.student.current_academic_level === 'High School' ">
+      <!-- <ion-item *ngIf="thisStudent.current_academic_level === 'High School' ">
         <ion-label position="stacked">Syllabus</ion-label>
-        <ion-note color = "dark"> {{this.student.syllabus}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.syllabus}} </ion-note>
       </ion-item> -->
 
-      <!-- <ion-item *ngIf="this.student.current_academic_level === 'High School'">
+      <!-- <ion-item *ngIf="thisStudent.current_academic_level === 'High School'">
         <ion-label position="stacked">Average</ion-label>
-        <ion-note color = "dark"> {{this.student.average}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.average}} </ion-note>
       </ion-item> -->
 
       <!-- Info for uni students -->
 
-      <!-- <ion-item *ngIf="this.student.current_academic_level === 'Undergraduate' || this.student.current_academic_level === 'Postgraduate'">
+      <!-- <ion-item *ngIf="thisStudent.current_academic_level === 'Undergraduate' || thisStudent.current_academic_level === 'Postgraduate'">
         <ion-label position="stacked">Currently Studying</ion-label>
-        <ion-note color = "dark"> {{this.student.currently_studying}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.currently_studying}} </ion-note>
       </ion-item> -->
 
       <!-- Info for undergrad students -->
-      <!-- <ion-item *ngIf="this.student.current_academic_level === 'Undergraduate'">
+      <!-- <ion-item *ngIf="thisStudent.current_academic_level === 'Undergraduate'">
         <ion-label position="stacked">Year Of Study</ion-label>
-        <ion-note color = "dark"> {{this.student.year_of_study}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.year_of_study}} </ion-note>
       </ion-item> -->
       <!-- Info for postgrad -->
-      <!-- <ion-item *ngIf="this.student.current_academic_level === 'Postgraduate'">
+      <!-- <ion-item *ngIf="thisStudent.current_academic_level === 'Postgraduate'">
         <ion-label position="stacked">Year Of Study</ion-label>
-        <ion-note color = "dark"> {{this.student.year_of_study}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.year_of_study}} </ion-note>
       </ion-item> -->
 
 <!-- Info for uni students -->
-      <!-- <ion-item *ngIf="this.student.current_academic_level === 'Undergraduate' || this.student.current_academic_level === 'Postgraduate'">
+      <!-- <ion-item *ngIf="thisStudent.current_academic_level === 'Undergraduate' || thisStudent.current_academic_level === 'Postgraduate'">
         <ion-label position="stacked">Institution of study</ion-label>
-        <ion-note color = "dark"> {{this.student.study_institution}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.study_institution}} </ion-note>
       </ion-item>
-      <ion-item *ngIf="this.student.current_academic_level === 'Undergraduate' || this.student.current_academic_level === 'Postgraduate'">
+      <ion-item *ngIf="thisStudent.current_academic_level === 'Undergraduate' || thisStudent.current_academic_level === 'Postgraduate'">
         <ion-label position="stacked">Will you be continuing with studies?</ion-label>
-        <ion-checkbox checked="{{this.student.continue_studies}}" color="dark"></ion-checkbox>
+        <ion-checkbox checked="{{thisStudent.continue_studies}}" color="dark"></ion-checkbox>
       </ion-item>
-      <ion-item *ngIf="this.student.current_academic_level === 'Undergraduate' || this.student.current_academic_level === 'Postgraduate'">
+      <ion-item *ngIf="thisStudent.current_academic_level === 'Undergraduate' || thisStudent.current_academic_level === 'Postgraduate'">
         <ion-label position="stacked">Current GPA</ion-label>
-        <ion-note color = "dark"> {{this.student.gpa}} </ion-note>
+        <ion-note color = "dark"> {{thisStudent.gpa}} </ion-note>
       </ion-item> -->
     </ion-list>
     <!-- <h1>View About Me</h1> -->
-    <!-- <ion-item *ngIf="this.student.description_of_student !== ''">
+    <!-- <ion-item *ngIf="thisStudent.description_of_student !== ''">
       <ion-label position="stacked">Student summary</ion-label>
-      <ion-note color = "dark"> {{this.student.description_of_student}} </ion-note>
+      <ion-note color = "dark"> {{thisStudent.description_of_student}} </ion-note>
     </ion-item> -->
       <!-- Submit Form -->
     <!-- <ion-button color="primary" (click)="gotoEdit()">
