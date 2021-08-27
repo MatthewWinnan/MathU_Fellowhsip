@@ -18,7 +18,7 @@ export class ShortlistPage implements OnInit {
   // Variables for messages for shortlist page
   bursariesInShortlist: boolean;
   noBursariesMessage4 = "No Bursaries in Shortlist."
-  noBursariesMessage5 = "Let's chagne that."
+  noBursariesMessage5 = "Let's change that."
   
   constructor(
     private router: Router,
