@@ -137,10 +137,10 @@ export class LoginPage implements OnInit {
         if (res["Student"]){
           this.user.student = new student_users();
           this.user.student.student_id = res["Student"]["id"];
-          this.user.student.first_name_of_student = res["Student"]["first_name"];
-          this.user.student.last_name_of_student = res["Student"]["last_name"];
+          this.user.student.first_name = res["Student"]["first_name"];
+          this.user.student.last_name = res["Student"]["last_name"];
           this.user.student.email_address = res["Student"]["email"];
-          this.user.student.isVerified = res["Student"]["validated"];
+          this.user.student.validated = res["Student"]["validated"];
           //do for rest 
           this.user.role = "Student";
 
