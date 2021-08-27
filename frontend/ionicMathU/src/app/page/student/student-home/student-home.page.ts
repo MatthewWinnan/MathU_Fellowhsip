@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { BursaryService } from 'src/app/service/bursary.service';
 import { Student_bursary } from 'src/app/model/student_bursary';
+import { LoadingController } from '@ionic/angular';
 
 
 let student = new student_users
@@ -91,9 +92,14 @@ export class StudentHomePage implements OnInit {
     public alertController: AlertController,
     private route: ActivatedRoute,
     public _apiService: BursaryService,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
+    
+    //this.loading()
+    this.presentLoading
+    
     let k: number;
     this.sub = this.route.params.subscribe(params => {
       console.log(params);
@@ -130,6 +136,24 @@ export class StudentHomePage implements OnInit {
       }
     }
 
+  }
+
+  loading() {
+    while (this.bursariesList.length == 0) {
+      this.presentLoading()
+    }
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Getting data...',
+      duration: 0
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
   checkID(k: number) {

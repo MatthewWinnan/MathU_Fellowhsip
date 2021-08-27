@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Student_bursary } from 'src/app/model/student_bursary';
 import { student_users } from 'src/app/model/student_users';
 import { BursaryService } from 'src/app/service/bursary.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-shortlist',
@@ -23,9 +24,12 @@ export class ShortlistPage implements OnInit {
   constructor(
     private router: Router,
     public _apiService: BursaryService,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
+    this.presentLoading()
+    
     //stored in Storage (when login)
     this.initialiseStudentData();
 
@@ -37,6 +41,18 @@ export class ShortlistPage implements OnInit {
     this.isBursariesInShortlist();
 
 
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: this.bursaryShortlist.length
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
   isBursariesInShortlist() {
