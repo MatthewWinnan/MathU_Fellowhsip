@@ -11,7 +11,7 @@ import { Student_bursary } from 'src/app/model/student_bursary';
 
 
 let student = new student_users
-let i = 0;
+
 
 @Component({
   selector: 'app-student-home',
@@ -23,6 +23,7 @@ export class StudentHomePage implements OnInit {
   thisStudent:student_users = new student_users();
   bursariesList:Bursary[] = [];
   student_bur = new Student_bursary();
+  i: number = 0;
 
 
   /* Form Variables */
@@ -60,7 +61,7 @@ export class StudentHomePage implements OnInit {
   bursValid: Boolean = false
 
   // Variables for messages for main page
-  noBursariesMessage1 = "There is currently no bursaries that are in the DB."
+  noBursariesMessage1 = "There are currently no bursaries in the DB."
   noBursariesMessage2 = "Sorry about that."
   noBursariesMessage3 = "But it is about to change, so don't worry."
   
@@ -72,13 +73,15 @@ export class StudentHomePage implements OnInit {
   showValid: boolean = false;
   viewMoreStr: string = "View More";
   viewLessStr: string = "View Less";
-  i = 0;
   moreBursaries: any = '';
   valueLeft: boolean;
   valueRight: boolean;
   listBurs = [];
 
   sub: any;
+
+  /* Testing apply function */
+  strTest:string = "Works"
 
   // are there bursaries?
   bursariesAvailable: boolean
@@ -112,33 +115,33 @@ export class StudentHomePage implements OnInit {
       this.checkID(k)
 
             // Gets bursary with certain id and populates screen.
-      this.getBuraries(i)
+      this.getBuraries(this.i)
 
       /* Upon initiation Values for left and right cycle button is set */
       /* Right */
-      if (i >= this.bursariesList.length) {
+      if (this.i >= this.bursariesList.length) {
         this.valueRight = false
       }
-      if (i < this.bursariesList.length) {
+      if (this.i < this.bursariesList.length) {
         this.valueRight = true
       }
-      if (i > 0) {
+      if (this.i > 0) {
         this.valueLeft = true
       }
     }
 
   }
 
-  checkID(k) {
+  checkID(k: number) {
     for (let m = 0; m < this.bursariesList.length; m++) {
       console.log(k, this.bursariesList[m].bursary_id)
       if (k == this.bursariesList[m].bursary_id) {
-        i = m
+        this.i = m
         break
       }
       else {
         console.log("Can't find Bursary")
-        i = 0
+        this.i = 0
       }
       
     }
@@ -158,30 +161,29 @@ export class StudentHomePage implements OnInit {
   nextBursary() {
     // there needs to be a list option to make sure that button will be disabled if end of list is reached.
     // list represents the list of bursaries that meet the filter criteria
-    if (i < this.bursariesList.length-1) {
-      i++
+    if (this.i < this.bursariesList.length-1) {
+      this.i++
       this.valueLeft = true
-      if (i >= this.bursariesList.length-1) {
+      if (this.i >= this.bursariesList.length-1) {
         this.valueRight = false
       } 
     }
-    this.getBuraries(i)
+    this.getBuraries(this.i)
   }
 
   prevBursary() {
-    if (i > 0) {
-      i--
+    if (this.i > 0) {
+      this.i--
       this.valueLeft = true
       this.valueRight = true
-      if (i <= 0) {
+      if (this.i <= 0) {
         this.valueLeft = false
       } 
     }
-    this.getBuraries(i)
+    this.getBuraries(this.i)
   }
   
-  applyBursary(bursary_data:Bursary) {
-    /* this.studentIsVerified ? console.log('You are Verified. Proceed to apply for the Bursary') : this.presentAlert('apply for') */
+  applyBursary(bursary_data: Bursary) {
     console.log('Proceed to apply for the Bursary');
     console.log(bursary_data);
     // this.student_bur.Student_ID = this.thisStudent.id;
