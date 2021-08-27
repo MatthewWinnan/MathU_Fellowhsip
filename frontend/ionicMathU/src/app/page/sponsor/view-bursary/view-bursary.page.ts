@@ -186,7 +186,7 @@ export class ViewBursaryPage implements OnInit {
               this.router.navigateByUrl('./view-bursary');
             }
           }, (error:any) => {
-            deactivateItem.isVisible = true;
+            //deactivateItem.isVisible = true;  //fix it
             this.the_message = 'error';
             this.printMessage();
             console.log("ERROR ===", error);

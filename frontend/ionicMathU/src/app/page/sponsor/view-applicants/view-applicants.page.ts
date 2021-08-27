@@ -211,7 +211,6 @@ export class ViewApplicantsPage implements OnInit {
   }
 
   acceptDialogue(acceptItem) {
-    console.log(acceptItem);
     let before = acceptItem.Status;
     this.alert.create({
       header: "Confirmation",
@@ -222,6 +221,7 @@ export class ViewApplicantsPage implements OnInit {
         handler:(data) => {
           //send request to backend
           acceptItem.Status = "Accepted";
+          console.log(acceptItem);
           this._apiService.acceptApplicant(acceptItem).subscribe((res) => {
             console.log("REQUEST SUCCESS ===", res);
             this.the_message = res["message"];
@@ -229,7 +229,7 @@ export class ViewApplicantsPage implements OnInit {
             console.log(acceptItem.first_name + " " + acceptItem.last_name + " has been accepted to " 
           + "Bursary xyz");
           }, (error:any) => {
-            acceptItem.Status = before;
+            //acceptItem.Status = before;
             this.the_message = 'error';// error;
             this.printMessage();
             console.log("ERROR ===", error);
@@ -248,7 +248,6 @@ export class ViewApplicantsPage implements OnInit {
   }
 
   declineDialogue(acceptItem) {
-    console.log(acceptItem);
     let before = acceptItem.Status;
     this.alert.create({
       header: "Decline",
@@ -260,6 +259,7 @@ export class ViewApplicantsPage implements OnInit {
           //this.status = 'Declined!'
           //send request to backend
           acceptItem.Status = "Declined";
+          console.log(acceptItem);
           this._apiService.declineApplicant(acceptItem).subscribe((res) => {
             console.log("REQUEST SUCCESS ===", res);
             this.the_message = res["message"];
@@ -268,7 +268,7 @@ export class ViewApplicantsPage implements OnInit {
           }, (error:any) => {
             this.the_message = 'error';// error;
             this.printMessage();
-            acceptItem.Status = before;
+            //acceptItem.Status = before;
             console.log("ERROR ===", error);
           });
         } 

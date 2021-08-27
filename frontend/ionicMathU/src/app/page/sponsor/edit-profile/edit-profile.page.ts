@@ -76,7 +76,7 @@ export class EditProfilePage implements OnInit {
       this.ourCompany.company_URL = this.editProfile.value.company_URL;
 
       this.allUsersDetials.sponsor_users.company = this.ourCompany;
-      //send request to backend to update details 
+      console.log(this.ourCompany);
       //send api request 
       this._apiService.editSponsor(this.ourCompany).subscribe((res) => {
         console.log("REQUEST SUCCESS ===", res);
