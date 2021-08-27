@@ -14,6 +14,11 @@ import { BursaryService } from 'src/app/service/bursary.service';
 export class ShortlistPage implements OnInit {
   bursaryShortlist:Student_bursary[] = [];
   thisStudent:student_users = new student_users;
+
+  // Variables for messages for shortlist page
+  bursariesInShortlist: boolean;
+  noBursariesMessage4 = "No Bursaries in Shortlist."
+  noBursariesMessage5 = "Let's chagne that."
   
   constructor(
     private router: Router,
@@ -26,7 +31,20 @@ export class ShortlistPage implements OnInit {
 
 
     //api call to backend --> all bursaries with this student 
-    this.initialiseShortlist();
+    //this.initialiseShortlist();
+
+    // See if there are items in teh shortlist
+    this.isBursariesInShortlist();
+
+
+  }
+
+  isBursariesInShortlist() {
+    let lenShortlist = this.bursaryShortlist.length
+    this.bursariesInShortlist = false
+    if (lenShortlist !== 0) {
+      this.bursariesInShortlist = true
+    }
   }
 
   initialiseStudentData(){
@@ -144,6 +162,8 @@ export class ShortlistPage implements OnInit {
     //   console.log("ERROR ===", error);
     //   this.bursaryShortlist = [];
     // });
+
+    this.isBursariesInShortlist()
 
     this.bursaryShortlist = [
       {

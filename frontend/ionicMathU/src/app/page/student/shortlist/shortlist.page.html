@@ -18,80 +18,100 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-
-  <ion-list *ngFor="let burs of bursaryShortlist">
-    <ion-item-sliding>
-      <ion-item>
-        <ion-label>
-          <h2>{{ burs.bursary.bursary_name }}</h2>
-          <h3>{{ burs.bursary.company.company_name }}</h3>
-            <div *ngIf="burs.Status == 'Pending'">
-              <p>
-                <ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon>
-                Application {{ burs.Status }}
-              </p>
-            </div>
-            <div *ngIf="burs.Status == 'Accepted'">
-              <p>
-                <ion-icon name="checkmark-circle-outline"></ion-icon>
-                Application {{ burs.Status }}
-              </p>
-            </div>
-            <div *ngIf="burs.Status == 'Declined'">
-              <p>
-                <ion-icon name="close-circle-outline"></ion-icon>
-                Application {{ burs.Status }}
-              </p>
-            </div>
-        </ion-label>
-      </ion-item>
+  <div *ngIf="bursariesInShortlist; else nobursariesINShortlistBlock">
+    <ion-list *ngFor="let burs of bursaryShortlist">
+      <ion-item-sliding>
+        <ion-item>
+          <ion-label>
+            <h2>{{ burs.bursary.bursary_name }}</h2>
+            <h3>{{ burs.bursary.company.company_name }}</h3>
+              <div *ngIf="burs.Status == 'Pending'">
+                <p>
+                  <ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon>
+                  Application {{ burs.Status }}
+                </p>
+              </div>
+              <div *ngIf="burs.Status == 'Accepted'">
+                <p>
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  Application {{ burs.Status }}
+                </p>
+              </div>
+              <div *ngIf="burs.Status == 'Declined'">
+                <p>
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                  Application {{ burs.Status }}
+                </p>
+              </div>
+          </ion-label>
+        </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option (click)="goToBursaryView(burs.Bursary_ID)">View Bursary</ion-item-option>
+          </ion-item-options>
+        <!-- <ion-item-options side="start">
+          <ion-item-option (click)="deleteApplication(burs.Bursary_ID)" color="danger">
+            <p>Delete Application</p>
+          </ion-item-option>
+        </ion-item-options> -->
+      </ion-item-sliding>
+  
+      <!-- <ion-item-sliding>
+        <ion-item>
+          <ion-avatar>
+            <img src="{{ burs.bursIcon }}" alt="Busary Conmpany Logo">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ burs.bursName }}</h2>
+            <h3>{{ burs.bursCompName }}</h3>
+              <div *ngIf="burs.bursStatus == 'Pending'">
+                <p>
+                  <ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon>
+                  Application {{ burs.bursStatus }}
+                </p>
+              </div>
+              <div *ngIf="burs.bursStatus == 'Accepted'">
+                <p>
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  Application {{ burs.bursStatus }}
+                </p>
+              </div>
+              <div *ngIf="burs.bursStatus == 'Declined'">
+                <p>
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                  Application {{ burs.bursStatus }}
+                </p>
+              </div>
+          </ion-label>
+        </ion-item>
         <ion-item-options side="end">
-          <ion-item-option (click)="goToBursaryView(burs.Bursary_ID)">View Bursary</ion-item-option>
+          <ion-item-option (click)="goToBursaryView(burs.bursID)">View Bursary</ion-item-option>
         </ion-item-options>
-      <!-- <ion-item-options side="start">
-        <ion-item-option (click)="deleteApplication(burs.Bursary_ID)" color="danger">
-          <p>Delete Application</p>
-        </ion-item-option>
-      </ion-item-options> -->
-    </ion-item-sliding>
+        <ion-item-options side="start">
+          <ion-item-option (click)="deleteApplication(burs.bursID)" color="danger">
+            <p>Delete Application</p>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding> -->
+    </ion-list>
+  </div>
 
-    <!-- <ion-item-sliding>
-      <ion-item>
-        <ion-avatar>
-          <img src="{{ burs.bursIcon }}" alt="Busary Conmpany Logo">
-        </ion-avatar>
-        <ion-label>
-          <h2>{{ burs.bursName }}</h2>
-          <h3>{{ burs.bursCompName }}</h3>
-            <div *ngIf="burs.bursStatus == 'Pending'">
-              <p>
-                <ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon>
-                Application {{ burs.bursStatus }}
-              </p>
-            </div>
-            <div *ngIf="burs.bursStatus == 'Accepted'">
-              <p>
-                <ion-icon name="checkmark-circle-outline"></ion-icon>
-                Application {{ burs.bursStatus }}
-              </p>
-            </div>
-            <div *ngIf="burs.bursStatus == 'Declined'">
-              <p>
-                <ion-icon name="close-circle-outline"></ion-icon>
-                Application {{ burs.bursStatus }}
-              </p>
-            </div>
-        </ion-label>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option (click)="goToBursaryView(burs.bursID)">View Bursary</ion-item-option>
-      </ion-item-options>
-      <ion-item-options side="start">
-        <ion-item-option (click)="deleteApplication(burs.bursID)" color="danger">
-          <p>Delete Application</p>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding> -->
-  </ion-list>
+  <ng-template #nobursariesINShortlistBlock>
+    <ion-item-sliding>
+        <ion-item>
+          <ion-avatar>
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ noBursariesMessage4 }}</h2>
+            <h3>{{ noBursariesMessage5 }}</h3>
+          </ion-label>
+        </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option (click)="goToBursaryView(0)">View Bursaries</ion-item-option>
+          </ion-item-options>
+    </ion-item-sliding>
+  </ng-template>
+
+
 
 </ion-content>

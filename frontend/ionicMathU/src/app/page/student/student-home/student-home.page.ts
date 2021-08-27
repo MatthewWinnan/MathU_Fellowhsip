@@ -56,6 +56,13 @@ export class StudentHomePage implements OnInit {
   documentsNeeded: any;
 
   dateForFurtherCommunication: any;
+  currentDate = new Date();
+  bursValid: Boolean = false
+
+  // Variables for messages for main page
+  noBursariesMessage1 = "There is currently no bursaries that are in the DB."
+  noBursariesMessage2 = "Sorry about that."
+  noBursariesMessage3 = "But it is about to change, so don't worry."
   
 
   /* Student Account Verified */
@@ -73,6 +80,9 @@ export class StudentHomePage implements OnInit {
 
   sub: any;
 
+  // are there bursaries?
+  bursariesAvailable: boolean
+
   constructor(
     private router: Router,
     public alertController: AlertController,
@@ -85,33 +95,37 @@ export class StudentHomePage implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       console.log(params);
       k = parseInt(params.id)
-    });
+    });    
 
-    //stored in Storage (when login)
+    // stored in Storage (when login)
     this.initialiseStudentData();
 
-    //get all bursaries
+    // get all bursaries
     this.initialiseBursaries();
 
-    // See if a certain bursary needs to be shown
-    this.checkID(k)
+    /* See if there are bursaries */
+    this.checkHowManyBursariesInList()
 
-    console.log(i)
+    if (this.bursariesAvailable) {
 
-    this.getBuraries(i)
+      // See if a certain bursary can shown (Eq if wanted to view a bursary seen in the shortlist page)
+      this.checkID(k)
 
-    /* Upon initiation Values for left and right cycle button is set */
-    /* Right */
-    if (i >= this.bursariesList.length) {
-      this.valueRight = false
+            // Gets bursary with certain id and populates screen.
+      this.getBuraries(i)
+
+      /* Upon initiation Values for left and right cycle button is set */
+      /* Right */
+      if (i >= this.bursariesList.length) {
+        this.valueRight = false
+      }
+      if (i < this.bursariesList.length) {
+        this.valueRight = true
+      }
+      if (i > 0) {
+        this.valueLeft = true
+      }
     }
-    if (i < this.bursariesList.length) {
-      this.valueRight = true
-    }
-    if (i > 0) {
-      this.valueLeft = true
-    }
-
 
   }
 
@@ -186,6 +200,17 @@ export class StudentHomePage implements OnInit {
     //   console.log('error');
     // });
   }
+  
+
+  /* See if bursary is Expired */
+  isBursaryExpired(d: number) {
+    let bursDate = new Date(this.bursariesList[d].closing_date)
+    this.bursValid = false
+
+    if (this.currentDate <= bursDate) {
+      this.bursValid = true
+    }
+}
 
   dismissBursary() {
     /* this.studentIsVerified ? console.log('You are Verified. Proceed to decline Bursary') : this.presentAlert('dismiss') */
@@ -233,6 +258,11 @@ export class StudentHomePage implements OnInit {
 
   /* Get Bursary That meet the filter Criteria */
   getBuraries(i: number) {
+    this.checkHowManyBursariesInList()
+
+    // Check to see if the bursary is past expiration date and therefore disables apply button
+    this.isBursaryExpired(i)
+
     this.companyName = this.bursariesList[i].company.company_name;
     this.companyIndustry = this.bursariesList[i].company.company_industry;
     this.bursaryName = this.bursariesList[i].bursary_name;
@@ -261,15 +291,23 @@ export class StudentHomePage implements OnInit {
 
     /* this.documentsNeeded =  */
     this.dateForFurtherCommunication = this.bursariesList[i].shortlist_date; 
-
-    /* present the first bursary in the list */
-    this.getSpecificBursary(this.bursariesList[i])
+       
   }
 
+  /* Check to see if there are bursaries in the database */
+  checkHowManyBursariesInList() {
+    console.log("Checking how many bursaries are in the DB")
+    let numBursaries = this.bursariesList.length
+    console.log("There are ", numBursaries, " bursary/bursaries")
 
-  /* Get burary with certain ID */
-  getSpecificBursary(bursID) {
+    if (numBursaries == 0) {
+      this.bursariesAvailable = false
+    }
+    else {
+      this.bursariesAvailable = true
+    }
   }
+
 
   initialiseStudentData(){
     //someone who just logged in 
@@ -413,7 +451,7 @@ export class StudentHomePage implements OnInit {
             "Books Allowance",
             "Transport"
         ],
-        closing_date: "2021-11-16",
+        closing_date: "2021-06-16",
         shortlist_date: "2021-11-20",
         email_address: "name@gmail.com",
         bursary_duration: 2,
