@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
     public navCtrl: NavController
   ) { 
     //this.storage.clear();
-    this.getValue();
+    //this.getValue();
   }
 
   get email_address() {
@@ -68,7 +68,7 @@ export class LoginPage implements OnInit {
   public loginSubmit() {
     this.isChecking = true;
     let login_data = this.loginUser.value;
-    console.log(login_data);
+    //console.log(login_data);
 
     this.login_api.login_a_user(login_data).subscribe((res) => {
       console.log("API SUCCESS ===", res);

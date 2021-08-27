@@ -6,6 +6,8 @@ import { DataService } from 'src/app/service/data.service';
 import { Company } from '../../../model/company';
 import { BursaryService } from '../../../service/bursary.service';
 import { Storage } from '@ionic/storage-angular';
+import { AllUsers } from 'src/app/model/all_users';
+import { Sponsor_users } from 'src/app/model/sponsor_users';
 
 @Component({
   selector: 'app-view-bursary',
@@ -19,11 +21,10 @@ export class ViewBursaryPage implements OnInit {
   jsonData_length = 0;
   ourCompany = new Company();
   allBursaries:Bursary[] = [];
-  //bursary = new Bursary();
-  // jsonData:Bursary[] = [];
-  //jsonData:any = [];
-  b_status : string = "Open";
-  gmail = "";
+  allUsersDetials = new AllUsers();
+  userType: string = "";
+  loggedSponsor = new Sponsor_users();
+  //b_status : string = "Open";
   
   constructor(
     private platform: Platform,
@@ -35,33 +36,14 @@ export class ViewBursaryPage implements OnInit {
     public toastController: ToastController,
     public storage: Storage,
   ) { 
-    this.getValue();
     this.platform.ready().then(()=>{
-      this.initializeJSONData();
+      this.getUserType();
+      this.getLoggedSponsor();
+      this.getCompanyDetails();
     });
-    //this.initializeJSONData();
   }
 
-  ngOnInit() {
-    //this.platform.ready().then(()=>{
-      //ourCompany is stored in LocalStorage (when user logs in)
-      this.ourCompany.company_id = 0;
-      this.ourCompany.company_name = "Google";
-      this.ourCompany.company_industry = "IT & Telecommunications";
-      this.ourCompany.company_logo = "";
-      this.ourCompany.company_description = "";
-      this.ourCompany.company_URL = "";
-      this.initializeJSONData();
-    //});
-  }
-
-  getValue(){
-    this.storage.get('name').then( (val) => {
-      this.gmail = "value is " + val["role"];
-    }, (err)=>{
-      this.gmail = "empty";
-    })
-  }
+  ngOnInit() { }
 
   initializeJSONData() {
     // this.jsonData = [
@@ -253,5 +235,36 @@ export class ViewBursaryPage implements OnInit {
     //window.location.reload();
     this.initializeJSONData();
   }
+
+  getUserType(){
+    this.storage.get('name').then( (val) => {
+      //console.log(val);
+      this.userType = val["role"];
+    }, (err)=>{
+      this.userType = "";
+    })
+  }
+
+  getCompanyDetails(){
+    this.storage.get('name').then( (val) => {
+      this.ourCompany = <Company>val["sponsor_users"]["company"];
+      //console.log("in company details ");
+      //console.log(this.ourCompany);
+      this.initializeJSONData();
+    }, (err)=>{
+      console.log("company detials error " + err);
+    })    
+  }
+
+  getLoggedSponsor(){
+    this.storage.get('name').then( (val) => {
+      this.loggedSponsor = <Sponsor_users>val["sponsor_users"];
+      //console.log("in logged in sponsor details ");
+      //console.log(this.loggedSponsor);
+    }, (err)=>{
+      console.log("logged in sponsor error " + err);
+    })    
+  }
+
 
 }

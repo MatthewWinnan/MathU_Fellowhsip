@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { Bursary } from '../../../model/bursaries';
 import { BursaryService } from '../../../service/bursary.service';
-import { ToastController } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Sponsor_users } from 'src/app/model/sponsor_users';
+import { AllUsers } from 'src/app/model/all_users';
+import { Company } from 'src/app/model/company';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-add-bursary',
@@ -12,7 +16,10 @@ import { Router } from '@angular/router';
 })
 export class AddBursaryPage implements OnInit {
   the_message : string = "";
-
+  allUsersDetials = new AllUsers();
+  userType: string = "";
+  loggedSponsor = new Sponsor_users();
+  ourCompany = new Company();
   dateToday = new Date().toISOString().substring(0,10);
 
   get bursary_name() {
@@ -151,14 +158,22 @@ export class AddBursaryPage implements OnInit {
     public toastController: ToastController,
     private router:Router,
     public _apiService: BursaryService,
-  ) { }
+    public storage: Storage,
+    private platform: Platform,
+  ) {
+    this.platform.ready().then(()=>{
+      this.getUserType();
+      this.getCompanyDetails();
+    });
+   }
 
   ngOnInit() {
   }
 
   public addBursarySubmit() {
     //console.log(this.addBursary.value);
-    this.bursary.company_id = 0; //fix it
+    this.bursary.company_id = this.ourCompany.company_id;
+    this.bursary.company = this.ourCompany;
     this.bursary.bursary_name = this.addBursary.value.bursary_name;
     this.bursary.bursary_type = this.addBursary.value.bursary_type;
     this.bursary.bursary_description = this.addBursary.value.bursary_description;
@@ -221,5 +236,32 @@ export class AddBursaryPage implements OnInit {
 
     (await toast).present();
     this.the_message = "";
+  }
+
+  getUserType(){
+    this.storage.get('name').then( (val) => {
+      //console.log(val);
+      this.userType = val["role"];
+    }, (err)=>{
+      this.userType = "";
+    })
+  }
+
+  getCompanyDetails(){
+    this.storage.get('name').then( (val) => {
+      this.ourCompany = <Company>val["sponsor_users"]["company"];
+    }, (err)=>{
+      console.log("company detials error " + err);
+    })    
+  }
+
+  getLoggedSponsor(){
+    this.storage.get('name').then( (val) => {
+      this.loggedSponsor = <Sponsor_users>val["sponsor_users"];
+      //console.log("in logged in sponsor details ");
+      //console.log(this.loggedSponsor);
+    }, (err)=>{
+      console.log("logged in sponsor error " + err);
+    })    
   }
 }

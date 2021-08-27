@@ -2,31 +2,21 @@
 <ion-header>
   <ion-toolbar>
     <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
-    <ion-button slot="start" fill="none">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
-    </ion-button>
-
-    <ion-button slot="end" routerLink="/add-bursary" fill="none">
-
-    <!-- <ion-buttons slot="start">
+    <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-
-    <ion-button slot="end" routerLink="/edit-bursary" fill="none">
-      <ion-icon name="add"></ion-icon> 
-    </ion-button> -->
-
+    <ion-button slot="end" fill="none" routerLink="/add-bursary">
+      <ion-icon name="add" size="small"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
-
-
 
 <ion-content class="ion-padding">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list>
+  <ion-list *ngIf="!isFetching && jsonData_length>=1">
     <ion-item>
       <ion-searchbar placeholder="Bursary Name" (ionInput)="filterBursary($event)"></ion-searchbar>
     </ion-item>
@@ -66,7 +56,7 @@
     </ion-card>
   </div>
 
-  <div class="ion-text-center" *ngIf="!isFetching && jsonData_length<1">
+  <div class="ion-text-center vertical-center" *ngIf="!isFetching && jsonData_length<1">
     No Bursaries posted. <br>
     Click on the "plus" symbol to post a bursary. 
   </div>
