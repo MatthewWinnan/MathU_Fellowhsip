@@ -17,7 +17,7 @@ import { Form, FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn 
 export class RegisterPage implements OnInit {
   //password: null; 
   public barLabel: string = "Password strength:";  
-
+  dateToday = new Date().toISOString().substring(0,10);
   the_message : string = "";
 
   //Password variables
@@ -26,8 +26,32 @@ export class RegisterPage implements OnInit {
   c_showPassword = false;
   c_passwordToggleIcon = 'eye';
 
+  //Student Password variables
+  student_showPassword = false;
+  student_passwordToggleIcon = 'eye';
+  student_c_showPassword = false;
+  student_c_passwordToggleIcon = 'eye';
+
   //form input fields --> Student only
-  //??
+  addStudent: FormGroup;
+  get student_first_name() {
+    return this.addStudent.get('student_first_name');
+  }
+  get student_last_name() {
+    return this.addStudent.get('student_last_name');
+  }
+  get student_email_address() {
+    return this.addStudent.get('student_email_address');
+  }
+  get student_password() {
+    return this.addStudent.get('student_password');
+  }
+  get student_c_password() {
+    return this.addStudent.get('student_c_password');
+  }
+  get student_date_of_birth(){
+    return this.addStudent.get('student_date_of_birth');
+  }
 
   //form input fields --> Sponsor only
   addSponsor: FormGroup;
@@ -37,8 +61,6 @@ export class RegisterPage implements OnInit {
   get company_industry() {
     return this.addSponsor.get('company_industry');
   }
-
-  //for input fields --> common for both
   get first_name() {
     return this.addSponsor.get('first_name');
   }
@@ -79,39 +101,41 @@ export class RegisterPage implements OnInit {
       { type: 'required', message: 'Password is required' },
       { type: 'minlength', message: 'Password has to be longer than 8 characters'}
     ],
+
+    student_first_name: [
+      { type: 'required', message: 'First Name is required' },
+      { type: 'maxlength', message: 'First Name cannot be longer than 100 charcters'}
+    ],
+    student_last_name: [
+      { type: 'required', message: 'Last Name is required' },
+      { type: 'maxlength', message: 'Last Name cannot be longer than 100 charcters'}
+    ],
+    student_email_address: [
+      { type: 'required', message: 'Email is required' },
+      { type: 'pattern', message: 'Please enter a valid email address' },
+    ],
+    student_password: [
+      { type: 'required', message: 'Password is required' },
+      { type: 'minlength', message: 'Password has to be longer than 8 characters'}
+    ],
+    student_date_of_birth: [
+      { type: 'required', message: 'Date of Birth is required' },
+    ],
     // c_password: [
     //   { type: 'required', message: 'Password is required' }
     // ],
 
   }
 
-  
-
-
-
+  //initialize credentials
+  student = new student_users();
   sponsor = new Sponsor_users() ;
-  //Student initialize credentials
-  student : student_users;
-  student_name : string="";
-  student_surname : string="";
-  //Sponsor initialize credentials
-  //sponor : Sponsor_users;
-  //company_name : string = "";
-  //company_industry : string = "";
-  //f_name : string = "";
-  //l_name : string = "";
-  //email_address : string = "";
-  //password : string = "";
-  //c_password : string = "";
-  
-  
 
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
     public _apiService: ApiService,
     public toastController: ToastController,
-    
   ) { 
     this.sponsor.company = new Company();
    }
@@ -135,50 +159,58 @@ export class RegisterPage implements OnInit {
       validator: [this.MustMatch('password', 'c_password')],
     });
 
+    this.addStudent = this.formBuilder.group({
+      student_first_name: ['', [Validators.required, Validators.maxLength(100)]],
+      student_last_name: ['', [Validators.required, Validators.maxLength(100)]],
+      student_email_address: ['', [ Validators.required, Validators.pattern("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$") ] ],
+      student_password: ['', [Validators.required, Validators.minLength(8)]],
+      student_c_password: [''],
+      student_date_of_birth: ['', [Validators.required]],
+    },
+    {
+      validator: [this.MustMatch('student_password', 'student_c_password')],
+    });
+
   }
 
   get sponsorControl() {
     return this.addSponsor.controls;
   }
 
+  get studentControl() {
+    return this.addStudent.controls;
+  }
+
   //register code for the students
-  registerMe_Student(){
-    // put in code 
-    //console.log(this.company_name, this.company_industry, this.f_name, this.l_name, this.email_address, this.password, this.c_password)
-    if (this.student_name == ""){
-      this.the_message = 'Please enter a name';
-      this.printMessage();
-    }
-    else if (this.student_surname == ""){
-      this.the_message = 'Please eneter your surname';
-      this.printMessage();
+  public addStudentSubmit() {
+    if(this.addStudent.invalid){
+      return;
     }
     else{
-      let data = {
-        //made dummy variables so project can function
-        id : 0,
-        student_id : "",
-        first_name_of_student : "",
-        last_name_of_student : "",
-        email_address : "",
-        password : "",
-      inactive : "",
-      isVerified : "",
-      regisered_date : "",
-      last_login : "",
+      this.student.first_name = this.addStudent.value.student_first_name;
+      this.student.last_name = this.addStudent.value.student_last_name;
+      this.student.email_address = this.addStudent.value.student_email_address;
+      this.student.password = this.addStudent.value.student_password;
+      this.student.date_of_birth = this.addStudent.value.student_date_of_birth.substring(0,10);
+      console.log(this.student);
 
-        // company_name : this.company_name, 
-        // company_industry : this.company_industry,
-        // f_name : this.f_name,
-        // l_name : this.l_name,
-        // email_address : this.email_address,
-        // password : this.password,
-      }
-      
+      this._apiService.registerStudent(this.student).subscribe((res) => {
+        console.log("SUCCESS ===", res);
+        this.the_message = res["message"];
+        //"Successfully created an account. Check your email for the activation email.";
+        this.printMessage();
+        console.log(this.the_message.substring(0,7));
+        if (this.the_message.substring(0,7) == "Success"){
+          //this.router.navigate(['./login']);
+        }
+      }, (error:any) => {
+        this.the_message = 'error';// error;
+        this.printMessage();
+        console.log("ERROR ===", error);
+      });
+
+      // this.router.navigate(['./student-view-profile']);
     }
-    console.log(this.student_name, this.student_surname);
-    //this.router.navigate(['./login']);
-    this.router.navigate(['./student-view-profile']);
   }
 
   //Register code for the sponsors
@@ -229,6 +261,26 @@ export class RegisterPage implements OnInit {
     }
     else{
       this.c_passwordToggleIcon = 'eye';
+    }
+  }
+
+  student_togglePassword():void{
+    this.student_showPassword = !this.student_showPassword;
+    if (this.student_passwordToggleIcon == 'eye'){
+      this.student_passwordToggleIcon = 'eye-off';
+    }
+    else{
+      this.student_passwordToggleIcon = 'eye';
+    }
+  }
+
+  student_c_togglePassword():void{
+    this.student_c_showPassword = !this.student_c_showPassword;
+    if (this.student_c_passwordToggleIcon == 'eye'){
+      this.student_c_passwordToggleIcon = 'eye-off';
+    }
+    else{
+      this.student_c_passwordToggleIcon = 'eye';
     }
   }
 

@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit {
       //console.log("menu");
       //console.log(val);
       if (val["student"]){
-        this.studentName = val["student"]["first_name_of_student"] + " " + val["student"]["last_name_of_student"];
+        this.studentName = val["student"]["first_name"] + " " + val["student"]["last_name"];
       }
       
      }, (err)=>{

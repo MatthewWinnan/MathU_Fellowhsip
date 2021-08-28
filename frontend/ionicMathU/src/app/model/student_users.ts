@@ -8,7 +8,7 @@ export class student_users{
     date_of_birth = "";
     email_address = "";
     password? = "";
-    validated? = 0;
+    //validated? = 0; //not needed in frontend
     nationality? = false;
     contact_number? = "";
     city? = "";
@@ -31,8 +31,8 @@ export class student_users{
     //Filters is linked to another table 
     website? = "";
 	//last_login = "";      //will not be used in frontend at all
-    number_of_reports? = 0;
-    banned? = false;
+    //number_of_reports? = 0;   //version 2
+    //banned? = false;      //version 2
 
     Students_marks?:Students_marks[];
 }

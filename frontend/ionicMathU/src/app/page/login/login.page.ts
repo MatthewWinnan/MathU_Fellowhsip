@@ -9,6 +9,7 @@ import { AllUsers } from '../../model/all_users';
 import { Sponsor_users } from '../../model/sponsor_users';
 import { Company } from '../../model/company';
 import { student_users } from '../../model/student_users';
+import { Students_marks } from 'src/app/model/subjects_marks';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +46,7 @@ export class LoginPage implements OnInit {
 
   public errorMessages = {
     email_address: [
-      { type: 'required', message: 'Name is required' },
+      { type: 'required', message: 'Email Address is required' },
       { type: 'pattern', message: 'Please enter a valid email address' }
     ],
     password: [
@@ -136,22 +137,39 @@ export class LoginPage implements OnInit {
         }
         if (res["Student"]){
           this.user.student = new student_users();
-          this.user.student.student_id = res["Student"]["id"];
+          this.user.student.id = res["Student"]["id"];
           this.user.student.first_name = res["Student"]["first_name"];
           this.user.student.last_name = res["Student"]["last_name"];
           this.user.student.email_address = res["Student"]["email"];
-          this.user.student.validated = res["Student"]["validated"];
-          //do for rest 
+          this.user.student.date_of_birth = res["Student"]["date_of_birth"];
+          this.user.student.nationality = res["Student"]["nationality"];
+          this.user.student.contact_number = res["Student"]["contact_number"];
+          this.user.student.city = res["Student"]["city"];
+          this.user.student.province = res["Student"]["province"];
+          this.user.student.disability = res["Student"]["disability"];
+          this.user.student.current_academic_level = res["Student"]["current_academic_level"];
+          this.user.student.grade = res["Student"]["grade"];
+          this.user.student.syllabus = res["Student"]["syllabus"];
+          this.user.student.average = res["Student"]["average"];
+          this.user.student.currently_studying = res["Student"]["currently_studying"];
+          this.user.student.year_of_study = res["Student"]["year_of_study"];
+          this.user.student.study_institution = res["Student"]["study_institution"];
+          this.user.student.continue_studies = res["Student"]["continue_studies"];
+          this.user.student.gpa = res["Student"]["gpa"];
+          this.user.student.description_of_student = res["Student"]["description_of_student"];
+          this.user.student.bursarred = res["Student"]["bursarred"];
+          this.user.student.current_bursaries = res["Student"]["current_bursaries"];
+          this.user.student.workback = res["Student"]["workback"];
+          this.user.student.website = res["Student"]["website"];
+          //this.user.student.Students_marks = new Students_marks()[];
+          //this.user.student.Students_marks = res["Student"]["date_of_birth"]; 
+          //get student marks
+
+          
           this.user.role = "Student";
 
           console.log(this.user);
           this.setValue(this.user);          
-          //console.log("Student logged in");
-          //console.log(res["Student"]["first_name"]);
-          //this.setValue(res);
-          //this.getValue();  //remove later (to test)
-          //this.router.navigate(['./student-view-profile']); //student
-
           this.navCtrl.navigateRoot('/student-view-profile');
         }
       }
@@ -181,25 +199,6 @@ export class LoginPage implements OnInit {
 
   setValue(value){
     this.storage.set('name', value);
-  }
-
-  getValue(){
-    this.storage.get('name').then( (val) => {
-      if (val != null){
-        console.log(val);
-        // if (val["Sponsor"] != null){
-        //   console.log(val["Sponsor"]["company_id"]);
-        // }
-        // else if (val["Student"] != null){
-        //   console.log(val["Student"]["first_name"]);
-        // }
-      }
-      else{
-        console.log("val is nothing")
-      }
-    }, (err)=>{
-      console.log(err);
-    })
   }
 
   async printMessage() {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Sponsor_users } from '../model/sponsor_users';
 import { Company } from '../model/Company';
+import { student_users } from '../model/student_users';
 //import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,11 @@ export class ApiService {
 
   registerSponsor(data : Sponsor_users) {
     return this.http.post<Sponsor_users>('http://localhost/mathU_backend/math_u_addSponsor.php', data);
+    //return this.http.post<Sponsor_users>('http://mathufellows.epizy.com/math_u_addSponsor.php', data);
+  }
+
+  registerStudent(data : student_users) {
+    return this.http.post<student_users>('http://localhost/mathU_backend/math_u_addStudent.php', data);
     //return this.http.post<Sponsor_users>('http://mathufellows.epizy.com/math_u_addSponsor.php', data);
   }
 
