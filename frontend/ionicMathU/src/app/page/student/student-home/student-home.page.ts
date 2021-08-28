@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Bursary } from 'src/app/model/bursaries';
 import { Company } from 'src/app/model/company';
 import { student_users } from 'src/app/model/student_users'
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonApp } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { BursaryService } from 'src/app/service/bursary.service';
@@ -81,11 +81,11 @@ export class StudentHomePage implements OnInit {
 
   sub: any;
 
-  /* Testing apply function */
-  strTest:string = "Works"
+  /* Testing spinner function */
+  isChecking: boolean = true;
 
   // are there bursaries?
-  bursariesAvailable: boolean
+  bursariesAvailable: boolean;
 
   constructor(
     private router: Router,
@@ -98,7 +98,7 @@ export class StudentHomePage implements OnInit {
   ngOnInit() {
     
     //this.loading()
-    this.presentLoading
+    //this.presentLoading
     
     let k: number;
     this.sub = this.route.params.subscribe(params => {
@@ -138,23 +138,22 @@ export class StudentHomePage implements OnInit {
 
   }
 
-  loading() {
-    while (this.bursariesList.length == 0) {
-      this.presentLoading()
-    }
+  /* ionViewWillEnter() {
+    this.presentLoadingBursaries()
   }
 
-  async presentLoading() {
+  async presentLoadingBursaries() {
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
-      message: 'Getting data...',
-      duration: 0
+      spinner: 'lines-small',
+      message: 'Fetching Bursaries...',
+      duration: 2000
     });
     await loading.present();
 
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
-  }
+  } */
 
   checkID(k: number) {
     for (let m = 0; m < this.bursariesList.length; m++) {
@@ -328,9 +327,11 @@ export class StudentHomePage implements OnInit {
 
     if (numBursaries == 0) {
       this.bursariesAvailable = false
+      this.isChecking = false
     }
     else {
       this.bursariesAvailable = true
+      this.isChecking = false
     }
   }
 

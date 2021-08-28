@@ -14,235 +14,246 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="bursariesAvailable; else noBursariesInDB">
 
-    <div class="summaryCards">
-      <ion-card>
-        <ion-card-header>
-          <!-- <ion-avatar>
-            <img src="{{ companyLogo }}" alt="company_logo"><img>
-          </ion-avatar> -->
-          <ion-card-title>{{ companyName }}</ion-card-title>
-          <ion-card-subtitle>{{ companyIndustry }}</ion-card-subtitle>
-        </ion-card-header>
-      </ion-card>
-  
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>{{ bursaryName }}</ion-card-subtitle>
-        </ion-card-header>
-      
-        <ion-card-content>
-          <ul>
-            <li>
-              <ion-icon name="clipboard"></ion-icon>
-              Field Needed: 
-              {{ fieldStudyNeeded }}</li>
-            <li>
-              <ion-icon name="calendar"></ion-icon>
-              Expiration Date: 
-              {{ offerExpirationDate }}</li>
-            <li>
-              <ion-icon name="umbrella"></ion-icon>
-              Bursary Covers:
-              <ul *ngFor="let cov of bursary_covers, let i = index">
-                <li>{{cov[i]}}</li>
-              </ul>
-              {{ bursaryCoversFor }}
-            </li>
-            <li>
-              <ion-icon name="trending-up"></ion-icon>
-              {{ latestAverageAbove }}% minimum latest average</li>
-          </ul>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  
-    <div [className]="showValid ? 'showMore' : 'showLess'">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>Details about {{ companyName }}</ion-card-subtitle>
-        </ion-card-header>
-      
-        <ion-card-content>
-          <ul>
-            <li>
-              <ion-icon name="business"></ion-icon>
-              {{ companyDescription }}</li>
-            <li>
-              <ion-icon name="code-working"></ion-icon>
-              {{ companyURL }}</li>
-            <li>
-              <ion-icon name="mail"></ion-icon>
-              {{ emailAddress }}</li>
-          </ul>
-        </ion-card-content>
-      </ion-card>
-  
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>Bursary Details</ion-card-subtitle>
-        </ion-card-header>
-      
-        <ion-card-content>
-          <ul>
-            <li>
-              <ion-icon name="document"></ion-icon>
-              {{ bursaryType }}</li>
-            <li>
-              <ion-icon name="time"></ion-icon>
-              The duration the bursary is {{ bursaryDuration }} years</li>
-            <li>
-              <ion-icon name="school"></ion-icon>
-              {{ academicLevel }}</li>
-            <li>
-              <ion-icon name="hourglass"></ion-icon>
-              {{ minYearRequired }} and above</li>
-          </ul>
-        </ion-card-content>
-      </ion-card>
-  
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>
-            <ion-icon name="list-circle"></ion-icon>
-            Criteria</ion-card-subtitle>
-        </ion-card-header>
-      
-        <ion-card-content>
-          <ul>
-            <li>Age Range: {{ ageMin }} upto {{ ageMax }}</li>
-            <li>
-              RSA citizen:
-              <ion-icon name="{{RSACitizenNeeded ? 'checkmark-circle-outline' : 'close-circle-outline'}}" slot="start"></ion-icon>
-            </li>
-            <li>
-              Bursary for financial assistence: 
-              {{forFinancialAssistence ? 'Only' : 'Not Only'}}
-            </li>
-            <li>
-              Disability: 
-              {{disability ? 'Only' : 'Not Only'}}
-            </li>
-            <li>Study Further: {{ studyFurther }}</li>
-          </ul>
-        </ion-card-content>
-      </ion-card>
-  
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>Application Process</ion-card-subtitle>
-        </ion-card-header>
-      
-        <ion-card-content>
-          <ul>
-            <li>
-              <ion-icon name="document-text"></ion-icon>
-              Documents Needed:
-              <ul *ngFor="let doc of documentsNeeded">
-                <li>{{doc.docName}}, Certified: {{doc.docCertified}}</li>
-              </ul>
-            </li>
-            <li>
-              <ion-icon name="calendar-number"></ion-icon>
-              {{ dateForFurtherCommunication }}</li>
-          </ul>
-        </ion-card-content>
-      </ion-card>
-    </div>
-    
-  
-    <div class="bottomNavigation bar bar-footer ">
-  
-      <div *ngIf="showValid; else cycleBlock">
-        <div *ngIf="bursValid; else expiredBlock">
-  
-          <ion-button disabled fill="none" (click)="leftOption()">
-            <ion-icon name='' slot="start"></ion-icon>
-          </ion-button>
-  
-          <ion-button (click)="viewMore()">
-            <ion-label>
-              {{showValid ? 'View Less' : 'View More'}}
-            </ion-label>
-          </ion-button>
-  
-          <ion-button expand="" fill="" (click)="rightOption(bursariesList[i])">
-            <ion-icon name='checkmark-outline' slot="end"></ion-icon>
-          </ion-button>
-        </div>
-  
-        <ng-template #expiredBlock>
-  
-          <ion-button disabled fill="none" (click)="leftOption()">
-            <ion-icon name='' slot="start"></ion-icon>
-          </ion-button>
-  
-          <ion-button (click)="viewMore()">
-            <ion-label>
-              {{showValid ? 'View Less' : 'View More'}}
-            </ion-label>
-          </ion-button>
-  
-          <ion-button disabled expand="" fill="" (click)="rightOption(bursary)">
-            <ion-icon name='checkmark-outline' slot="end"></ion-icon>
-          </ion-button>
-        </ng-template>
-  
-      </div>
-  
-      <ng-template #cycleBlock>
-  
-        <div *ngIf="valueLeft; else elseLeft">
-          <ion-button fill="none" (click)="leftOption()">
-            <ion-icon name='chevron-back-outline' slot="start"></ion-icon>
-          </ion-button>
-        </div>
-  
-        <ng-template #elseLeft>
-          <ion-button disabled fill="none" (click)="leftOption()">
-            <ion-icon disabled name='chevron-back-outline' slot="start"></ion-icon>
-          </ion-button>
-        </ng-template>
-  
-        <ion-button (click)="viewMore()">
-          <ion-label>
-            {{showValid ? 'View Less' : 'View More'}}
-          </ion-label>
-        </ion-button>
-  
-        <div *ngIf="valueRight; else elseRight">
-          <ion-button fill="none" (click)="rightOption()">
-            <ion-icon name='chevron-forward-outline' slot="end"></ion-icon>
-          </ion-button>
-        </div>
-  
-        <ng-template #elseRight>
-          <ion-button disabled fill="none" (click)="rightOption()">
-            <ion-icon name='chevron-forward-outline' slot="end"></ion-icon>
-          </ion-button>
-        </ng-template>
-  
-  
-      </ng-template>
-  
-      
-    </div>
-
+  <div *ngIf="isChecking">
+    <p class="ion-text-center">
+      <ion-spinner color="primary" name="crescent"></ion-spinner>
+    </p>
+    <p class="ion-text-center" color="primary">
+      Fetching Bursaries
+    </p>
   </div>
-  <ng-template #noBursariesInDB>
-    <div class="summaryCards">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{ noBursariesMessage1 }}</ion-card-title>
-          <ion-card-subtitle>{{ noBursariesMessage2 }}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          {{ noBursariesMessage3 }}
-        </ion-card-content>
-      </ion-card>
+  
+  
+  <div *ngIf="!isChecking">
+    <div *ngIf="bursariesAvailable; else noBursariesInDB">
+      <div class="summaryCards">
+        <ion-card>
+          <ion-card-header>
+            <!-- <ion-avatar>
+              <img src="{{ companyLogo }}" alt="company_logo"><img>
+            </ion-avatar> -->
+            <ion-card-title>{{ companyName }}</ion-card-title>
+            <ion-card-subtitle>{{ companyIndustry }}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+    
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>{{ bursaryName }}</ion-card-subtitle>
+          </ion-card-header>
+    
+          <ion-card-content>
+            <ul>
+              <li>
+                <ion-icon name="clipboard"></ion-icon>
+                Field Needed:
+                {{ fieldStudyNeeded }}</li>
+              <li>
+                <ion-icon name="calendar"></ion-icon>
+                Expiration Date:
+                {{ offerExpirationDate }}</li>
+              <li>
+                <ion-icon name="umbrella"></ion-icon>
+                Bursary Covers:
+                <ul *ngFor="let cov of bursary_covers, let i = index">
+                  <li>{{cov[i]}}</li>
+                </ul>
+                {{ bursaryCoversFor }}
+              </li>
+              <li>
+                <ion-icon name="trending-up"></ion-icon>
+                {{ latestAverageAbove }}% minimum latest average</li>
+            </ul>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    
+      <div [className]="showValid ? 'showMore' : 'showLess'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Details about {{ companyName }}</ion-card-subtitle>
+          </ion-card-header>
+    
+          <ion-card-content>
+            <ul>
+              <li>
+                <ion-icon name="business"></ion-icon>
+                {{ companyDescription }}</li>
+              <li>
+                <ion-icon name="code-working"></ion-icon>
+                {{ companyURL }}</li>
+              <li>
+                <ion-icon name="mail"></ion-icon>
+                {{ emailAddress }}</li>
+            </ul>
+          </ion-card-content>
+        </ion-card>
+    
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Bursary Details</ion-card-subtitle>
+          </ion-card-header>
+    
+          <ion-card-content>
+            <ul>
+              <li>
+                <ion-icon name="document"></ion-icon>
+                {{ bursaryType }}</li>
+              <li>
+                <ion-icon name="time"></ion-icon>
+                The duration the bursary is {{ bursaryDuration }} years</li>
+              <li>
+                <ion-icon name="school"></ion-icon>
+                {{ academicLevel }}</li>
+              <li>
+                <ion-icon name="hourglass"></ion-icon>
+                {{ minYearRequired }} and above</li>
+            </ul>
+          </ion-card-content>
+        </ion-card>
+    
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-icon name="list-circle"></ion-icon>
+              Criteria</ion-card-subtitle>
+          </ion-card-header>
+    
+          <ion-card-content>
+            <ul>
+              <li>Age Range: {{ ageMin }} upto {{ ageMax }}</li>
+              <li>
+                RSA citizen:
+                <ion-icon name="{{RSACitizenNeeded ? 'checkmark-circle-outline' : 'close-circle-outline'}}" slot="start"></ion-icon>
+              </li>
+              <li>
+                Bursary for financial assistence:
+                {{forFinancialAssistence ? 'Only' : 'Not Only'}}
+              </li>
+              <li>
+                Disability:
+                {{disability ? 'Only' : 'Not Only'}}
+              </li>
+              <li>Study Further: {{ studyFurther }}</li>
+            </ul>
+          </ion-card-content>
+        </ion-card>
+    
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Application Process</ion-card-subtitle>
+          </ion-card-header>
+    
+          <ion-card-content>
+            <ul>
+              <li>
+                <ion-icon name="document-text"></ion-icon>
+                Documents Needed:
+                <ul *ngFor="let doc of documentsNeeded">
+                  <li>{{doc.docName}}, Certified: {{doc.docCertified}}</li>
+                </ul>
+              </li>
+              <li>
+                <ion-icon name="calendar-number"></ion-icon>
+                {{ dateForFurtherCommunication }}</li>
+            </ul>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    
+    
+      <div class="bottomNavigation bar bar-footer ">
+    
+        <div *ngIf="showValid; else cycleBlock">
+          <div *ngIf="bursValid; else expiredBlock">
+    
+            <ion-button disabled fill="none" (click)="leftOption()">
+              <ion-icon name='' slot="start"></ion-icon>
+            </ion-button>
+    
+            <ion-button (click)="viewMore()">
+              <ion-label>
+                {{showValid ? 'View Less' : 'View More'}}
+              </ion-label>
+            </ion-button>
+    
+            <ion-button expand="" fill="" (click)="rightOption(bursariesList[i])">
+              <ion-icon name='checkmark-outline' slot="end"></ion-icon>
+            </ion-button>
+          </div>
+    
+          <ng-template #expiredBlock>
+    
+            <ion-button disabled fill="none" (click)="leftOption()">
+              <ion-icon name='' slot="start"></ion-icon>
+            </ion-button>
+    
+            <ion-button (click)="viewMore()">
+              <ion-label>
+                {{showValid ? 'View Less' : 'View More'}}
+              </ion-label>
+            </ion-button>
+    
+            <ion-button disabled expand="" fill="" (click)="rightOption(bursary)">
+              <ion-icon name='checkmark-outline' slot="end"></ion-icon>
+            </ion-button>
+          </ng-template>
+    
+        </div>
+    
+        <ng-template #cycleBlock>
+    
+          <div *ngIf="valueLeft; else elseLeft">
+            <ion-button fill="none" (click)="leftOption()">
+              <ion-icon name='chevron-back-outline' slot="start"></ion-icon>
+            </ion-button>
+          </div>
+    
+          <ng-template #elseLeft>
+            <ion-button disabled fill="none" (click)="leftOption()">
+              <ion-icon disabled name='chevron-back-outline' slot="start"></ion-icon>
+            </ion-button>
+          </ng-template>
+    
+          <ion-button (click)="viewMore()">
+            <ion-label>
+              {{showValid ? 'View Less' : 'View More'}}
+            </ion-label>
+          </ion-button>
+    
+          <div *ngIf="valueRight; else elseRight">
+            <ion-button fill="none" (click)="rightOption()">
+              <ion-icon name='chevron-forward-outline' slot="end"></ion-icon>
+            </ion-button>
+          </div>
+    
+          <ng-template #elseRight>
+            <ion-button disabled fill="none" (click)="rightOption()">
+              <ion-icon name='chevron-forward-outline' slot="end"></ion-icon>
+            </ion-button>
+          </ng-template>
+    
+    
+        </ng-template>
+    
+    
+      </div>
     </div>
-  </ng-template>
+    <ng-template #noBursariesInDB>
+      <div class="summaryCards">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ noBursariesMessage1 }}</ion-card-title>
+            <ion-card-subtitle>{{ noBursariesMessage2 }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            {{ noBursariesMessage3 }}
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ng-template>
+  </div>
 
 
 
