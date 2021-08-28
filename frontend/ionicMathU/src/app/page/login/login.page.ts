@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { student_users } from '../../model/student_users';
 // import {ViewStudentPageModule} from '../student/student-view-profile/student-view-profile.module';
 // import { NavController } from '@ionic/angular';
-import {NavparamService} from '../../service/navparam/navparam.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -15,8 +14,7 @@ export class LoginPage implements OnInit {
   student = new student_users();
   constructor(
     private router:Router,
-    private navParamService:NavparamService,
-    ) { 
+  ) { 
 
   }
 

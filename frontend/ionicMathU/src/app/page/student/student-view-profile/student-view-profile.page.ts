@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { student_users } from '../../../model/student_users';
 import { Router } from '@angular/router';
-import {NavparamService} from '../../../service/navparam/navparam.service';
 import { Students_marks } from 'src/app/model/subjects_marks';
 @Component({
   selector: 'app-view-profile',
@@ -16,7 +15,6 @@ export class ViewProfilePage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
-    private studentData:NavparamService
   ) { 
     //get data from storage 
     //for now creating a dummy dataset
