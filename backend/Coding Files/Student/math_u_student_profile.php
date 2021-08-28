@@ -61,7 +61,10 @@ $p = 0;
 
 $studentrow['Students_marks'] = $markrow;
 
-$marks->student = $studentrow;
+$marks = new student($studentrow['Student_ID'], $studentrow['First_name'], $studentrow['Last_name'], $studentrow['Date_of_birth'], $studentrow['Email_address'], $studentrow['Nationality'], $studentrow['Contact_number'],
+                      $studentrow['City'], $studentrow['Province'], $studentrow['Disability'], $studentrow['Current_academic_level'], $studentrow['Grade'], $studentrow['Syllabus'], $studentrow['Average'], $studentrow['Currently_studying'],
+                      $studentrow['Year_of_study'], $studentrow['Study_institution'], $studentrow['Continue_studies'], $studentrow['GPA'], $studentrow['Description_of_student'], $studentrow['Bursarred'],$studentrow['Current_bursaries'],
+                      $studentrow['Workback'], $studentrow['Website'], $markrow);
 // $marks = $studentrow;
 
 echo json_encode($marks);
@@ -94,6 +97,74 @@ function emailInStudent($email,$mysqli){
   }
   else{ return false;
 }
+}
+
+//==============================================================================
+//==============================================================================
+//==============================================================================
+
+class student{
+
+	public $student_id;
+	public $first_name;
+	public $last_name;
+	public $date_of_birth;
+	public $email_address;
+	public $nationality;
+	public $contact_number;
+	public $city;
+	public $province;
+	public $disability;
+	public $current_academic_level;
+	public $grade;
+	public $syllabus;
+	public $average;
+	public $currently_studying;
+	public $year_of_study;
+	public $study_institution;
+	public $continue_studies;
+	public $gpa;
+	public $description_of_student;
+	public $bursarred;
+	public $current_bursaries;
+	public $workback;
+	public $website;
+
+
+  public $Students_marks;
+
+
+	// public subject_marks $Students_marks;
+
+	public function __construct($student_id, $first_name, $last_name, $date_of_birth, $email_address, $nationality, $contact_number, $city, $province, $disability,
+   $current_academic_level, $grade, $syllabus, $average, $currently_studying, $year_of_study, $study_institution, $continue_studies, $gpa, $description_of_student, $bursarred,
+    $current_bursaries, $workback, $website, $Students_marks){
+		 $this->student_id = $student_id;
+		 $this->first_name = $first_name;
+		 $this->last_name = $last_name;
+		 $this->date_of_birth = $date_of_birth;
+		 $this->email_address = $email_address;
+		 $this->nationality = $nationality;
+		 $this->contact_number = $contact_number;
+		 $this->city = $city;
+		 $this->province = $province;
+		 $this->disability = $disability;
+		 $this->current_academic_level = $current_academic_level;
+		 $this->grade = $grade;
+		 $this->syllabus = $syllabus;
+		 $this->average = $average;
+		 $this->currently_studying = $currently_studying;
+		 $this->year_of_study = $year_of_study;
+		 $this->study_institution = $study_institution;
+		 $this->continue_studies = $continue_studies;
+		 $this->gpa = $gpa;
+		 $this->description_of_student = $description_of_student;
+		 $this->bursarred = $bursarred;
+		 $this->current_bursaries = $current_bursaries;
+		 $this->workback = $workback;
+		 $this->website = $website;
+     $this->Students_marks = $Students_marks;
+	 }
 }
 
 //==============================================================================
