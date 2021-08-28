@@ -164,13 +164,13 @@ export class LoginPage implements OnInit {
           //this.user.student.Students_marks = new Students_marks()[];
           //this.user.student.Students_marks = res["Student"]["date_of_birth"]; 
           //get student marks
-
           
           this.user.role = "Student";
 
           console.log(this.user);
           this.setValue(this.user);          
-          this.navCtrl.navigateRoot('/student-view-profile');
+          this.navCtrl.navigateRoot('/student-view-profile'); //comment later
+          //this.navCtrl.navigateRoot('/student-home/0'); //correct one
         }
       }
     }, (error:any) => {
