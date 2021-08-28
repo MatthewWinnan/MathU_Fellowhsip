@@ -45,7 +45,7 @@ export class ViewApplicantsPage implements OnInit {
     this.isFetching = true;
     //console.log(this.data);
     this._apiService.getBursaryApplications(this.data).subscribe((res:Student_bursary[]) => {
-      console.log("REQUEST SUCCESS ===", res);
+      console.log("APPLICATION REQUEST SUCCESS ===", res);
       this.applicantsData = res;
       this.allApplicants = this.applicantsData;
       if(res!=null){

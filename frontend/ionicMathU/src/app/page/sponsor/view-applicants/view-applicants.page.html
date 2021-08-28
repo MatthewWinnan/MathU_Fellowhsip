@@ -46,13 +46,17 @@
       </ion-card-header>
   
       <div class="ion-text-center">
-        <ion-button fill="none" (click)="declineDialogue(item)" size="small" disabled [attr.disabled]="(item.Status=='Declined')?true:false">
+        <ion-button fill="none" (click)="declineDialogue(item)" size="small" disabled 
+         [attr.disabled]="(item.Status=='Declined')?true:false"
+         *ngIf="data.bursary_status !== 'Deactivated'">
           <ion-icon name="close-circle"></ion-icon>
         </ion-button>
         <ion-button fill="none" (click)="openViewInfo(item)" size="small" >
           <ion-icon name="ellipsis-horizontal"></ion-icon>
         </ion-button>
-        <ion-button fill="none" (click)="acceptDialogue(item)" size="small" disabled [attr.disabled]="(item.Status=='Accepted')?true:false">
+        <ion-button fill="none" (click)="acceptDialogue(item)" size="small" disabled 
+         [attr.disabled]="(item.Status=='Accepted')?true:false"
+         *ngIf="data.bursary_status !== 'Deactivated'">
           <ion-icon name="checkmark-circle"></ion-icon>
         </ion-button>
         

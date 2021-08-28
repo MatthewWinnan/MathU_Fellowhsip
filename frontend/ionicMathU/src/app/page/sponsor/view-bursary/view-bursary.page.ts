@@ -139,7 +139,7 @@ export class ViewBursaryPage implements OnInit {
     //console.log(this.ourCompany);
     // all bursaries with company_id that are 
     this._apiService.getAllBursary(this.ourCompany).subscribe((res:Bursary[]) => {
-      console.log("REQUEST SUCCESS ===", res);
+      console.log("BURSARIES REQUEST SUCCESS ===", res);
       this.jsonData = res;
       this.allBursaries = this.jsonData;
       if(res!=null){
