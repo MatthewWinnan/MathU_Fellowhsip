@@ -9,7 +9,7 @@ import { AllUsers } from '../../model/all_users';
 import { Sponsor_users } from '../../model/sponsor_users';
 import { Company } from '../../model/company';
 import { student_users } from '../../model/student_users';
-import { Students_marks } from 'src/app/model/subjects_marks';
+import { Students_marks } from '../../model/subjects_marks';
 
 @Component({
   selector: 'app-login',
