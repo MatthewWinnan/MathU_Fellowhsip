@@ -20,6 +20,9 @@ export class ShortlistPage implements OnInit {
   bursariesInShortlist: boolean;
   noBursariesMessage4 = "No Bursaries in Shortlist."
   noBursariesMessage5 = "Let's change that."
+
+  // Spinner Loading
+  isChecking: boolean = true;
   
   constructor(
     private router: Router,
@@ -28,14 +31,14 @@ export class ShortlistPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.presentLoading()
+    /* this.presentLoading() */
     
     //stored in Storage (when login)
     this.initialiseStudentData();
 
 
     //api call to backend --> all bursaries with this student 
-    //this.initialiseShortlist();
+    this.initialiseShortlist();
 
     // See if there are items in teh shortlist
     this.isBursariesInShortlist();
@@ -43,21 +46,23 @@ export class ShortlistPage implements OnInit {
 
   }
 
-  async presentLoading() {
+  /* async presentLoading() {
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
-      message: 'Please wait...',
-      duration: this.bursaryShortlist.length
+      spinner: 'lines-small',
+      message: 'Fetching Shortlist...',
+      duration: 2000
     });
     await loading.present();
 
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
-  }
+  } */
 
   isBursariesInShortlist() {
     let lenShortlist = this.bursaryShortlist.length
     this.bursariesInShortlist = false
+    this.isChecking = false
     if (lenShortlist !== 0) {
       this.bursariesInShortlist = true
     }
@@ -470,6 +475,7 @@ export class ShortlistPage implements OnInit {
     
   }
 
+  /* Go to specific bursary on the Student Main Page*/
   goToBursaryView(bursID, k) {
     console.log("goToBursaryView() ran with the ",  bursID );
     k = bursID
@@ -480,6 +486,6 @@ export class ShortlistPage implements OnInit {
     console.log("deleteApplication() ran with the ",  bursID )
   }
 
-  doRefresh(event) {
+  doRefresh() {
     window.location.reload();
   }}
