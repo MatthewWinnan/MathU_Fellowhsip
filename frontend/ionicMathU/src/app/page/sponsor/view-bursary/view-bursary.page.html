@@ -41,7 +41,7 @@
           <ion-button fill="none" (click)="openDeactivate(item)" size="small" slot="end" [disabled]="!item.isVisible">
             <ion-icon name="ban"></ion-icon>
           </ion-button>
-          <ion-button fill="none" (click)="editBursary(item)" size="small">
+          <ion-button fill="none" (click)="editBursary(item)" size="small" [disabled]="!item.isVisible">
             <ion-icon name="pencil" ></ion-icon>
           </ion-button>
           <ion-button fill="none" (click)="openViewInfo(item)" size="small">
