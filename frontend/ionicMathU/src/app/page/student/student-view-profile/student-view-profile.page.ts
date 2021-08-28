@@ -26,7 +26,7 @@ export class ViewProfilePage implements OnInit {
     this.thisStudent.date_of_birth = "03-03-2005";
     this.thisStudent.email_address = "jadon@gmail.com";
     //the above fields are filled it from register 
-    this.thisStudent.nationality = null;
+    this.thisStudent.nationality = true;
     this.thisStudent.contact_number = "";
     this.thisStudent.city = "";
     this.thisStudent.province = "";
@@ -38,14 +38,23 @@ export class ViewProfilePage implements OnInit {
     this.thisStudent.currently_studying = "";
     this.thisStudent.year_of_study = "";
     this.thisStudent.study_institution = "";
-    this.thisStudent.continue_studies = null;
+    this.thisStudent.continue_studies = false;
     this.thisStudent.gpa = 0;
     this.thisStudent.description_of_student = "";
-    this.thisStudent.bursarred = null;
+    this.thisStudent.bursarred = false;
     this.thisStudent.current_bursaries = "";
     this.thisStudent.workback = 0;
-    this.thisStudent.website = "";
-    this.thisStudent.Students_marks = [];
+    this.thisStudent.website = "www.jadon.com";
+    this.thisStudent.Students_marks = [
+      {
+        "subject_name": "English",
+        "marks": 90.0
+      },
+      {
+        "subject_name": "Afrikaans",
+        "marks": 80.0
+      }
+    ];
 
       //this.student = this.studentData.getStudent();
       //console.log(this.student.last_name);
@@ -59,6 +68,13 @@ export class ViewProfilePage implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  calculateAge(){
+    let dob = new Date(this.thisStudent.date_of_birth);
+    let timeDiff = Math.abs(Date.now() - dob.getTime());
+    let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
+    return age;
   }
 
 }
