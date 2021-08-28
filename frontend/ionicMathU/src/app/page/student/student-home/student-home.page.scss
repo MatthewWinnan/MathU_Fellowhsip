@@ -44,3 +44,13 @@ display: flex;
     position: fixed;
     bottom: 0;
 }
+
+.main-list{
+    list-style-type: none;
+    margin-left: -20px;
+}
+
+.sub-list{
+    list-style-type: none;
+    margin-left: -10px;
+}

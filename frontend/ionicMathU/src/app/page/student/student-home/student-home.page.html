@@ -44,22 +44,22 @@
           </ion-card-header>
     
           <ion-card-content>
-            <ul>
+            <ul class="main-list">
               <li>
                 <ion-icon name="clipboard"></ion-icon>
-                Field Needed:
-                {{ fieldStudyNeeded }}</li>
+                Field Needed: {{ fieldStudyNeeded }}
+              </li>
               <li>
                 <ion-icon name="calendar"></ion-icon>
-                Expiration Date:
-                {{ offerExpirationDate }}</li>
+                Expiration Date: {{ offerExpirationDate }}
+              </li>
               <li>
                 <ion-icon name="umbrella"></ion-icon>
                 Bursary Covers:
-                <ul *ngFor="let cov of bursary_covers, let i = index">
-                  <li>{{cov[i]}}</li>
+                <ul *ngFor="let cov of bursaryCoversFor, let i = index" class="sub-list">
+                  <li>{{cov}}</li>
                 </ul>
-                {{ bursaryCoversFor }}
+                <!-- {{ bursaryCoversFor }} -->
               </li>
               <li>
                 <ion-icon name="trending-up"></ion-icon>
@@ -76,16 +76,14 @@
           </ion-card-header>
     
           <ion-card-content>
-            <ul>
+            <ul class="main-list">
               <li>
                 <ion-icon name="business"></ion-icon>
                 {{ companyDescription }}</li>
               <li>
                 <ion-icon name="code-working"></ion-icon>
-                {{ companyURL }}</li>
-              <li>
-                <ion-icon name="mail"></ion-icon>
-                {{ emailAddress }}</li>
+                {{ companyURL }}
+              </li>
             </ul>
           </ion-card-content>
         </ion-card>
@@ -96,19 +94,28 @@
           </ion-card-header>
     
           <ion-card-content>
-            <ul>
+            <ul class="main-list">
               <li>
                 <ion-icon name="document"></ion-icon>
-                {{ bursaryType }}</li>
+                Bursary Type: {{ bursaryType }}
+              </li>
+              <li *ngIf="bursaryType == 'Work Back'">
+                <ion-icon name="document"></ion-icon>
+                Work Back Duration time: add in time
+                (also change the icon) 
+              </li>
               <li>
                 <ion-icon name="time"></ion-icon>
-                The duration the bursary is {{ bursaryDuration }} years</li>
+                Bursary duration: {{ bursaryDuration }} years
+              </li>
               <li>
                 <ion-icon name="school"></ion-icon>
-                {{ academicLevel }}</li>
+                Academic level: {{ academicLevel }}
+              </li>
               <li>
                 <ion-icon name="hourglass"></ion-icon>
-                {{ minYearRequired }} and above</li>
+                {{ minYearRequired }} and above
+              </li>
             </ul>
           </ion-card-content>
         </ion-card>
@@ -121,21 +128,21 @@
           </ion-card-header>
     
           <ion-card-content>
-            <ul>
+            <ul class="main-list">
               <li>Age Range: {{ ageMin }} upto {{ ageMax }}</li>
               <li>
                 RSA citizen:
                 <ion-icon name="{{RSACitizenNeeded ? 'checkmark-circle-outline' : 'close-circle-outline'}}" slot="start"></ion-icon>
               </li>
-              <li>
-                Bursary for financial assistence:
-                {{forFinancialAssistence ? 'Only' : 'Not Only'}}
+              <li *ngIf="forFinancialAssistence">
+                Bursary for financial assistence students
               </li>
-              <li>
-                Disability:
-                {{disability ? 'Only' : 'Not Only'}}
+              <li *ngIf="disability">
+                Disability Students Only
               </li>
-              <li>Study Further: {{ studyFurther }}</li>
+              <li *ngIf="studyFurther">
+                Only for studnets willing to study further
+              </li>
             </ul>
           </ion-card-content>
         </ion-card>
@@ -146,17 +153,15 @@
           </ion-card-header>
     
           <ion-card-content>
-            <ul>
-              <li>
-                <ion-icon name="document-text"></ion-icon>
-                Documents Needed:
-                <ul *ngFor="let doc of documentsNeeded">
-                  <li>{{doc.docName}}, Certified: {{doc.docCertified}}</li>
-                </ul>
-              </li>
+            <ul class="main-list">
               <li>
                 <ion-icon name="calendar-number"></ion-icon>
-                {{ dateForFurtherCommunication }}</li>
+                Date for futher communication: {{ dateForFurtherCommunication }}
+              </li>
+              <li>
+                <ion-icon name="mail"></ion-icon>
+                {{ emailAddress }}
+              </li>
             </ul>
           </ion-card-content>
         </ion-card>

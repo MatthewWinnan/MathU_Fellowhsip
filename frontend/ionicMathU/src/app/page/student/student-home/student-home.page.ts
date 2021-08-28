@@ -208,13 +208,13 @@ export class StudentHomePage implements OnInit {
   
   applyBursary(bursary_data: Bursary) {
     console.log('Proceed to apply for the Bursary');
-    console.log(bursary_data);
-    // this.student_bur.Student_ID = this.thisStudent.id;
-    // this.student_bur.Bursary_ID = bursary_data.bursary_id;
-    // //date set by backend 
-    // this.student_bur.Status = "Pending";
-    // this.student_bur.Student = this.thisStudent;
-    // this.student_bur.bursary = bursary_data;
+    this.student_bur.Student_ID = this.thisStudent.id;
+    this.student_bur.Bursary_ID = bursary_data.bursary_id;
+    //date set by backend 
+    this.student_bur.Status = "Pending";
+    this.student_bur.Student = this.thisStudent;
+    this.student_bur.bursary = bursary_data;
+    console.log(this.student_bur);
     // //send api call
     // this._apiService.studentApplyBursary(this.student_bur).subscribe((res) => {
     //   console.log("REQUEST SUCCESS ===", res);
@@ -470,7 +470,7 @@ export class StudentHomePage implements OnInit {
         RSA_citizen: true,
         financial_need: false,
         study_further: false,
-        disability: true,
+        disability: false,
         province: "Gauteng",
         bursary_covers: [
             "Accommodation Fees",
@@ -548,7 +548,7 @@ export class StudentHomePage implements OnInit {
         RSA_citizen: true,
         financial_need: false,
         study_further: false,
-        disability: true,
+        disability: false,
         province: "Gauteng",
         bursary_covers: [
             "Accommodation Fees",
@@ -587,7 +587,7 @@ export class StudentHomePage implements OnInit {
         RSA_citizen: true,
         financial_need: false,
         study_further: false,
-        disability: true,
+        disability: false,
         province: "Gauteng",
         bursary_covers: [
             "Accommodation Fees",
@@ -595,7 +595,7 @@ export class StudentHomePage implements OnInit {
             "Books Allowance",
             "Transport"
         ],
-        closing_date: "2021-11-16",
+        closing_date: "2021-08-30",
         shortlist_date: "2021-11-20",
         email_address: "name@gmail.com",
         bursary_duration: 2,
