@@ -56,10 +56,7 @@ function GetBursaries($comp_id, $mysqli){
 			
 			
 			//create new bursary 
-			$newBursary = new bursary($row["Company_ID"], $row["Bursary_Name"], $row["Bursary_Type"], $row["WB_Duration"], $row["Closing_Date"], 
-				$row["Minimum_Age"], $row["Maximum_Age"], $row["Academic_Level"], $row["Study_field"], $row["Current_Year"], $row["Bursary_Duration"], 
-				$row["Minimum_Average"], $RSA_Citizen, $Financial_Need, $Study_Further, $Disability, $row["Province"], 
-				$row["Email_Address"], $row["Shortlist_Date"], $isVisible, $row["Description"]);
+			$newBursary = new bursary($row["Company_ID"], $row["Bursary_Name"], $row["Bursary_Type"], $row["WB_Duration"], $row["Closing_Date"], $row["Minimum_Age"], $row["Maximum_Age"], $row["Academic_Level"], $row["Study_field"], $row["Current_Year"], $row["Bursary_Duration"], $row["Minimum_Average"], $RSA_Citizen, $Financial_Need, $Study_Further, $Disability, $row["Province"], $row["Email_Address"], $row["Shortlist_Date"], $isVisible, $row["Description"]);
 			$newBursary->Company = GetCompanyClass($comp_id, $mysqli);
 			$newBursary->bursary_id = $row["Bursary_ID"];
 			//add to the array
