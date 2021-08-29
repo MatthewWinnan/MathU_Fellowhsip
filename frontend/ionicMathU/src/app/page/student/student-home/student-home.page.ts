@@ -8,6 +8,7 @@ import { BursaryService } from '../../../service/bursary.service';
 import { Student_bursary } from '../../../model/student_bursary';
 import { LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { ToastController } from '@ionic/angular';
 
 let student = new student_users
 @Component({
@@ -22,6 +23,7 @@ export class StudentHomePage implements OnInit {
   bursariesList:Bursary[] = [];
   student_bur = new Student_bursary();
   i: number = 0;
+  the_message : string = "";
 
   /* Form Variables */
   companyLogo: any;
@@ -86,6 +88,7 @@ export class StudentHomePage implements OnInit {
     public _apiService: BursaryService,
     public loadingController: LoadingController,
     public storage: Storage,
+    public toastController: ToastController,
   ) { 
     let k: number;
     this.sub = this.route.params.subscribe(params => {
@@ -253,11 +256,15 @@ export class StudentHomePage implements OnInit {
     //send api call
     this._apiService.studentApplyBursary(this.student_bur).subscribe((res) => {
       console.log("APPLY REQUEST SUCCESS ===", res);
-      console.log(res["message"]);
+      //console.log(res["message"]);
+      this.the_message = res["message"];
+      this.printMessage();
       //display message 
     }, (error:any) => {
       console.log("ERROR ===", error);
-      console.log('error');
+      //console.log('error');
+      this.the_message = 'Error';
+      this.printMessage();
     });
   }
   
@@ -572,5 +579,16 @@ export class StudentHomePage implements OnInit {
     }, (err)=>{
       this.thisStudent;
     })
+  }
+
+  async printMessage() {
+    const toast = this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: this.the_message
+    });
+
+    (await toast).present();
+    this.the_message = "";
   }
 }
