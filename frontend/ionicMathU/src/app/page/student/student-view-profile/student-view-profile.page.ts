@@ -50,7 +50,8 @@ export class ViewProfilePage implements OnInit {
 
   doRefresh(event) {
     //window.location.reload();
-    this.getStudent;
+    this.thisStudent = new student_users();
+    this.getStudent();
   }
 
   getUserType(){
@@ -66,8 +67,8 @@ export class ViewProfilePage implements OnInit {
     this.storage.get('name').then( (val) => {
       //console.log(val);
       this.thisStudent = val["student"];
-      console.log("called getStudentType");
-      console.log(this.thisStudent);  
+      //console.log("called getStudentType");
+      //console.log(this.thisStudent);  
     }, (err)=>{
       this.thisStudent;
     })

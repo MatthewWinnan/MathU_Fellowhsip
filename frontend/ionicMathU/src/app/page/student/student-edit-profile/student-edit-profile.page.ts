@@ -19,43 +19,7 @@ export class ViewProfilePage implements OnInit {
   userType: string = "";
   the_message : string = "";
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private router:Router,
-    public _apiService: ApiService,
-    public toastController: ToastController,
-    public storage: Storage,
-  ) {
-    //get data from storage 
-    this.getUserType();
-    this.getStudentType();
-    this.getAllUsersDetails();
-  }
-
-  addStudent_details = this.formBuilder.group({
-    contact_number: ['',[Validators.required, Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$")]],
-    rsa_citizen: [false],
-    disability: [false],
-    city: [''],
-    province: [''],    
-    current_academic_level: [''],
-    grade: [0],
-    syllabus: [''],
-    average: [60.0],
-    currently_studying: [''],
-    year_of_study: [''],
-    study_institution: [''],
-    continue_studies: [false],
-    gpa: [60.0],
-    description_of_student: [''],
-    website: [''],
-    bursarred: [''],
-    current_bursaries: [''],
-    workback: [0],
-    
-  });
-
-  //Gets for all the form's parameters
+    //Gets for all the form's parameters
   get contact_number() {
     return this.addStudent_details.get('contact_number');
   }
@@ -113,7 +77,28 @@ export class ViewProfilePage implements OnInit {
   get workback() {
     return this.addStudent_details.get('workback');
   }
-  
+
+  addStudent_details = this.formBuilder.group({
+    contact_number: ['',[Validators.required, Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$")]],
+    rsa_citizen: [false],
+    disability: [false],
+    city: [''],
+    province: [''],    
+    current_academic_level: [''],
+    grade: [0],
+    syllabus: [''],
+    average: [60.0],
+    currently_studying: [''],
+    year_of_study: [''],
+    study_institution: [''],
+    continue_studies: [false],
+    gpa: [60.0],
+    description_of_student: [''],
+    website: [''],
+    bursarred: [''],
+    current_bursaries: [''],
+    workback: [0],  
+  });
 
   public errorMessages = {
     contact_number: [
@@ -122,6 +107,19 @@ export class ViewProfilePage implements OnInit {
     ],
     disability: [],
   };
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router:Router,
+    public _apiService: ApiService,
+    public toastController: ToastController,
+    public storage: Storage,
+  ) {
+    //get data from storage 
+    this.getUserType();
+    this.getStudentType();
+    this.getAllUsersDetails();
+  }
 
   public addStudentDetails() {
     //console.log(this.addStudent_details.value);
@@ -144,7 +142,7 @@ export class ViewProfilePage implements OnInit {
     this.thisStudent.bursarred = this.addStudent_details.value.bursarred;
     this.thisStudent.current_bursaries = this.addStudent_details.value.current_bursaries ;
     this.thisStudent.workback = this.addStudent_details.value.workback;
-    console.log(this.thisStudent);
+    //console.log(this.thisStudent);
     this._apiService.editStudentProfile(this.thisStudent).subscribe((res) => {
       this.allUsersDetials.student = this.thisStudent;
       console.log("EDIT API SUCCESS ===", res);
@@ -155,7 +153,7 @@ export class ViewProfilePage implements OnInit {
         //overwrite values in storage
         this.setValue(this.allUsersDetials);
         //console.log("move to different page");
-        this.router.navigateByUrl('./student-view-profile/2');
+        this.router.navigateByUrl('/student-view-profile/1');
       }
     }, (error:any) => {
       this.the_message = 'error';// error;
@@ -165,33 +163,6 @@ export class ViewProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    this.getStudentType();
-    this.addStudent_details = this.formBuilder.group({
-      contact_number: [this.thisStudent.contact_number,
-        [
-          Validators.required, 
-          Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$")
-        ]
-      ],
-      rsa_citizen: [this.thisStudent.nationality],
-      disability: [this.thisStudent.disability],
-      city: [this.thisStudent.city],
-      province: [this.thisStudent.province],
-      current_academic_level: [this.thisStudent.current_academic_level],
-      grade: [this.thisStudent.grade],
-      syllabus: [this.thisStudent.syllabus],
-      average: [this.thisStudent.average],
-      currently_studying: [this.thisStudent.currently_studying],
-      year_of_study: [this.thisStudent.year_of_study],
-      study_institution: [this.thisStudent.study_institution],
-      continue_studies: [this.thisStudent.continue_studies],
-      gpa: [this.thisStudent.gpa],
-      description_of_student: [this.thisStudent.description_of_student],
-      website: [this.thisStudent.website],
-      bursarred: [this.thisStudent.bursarred],
-      current_bursaries: [this.thisStudent.current_bursaries],
-      workback: [this.thisStudent.workback],
-    });
   }
 
   getUserType(){
@@ -207,6 +178,32 @@ export class ViewProfilePage implements OnInit {
     this.storage.get('name').then( (val) => {
       //console.log(val);
       this.thisStudent = val["student"];
+      this.addStudent_details = this.formBuilder.group({
+        contact_number: [this.thisStudent.contact_number,
+          [
+            Validators.required, 
+            Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$")
+          ]
+        ],
+        rsa_citizen: [this.thisStudent.nationality],
+        disability: [this.thisStudent.disability],
+        city: [this.thisStudent.city],
+        province: [this.thisStudent.province],
+        current_academic_level: [this.thisStudent.current_academic_level],
+        grade: [this.thisStudent.grade],
+        syllabus: [this.thisStudent.syllabus],
+        average: [this.thisStudent.average],
+        currently_studying: [this.thisStudent.currently_studying],
+        year_of_study: [this.thisStudent.year_of_study],
+        study_institution: [this.thisStudent.study_institution],
+        continue_studies: [this.thisStudent.continue_studies],
+        gpa: [this.thisStudent.gpa],
+        description_of_student: [this.thisStudent.description_of_student],
+        website: [this.thisStudent.website],
+        bursarred: [this.thisStudent.bursarred],
+        current_bursaries: [this.thisStudent.current_bursaries],
+        workback: [this.thisStudent.workback],
+      });
     }, (err)=>{
       this.thisStudent;
     })
@@ -224,6 +221,7 @@ export class ViewProfilePage implements OnInit {
     this.storage.clear();
     //this.storage.set('name', "");
     this.storage.set('name', value);
+  
   }
 
   async printMessage() {
