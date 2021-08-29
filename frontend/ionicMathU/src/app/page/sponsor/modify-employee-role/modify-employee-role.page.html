@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="none" slot="start" (click)="closeModify()">
+      <ion-icon name="arrow-back-outline" size="small" ></ion-icon>
+    </ion-button>
+    <ion-title>Change Role of {{data.first_name_of_user}} {{data.last_name_of_user}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <form> -->
+  <form [formGroup]="modifyEmployee" (ngSubmit)="modifyEmployeeSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label>First Name </ion-label>
+        <ion-input autocapitalize inputmode="text" disabled [value]="data.first_name_of_user">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Last Name </ion-label>
+        <ion-input autocapitalize inputmode="text" disabled [value]="data.last_name_of_user">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email Address </ion-label>
+        <ion-input autocapitalize inputmode="text" disabled [value]="data.email_address">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Super Admin</ion-label>
+        <ion-checkbox formControlName="super_admin" [(checked)]="data.isSuperAdmin" 
+          (ionChange)="updateSuper($event)"
+          color="dark"></ion-checkbox>
+      </ion-item>
+
+      <ion-item *ngIf="!data.isSuperAdmin">
+        <ion-label>Manage Bursaries</ion-label>
+        <ion-checkbox formControlName="manage_bursary" 
+          [(checked)]="data.manageBursaries" color="dark"></ion-checkbox>
+      </ion-item>
+
+      <ion-item *ngIf="!data.isSuperAdmin">
+        <ion-label>Manage Applications</ion-label>
+        <ion-checkbox formControlName="manage_applications" 
+          [(checked)]="data.manageApplications" color="dark"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-list class="ion-text-center">
+      <ion-button type="submit" color="">
+        Modify
+      </ion-button>
+    </ion-list>
+  </form>
+
+  <!-- <ion-item>
+    <ion-label> Bursaries Manager</ion-label>
+    <ion-checkbox checked = 'false'></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Form Manager</ion-label>
+    <ion-checkbox checked = 'false'></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Super Admin</ion-label>
+    <ion-checkbox checked = 'false'></ion-checkbox>
+  </ion-item>
+
+  <ion-button (click)="saveRole()">Save</ion-button> -->
+</ion-content>

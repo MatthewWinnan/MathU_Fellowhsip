@@ -3,6 +3,8 @@ import { Form, FormBuilder, Validators } from '@angular/forms';
 import { student_users } from '../../../model/student_users';
 import { Router } from '@angular/router';
 import { Students_marks } from 'src/app/model/subjects_marks';
+import { MenuController } from '@ionic/angular';
+
 @Component({
   selector: 'app-view-profile',
   templateUrl: './student-view-profile.page.html',
@@ -15,6 +17,7 @@ export class ViewProfilePage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
+    private menuController: MenuController
   ) { 
     //get data from storage 
     //for now creating a dummy dataset
@@ -75,6 +78,11 @@ export class ViewProfilePage implements OnInit {
     let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
     return age;
   }
+
+  ionViewWillEnter() {
+    this.menuController.enable(true, 'stu');
+  }
+
 
 }
 

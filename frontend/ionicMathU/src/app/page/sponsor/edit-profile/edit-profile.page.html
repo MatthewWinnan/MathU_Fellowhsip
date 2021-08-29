@@ -1,0 +1,52 @@
+<app-menu></app-menu>
+<ion-header>
+  <ion-toolbar>
+    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-button slot="end" fill="none"></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <!-- <div class="vertical-center"> -->
+  <div>
+    <form [formGroup]="editProfile" (ngSubmit)="editProfileSubmit()">
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Company Name </ion-label>
+          <ion-input inputmode="text" disabled [value]="ourCompany.company_name">
+          </ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Company Industry </ion-label>
+          <ion-input inputmode="text" disabled [value]="ourCompany.company_industry">
+          </ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Company Description </ion-label>
+          <ion-input formControlName="company_description" 
+            autocapitalize inputmode="text" [value]="ourCompany.company_description">
+          </ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Company URL </ion-label>
+          <ion-input formControlName="company_URL" inputmode="text" [value]="ourCompany.company_URL">
+          </ion-input>
+        </ion-item>
+      </ion-list>
+  
+      <ion-list class="ion-text-center">
+        <ion-button [disabled]="!editProfile.valid" type="submit" color="">
+          Edit Profile
+        </ion-button>
+      </ion-list>
+    </form>
+  </div>
+</ion-content>
+

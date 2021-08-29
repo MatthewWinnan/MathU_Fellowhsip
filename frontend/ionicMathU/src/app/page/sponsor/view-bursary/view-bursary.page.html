@@ -1,0 +1,64 @@
+<app-menu></app-menu>
+<ion-header>
+  <ion-toolbar>
+    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-button slot="end" fill="none" routerLink="/add-bursary">
+      <ion-icon name="add" size="small"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="!isFetching && jsonData_length>=1">
+    <ion-item>
+      <ion-searchbar placeholder="Bursary Name" (ionInput)="filterBursary($event)"></ion-searchbar>
+    </ion-item>
+  </ion-list>
+
+  <p class="ion-text-center" *ngIf="isFetching">
+    <ion-spinner name="crescent"></ion-spinner>
+  </p>
+
+  <div *ngIf="!isFetching && jsonData_length>=1">
+    <ion-card *ngFor="let item of jsonData">
+      <ion-card-header>
+        <ion-item>
+          <ion-card-title>{{item.bursary_name}}</ion-card-title>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content> 
+        Bursary Type: {{item.bursary_type}}
+        <br>
+        <p align="justify">{{item.bursary_description.substr(0,100) + "..."}} </p>
+        <div class="ion-text-center">
+          <ion-button fill="none" (click)="openDeactivate(item)" size="small" slot="end" [disabled]="!item.isVisible">
+            <ion-icon name="ban"></ion-icon>
+          </ion-button>
+          <ion-button fill="none" (click)="editBursary(item)" size="small" [disabled]="!item.isVisible">
+            <ion-icon name="pencil" ></ion-icon>
+          </ion-button>
+          <ion-button fill="none" (click)="openViewInfo(item)" size="small">
+            <ion-icon name="ellipsis-horizontal"></ion-icon>
+          </ion-button>
+          <!-- <ion-button fill="none" routerLink="/view-applicants" size="small"> -->
+          <ion-button fill="none" (click)="viewApplicants(item)" size="small">
+            <ion-icon name="people" ></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="ion-text-center vertical-center" *ngIf="!isFetching && jsonData_length<1">
+    No Bursaries posted. <br>
+    Click on the "plus" symbol to post a bursary. 
+  </div>
+  
+</ion-content>

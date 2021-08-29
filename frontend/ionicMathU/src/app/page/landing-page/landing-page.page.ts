@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage  } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-landing-page',
@@ -8,17 +9,22 @@ import { Router } from '@angular/router';
 })
 export class LandingPagePage implements OnInit {
 
-  constructor(private router:Router) {  }
+  constructor(
+    private router:Router, 
+    private storage: Storage
+  ) {  }
 
   ngOnInit() {
+    this.storage.create();
+    this.storage.set('name', "");
   }
 
-  GoToLogin(){
-    this.router.navigate(['./login']);
-  }
+  // GoToLogin(){
+  //   this.router.navigate(['./login']);
+  // }
 
-  GoToRegister(){
-    this.router.navigate(['./register']);
-  }
+  // GoToRegister(){
+  //   this.router.navigate(['./register']);
+  // }
 
 }
