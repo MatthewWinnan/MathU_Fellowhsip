@@ -42,12 +42,12 @@ export class BursaryService {
   }
 
   acceptApplicant(data:Student_bursary){
-    return this.http.post<any>('http://localhost/mathU_backend/accept_applicant.php', data);
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_acceptStudent.php', data);
     //change file name
   }
 
   declineApplicant(data:Student_bursary){
-    return this.http.post<any>('http://localhost/mathU_backend/decline_applicant.php', data);
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_denyApplicant.php', data);
     //change file name
   }
 

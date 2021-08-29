@@ -213,9 +213,8 @@ export class ViewApplicantsPage implements OnInit {
   acceptDialogue(acceptItem) {
     let before = acceptItem.Status;
     this.alert.create({
-      header: "Confirmation",
-      subHeader: "Are you sure you would like to accept " + acceptItem.first_name + " " + 
-        acceptItem.last_name + " into the shortlist for " + "Bursary xyz" + "?",
+      header: "Accept " + acceptItem.Student.first_name + " " + acceptItem.Student.last_name + " for " + this.data.bursary_name,
+      //subHeader: "Are you sure you would like to accept " + acceptItem.first_name + " " + acceptItem.last_name + " into the shortlist for " + "Bursary xyz" + "?",
       buttons:[{
         text: "Accept",
         handler:(data) => {
@@ -226,10 +225,8 @@ export class ViewApplicantsPage implements OnInit {
             console.log("REQUEST SUCCESS ===", res);
             this.the_message = res["message"];
             this.printMessage();
-            console.log(acceptItem.first_name + " " + acceptItem.last_name + " has been accepted to " 
-          + "Bursary xyz");
           }, (error:any) => {
-            //acceptItem.Status = before;
+            acceptItem.Status = before;
             this.the_message = 'error';// error;
             this.printMessage();
             console.log("ERROR ===", error);
@@ -250,9 +247,8 @@ export class ViewApplicantsPage implements OnInit {
   declineDialogue(acceptItem) {
     let before = acceptItem.Status;
     this.alert.create({
-      header: "Decline",
-      subHeader: "Are you sure you would like to decline " + acceptItem.first_name + " " + 
-        acceptItem.last_name + " into the shortlist for the bursary " + "Bursary xyz" + "?",
+      header: "Decline " + acceptItem.Student.first_name + " " + acceptItem.Student.last_name + " for " + this.data.bursary_name,
+      //subHeader: "Are you sure you would like to decline " + acceptItem.Student.first_name + " " + acceptItem.Student.last_name + " into the shortlist for the bursary " + "Bursary xyz" + "?",
       buttons:[{
         text: "Decline",
         handler:(data) => {
@@ -264,11 +260,11 @@ export class ViewApplicantsPage implements OnInit {
             console.log("REQUEST SUCCESS ===", res);
             this.the_message = res["message"];
             this.printMessage();
-            console.log(acceptItem.first_name + " " + acceptItem.last_name + " has been declined to " + "Bursary xyz");
+            //console.log(acceptItem.Student.first_name + " " + acceptItem.Student.last_name + " has been declined to " + "Bursary xyz");
           }, (error:any) => {
             this.the_message = 'error';// error;
             this.printMessage();
-            //acceptItem.Status = before;
+            acceptItem.Status = before;
             console.log("ERROR ===", error);
           });
         } 
