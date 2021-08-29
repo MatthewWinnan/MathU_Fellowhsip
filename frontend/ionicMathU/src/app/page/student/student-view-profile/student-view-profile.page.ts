@@ -18,11 +18,12 @@ export class ViewProfilePage implements OnInit {
   ) { 
     //get data from storage 
     //for now creating a dummy dataset
-    this.thisStudent.student_id = "U0001";
-    this.thisStudent.first_name = "Jadon";
-    this.thisStudent.last_name = "Sancho";
-    this.thisStudent.date_of_birth = "03-03-2005";
-    this.thisStudent.email_address = "jadon@gmail.com";
+    this.thisStudent.id = 35;
+    this.thisStudent.student_id = "U035";
+    this.thisStudent.first_name = "Mary";
+    this.thisStudent.last_name = "Lamb";
+    this.thisStudent.date_of_birth = "2005-08-28";
+    this.thisStudent.email_address = "mary@gmail.com";
     //the above fields are filled it from register 
     this.thisStudent.nationality = true;
     this.thisStudent.contact_number = "";
