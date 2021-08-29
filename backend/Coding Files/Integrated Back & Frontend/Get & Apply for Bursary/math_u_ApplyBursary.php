@@ -54,17 +54,30 @@ $student_id = $data["Student_ID"];
 
  $new_user = new all_users();
  
-
-if (AddStudent($bursary_id, $student_id, $mysqli)){
-	$new_user->message = "Success! You have successfully applied for your bursary.";
-    echo json_encode($new_user);
-}else{
-	$new_user->message = "Error! Could not apply for bursary. Try again.";
-    echo json_encode($new_user);
+if (isNewApplicant($bursary_id, $student_id, $mysqli)==TRUE){
+	if (AddStudent($bursary_id, $student_id, $mysqli)){
+		$new_user->message = "Success! You have successfully applied for your bursary.";
+		echo json_encode($new_user);
+	}else{
+		$new_user->message = "Error! Could not apply for bursary. Try again.";
+		echo json_encode($new_user);
+	}
+}else {
+	$new_user->message = "You've already applied for this bursary.";
+	echo json_encode($new_user);
 }
 
 
 //----------------------------------------------------------------------------------------------------------------
+function isNewApplicant($bursary_id, $student_id, $mysqli){
+	$sql= "SELECT * FROM student_bursaries WHERE Student_ID=$student_id AND Bursary_ID=$bursary_id";
+	$result = $mysqli->query($sql);
+	if ($result->num_rows > 0){
+		return true;
+	}else{
+		return false;
+	}
+}
 function AddStudent($Bursary_ID, $Student_ID, $mysqli){
 	$date = date("Y-m-d");
 	$sql = "Insert Into student_bursaries (Bursary_ID, Student_ID, Application_Date) values ($Bursary_ID, $Student_ID, '$date')";
