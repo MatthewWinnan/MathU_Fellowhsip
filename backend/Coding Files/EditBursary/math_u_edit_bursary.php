@@ -1,5 +1,6 @@
 <?php
 include_once "math_u_db_connection.php";
+include_once "math_u_edit_covers.php";
 
 
 $input = file_get_contents('php://input');
@@ -101,6 +102,213 @@ if($result AND $result2){
     $updateBursary -> $message ="Error: Failed To Update Bursary!";
     echo json_encode($updateBursary);
 }
+
+
+//=================================FOR EDIT COVERS====================================================================
+
+$newTuition="";
+$newRegistrationFees="";
+$newAccomodationFees="";
+$newTranport ="";
+$newLaptop="";
+$newMeals ="";
+$newBooksAllowance="";
+
+
+
+//We check the array sent to back and and update the new variable accordingly
+//If the array does contain a certain value we append the variable
+//IF it does not contain the value we append invalid
+
+// ---------------------Check Tuition-------------------------------
+$i = 0;
+while($i <count($bursary_covers) AND empty($newTuition)){
+    
+    if($bursary_covers[$i] == "Tuition"){
+        $newTuition .= $bursary_covers[$i];
+    }else{
+        $newTuition .= "invalid";
+    }
+    $i++;
+}
+
+// ---------------------Registration Fees-------------------------------
+$i = 0;
+while($i <count($bursary_covers) AND empty($newRegistrationFees)){
+    
+    if($bursary_covers[$i] == "Registration Fees"){
+        $newRegistrationFees .= $bursary_covers[$i];
+    }else{
+        $newRegistrationFees .= "invalid";
+    }
+    $i++;
+}
+
+// ---------------------Accomodation Fees-------------------------------
+$i = 0;
+while($i <count($bursary_covers) AND empty($newAccomodationFees)){
+    
+    if($bursary_covers[$i] == "Accommodation Fees"){
+        $newAccomodationFees .= $bursary_covers[$i];
+    }else{
+        $newAccomodationFees .= "invalid";
+    }
+    $i++;
+}
+
+// ---------------------Transport-------------------------------
+$i = 0;
+while($i <count($bursary_covers) AND empty($newTranport)){
+    
+    if($bursary_covers[$i] == "Transport"){
+        $newTranport .= $bursary_covers[$i];
+    }else{
+        $newTranport .= "invalid";
+    }
+    $i++;
+}
+
+// ---------------------Laptop-------------------------------
+$i = 0;
+while($i <count($bursary_covers) AND empty($newLaptop)){
+    
+    if($bursary_covers[$i] == "Laptop"){
+        $newLaptop .= $bursary_covers[$i];
+    }else{
+        $newLaptop .= "invalid";
+    }
+    $i++;
+}
+
+// ---------------------Meals-------------------------------
+$i = 0;
+while($i <count($bursary_covers) AND empty($newMeals)){
+    
+    if($bursary_covers[$i] == "Meals"){
+        $newMeals .= $bursary_covers[$i];
+    }else{
+        $newMeals .= "invalid";
+    }
+    $i++;
+}
+
+// ---------------------Books Allowance-------------------------------
+$i = 0;
+while($i <count($bursary_covers) AND empty($newBooksAllowance)){
+    
+    if($bursary_covers[$i] == "Books Allowance"){
+        $newBooksAllowance .= $bursary_covers[$i];
+    }else{
+        $newBooksAllowance .= "invalid";
+    }
+    $i++;
+}
+
+///====================================================================================================
+// CHECKING WITH DATABASE NOW AND COMPARING
+
+///====================================================================================================
+
+
+//-----------------------------We check Tuition---------------------------------------------------------
+$whatWeCover= "Tuition";
+$oldTuition = editCovers($bursary_id,$whatWeCover,$mysqli);
+
+if($oldTuition == $newTuition){ //Did not Update
+    //we do nothing
+} elseif($oldTuition=="Unavailable" AND $newTuition != "invalid"){ // Tution Edited
+    $sql = "INSERT INTO bursary_covers(Bursary_ID,Bursary_Covers) VALUES('$bursary_id','$newTuition')";
+    $result = $mysqli->query($sql);
+} elseif($oldTuition =="Tuition" AND $newTuition == "invalid"){
+    $sql = "DELETE FROM bursary_covers WHERE Bursary_ID = $bursary_id AND Bursary_Covers='$oldTuition'";
+    $result = $mysqli->query($sql);
+}
+
+//------------------------Registration Fees------------------------------------------------------------------
+$whatWeCover= "Registration Fees";
+$oldRegistrationFees = editCovers($bursary_id,$whatWeCover,$mysqli);
+
+if($oldRegistrationFees == $newRegistrationFees){ //Did not Update
+    //we do nothing
+} elseif($oldRegistrationFees=="Unavailable" AND $newRegistrationFees != "invalid"){ // Tution Edited
+    $sql = "INSERT INTO bursary_covers(Bursary_ID,Bursary_Covers) VALUES('$bursary_id','$newRegistrationFees')";
+    $result = $mysqli->query($sql);
+} elseif($oldRegistrationFees =="Registration Fees" AND $newRegistrationFees == "invalid"){
+    $sql = "DELETE FROM bursary_covers WHERE Bursary_ID = $bursary_id AND Bursary_Covers='$oldRegistrationFees'";
+    $result = $mysqli->query($sql);
+}
+
+//------------------------Accommodation Fees------------------------------------------------------------------
+$whatWeCover= "Accommodation Fees";
+$oldAccommodationFees = editCovers($bursary_id,$whatWeCover,$mysqli);
+
+if($oldAccommodationFees == $newAccomodationFees){ //Did not Update
+    //we do nothing
+} elseif($oldAccommodationFees=="Unavailable" AND $newAccomodationFees != "invalid"){ // Tution Edited
+    $sql = "INSERT INTO bursary_covers(Bursary_ID,Bursary_Covers) VALUES('$bursary_id','$newAccomodationFees')";
+    $result = $mysqli->query($sql);
+} elseif($oldAccommodationFees =="Accommodation Fees" AND $newAccomodationFees == "invalid"){
+    $sql = "DELETE FROM bursary_covers WHERE Bursary_ID = $bursary_id AND Bursary_Covers='$oldAccommodationFees'";
+    $result = $mysqli->query($sql);
+}
+
+//------------------------Transport------------------------------------------------------------------
+$whatWeCover= "Transport";
+$oldTransport = editCovers($bursary_id,$whatWeCover,$mysqli);
+
+if($oldTransport == $newTranport){ //Did not Update
+    //we do nothing
+} elseif($oldTransport=="Unavailable" AND $newTranport != "invalid"){ // Tution Edited
+    $sql = "INSERT INTO bursary_covers(Bursary_ID,Bursary_Covers) VALUES('$bursary_id','$newTranport')";
+    $result = $mysqli->query($sql);
+} elseif($oldTransport =="Transport" AND $newTranport == "invalid"){
+    $sql = "DELETE FROM bursary_covers WHERE Bursary_ID = $bursary_id AND Bursary_Covers='$oldTransport'";
+    $result = $mysqli->query($sql);
+}
+
+//------------------------Laptop-----------------------------------------------------------------
+$whatWeCover= "Laptop";
+$oldLaptop = editCovers($bursary_id,$whatWeCover,$mysqli);
+
+if($oldLaptop == $newTranport){ //Did not Update
+    //we do nothing
+} elseif($oldLaptop=="Unavailable" AND $newLaptop != "invalid"){ // Tution Edited
+    $sql = "INSERT INTO bursary_covers(Bursary_ID,Bursary_Covers) VALUES('$bursary_id','$newLaptop')";
+    $result = $mysqli->query($sql);
+} elseif($oldLaptop =="Laptop" AND $newLaptop == "invalid"){
+    $sql = "DELETE FROM bursary_covers WHERE Bursary_ID = $bursary_id AND Bursary_Covers='$oldLaptop'";
+    $result = $mysqli->query($sql);
+}
+
+//------------------------Meals-----------------------------------------------------------------
+$whatWeCover= "Meals";
+$oldMeals = editCovers($bursary_id,$whatWeCover,$mysqli);
+
+if($oldMeals == $newMeals){ //Did not Update
+    //we do nothing
+} elseif($oldMeals=="Unavailable" AND $newMeals != "invalid"){ // Tution Edited
+    $sql = "INSERT INTO bursary_covers(Bursary_ID,Bursary_Covers) VALUES('$bursary_id','$newMeals')";
+    $result = $mysqli->query($sql);
+} elseif($oldMeals =="Meals" AND $newMeals == "invalid"){
+    $sql = "DELETE FROM bursary_covers WHERE Bursary_ID = $bursary_id AND Bursary_Covers='$oldMeals'";
+    $result = $mysqli->query($sql);
+}
+
+//------------------------Books Allowance-----------------------------------------------------------------
+$whatWeCover= "Books Allowance";
+$oldBookAllowance = editCovers($bursary_id,$whatWeCover,$mysqli);
+
+if($oldBookAllowance == $newBooksAllowance){ //Did not Update
+    //we do nothing
+} elseif($oldBookAllowance=="Unavailable" AND $newBooksAllowance != "invalid"){ // Tution Edited
+    $sql = "INSERT INTO bursary_covers(Bursary_ID,Bursary_Covers) VALUES('$bursary_id','$newBooksAllowance')";
+    $result = $mysqli->query($sql);
+} elseif($oldBookAllowance =="Books Allowance" AND $newMeals == "invalid"){
+    $sql = "DELETE FROM bursary_covers WHERE Bursary_ID = $bursary_id AND Bursary_Covers='$oldBookAllowance'";
+    $result = $mysqli->query($sql);
+}
+
+
 
 
 ?>
