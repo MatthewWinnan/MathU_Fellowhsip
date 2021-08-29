@@ -183,10 +183,10 @@ export class ViewBursaryPage implements OnInit {
             this.the_message = deactivateItem.bursary_name + " has been deactivated.";
             this.printMessage();
             if (this.the_message.substring(0,7) == "Success"){
-              this.router.navigateByUrl('./view-bursary');
+              this.router.navigateByUrl('./view-bursary/2');
             }
           }, (error:any) => {
-            //deactivateItem.isVisible = true;  //fix it
+            deactivateItem.isVisible = true; 
             this.the_message = 'error';
             this.printMessage();
             console.log("ERROR ===", error);
