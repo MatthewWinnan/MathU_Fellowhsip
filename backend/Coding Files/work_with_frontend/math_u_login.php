@@ -238,7 +238,71 @@ function ComparePasswords($password, $row,int $flag,$mysqli){
 			if($mysqli->query($sql)){
 				//create object to send to the frontend
 				$user = new all_users();
-				$user->Student = new student($row["ID"], $row["First_name"], $row["Last_name"], $row["Date_of_birth"], $row["Email_address"], $row["Validated"], $row["Nationality"], $row["Contact_number"], $row["City"], $row["Province"], $row["Disability"], $row["Current_academic_level"], $row["Grade"], $row["Syllabus"], $row["Average"], $row["Currently_studying"], $row["Year_of_study"], $row["Study_institution"], $row["Continue_studies"], $row["GPA"], $row["Description_of_student"], $row["Bursarred"], $row["Current_bursaries"], $row["Workback"], $row["Website"], $row["Number_of_reports"],$row["Banned"]);
+				if ($row["Bursarred"]==1){
+					$Bursarred = TRUE;//(boolean)
+					$Current_bursaries = $row["Current_bursaries"];
+				}
+				else{
+					$Bursarred = FALSE;
+					$Current_bursaries = '';
+				}
+
+				if ($row["Disability"]==1){
+					$Disability = TRUE;//(boolean)
+				}
+				else $Disability = FALSE;
+				
+				if ($row["Nationality"]==1){
+					$Nationality = TRUE;//(boolean)
+				}
+				else $Nationality = FALSE;
+				
+				if ($row["Workback"]==null){
+					$Workback = 0;//(boolean)
+				}
+				else $Workback = (int)$row["Workback"];
+				
+				if ($row["Continue_studies"]==1){
+					$Continue_studies = TRUE;//(boolean)
+				}
+				else $Continue_studies = FALSE;
+				
+				if ($row["Grade"]==null){
+					$Grade = 0;//(boolean)
+				}
+				else $Grade = $row["Grade"];
+				
+				if ($row["Syllabus"]==null){
+					$Syllabus = '';//(boolean)
+				}
+				else $Syllabus = $row["Syllabus"];
+				
+				if ($row["GPA"]==null){
+					$GPA = 0;//(boolean)
+				}
+				else $GPA = $row["GPA"];
+				
+				if ($row["Average"]==null){
+					$Average = 0;//(boolean)
+				}
+				else $Average = (int)$row["Average"];
+				
+				if ($row["Currently_studying"]==null){
+					$Currently_studying = '';//(boolean)
+				}
+				else $Currently_studying = $row["Currently_studying"];
+				
+				if ($row["Year_of_study"]==null){
+					$Year_of_study = '';//(boolean)
+				}
+				else $Year_of_study = $row["Year_of_study"];
+				
+				if ($row["Study_institution"]==null){
+					$Study_institution = '';//(boolean)
+				}
+				else $Study_institution = $row["Study_institution"];
+				
+				$user->Student = new student($row["ID"], $row["Student_ID"], $row["First_name"], $row["Last_name"], $row["Date_of_birth"], $row["Email_address"], $row["Validated"], $Nationality, $row["Contact_number"], $row["City"], $row["Province"], $Disability, $row["Current_academic_level"], $Grade, $Syllabus, $Average, $Currently_studying, $Year_of_study, $Study_institution, $Continue_studies, $GPA, $row["Description_of_student"], $Bursarred, $Current_bursaries, $Workback, $row["Website"], $row["Number_of_reports"],$row["Banned"]);
 				return $user;
 			}
 			else{

@@ -98,7 +98,7 @@ function getStudent($student_id, $mysqli){
 			$Validated = false;
 		}
 		
-		$user = new student($row["ID"], $row["First_name"], $row["Last_name"], $row["Date_of_birth"], $row["Email_address"], $Validated, $Nationality, $row["Contact_number"], $row["City"], $row["Province"], $Disability, $row["Current_academic_level"], $row["Grade"], $row["Syllabus"], $row["Average"], $row["Currently_studying"], $row["Year_of_study"], $row["Study_institution"], $row["Continue_studies"], $row["GPA"], $row["Description_of_student"], $Bursarred, $row["Current_bursaries"], $row["Workback"], $row["Website"], $row["Number_of_reports"],$Banned);
+		$user = new student($row["ID"], $row["Student_ID"], $row["First_name"], $row["Last_name"], $row["Date_of_birth"], $row["Email_address"], $Validated, $Nationality, $row["Contact_number"], $row["City"], $row["Province"], $Disability, $row["Current_academic_level"], $row["Grade"], $row["Syllabus"], $row["Average"], $row["Currently_studying"], $row["Year_of_study"], $row["Study_institution"], $row["Continue_studies"], $row["GPA"], $row["Description_of_student"], $Bursarred, $row["Current_bursaries"], $row["Workback"], $row["Website"], $row["Number_of_reports"],$Banned);
 		return $user;
 	}
 	else return null;
