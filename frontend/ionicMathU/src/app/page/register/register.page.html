@@ -1,0 +1,338 @@
+<ion-header>
+  <ion-toolbar>
+    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <!-- <ion-buttons slot="start">
+      <ion-icon name="arrow-back" (click)="goBack()"></ion-icon>
+    </ion-buttons> -->
+    <ion-buttons slot="end">
+      <ion-icon></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <super-tabs>
+    <super-tabs-toolbar slot="top" color="light">
+      <super-tab-button>
+        <ion-label>Student</ion-label>
+      </super-tab-button>
+
+
+      <super-tab-button>
+        <ion-label>Sponsor</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+
+    <super-tabs-container>
+      <super-tab>
+        <ion-content>
+          <form [formGroup]="addStudent" (ngSubmit)="addStudentSubmit()">
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating">First Name</ion-label>
+                <ion-input formControlName="student_first_name" autocapitalize inputmode="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.student_first_name">
+                <ng-container *ngIf="student_first_name.hasError(error.type) && (student_first_name.dirty || student_first_name.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+
+              <ion-item>
+                <ion-label position="floating">Last Name</ion-label>
+                <ion-input formControlName="student_last_name" autocapitalize inputmode="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.student_last_name">
+                <ng-container *ngIf="student_last_name.hasError(error.type) && (student_last_name.dirty || student_last_name.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+
+              <ion-item>
+                <ion-label position="floating">Email Address</ion-label>
+                <ion-input formControlName="student_email_address" inputmode="email"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.student_email_address">
+                <ng-container *ngIf="student_email_address.hasError(error.type) && (student_email_address.dirty || student_email_address.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+
+              <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input formControlName="student_password" placeholder="Password" 
+                  [type]="student_showPassword ? 'text' : 'password'"></ion-input>
+                <ion-icon slot="end" [name]="student_passwordToggleIcon" (click)="student_togglePassword()"></ion-icon>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.student_password">
+                <ng-container *ngIf="student_password.hasError(error.type) && (student_password.dirty || student_password.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+              <app-password-strength-bar [passwordToCheck]="addStudent.value.student_password" [barLabel]="barLabel">  
+              </app-password-strength-bar> 
+
+              <ion-item>
+                <ion-label position="floating">Confirm Password</ion-label>
+                <ion-input formControlName="student_c_password" placeholder="Password" 
+                  [type]="student_c_showPassword ? 'text' : 'password'"></ion-input>
+                <ion-icon slot="end" [name]="student_c_passwordToggleIcon" 
+                  (click)="student_c_togglePassword()"></ion-icon>
+              </ion-item>
+              <div *ngIf="studentControl.student_c_password.errors">
+                <ng-container *ngIf="studentControl.student_c_password.errors.matching">
+                  <small class="error-message">Passwords must match</small>
+                </ng-container>
+              </div>
+
+              <ion-item>
+                <ion-label position="floating">Date of Birth</ion-label>
+                <ion-datetime formControlName="student_date_of_birth" displayFormat="YYYY-MM-DD" 
+                 max="{{dateToday}}" placeholder="Select Date" ></ion-datetime>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.student_date_of_birth">
+                <ng-container *ngIf="student_date_of_birth.hasError(error.type) && (student_date_of_birth.dirty || student_date_of_birth.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+
+            </ion-list>
+
+            <ion-list class="ion-text-center">
+              <ion-button [disabled]="!addStudent.valid" type="submit" color="">
+                Sign Up
+              </ion-button>
+            </ion-list>
+          </form>
+
+          <!-- <ion-list>
+            <ion-item>
+              <ion-input placeholder="Student Name" [(ngModel)]="student.first_name" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input placeholder="Student Surname" [(ngModel)]="student.last_name" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input placeholder="Email Address" [(ngModel)]="student.email_address" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input placeholder="Password" [(ngModel)]="student.password" [type]="showPassword ? 'text' : 'password'"></ion-input>
+              <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+            </ion-item>
+
+            <ion-item>
+              <ion-input placeholder="Confirm Password" [(ngModel)]="student_c_password" [type]="c_showPassword ? 'text' : 'password'"></ion-input>
+              <ion-icon slot="end" [name]="c_passwordToggleIcon" (click)="c_togglePassword()"></ion-icon>
+            </ion-item>
+          </ion-list>
+          <h2> Enter date of birth</h2>
+          <ion-item>
+            <ion-datetime displayFormat="YY-MM-DD" placeholder="YY-MM-DD" [(ngModel)]="student.date_of_birth"></ion-datetime>
+          </ion-item>
+          <br>
+          <div class="ion-text-center">
+            <ion-button color="primary" (click)="registerMe_Student()">Sign Up</ion-button>
+          </div>
+          <br> -->
+
+
+          
+        </ion-content>
+      </super-tab>
+      <super-tab>
+        <ion-content>
+          <form [formGroup]="addSponsor" (ngSubmit)="addSponsorSubmit()">
+            <ion-list>
+              <h3>Company details</h3>
+              <ion-item>
+                <ion-label position="floating">Company Name</ion-label>
+                <ion-input formControlName="company_name" inputmode="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.company_name">
+                <ng-container *ngIf="company_name.hasError(error.type) && (company_name.dirty || company_name.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+
+              <ion-item>
+                <ion-label position="floating">Company Industry</ion-label>
+                <ion-select formControlName="company_industry" interface="action-sheet">
+                  <ion-select-option value="">Select Company Industry</ion-select-option>
+                  <ion-select-option value="IT & Telecommunications">IT & Telecommunications</ion-select-option>
+                  <ion-select-option value="Banking, Finance, Insurance, Stockbroking">Banking, Finance, Insurance, Stockbroking</ion-select-option>
+                  <ion-select-option value="Engineering, Technical, Production & Manufacturing">Engineering, Technical, Production & Manufacturing</ion-select-option>
+                  <ion-select-option value="Sales & Purchasing">Sales & Purchasing</ion-select-option>
+                  <ion-select-option value="Accounting, Auditing">Accounting, Auditing</ion-select-option>
+                  <ion-select-option value="FMCG, Rental, Wholesale & Supply Chain">FMCG, Rental, Wholesale & Supply Chain</ion-select-option>
+                  <ion-select-option value="Health, Fitness, Medical & Optometry">Health, Fitness, Medical & Optometry</ion-select-option>
+                  <ion-select-option value="Admin, Office Support & Services">Admin, Office Support & Services</ion-select-option>
+                  <ion-select-option value="Human Resources & Recruitment">Human Resources & Recruitment</ion-select-option>
+                  <ion-select-option value="Transport, Logistics & Freight">Transport, Logistics & Freight</ion-select-option>
+                  <ion-select-option value="Media, Advertising, PR, Publishing & Marketing">Media, Advertising, PR, Publishing & Marketing</ion-select-option>
+                  <ion-select-option value="Construction, Design, Architecture & Property">Construction, Design, Architecture & Property</ion-select-option>
+                  <ion-select-option value="General Management">General Management</ion-select-option>
+                  <ion-select-option value="Legal">Legal</ion-select-option>
+                  <ion-select-option value="Agriculture, Forestry, Environmental & Fishing">Agriculture, Forestry, Environmental & Fishing</ion-select-option>
+                  <ion-select-option value="Education & Training">Education & Training</ion-select-option>
+                  <ion-select-option value="Mining">Mining</ion-select-option>
+                  <ion-select-option value="Hospitality, Hotel, Catering, Tourism & Travel">Hospitality, Hotel, Catering, Tourism & Travel</ion-select-option>
+                  <ion-select-option value="SEHQ & Security Work">SEHQ & Security Work</ion-select-option>
+                  <ion-select-option value="R&D, Science & Scientific Research">R&D, Science & Scientific Research</ion-select-option>
+                  <ion-select-option value="Chemical, Petrochemical, Oil & Gas">Chemical, Petrochemical, Oil & Gas</ion-select-option>
+                  <ion-select-option value="Government & NGO">Government & NGO</ion-select-option>
+                  <ion-select-option value="Textile/Clothing">Textile/Clothing</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.company_industry">
+                <ng-container *ngIf="company_industry.hasError(error.type) && (company_industry.dirty || company_industry.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+            </ion-list>
+
+            <ion-list>
+              <h3>Super Admin details</h3>
+              <ion-item>
+                <ion-label position="floating">First Name</ion-label>
+                <ion-input formControlName="first_name" autocapitalize inputmode="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.first_name">
+                <ng-container *ngIf="first_name.hasError(error.type) && (first_name.dirty || first_name.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+
+              <ion-item>
+                <ion-label position="floating">Last Name</ion-label>
+                <ion-input formControlName="last_name" autocapitalize inputmode="text"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.last_name">
+                <ng-container *ngIf="last_name.hasError(error.type) && (last_name.dirty || last_name.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+
+              <ion-item>
+                <ion-label position="floating">Email Address</ion-label>
+                <ion-input formControlName="email_address" inputmode="email"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.email_address">
+                <ng-container *ngIf="email_address.hasError(error.type) && (email_address.dirty || email_address.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+
+              <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input formControlName="password" placeholder="Password" 
+                  [type]="showPassword ? 'text' : 'password'"></ion-input>
+                <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.password">
+                <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+              <app-password-strength-bar [passwordToCheck]="addSponsor.value.password" [barLabel]="barLabel">  
+              </app-password-strength-bar> 
+
+              <ion-item>
+                <ion-label position="floating">Confirm Password</ion-label>
+                <ion-input formControlName="c_password" placeholder="Password" 
+                  [type]="c_showPassword ? 'text' : 'password'"
+                  ></ion-input>
+                <ion-icon slot="end" [name]="c_passwordToggleIcon" (click)="c_togglePassword()"></ion-icon>
+              </ion-item>
+              <div *ngIf="sponsorControl.c_password.errors">
+                <ng-container *ngIf="sponsorControl.c_password.errors.matching">
+                  <small class="error-message">Passwords must match</small>
+                </ng-container>
+              </div>
+            </ion-list>
+
+            <ion-list class="ion-text-center">
+              <ion-button [disabled]="!addSponsor.valid" type="submit" color="">
+                Sign Up
+              </ion-button>
+            </ion-list>
+          </form>
+
+
+          <!-- <h2 class="ion-text-center">Sponsor Sign Up</h2> -->
+          <!-- <h3>Company details</h3>
+          <ion-list>
+            <ion-item>
+              <ion-input placeholder="Company Name" [(ngModel)]="sponsor.company.company_name" type="text"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-select placeholder="Select Company Industry" okText="Okay" cancelText="Dismiss" [(ngModel)]="sponsor.company.company_industry" interface="action-sheet">
+                <ion-select-option value="IT & Telecommunications">IT & Telecommunications</ion-select-option>
+                <ion-select-option value="Banking, Finance, Insurance, Stockbroking">Banking, Finance, Insurance, Stockbroking</ion-select-option>
+                <ion-select-option value="Engineering, Technical, Production & Manufacturing">Engineering, Technical, Production & Manufacturing</ion-select-option>
+                <ion-select-option value="Sales & Purchasing">Sales & Purchasing</ion-select-option>
+                <ion-select-option value="Accounting, Auditing">Accounting, Auditing</ion-select-option>
+                <ion-select-option value="FMCG, Rental, Wholesale & Supply Chain">FMCG, Rental, Wholesale & Supply Chain</ion-select-option>
+                <ion-select-option value="Health, Fitness, Medical & Optometry">Health, Fitness, Medical & Optometry</ion-select-option>
+                <ion-select-option value="Admin, Office Support & Services">Admin, Office Support & Services</ion-select-option>
+                <ion-select-option value="Human Resources & Recruitment">Human Resources & Recruitment</ion-select-option>
+                <ion-select-option value="Transport, Logistics & Freight">Transport, Logistics & Freight</ion-select-option>
+                <ion-select-option value="Media, Advertising, PR, Publishing & Marketing">Media, Advertising, PR, Publishing & Marketing</ion-select-option>
+                <ion-select-option value="Construction, Design, Architecture & Property">Construction, Design, Architecture & Property</ion-select-option>
+                <ion-select-option value="General Management">General Management</ion-select-option>
+                <ion-select-option value="Legal">Legal</ion-select-option>
+                <ion-select-option value="Agriculture, Forestry, Environmental & Fishing">Agriculture, Forestry, Environmental & Fishing</ion-select-option>
+                <ion-select-option value="Education & Training">Education & Training</ion-select-option>
+                <ion-select-option value="Mining">Mining</ion-select-option>
+                <ion-select-option value="Hospitality, Hotel, Catering, Tourism & Travel">Hospitality, Hotel, Catering, Tourism & Travel</ion-select-option>
+                <ion-select-option value="SEHQ & Security Work">SEHQ & Security Work</ion-select-option>
+                <ion-select-option value="R&D, Science & Scientific Research">R&D, Science & Scientific Research</ion-select-option>
+                <ion-select-option value="Chemical, Petrochemical, Oil & Gas">Chemical, Petrochemical, Oil & Gas</ion-select-option>
+                <ion-select-option value="Government & NGO">Government & NGO</ion-select-option>
+                <ion-select-option value="Textile/Clothing">Textile/Clothing</ion-select-option>
+              </ion-select>
+            </ion-item>
+        
+          </ion-list>
+
+          <h3>Super Admin details</h3>
+          <ion-list>
+            <ion-item>
+              <ion-input placeholder="First Name" [(ngModel)]="sponsor.first_name_of_user" type="text"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input placeholder="Last Name" [(ngModel)]="sponsor.last_name_of_user" type="text"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input placeholder="Email address" [(ngModel)]="sponsor.email_address" type="Email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input placeholder="Password" [(ngModel)]="sponsor.password" [type]="showPassword ? 'text' : 'password'"></ion-input>
+              <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+            </ion-item>
+
+            <ion-item>
+              <ion-input placeholder="Confirm Password" [(ngModel)]="c_password" [type]="c_showPassword ? 'text' : 'password'"></ion-input>
+              <ion-icon slot="end" [name]="c_passwordToggleIcon" (click)="c_togglePassword()"></ion-icon>
+            </ion-item>
+          </ion-list>
+          <br>
+          <div class="ion-text-center">
+            <ion-button color="primary" (click)="registerMeSponsor()">Sign Up</ion-button>
+          </div>
+          <br> -->
+
+        </ion-content>
+
+
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+
+</ion-content>

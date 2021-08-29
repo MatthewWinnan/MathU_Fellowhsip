@@ -1,0 +1,112 @@
+<app-menu></app-menu>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
+    <ion-button fill = 'none' slot="end"  routerLink="/student-edit-profile">
+      <ion-icon name="brush"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <div padding style="margin:15px">
+    <h3>My detials: {{thisStudent.first_name}} {{thisStudent.last_name}}</h3>
+    
+    <div class="applicant-info">
+      <b>Age:</b> 
+      {{calculateAge()}}
+    </div>
+
+    <div class="applicant-info" *ngIf='thisStudent.description_of_student !== ""'>
+      <b>A short Description of Me: </b>
+      <br/>
+      {{ thisStudent.description_of_student}}
+    </div>
+
+    <div class="applicant-info" *ngIf="thisStudent.nationality">
+      RSA citizen	
+    </div>
+
+    <div class="applicant-info" *ngIf="thisStudent.city!=='' && thisStudent.province!==''">
+      <b>Address: </b>
+      {{ thisStudent.city }}, {{ thisStudent.province }}
+    </div>
+    <div class="applicant-info" *ngIf="thisStudent.city=='' && thisStudent.province!==''">
+      <b>Address: </b>
+      {{ thisStudent.province }}
+    </div>
+    <div class="applicant-info" *ngIf="thisStudent.city!=='' && thisStudent.province==''">
+      <b>Address: </b>
+      {{ thisStudent.city }}
+    </div>
+    
+    <div class="applicant-info" *ngIf="thisStudent.disability">
+      <b>Disability: </b>
+      {{ thisStudent.disability }}
+    </div>
+
+    <div class="applicant-info" *ngIf="thisStudent.current_academic_level=='High School'" >
+      Currently in {{ thisStudent.grade }} with the {{ thisStudent.syllabus }} syllabus. 
+    </div>
+
+    <div class="applicant-info" *ngIf="thisStudent.current_academic_level=='Undergraduate' || 
+      thisStudent.current_academic_level=='Postgraduate'">
+      Currently studying {{thisStudent.currently_studying}} ({{ thisStudent.year_of_study }})
+       at {{ thisStudent.study_institution }} ({{thisStudent.current_academic_level}})
+    </div>
+
+    <div class="applicant-info" *ngIf="thisStudent.current_academic_level=='High School' && 
+    thisStudent.average != null" >
+      <b>Current average: </b>
+      {{ thisStudent.average }}
+    </div>
+
+    <div class="applicant-info" *ngIf="(thisStudent.current_academic_level=='Undergraduate' || 
+      thisStudent.current_academic_level=='Postgraduate') && thisStudent.gpa != null">
+      <b>Current average: </b>
+      {{thisStudent.gpa}}
+    </div>
+
+    <!-- <div class="applicant-info" *ngIf="thisStudent.Students_marks.length > 0">
+      <b>Current subjects: </b>
+      <ul *ngFor="let item of thisStudent.Students_marks" class="marks-list">
+        <li>{{item.subject_name}}: {{item.marks}}</li>
+      </ul>
+    </div> -->
+
+    <div class="applicant-info" *ngIf="thisStudent.website">
+      <b>Personal website/LinkedIn profile:</b>
+      {{thisStudent.website}}
+    </div>
+
+    <div class="applicant-info" *ngIf='thisStudent.continue_studies'>
+      Willing to study further
+    </div>
+
+    <div class="applicant-info" *ngIf='thisStudent.bursarred'>
+      Current bursary: {{thisStudent.current_bursaries}}
+    </div>
+
+    <div class="applicant-info" *ngIf='thisStudent.workback !== 0'>
+      Willing to work back for {{ thisStudent.workback }} years 
+    </div>
+
+    <div class="applicant-info">
+      <b>Email address: </b>
+      {{ thisStudent.email_address }}
+    </div>
+
+    <div class="applicant-info" *ngIf='thisStudent.contact_number!==""'>
+      <b>Contact number: </b>
+      {{ thisStudent.contact_number }}
+    </div> 
+  </div>
+  
+<ion-content>

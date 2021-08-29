@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="none" slot="start" routerLink="/view-bursary/3">
+      <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
+    </ion-button>
+    <ion-title>Applicants for {{data.bursary_name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="applicantsData_length >= 1">
+    <ion-item>
+      <ion-label position="floating">Bursary Status</ion-label>
+      <ion-select (ngModel)="b_status" (ionChange)="filterStudent($event)">
+        <ion-select-option value="Pending">Pending</ion-select-option>
+        <ion-select-option value="Accepted">Accepted</ion-select-option>
+        <ion-select-option value="Declined">Declined</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <p class="ion-text-center" *ngIf="isFetching">
+    <ion-spinner name="crescent"></ion-spinner>
+  </p>
+  
+  <div *ngIf="!isFetching && applicantsData_length>=1">
+    <ion-card *ngFor="let item of applicantsData">
+      <ion-card-header>
+        <ion-card-subtitle>
+          Applicant (Status: {{item.Status}}) 
+          <br/><br/>
+          Applied date: {{item.Application_Date}}
+        </ion-card-subtitle>
+        <ion-item>
+          {{item.Student.first_name}}  {{ item.Student.last_name }}
+        </ion-item>
+        <ion-item *ngIf="item.Student.current_academic_level">
+          <p *ngIf="item.Student.current_academic_level == 'High School'">
+            Currently in {{item.Student.current_academic_level}}, Grade {{item.Student.grade}}
+          </p>
+          <p *ngIf="item.Student.current_academic_level != 'High School'">
+            Currently in {{item.Student.study_institution}} for {{item.Student.current_academic_level}}
+          </p>
+          <!-- Average: {{ item.applicant_average }} -->
+        </ion-item>
+      </ion-card-header>
+  
+      <div class="ion-text-center">
+        <ion-button fill="none" (click)="declineDialogue(item)" size="small" disabled 
+         [attr.disabled]="(item.Status=='Declined')?true:false"
+         *ngIf="data.bursary_status !== 'Deactivated'">
+          <ion-icon name="close-circle"></ion-icon>
+        </ion-button>
+        <ion-button fill="none" (click)="openViewInfo(item)" size="small" >
+          <ion-icon name="ellipsis-horizontal"></ion-icon>
+        </ion-button>
+        <ion-button fill="none" (click)="acceptDialogue(item)" size="small" disabled 
+         [attr.disabled]="(item.Status=='Accepted')?true:false"
+         *ngIf="data.bursary_status !== 'Deactivated'">
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </ion-button>
+        
+      </div>
+    </ion-card>
+  </div>
+
+  <div class="ion-text-center" *ngIf="!isFetching && applicantsData_length<1">
+    <br/>
+    No Applicants have applied yet.
+  </div>
+  
+
+</ion-content>

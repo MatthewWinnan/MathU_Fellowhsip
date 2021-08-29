@@ -1,33 +1,55 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-        <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" height="100px" style="display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;">
-    </ion-title>
+    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
     <ion-buttons slot="start">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
+      <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
+    <!-- <ion-buttons slot="start">
+      <ion-icon name="arrow-back" (click)="goBack()"></ion-icon>
+    </ion-buttons> -->
     <ion-buttons slot="end">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
+      <ion-icon></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-content>
-      <br>
-      <ion-item>
-        <ion-input placeholder="Username"></ion-input>
-      </ion-item>
-      <br>
-      <ion-item>
-        <ion-input placeholder="Password" type="Password"></ion-input>
-      </ion-item>
-      <br>
-      <ion-button (click)="logMeIn()">Login</ion-button>
-    </ion-card-content>
-  </ion-card>
+  <div class="vertical-center">
+    <p class="ion-text-center" *ngIf="isChecking">
+      <ion-spinner name="crescent"></ion-spinner>
+    </p>
+    <form [formGroup]="loginUser" (ngSubmit)="loginSubmit()" *ngIf="!isChecking">
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Email Address</ion-label>
+          <ion-input formControlName="email_address" inputmode="text"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.email_address">
+          <ng-container *ngIf="email_address.hasError(error.type) && (email_address.dirty || email_address.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'"></ion-input>
+          <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.password">
+          <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+      </ion-list>
+      <ion-router-link href="./forgot-password" class="underline"  *ngIf="!isChecking" 
+           style="margin-left: 10px;">
+          Forgot Password
+      </ion-router-link>
+      <ion-list class="ion-text-center">
+        <ion-button [disabled]="!loginUser.valid" type="submit" color="">
+          Submit
+        </ion-button>
+      </ion-list>
+    </form>
+  </div>
 </ion-content>

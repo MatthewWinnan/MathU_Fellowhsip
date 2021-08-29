@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill = "none" slot = "start" routerLink="/view-bursary">
+      <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
+    </ion-button>
+    <ion-title>{{ data.bursary_name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Bursary type</ion-card-subtitle>
+      <ion-card-title>{{ data.bursary_type }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngIf="data.bursary_type == 'Work Back'">
+    <ion-card-header>
+      <ion-card-subtitle>Work Back Duration</ion-card-subtitle>
+      <ion-card-title>{{ data.WB_duration }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Age Group</ion-card-subtitle>
+      <ion-card-title> {{ data.min_age }} - {{ data.max_age }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Academic Level</ion-card-subtitle>
+      <ion-card-title>{{ data.academic_level  }} </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngIf="data.academic_level != 'High School'">
+    <ion-card-header>
+      <ion-card-subtitle>Study Field</ion-card-subtitle>
+      <ion-card-title>{{ data.study_field }} </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngIf="data.academic_level != 'High School'">
+    <ion-card-header>
+      <ion-card-subtitle>Minimum Study Year Required</ion-card-subtitle>
+      <ion-card-title>{{ data.minimum_year_required }} </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Minimum Average</ion-card-subtitle>
+      <ion-card-title>{{ data.min_average }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Requrirements</ion-card-subtitle>
+      <ion-card-title>
+        <p *ngIf="data.RSA_citizen == true">An RSA citizen</p>
+        <p *ngIf="data.financial_need == true">Students with financial need</p>
+        <p *ngIf="data.study_further == true">Students willing to study further</p>
+        <p *ngIf="data.disability == true">Students with a disability</p>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Province in South Africa</ion-card-subtitle>
+      <ion-card-title>{{ data.province }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Bursary Covers For</ion-card-subtitle>
+      <ion-card-title>
+        <p *ngFor="let bc of data.bursary_covers">
+          {{bc}}
+        </p>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Bursary last for (years)</ion-card-subtitle>
+      <ion-card-title>{{ data.bursary_duration }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Closing Date for Applications </ion-card-subtitle>
+      <ion-card-title>{{ data.closing_date }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Closing Date for Further Communication </ion-card-subtitle>
+      <ion-card-title> {{ data.shortlist_date }} </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Bursary Description</ion-card-subtitle>
+      <ion-card-title>{{ data.bursary_description }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Email Address</ion-card-subtitle>
+      <ion-card-title>{{ data.email_address }} </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+
+
+</ion-content>

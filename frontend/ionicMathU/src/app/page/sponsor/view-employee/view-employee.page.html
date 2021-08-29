@@ -1,0 +1,57 @@
+<app-menu></app-menu>
+<ion-header>
+  <ion-toolbar>
+    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-button slot="end" fill="none" routerLink="/add-new-employee">
+      <ion-icon name="add" size="small"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <p class="ion-text-center" *ngIf="isFetching">
+    <ion-spinner name="crescent"></ion-spinner>
+  </p>
+
+  <div *ngIf="userType == 'SuperAdmin' && !isFetching">
+    <ion-card *ngFor = 'let item of employeesData'>
+      <ion-card-header>
+        <ion-card-subtitle>
+          <p *ngIf="item.isSuperAdmin">Super Admin</p>
+          <p *ngIf="!item.isSuperAdmin">Employee</p>
+          <p *ngIf="item.inactive">(Deactivated)</p>
+        </ion-card-subtitle>
+        <ion-item> {{ item.first_name_of_user }} {{ item.last_name_of_user }} </ion-item>
+        <ion-item> {{ item.email_address }}</ion-item>
+        <ion-item>
+          <ul>
+            <li *ngIf="item.manageBursaries">Manage Bursaries</li>
+            <li *ngIf="item.manageApplications">Manage Applications</li>
+          </ul>
+        </ion-item>
+        <ion-toolbar *ngIf="!item.inactive && loggedSponsor.email_address !== item.email_address">
+          <ion-button fill="none" color="black" slot="start" (click)="modifyEmployee(item)">
+            <ion-icon name="brush" size="small"></ion-icon>
+          </ion-button>
+  
+          <ion-button fill="none" color="black" slot="end" (click)="deactivate(item)">
+            <ion-icon name="close-circle" size="small" ></ion-icon>
+          </ion-button>
+        </ion-toolbar>  
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <div *ngIf="userType != 'SuperAdmin'" class="ion-text-center vertical-center">
+    Unauthorised access is prohibited
+  </div>
+
+</ion-content>
+

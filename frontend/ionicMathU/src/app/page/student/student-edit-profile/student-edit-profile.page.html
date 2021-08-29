@@ -1,0 +1,216 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill = "none" slot = "start" routerLink="/student-view-profile/2">
+      <ion-icon name="arrow-back-outline" size= "small" ></ion-icon>
+    </ion-button>
+    <ion-title>Editing {{ thisStudent.first_name }} {{thisStudent.last_name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding style="margin:0px;">
+  <form [formGroup]="addStudent_details" (ngSubmit)="addStudentDetails()" >
+    <ion-list>
+      <h3>Personal Information</h3>
+      
+      <ion-item>
+        <ion-label position="floating">Contact number</ion-label>
+        <ion-input formControlName="contact_number" type="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.contact_number">
+        <ng-container *ngIf="contact_number.hasError(error.type) && (contact_number.dirty || contact_number.touched)" >
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label>RSA citizen</ion-label>
+        <ion-checkbox formControlName="rsa_citizen" checked="false" color="dark"></ion-checkbox>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Currently disabled</ion-label>
+        <ion-checkbox formControlName="disability" checked="false" color="dark"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <h3>Residential Information</h3>
+      <ion-item >
+        <ion-label position="floating">City</ion-label>
+        <ion-input formControlName="city" type="text"></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating">Province</ion-label>
+        <ion-select formControlName="province">
+          <ion-select-option value="Mpumalanga">Mpumalanga</ion-select-option>
+          <ion-select-option value="Eastern Cape">Eastern Cape</ion-select-option>
+          <ion-select-option value="Free State">Free State</ion-select-option>
+          <ion-select-option value="Gauteng">Gauteng</ion-select-option>
+          <ion-select-option value="Limpopo">Limpopo</ion-select-option>
+          <ion-select-option value="Northern Cape">Northern Cape</ion-select-option>
+          <ion-select-option value="North West">North West</ion-select-option>
+          <ion-select-option value="Western Cape">Western Cape</ion-select-option>
+          <ion-select-option value="KwaZulu-Natal">KwaZulu-Natal</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <h3>Academic Information</h3>
+      <ion-item >
+        <ion-label position="floating">Enter Academic Level</ion-label>
+        <ion-select formControlName="current_academic_level">
+          <ion-select-option value="High School">High School</ion-select-option>
+          <ion-select-option value="Undergraduate">Undergraduate</ion-select-option>
+          <ion-select-option value="Postgraduate">Postgraduate</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Info for only HS students -->
+      <ion-item *ngIf="current_academic_level.value === 'High School'">
+        <ion-label position="float">Current Grade</ion-label>
+        <ion-select formControlName="grade">
+          <ion-select-option value= 10 >10</ion-select-option>
+          <ion-select-option value= 11 >11</ion-select-option>
+          <ion-select-option value= 12 >12</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="current_academic_level.value === 'High School'">
+        <ion-label position="floating">Syllabus</ion-label>
+        <ion-select formControlName="syllabus">
+          <ion-select-option value= "Cambridge" >Cambridge</ion-select-option>
+          <ion-select-option value= "CAPS" >CAPS</ion-select-option>
+          <ion-select-option value= "IEB" >IEB</ion-select-option>
+          <ion-select-option value= "Other" >Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="current_academic_level.value === 'High School'">
+        <ion-label position="floating">Average</ion-label>
+        <!-- <ion-input formControlName="average" type="number"></ion-input> -->
+        <ion-range formControlName="average" pin snaps min="60" step="1" max="100" color="dark" value="25">
+          <ion-label slot="start" size="small">60</ion-label>
+          <ion-label slot="end">100</ion-label>
+        </ion-range>
+      </ion-item>
+
+      <!-- Info for uni students -->
+      <ion-item *ngIf="current_academic_level.value==='Undergraduate' || current_academic_level.value==='Postgraduate'">
+        <ion-label position="floating">Currently Studying (Degree)</ion-label>
+        <ion-input formControlName="currently_studying" type="text"></ion-input>
+      </ion-item>
+
+      <!-- Info for undergrad students -->
+      <ion-item *ngIf="current_academic_level.value === 'Undergraduate'">
+        <ion-label position="floating">Year Of Study</ion-label>
+        <ion-select formControlName="year_of_study">
+          <ion-select-option value= "1st" >1st</ion-select-option>
+          <ion-select-option value= "2nd" >2nd</ion-select-option>
+          <ion-select-option value= "3rd" >3rd</ion-select-option>
+          <ion-select-option value= "4th" >4th</ion-select-option>
+          <ion-select-option value= "5th" >5th</ion-select-option>
+          <ion-select-option value= "6th" >6th</ion-select-option>
+          <ion-select-option value= "7th" >7th</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Info for postgrad -->
+      <ion-item *ngIf="current_academic_level.value === 'Postgraduate'">
+        <ion-label position="floating">Year Of Study</ion-label>
+        <ion-select formControlName="year_of_study">
+          <ion-select-option value= "Honours" >Honors</ion-select-option>
+          <ion-select-option value= "Masters" >Masters</ion-select-option>
+          <ion-select-option value= "PHD" >PHD</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    <!-- Info for uni students -->
+      <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
+        <ion-label position="floating">Institution of study</ion-label>
+        <ion-select formControlName="study_institution">
+          <ion-select-option value= "Cape Peninsula University of Technology (CPUT)" >Cape Peninsula University of Technology (CPUT)</ion-select-option>
+          <ion-select-option value= "Central University of Technology (CUT)" >Central University of Technology (CUT)</ion-select-option>
+          <ion-select-option value="Durban University of Technology (DUT)">Durban University of Technology (DUT)</ion-select-option>
+          <ion-select-option value="Mangosuthu University of Technology (MUT)">Mangosuthu University of Technology (MUT)</ion-select-option>
+          <ion-select-option value="Nelson Mandela University (NMU)">Nelson Mandela University (NMU)</ion-select-option>
+          <ion-select-option value="North-West University (NWU)">North-West University (NWU)</ion-select-option>
+          <ion-select-option value="Rhodes University (RU)">Rhodes University (RU)</ion-select-option>
+          <ion-select-option value="Sefako Makgatho Health Sciences University (SMU)">Sefako Makgatho Health Sciences University (SMU)</ion-select-option>
+          <ion-select-option value="Sol Plaatje University (SPU)">Sol Plaatje University (SPU)</ion-select-option>
+          <ion-select-option value="Tshwane University of Technology (TUT)">Tshwane University of Technology (TUT)</ion-select-option>
+          <ion-select-option value="Universiteit Stellenbosch (SU)">Universiteit Stellenbosch (SU)</ion-select-option>
+          <ion-select-option value="University of Cape Town (UCT)">University of Cape Town (UCT)</ion-select-option>
+          <ion-select-option value="University of Fort Hare (UFH)">University of Fort Hare (UFH)</ion-select-option>
+          <ion-select-option value="University of Johannesburg (UJ)">University of Johannesburg (UJ)</ion-select-option>
+          <ion-select-option value="University of KwaZulu-Natal (UKZN)">University of KwaZulu-Natal (UKZN)</ion-select-option>
+          <ion-select-option value="University of Limpopo (UL)">University of Limpopo (UL)</ion-select-option>
+          <ion-select-option value="University of Mpumalanga (UMP)">University of Mpumalanga (UMP)</ion-select-option>
+          <ion-select-option value="University of Pretoria (UP)">University of Pretoria (UP)</ion-select-option>
+          <ion-select-option value="University of the Free State (UFS)">University of the Free State (UFS)</ion-select-option>
+          <ion-select-option value="University of the Western Cape (UWC)">University of the Western Cape (UWC)</ion-select-option>
+          <ion-select-option value="University of the Witwatersrand (WITS)">University of the Witwatersrand (WITS)</ion-select-option>
+          <ion-select-option value="University of Venda (UNIVEN)">University of Venda (UNIVEN)</ion-select-option>
+          <ion-select-option value="University of Zululand (UNIZULU)">University of Zululand (UNIZULU)</ion-select-option>
+          <ion-select-option value="Vaal University of Technology (VUT)">Vaal University of Technology (VUT)</ion-select-option>
+          <ion-select-option value="Walter Sisulu University (WSU)">Walter Sisulu University (WSU)</ion-select-option>
+          <ion-select-option value="Other">Other </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
+        <ion-label>Will you be continuing with studies?</ion-label>
+        <ion-checkbox formControlName="continue_studies" checked="false" color="dark"></ion-checkbox>
+      </ion-item>
+      
+      <ion-item *ngIf="current_academic_level.value === 'Undergraduate' || current_academic_level.value === 'Postgraduate'">
+        <ion-label position="floating">Current GPA</ion-label>
+        <!-- <ion-input formControlName="gpa" type="number"></ion-input> -->
+        <ion-range formControlName="gpa" pin snaps min="60" step="1" max="100" color="dark" value="25">
+          <ion-label slot="start" size="small">60</ion-label>
+          <ion-label slot="end">100</ion-label>
+        </ion-range>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <h3>About Me</h3>
+      <ion-item>
+        <ion-label position="floating">Student summary</ion-label>
+        <ion-input formControlName="description_of_student" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Personal Website / LinkedIn Profile</ion-label>
+        <ion-input formControlName="website" type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <h3>Other Information</h3>
+      <ion-item>
+        <ion-label>Do you have a bursary currently?</ion-label>
+        <ion-checkbox formControlName="bursarred" checked="false" color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item *ngIf="bursarred.value"> <!---add this after bursarred has been confirmed--->
+        <ion-label position="floating">Current Bursary</ion-label>
+        <ion-input formControlName="current_bursaries" type="text"></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating">Workback bursary for?</ion-label>
+        <!-- <ion-input formControlName="workback" type="number"></ion-input> -->
+        <ion-range formControlName="workback" pin snaps min="0" step="1" max="10" color="dark" value="25">
+          <ion-label slot="start" size="small">0</ion-label>
+          <ion-label slot="end">10</ion-label>
+        </ion-range>
+      </ion-item>
+    </ion-list>
+    
+    <ion-list class="ion-text-center">
+      <ion-button [disabled]="!addStudent_details.valid" type="submit" color="">
+        Submit
+      </ion-button>
+    </ion-list>
+  </form>
+<ion-content>

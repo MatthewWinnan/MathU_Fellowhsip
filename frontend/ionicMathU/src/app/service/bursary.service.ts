@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { student_users } from '../model/student_users';
+import { Bursary } from '../model/bursaries';
+import { Company } from '../model/Company';
 import { Student_bursary } from '../model/student_bursary';
 
 @Injectable({
@@ -31,4 +33,36 @@ export class BursaryService {
     return this.http.post<any>('http://localhost/mathU_backend/student_apply.php', data);
     //change file name 
   }
+  addBursary(data:Bursary){
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_create_bursary.php', data);
+  }
+
+  getAllBursary(data:Company){
+    return this.http.post<Bursary[]>('http://localhost/mathU_backend/math_u_get_bursary.php', data);
+  }
+
+  editBursary(data:Bursary){
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_edit_bursary.php', data);
+    //change file name 
+  }
+
+  deactivateBursary(data:Bursary){
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_deactivate_bursary.php', data);
+    //change file name 
+  }
+
+  getBursaryApplications(data:Bursary){
+    return this.http.post<any>('http://localhost/mathU_backend/mathU_getApplicants.php', data);
+  }
+
+  acceptApplicant(data:Student_bursary){
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_acceptStudent.php', data);
+    //change file name
+  }
+
+  declineApplicant(data:Student_bursary){
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_denyApplicant.php', data);
+    //change file name
+  }
+
 }
