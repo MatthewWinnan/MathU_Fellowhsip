@@ -152,7 +152,10 @@ class bursary{
 	public company $Company;
 	public $Applicants = [];
 	
-	public function __construct($company_id, $bursary_name, $bursary_type, $WB_duration, $closing_date, $min_age, $max_age, $academic_level, $study_field, $minimum_year_required, $bursary_duration, $min_average, $RSA_citizen, $financial_need,
+	public $bursary_status;
+	
+	public function __construct($company_id, $bursary_name, $bursary_type, $WB_duration, $closing_date, $min_age, $max_age, $academic_level, 
+		$study_field, $minimum_year_required, $bursary_duration, $min_average, $RSA_citizen, $financial_need,
 	 $study_further, $disability, $province, $email_address, $shortlist_date, $isVisible, $bursary_description){
 		 $this->company_id = $company_id;
 		 $this->bursary_name= $bursary_name;
@@ -169,6 +172,7 @@ class bursary{
 		 $this->RSA_citizen = $RSA_citizen;
 		 $this->financial_need = $financial_need;
 		 $this->disability = $disability;
+		 $this->study_further = $study_further;
 		 $this->province = $province;
 		 $this->email_address = $email_address;
 		 $this->shortlist_date = $shortlist_date;

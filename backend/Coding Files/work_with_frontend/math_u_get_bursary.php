@@ -1,10 +1,11 @@
 <?php
 
-include 'math_u_db_connection.php';
-include 'all_classes.php';
+include_once 'math_u_db_connection.php';
+include_once 'all_classes.php';
+include_once 'math_u_bursary_status_function.php';
 
 /*$input = '{
-	"comapny_id": 0,
+	"company_id": 0,
 	"company_name": "Google",
 	"company_industry": "Legal",
 	"comapny_logo": "",
@@ -13,7 +14,6 @@ include 'all_classes.php';
 	"number_of_reports": 0
 }';*/
 
-//$input ='{"company_id":1}';
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
@@ -29,8 +29,37 @@ function GetBursaries($comp_id, $mysqli){
 	$counter = 0;
 	if ($result->num_rows > 0){
 		while($row = $result->fetch_assoc()) {
+			if ($row["RSA_Citizen"]==1){
+				$RSA_Citizen = TRUE;//(boolean)
+			}
+			else $RSA_Citizen = FALSE;
+			
+			if ($row["Financial_Need"]==1){
+				$Financial_Need = TRUE;//(boolean)
+			}
+			else $Financial_Need = FALSE;
+			
+			if ($row["Study_Further"]==1){
+				$Study_Further = TRUE;//(boolean)
+			}
+			else $Study_Further = FALSE;
+			
+			if ($row["Disability"]==1){
+				$Disability = TRUE;//(boolean)
+			}
+			else $Disability = FALSE;
+			
+			if ($row["isVisible"]==1){
+				$isVisible = TRUE;//(boolean)
+			}
+			else $isVisible = FALSE;
+			
+			
 			//create new bursary 
-			$newBursary = new bursary($row["Company_ID"], $row["Bursary_Name"], $row["Bursary_Type"], $row["WB_Duration"], $row["Closing_Date"], $row["Minimum_Age"], $row["Maximum_Age"], $row["Academic_Level"], $row["Study_field"], $row["Current_Year"], $row["Bursary_Duration"], $row["Minimum_Average"], $row["RSA_Citizen"], $row["Financial_Need"], $row["Study_Further"], $row["Disability"], $row["Province"], $row["Email_Address"], $row["Shortlist_Date"], $row["isVisible"], $row["Description"]);
+			$newBursary = new bursary($row["Company_ID"], $row["Bursary_Name"], $row["Bursary_Type"], $row["WB_Duration"], $row["Closing_Date"], 
+				$row["Minimum_Age"], $row["Maximum_Age"], $row["Academic_Level"], $row["Study_field"], $row["Current_Year"], $row["Bursary_Duration"], 
+				$row["Minimum_Average"], $RSA_Citizen, $Financial_Need, $Study_Further, $Disability, $row["Province"], 
+				$row["Email_Address"], $row["Shortlist_Date"], $isVisible, $row["Description"]);
 			$newBursary->Company = GetCompanyClass($comp_id, $mysqli);
 			$newBursary->bursary_id = $row["Bursary_ID"];
 			//add to the array
@@ -40,6 +69,9 @@ function GetBursaries($comp_id, $mysqli){
 			//add to the array
 			$list[$counter]= $newBursary;
 			$counter = $counter+1;
+			
+			//add bursary status
+			$newBursary->bursary_status = bursaryStatus($mysqli,$comp_id);
 		}
 		return $list;
 	}else return null;	
