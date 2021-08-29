@@ -4,6 +4,7 @@ import { Student_bursary } from 'src/app/model/student_bursary';
 import { student_users } from 'src/app/model/student_users';
 import { BursaryService } from 'src/app/service/bursary.service';
 import { LoadingController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-shortlist',
@@ -14,7 +15,8 @@ import { LoadingController } from '@ionic/angular';
 
 export class ShortlistPage implements OnInit {
   bursaryShortlist:Student_bursary[] = [];
-  thisStudent:student_users = new student_users;
+  thisStudent: student_users = new student_users();
+  userType: string = "";
 
   // Variables for messages for shortlist page
   bursariesInShortlist: boolean;
@@ -27,14 +29,22 @@ export class ShortlistPage implements OnInit {
   constructor(
     private router: Router,
     public _apiService: BursaryService,
-    public loadingController: LoadingController
-  ) { }
+    public loadingController: LoadingController,
+    public storage: Storage,
+  ) { 
+    //get data from storage 
+    this.getUserType();
+    this.getStudent();
+  }
 
   ngOnInit() {
     /* this.presentLoading() */
     
     //stored in Storage (when login)
-    this.initialiseStudentData();
+    //this.initialiseStudentData();
+    //get data from storage 
+    this.getUserType();
+    this.getStudent();
 
 
     //api call to backend --> all bursaries with this student 
@@ -66,109 +76,6 @@ export class ShortlistPage implements OnInit {
     if (lenShortlist !== 0) {
       this.bursariesInShortlist = true
     }
-  }
-
-  initialiseStudentData(){
-    //someone who just logged in 
-    this.thisStudent.id = 100;
-    this.thisStudent.student_id = "U0100";
-    this.thisStudent.first_name = "Newbie";
-    this.thisStudent.last_name = "Newest";
-    this.thisStudent.date_of_birth = "03-03-1994";
-    this.thisStudent.email_address = "marcus.rashford@gmail.com";
-    this.thisStudent.nationality = false;
-    this.thisStudent.contact_number = "";
-    this.thisStudent.city = "";
-    this.thisStudent.province = "";
-    this.thisStudent.disability = null;
-    this.thisStudent.current_academic_level = "";
-    this.thisStudent.grade = 0.0;
-    this.thisStudent.syllabus = "";
-    this.thisStudent.average = 0.0;
-    this.thisStudent.currently_studying = "";
-    this.thisStudent.year_of_study = "";
-    this.thisStudent.study_institution = "";
-    this.thisStudent.continue_studies = null;
-    this.thisStudent.gpa = 0.0;
-    this.thisStudent.description_of_student = "";
-    this.thisStudent.bursarred = null;
-    this.thisStudent.current_bursaries = "";
-    this.thisStudent.workback = 0;
-    this.thisStudent.website = "";
-    this.thisStudent.Students_marks = [];
-
-    //High school student 
-    // this.thisStudent.id = 1;
-    // this.thisStudent.student_id = "U0001";
-    // this.thisStudent.first_name = "Jadon";
-    // this.thisStudent.last_name = "Sancho";
-    // this.thisStudent.date_of_birth = "03-03-2005";
-    // this.thisStudent.email_address ="jadon@gmail.com";
-    // this.thisStudent.nationality = true;
-    // this.thisStudent.contact_number = "+27 80 783 7823";
-    // this.thisStudent.city = "Centurion";
-    // this.thisStudent.province = "Gauteng";
-    // this.thisStudent.disability = false;
-    // this.thisStudent.current_academic_level = "High School";
-    // this.thisStudent.grade = 10;
-    // this.thisStudent.syllabus ="CAPS";
-    // this.thisStudent.average = 70.0;
-    // this.thisStudent.currently_studying = "";
-    // this.thisStudent.year_of_study = "";
-    // this.thisStudent.study_institution = "";
-    // this.thisStudent.continue_studies = false;
-    // this.thisStudent.gpa = 0.0;
-    // this.thisStudent.description_of_student = "I am a very hard-working learner";
-    // this.thisStudent.bursarred = false;
-    // this.thisStudent.current_bursaries ="";
-    // this.thisStudent.workback = 2;
-    // this.thisStudent.website ="";
-    // this.thisStudent.Students_marks = [
-    //   {
-    //     subject_name: "English",
-    //     marks: 90.0
-    //   },
-    //   {
-    //     subject_name: "Maths",
-    //     marks: 75.0
-    //   },
-    //   {
-    //     subject_name: "Afrikaans",
-    //     marks: 85.0
-    //   },
-    //   {
-    //     subject_name: "Life Orientation",
-    //     marks: 90.0
-    //   }
-    // ];
-
-    //Undergrad student
-    // this.thisStudent.id = 2;
-    // this.thisStudent.student_id = "U0002";
-    // this.thisStudent.first_name = "Daniel";
-    // this.thisStudent.last_name = "James";
-    // this.thisStudent.date_of_birth = "03-03-1999";
-    // this.thisStudent.email_address = "daniel@gmail.com";
-    // this.thisStudent.nationality = true;
-    // this.thisStudent.contact_number = "+27 80 783 0000";
-    // this.thisStudent.city = "Johannesburg";
-    // this.thisStudent.province = "Free State";
-    // this.thisStudent.disability = false;
-    // this.thisStudent.current_academic_level = "Undergraduate";
-    // this.thisStudent.grade = 0.0;
-    // this.thisStudent.syllabus = "";
-    // this.thisStudent.average = 0.0;
-    // this.thisStudent.currently_studying = "Civil Engineering";
-    // this.thisStudent.year_of_study = "Year 3";
-    // this.thisStudent.study_institution = "University of Pretoria";
-    // this.thisStudent.continue_studies = false;
-    // this.thisStudent.gpa = 75.0;
-    // this.thisStudent.description_of_student = "I am an ambitious learner";
-    // this.thisStudent.bursarred = false;
-    // this.thisStudent.current_bursaries = "";
-    // this.thisStudent.workback = 2;
-    // this.thisStudent.website = "www.james.co.za";
-    // this.thisStudent.Students_marks = [];
   }
 
   initialiseShortlist(){
@@ -488,4 +395,25 @@ export class ShortlistPage implements OnInit {
 
   doRefresh() {
     window.location.reload();
-  }}
+  }
+
+  getUserType(){
+    this.storage.get('name').then( (val) => {
+      //console.log(val);
+      this.userType = val["role"];
+    }, (err)=>{
+      this.userType = "";
+    })
+  }
+
+  getStudent(){
+    this.storage.get('name').then( (val) => {
+      //console.log(val);
+      this.thisStudent = val["student"];
+      //console.log("called getStudentType");
+      //console.log(this.thisStudent);  
+    }, (err)=>{
+      this.thisStudent;
+    })
+  }
+}

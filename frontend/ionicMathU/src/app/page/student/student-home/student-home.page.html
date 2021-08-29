@@ -1,12 +1,10 @@
+<app-menu></app-menu>
 <ion-header>
-  <ion-toolbar >
-    <ion-title class="ion-text-center">
-      <img src="assets/mathu-fellows-logo_final.png" alt="Company Logo" height="50px" width="auto">
-      <!-- View Profile -->
-    </ion-title>
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button menu="student-menu"></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
+    <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
     <ion-button fill="none" (click)="filter()" slot="end">
       <ion-icon small style="margin-left: 5px;" name="funnel"></ion-icon>
     </ion-button>
@@ -14,7 +12,6 @@
 </ion-header>
 
 <ion-content>
-
   <div *ngIf="isChecking">
     <p class="ion-text-center">
       <ion-spinner color="primary" name="crescent"></ion-spinner>
@@ -23,8 +20,7 @@
       Fetching Bursaries
     </p>
   </div>
-  
-  
+    
   <div *ngIf="!isChecking">
     <div *ngIf="bursariesAvailable; else noBursariesInDB">
       <div class="summaryCards">
@@ -259,7 +255,5 @@
       </div>
     </ng-template>
   </div>
-
-
 
 </ion-content>

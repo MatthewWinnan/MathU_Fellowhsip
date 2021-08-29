@@ -173,8 +173,8 @@ export class LoginPage implements OnInit {
 
           console.log(this.user);
           this.setValue(this.user);          
-          this.navCtrl.navigateRoot('/student-view-profile'); //comment later
-          //this.navCtrl.navigateRoot('/student-home/0'); //correct one
+          //this.navCtrl.navigateRoot('/student-view-profile'); //comment later
+          this.navCtrl.navigateRoot('/student-home/0'); //correct one
         }
       }
     }, (error:any) => {
