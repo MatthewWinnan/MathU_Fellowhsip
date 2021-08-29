@@ -3,7 +3,7 @@ import { student_users } from "./student_users";
 
 
 export class Student_bursary{
-    Bursary_ID: number;
+    Bursary_ID = 0;
     Student_ID: number; 
     Application_Date?: string;
     Status: string;

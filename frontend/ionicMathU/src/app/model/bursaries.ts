@@ -1,7 +1,7 @@
 import { Company } from './company';
 
 export class Bursary {
-    bursary_id?: number;    //created in backend 
+    bursary_id? = 0;    //created in backend 
     company_id: number;     //will be avaliable from login 
     bursary_name = "";  //compulsary 
     bursary_type = "";  //compulsary 

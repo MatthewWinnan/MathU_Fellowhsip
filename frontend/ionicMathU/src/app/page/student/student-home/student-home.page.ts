@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Bursary } from 'src/app/model/bursaries';
-import { Company } from 'src/app/model/company';
-import { student_users } from 'src/app/model/student_users'
+import { Bursary } from '../../../model/bursaries';
+import { student_users } from '../../../model/student_users'
 import { AlertController, IonApp } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
-import { BursaryService } from 'src/app/service/bursary.service';
-import { Student_bursary } from 'src/app/model/student_bursary';
+import { BursaryService } from '../../../service/bursary.service';
+import { Student_bursary } from '../../../model/student_bursary';
 import { LoadingController } from '@ionic/angular';
 
 
@@ -65,10 +63,6 @@ export class StudentHomePage implements OnInit {
   noBursariesMessage1 = "There are currently no bursaries in the DB."
   noBursariesMessage2 = "Sorry about that."
   noBursariesMessage3 = "But it is about to change, so don't worry."
-  
-
-  /* Student Account Verified */
-  studentIsVerified = student.validated;
 
     /* Rest of the Logic */
   showValid: boolean = false;
@@ -93,7 +87,43 @@ export class StudentHomePage implements OnInit {
     private route: ActivatedRoute,
     public _apiService: BursaryService,
     public loadingController: LoadingController
-  ) { }
+  ) { 
+    let k: number;
+    this.sub = this.route.params.subscribe(params => {
+      console.log(params);
+      k = parseInt(params.id)
+    });    
+
+    // stored in Storage (when login)
+    this.initialiseStudentData();
+
+    // get all bursaries
+    this.initialiseBursaries();
+
+    /* See if there are bursaries */
+    this.checkHowManyBursariesInList()
+
+    if (this.bursariesAvailable) {
+
+      // See if a certain bursary can shown (Eq if wanted to view a bursary seen in the shortlist page)
+      this.checkID(k)
+
+            // Gets bursary with certain id and populates screen.
+      this.getBuraries(this.i)
+
+      /* Upon initiation Values for left and right cycle button is set */
+      /* Right */
+      if (this.i >= this.bursariesList.length) {
+        this.valueRight = false
+      }
+      if (this.i < this.bursariesList.length) {
+        this.valueRight = true
+      }
+      if (this.i > 0) {
+        this.valueLeft = true
+      }
+    }
+  }
 
   ngOnInit() {
     
@@ -249,25 +279,8 @@ export class StudentHomePage implements OnInit {
   filter() {
     this.presentAlertV2()
   }
-  /* Alert Option */
-  /* async presentAlert(str:string) {
 
-
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Account Verification',
-      subHeader: 'To ' +str+ ' the bursary, account must be verified.',
-      message: 'Please go to profile page to make sure that the criteria fields are valid and submit to verify account. Then try again.',
-      buttons: ['OK, got it']
-    });
-
-    await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-  } */
   async presentAlertV2() {
-
-
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Not here yet',
@@ -440,20 +453,45 @@ export class StudentHomePage implements OnInit {
   }
 
   initialiseBursaries(){
-    //console.log(this.ourCompany);
     // get all bursaries that are not deactivated
-    // this._apiService.getBursaries(null).subscribe((res:Bursary[]) => {
-    //   console.log("REQUEST SUCCESS ===", res);
-    //   this.bursariesList = res;
-    //   if(res!=null){
-    //     //cater for no bursaries found!
-    //   }
-    // }, (error:any) => {
-    //   console.log("ERROR ===", error);
-    //   this.bursariesList = [];
-    // });
+    this._apiService.getBursaries(null).subscribe((res:Bursary[]) => {
+      console.log("REQUEST SUCCESS ===", res);
+      this.bursariesList = res;
+      let k: number;
+      this.sub = this.route.params.subscribe(params => {
+        console.log(params);
+        k = parseInt(params.id)
+      }); 
+      
+      /* See if there are bursaries */
+      this.checkHowManyBursariesInList()
 
-    this.bursariesList = [
+      if (this.bursariesAvailable) {
+
+        // See if a certain bursary can shown (Eq if wanted to view a bursary seen in the shortlist page)
+        this.checkID(k);
+
+        // Gets bursary with certain id and populates screen.
+        this.getBuraries(this.i)
+
+        /* Upon initiation Values for left and right cycle button is set */
+        /* Right */
+        if (this.i >= this.bursariesList.length) {
+          this.valueRight = false
+        }
+        if (this.i < this.bursariesList.length) {
+          this.valueRight = true
+        }
+        if (this.i > 0) {
+          this.valueLeft = true
+        }
+      }
+    }, (error:any) => {
+      console.log("ERROR ===", error);
+      this.bursariesList = [];
+    });
+
+    /*this.bursariesList = [
       {
         bursary_id: 1,
         company_id: 0,
@@ -611,7 +649,7 @@ export class StudentHomePage implements OnInit {
         }
       },
 
-    ];
+    ];*/
 
   }
 }
