@@ -41,7 +41,6 @@ export class ApiService {
   }
 
   editSponsor(data:Company){
-    return this.http.post<any>('http://localhost/mathU_backend/math_u_editSponsor.php', data);
-    //change file name
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_editCompany.php', data);
   }
 }

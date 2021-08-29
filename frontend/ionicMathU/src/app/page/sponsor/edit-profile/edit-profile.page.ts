@@ -85,7 +85,6 @@ export class EditProfilePage implements OnInit {
         if (this.the_message.substring(0,7) == "Success"){
           //console.log("go to differnet page");
           this.setValue(this.allUsersDetials);
-          this.router.navigateByUrl('edit-employee/1');
         }
       }, (error:any) => {
         this.the_message = 'error';// error;
