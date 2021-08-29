@@ -7,7 +7,6 @@ import { Storage } from '@ionic/storage-angular';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { LoginApiService } from '../../service/login-api.service';
 import { ToastController } from '@ionic/angular';
-import { NavController } from '@ionic/angular';
 import { AllUsers } from '../../model/all_users';
 import { Sponsor_users } from '../../model/sponsor_users';
 import { Company } from '../../model/company';
