@@ -250,15 +250,15 @@ export class StudentHomePage implements OnInit {
     this.student_bur.Student = this.thisStudent;
     this.student_bur.bursary = bursary_data;
     console.log(this.student_bur);
-    // //send api call
-    // this._apiService.studentApplyBursary(this.student_bur).subscribe((res) => {
-    //   console.log("REQUEST SUCCESS ===", res);
-    //   console.log(res["message"]);
-    //   //display message 
-    // }, (error:any) => {
-    //   console.log("ERROR ===", error);
-    //   console.log('error');
-    // });
+    //send api call
+    this._apiService.studentApplyBursary(this.student_bur).subscribe((res) => {
+      console.log("APPLY REQUEST SUCCESS ===", res);
+      console.log(res["message"]);
+      //display message 
+    }, (error:any) => {
+      console.log("ERROR ===", error);
+      console.log('error');
+    });
   }
   
 
@@ -277,7 +277,7 @@ export class StudentHomePage implements OnInit {
   }
 
   viewMore() {
-    console.log("viewMore()");
+    //console.log("viewMore()");
     this.showValid = !this.showValid;
   }
 

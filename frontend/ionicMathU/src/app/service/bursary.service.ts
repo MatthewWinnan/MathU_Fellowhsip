@@ -30,8 +30,7 @@ export class BursaryService {
   }
 
   studentApplyBursary(data:Student_bursary){
-    return this.http.post<any>('http://localhost/mathU_backend/student_apply.php', data);
-    //change file name 
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_ApplyBursary.php', data);
   }
   addBursary(data:Bursary){
     return this.http.post<any>('http://localhost/mathU_backend/math_u_create_bursary.php', data);
@@ -43,12 +42,10 @@ export class BursaryService {
 
   editBursary(data:Bursary){
     return this.http.post<any>('http://localhost/mathU_backend/math_u_edit_bursary.php', data);
-    //change file name 
   }
 
   deactivateBursary(data:Bursary){
     return this.http.post<any>('http://localhost/mathU_backend/math_u_deactivate_bursary.php', data);
-    //change file name 
   }
 
   getBursaryApplications(data:Bursary){
@@ -57,12 +54,10 @@ export class BursaryService {
 
   acceptApplicant(data:Student_bursary){
     return this.http.post<any>('http://localhost/mathU_backend/math_u_acceptStudent.php', data);
-    //change file name
   }
 
   declineApplicant(data:Student_bursary){
     return this.http.post<any>('http://localhost/mathU_backend/math_u_denyApplicant.php', data);
-    //change file name
   }
 
 }
