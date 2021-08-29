@@ -24,8 +24,14 @@ export class ApiService {
 //     return this.http.post<sponsor_users>('http://localhost/mathU_backend/math_u_addSponsor.php', data);
 //   }
 
-   registerStudent(data: student_users) : Observable<student_users>{
-     console.log(data);
-     return this.http.post<student_users>('http://localhost/mathU_backend/math_u_addStudent.php', data);
-   }
+  registerStudent(data: student_users) : Observable<student_users>{
+    //console.log(data);
+    return this.http.post<student_users>('http://localhost/mathU_backend/math_u_addStudent.php', data);
+  }
+
+  editStudentProfile(data: student_users) : Observable<student_users>{
+    //console.log(data);
+    return this.http.post<student_users>('http://localhost/mathU_backend/edit_student.php', data);
+  }
+
 }

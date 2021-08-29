@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { student_users } from '../../../model/student_users';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/service/api/api.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-profile',
@@ -11,10 +13,13 @@ import { Router } from '@angular/router';
 export class ViewProfilePage implements OnInit {
   dateToday = new Date().toISOString().substring(0,10);
   thisStudent:student_users = new student_users();
+  the_message : string = "";
 
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
+    public _apiService: ApiService,
+    public toastController: ToastController,
   ) {
       //get data from storage 
       //for now creating a dummy dataset
@@ -167,6 +172,19 @@ export class ViewProfilePage implements OnInit {
     this.thisStudent.workback = this.addStudent_details.value.workback;
     // add in marks
     console.log(this.thisStudent);
+    this._apiService.editStudentProfile(this.thisStudent).subscribe((res) => {
+      console.log("EDIT API SUCCESS ===", res);
+      this.the_message = res["message"];
+      this.printMessage();
+      console.log(this.the_message.substring(0,7));
+      if (this.the_message.substring(0,7) == "Success"){
+        this.router.navigate(['./login']);
+      }
+    }, (error:any) => {
+      this.the_message = 'error';// error;
+      this.printMessage();
+      console.log("ERROR ===", error);
+    });
     //this.router.navigate(['./student-view-profile']);
   }
 
@@ -197,6 +215,17 @@ export class ViewProfilePage implements OnInit {
       current_bursaries: [this.thisStudent.current_bursaries],
       workback: [this.thisStudent.workback],
     });
+  }
+
+  async printMessage() {
+    const toast = this.toastController.create({
+      color: 'dark',
+      duration: 2000,
+      message: this.the_message
+    });
+
+    (await toast).present();
+    this.the_message = "";
   }
 
 }
