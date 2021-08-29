@@ -1,4 +1,6 @@
 <?php
+include 'math_u_db_connection.php';
+include 'all_classes.php';
 
 $input = '{
     "bursary": {
