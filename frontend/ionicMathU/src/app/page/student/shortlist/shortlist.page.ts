@@ -47,11 +47,7 @@ export class ShortlistPage implements OnInit {
     this.getStudent();
 
 
-    //api call to backend --> all bursaries with this student 
-    this.initialiseShortlist();
-
-    // See if there are items in teh shortlist
-    this.isBursariesInShortlist();
+    
 
 
   }
@@ -79,21 +75,22 @@ export class ShortlistPage implements OnInit {
   }
 
   initialiseShortlist(){
-    // get all bursaries student applied for 
-    // this._apiService.getStudentBursaries(this.thisStudent).subscribe((res:Student_bursary[]) => {
-    //   console.log("REQUEST SUCCESS ===", res);
-    //   this.bursaryShortlist = res;
-    //   if(res!=null){
-    //     //cater for no bursaries found!
-    //   }
-    // }, (error:any) => {
-    //   console.log("ERROR ===", error);
-    //   this.bursaryShortlist = [];
-    // });
+    console.log(this.thisStudent);
+    //get all bursaries student applied for 
+    this._apiService.getStudentBursaries(this.thisStudent).subscribe((res:Student_bursary[]) => {
+      console.log("SHORTLIST REQUEST SUCCESS ===", res);
+      this.bursaryShortlist = res;
+      this.isBursariesInShortlist();
+      //if(res!=null){
+        //cater for no bursaries found!
+      //}
+    }, (error:any) => {
+      console.log("ERROR ===", error);
+      this.bursaryShortlist = [];
+    });
 
-    this.isBursariesInShortlist()
 
-    this.bursaryShortlist = [
+    /*this.bursaryShortlist = [
       {
         Bursary_ID: 1,
         Student_ID: this.thisStudent.id,
@@ -377,7 +374,7 @@ export class ShortlistPage implements OnInit {
           }
         }
       },
-    ];
+    ];*/
 
     
   }
@@ -412,6 +409,11 @@ export class ShortlistPage implements OnInit {
       this.thisStudent = val["student"];
       //console.log("called getStudentType");
       //console.log(this.thisStudent);  
+      //api call to backend --> all bursaries with this student 
+      this.initialiseShortlist();
+
+      // See if there are items in teh shortlist
+      this.isBursariesInShortlist();
     }, (err)=>{
       this.thisStudent;
     })

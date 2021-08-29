@@ -25,7 +25,7 @@ export class BursaryService {
   }
 
   getStudentBursaries(data:student_users){
-    return this.http.post<any>('http://localhost/mathU_backend/get_student_bursaries.php', data);
+    return this.http.post<any>('http://localhost/mathU_backend/math_u_getAppliedBursaries.php', data);
     //change file name 
   }
 
