@@ -1,4 +1,8 @@
 <?php
+include_once "all_classes.php";
+class allEmployees{
+    public $Employees;
+  }
 
 //==============================================================================
 // LIST OF FUNCTIONS
@@ -16,13 +20,13 @@ function addNewEmployee($first_name,$last_name,$email,$password,$company_id,$isS
   VALUES ('$first_name', '$last_name', '$email', '$password', '$company_id', 1, 1, 1, 0, 0, '$regdate')";
   $entry = $mysqli->query($sql);
 
-} elseif ($manageBursaries == true AND $manageApplications == false AND isSuperAdmin == false){
+} elseif ($manageBursaries == true AND $manageApplications == false AND $isSuperAdmin == false){
 
   $sql = "INSERT INTO `sponsor_users` (`first_name_of_user`, `last_name_of_user`, `email_address`, `password`, `company_id`, `isSuperAdmin`, `manageBursaries`,  `manageApplications`, `inactive`, `isVerified`,`regisered_date`)
  VALUES ('$first_name', '$last_name', '$email', '$password', '$company_id', 0, 1, 0, 0, 0, '$regdate')";
  $entry = $mysqli->query($sql);
 
-} elseif ($manageBursaries == false AND $manageApplications == true AND isSuperAdmin == false){
+} elseif ($manageBursaries == false AND $manageApplications == true AND $isSuperAdmin == false){
   $sql = "INSERT INTO `sponsor_users` (`first_name_of_user`, `last_name_of_user`, `email_address`, `password`, `company_id`, `isSuperAdmin`, `manageBursaries`,  `manageApplications`, `inactive`, `isVerified`,`regisered_date`)
  VALUES ('$first_name', '$last_name', '$email', '$password', '$company_id', 0, 0, 1, 0, 0, '$regdate')";
  $entry = $mysqli->query($sql);
@@ -80,50 +84,71 @@ function addNewEmployee($first_name,$last_name,$email,$password,$company_id,$isS
 
 function viewEmployees($mysqli, $company_id){      //Fetches all the company employees for the 'view employees' page that pops up
 
-  class allEmployees{
-    public $Employees;
-  }
-
-
-    $sql = "SELECT `sponsor_id`, `first_name_of_user`, `last_name_of_user`, `email_address`, `company_id`, `isSuperAdmin`, `manageBursaries`, `manageApplications`, `inactive`, `isVerified` FROM `sponsor_users` WHERE `company_id` = '$company_id'";
+    $sql = "SELECT * FROM `sponsor_users` WHERE `company_id` = '$company_id'";
     $entry = $mysqli->query($sql);
 
     if($entry){
 
-      $employees = array();
+      $employees = [];
       $p = 0;
 
       while ($row = mysqli_fetch_array($entry, MYSQLI_ASSOC)) {
 
-        foreach ($row as $key => $value) {
+       /* foreach ($row as $key => $value) {
 
           if($value == 1){
-            $row[$key] = 'true';
+            $row[$key] = true;
 
           } if($value == 0) {
-            $row[$key] = 'false';
+            $row[$key] = false;
 
           }
-        }
-
-        $employees[$p] = $row;
+        }*/
+		//$user = new all_users();
+		if ($row["isSuperAdmin"]==1){
+			$isSuperAdmin = TRUE;//(boolean)
+		}
+		else $isSuperAdmin = FALSE;
+		
+		if ($row["manageBursaries"]==1){
+			$manageBursaries = TRUE;//(boolean)
+		}
+		else $manageBursaries = FALSE;
+		
+		if ($row["manageApplications"]==1){
+			$manageApplications = TRUE;//(boolean)
+		}
+		else $manageApplications = FALSE;
+		
+		if ($row["inactive"]==1){
+			$inactive = TRUE;//(boolean)
+		}
+		else $inactive = FALSE;
+		
+		if ($row["isVerified"]==1){
+			$isVerified = TRUE;//(boolean)
+		}
+		else $isVerified = FALSE;
+		
+		$user= new sponsor_users($row["id"], $row["first_name_of_user"],$row["last_name_of_user"], $row["email_address"],  $row["company_id"], $isSuperAdmin, $manageBursaries, $manageApplications, $inactive, $isVerified);
+		$user->Company = getCompany($row["company_id"], $mysqli);
+        $employees[$p] = $user;
         $p += 1;
       }
 
-      $el = getCompany($company_id, $mysqli);
+     /* $el = getCompany($company_id, $mysqli);
       $employees = array_merge($employees, $el);
 
-
       $viewEmployees = new allEmployees();
-      $viewEmployees->Employees = $employees;
+      $viewEmployees->Employees = $employees;*/
 
-      echo json_encode($viewEmployees);
+      echo json_encode($employees);
 
     } else {
-      $viewEmployees = new Employees();
-      $viewEmployees->Employees = "";
+      /*$viewEmployees = new Employees();
+      $viewEmployees->Employees = "";*/
 
-      echo json_encode($viewEmployees);
+      echo json_encode($employees);
     }
 }
 
@@ -166,17 +191,15 @@ function addAU($sponsor_id, $email, $mysqli){
 //==============================================================================
 //==============================================================================
 
-function getCompany($company_id, $mysqli){
-  $sql = "SELECT `company_id`, `company_name`, `company_industry`, `number_of_reports`, `company_logo`, `company_description`, `company_URL`
-          FROM `company` WHERE `company_id` = $company_id";
-  $op = array($mysqli->query($sql));
-  $op = $mysqli->query($sql);
-
-  if($op){
-    return mysqli_fetch_array($op, MYSQLI_ASSOC) ;
-  } else {
-    return $myqli->errno;
-  }
+function getCompany($comp_id, $mysqli){
+ $sql = "SELECT * FROM company WHERE Company_ID=$comp_id";
+	$result = $mysqli->query($sql);
+	
+	if ($result->num_rows > 0){
+		$row = $result->fetch_assoc();
+		$newCompany = new company($row["company_id"], $row["company_logo"], $row["company_industry"], $row["company_description"], $row["company_URL"], $row["number_of_reports"], $row["company_name"]);
+		return $newCompany;
+	}else return null;
 }
 
 //==============================================================================
@@ -189,12 +212,14 @@ function companyIDInEmployee($email,$company_id,$mysqli){
   if ($result->num_rows>0){
     return true;
   }
-  else{ return false;
-}
+  else{ 
+	return false;
+  }
 }
 
 //==============================================================================
 //==============================================================================
 //==============================================================================
+
 
 ?>

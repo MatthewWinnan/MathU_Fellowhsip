@@ -3,6 +3,7 @@
 // Connection
 
 include 'math_u_db_connection.php';
+include 'math_u_addEmployee_functions.php';
 
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
@@ -13,7 +14,6 @@ class Role{
 
 $updateRole = new Role();
 
-// $sponsor_id = ucfirst($data['sponsor_id']);
 $email = $data['email_address'];
 $company_id = $data['company_id'];
 $isSuperAdmin = $data['isSuperAdmin'];
@@ -22,9 +22,13 @@ $manageApplications = $data['manageApplications'];
 
 // Update database.
 
-if($isSuperAdmin === 'true' AND $manageApplications === 'true' AND $manageBursaries === 'true'){
+$ci = companyIDInEmployee($email,$company_id,$mysqli);
 
-$sql = "UPDATE `sponsor_users` SET `isSuperAdmin`= 1, `manageBursaries`= 1, `manageApplications`= 1
+if( $ci == true){
+
+if($isSuperAdmin === 'false' AND $manageApplications === 'true' AND $manageBursaries === 'true'){
+
+$sql = "UPDATE `sponsor_users` SET `isSuperAdmin`= 0, `manageBursaries`= 1, `manageApplications`= 1
         WHERE `email_address`='$email' AND `company_id`='$company_id' ";
 $entry = $mysqli->query($sql);
 
@@ -43,7 +47,7 @@ $entry = $mysqli->query($sql);
 
 } else {
 
-  $sql = "UPDATE `sponsor_users` SET `isSuperAdmin`= 0, `manageBursaries`= 1, `manageApplications`= 1
+  $sql = "UPDATE `sponsor_users` SET `isSuperAdmin`= 1, `manageBursaries`= 1, `manageApplications`= 1
   WHERE `email_address`='$email' AND `company_id`='$company_id' ";
   $entry = $mysqli->query($sql);
 
@@ -55,7 +59,6 @@ if($entry){
 
   echo json_encode($updateRole);
 
-  // return json_encode($updateRole);
 
 } else {
 
@@ -63,7 +66,14 @@ if($entry){
 
   echo json_encode($updateRole);
 
-  // return json_encode($updateRole);
-}
+}} else {
+   $updateRole = new Role();
+   $updateRole->message = "Company ID or Email does not exist OR credentials do not match";
+
+   // echo $mysqli->errno;
+
+   echo json_encode($updateRole);
+
+ }
 
  ?>

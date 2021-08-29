@@ -17,19 +17,18 @@ class deactivateEmployee{
 
 if( $ci == true){
 
-$sql = "UPDATE `sponsor_users` SET `inactive`= 1
-        WHERE `company_id`='$company_id' AND `email_address` = '$email' ";
+$sql = "UPDATE `sponsor_users` SET `inactive`= 1 WHERE `company_id`='$company_id' AND `email_address` = '$email' ";
 $entry = $mysqli->query($sql);
 
 if($entry){
   $deactivate = new deactivateEmployee();
-  $deactivate->message = "Employee Deactivated";
+  $deactivate->message = "Success";
 
   echo json_encode($deactivate);
 
   // return json_encode($deactivate);
 
-} else {
+} }else {
   $deactivate = new deactivateEmployee();
   $deactivate->message = "Failed to deactivate employee.";
 
@@ -38,16 +37,7 @@ if($entry){
   echo json_encode($deactivate);
 
   // return json_encode($deactivate);
-} } else {
-   $updateRole = new deactivateEmployee();
-   $updateRole->message = "Company ID or Email does not exist OR credentials do not match";
-
-   // echo $mysqli->errno;
-
-   echo json_encode($updateRole);
-
-   return json_encode($updateRole);
- }
+}
 
 
  ?>

@@ -151,10 +151,11 @@ class bursary{
 	
 	public company $Company;
 	public $Applicants = [];
-
+	
 	public $bursary_status;
 	
-	public function __construct($company_id, $bursary_name, $bursary_type, $WB_duration, $closing_date, $min_age, $max_age, $academic_level, $study_field, $minimum_year_required, $bursary_duration, $min_average, $RSA_citizen, $financial_need,
+	public function __construct($company_id, $bursary_name, $bursary_type, $WB_duration, $closing_date, $min_age, $max_age, $academic_level, 
+		$study_field, $minimum_year_required, $bursary_duration, $min_average, $RSA_citizen, $financial_need,
 	 $study_further, $disability, $province, $email_address, $shortlist_date, $isVisible, $bursary_description){
 		 $this->company_id = $company_id;
 		 $this->bursary_name= $bursary_name;
@@ -171,6 +172,7 @@ class bursary{
 		 $this->RSA_citizen = $RSA_citizen;
 		 $this->financial_need = $financial_need;
 		 $this->disability = $disability;
+		 $this->study_further = $study_further;
 		 $this->province = $province;
 		 $this->email_address = $email_address;
 		 $this->shortlist_date = $shortlist_date;
@@ -236,19 +238,19 @@ class sponsor_users{
 	public $last_name_of_user;
 	public $email_address;
 	public $company_id;
-	public $isSuperAmin;
+	public $isSuperAdmin;
 	public $manageBursaries;
     public $manageApplications;
 	public $inactive;
 	public $isVerified;
 
-	public function __construct($sponsor_id, $first_name_of_user, $last_name_of_user, $email_address, $company_id, $isSuperAmin, $manageBursaries, $manageApplications, $inactive,$isVerified){
+	public function __construct($sponsor_id, $first_name_of_user, $last_name_of_user, $email_address, $company_id, $isSuperAdmin, $manageBursaries, $manageApplications, $inactive,$isVerified){
 		$this->sponsor_id = $sponsor_id;
 		$this->first_name_of_user = $first_name_of_user;
 		$this->last_name_of_user = $last_name_of_user;
 		$this->email_address = $email_address;
 		$this->company_id = $company_id;
-		$this->isSuperAmin = $isSuperAmin;
+		$this->isSuperAdmin = $isSuperAdmin;
 		$this->manageBursaries = $manageBursaries;
 		$this->manageApplications = $manageApplications;
 		$this->inactive = $inactive;
@@ -323,10 +325,10 @@ class student{
 	public $website;
 	public $number_of_reports;
 	public $banned;
-	public marks Students_marks=[];
+	public $Students_marks=[];//array of objects
 	
 	
-	public subject_marks $Subjects_marks;
+	//public subject_marks $Subjects_marks;
 	public filters $Filter;
 	
 	public function __construct($id, $first_name, $last_name, $date_of_birth, $email_address, $validated, $nationality, $contact_number, $city, $province, $disability, $current_academic_level, $grade, $syllabus, $average, $currently_studying, $year_of_study, $study_institution, $continue_studies, $gpa, $description_of_student, $bursarred, $current_bursaries, $workback, $website, $number_of_reports,$banned){
