@@ -277,7 +277,7 @@ if($ci == true){
   }
 
   $updateStudent = new Student();
-  $updateStudent->message = "Student Updated.";
+  $updateStudent->message = "Success.";
 
   echo json_encode($updateStudent);
 

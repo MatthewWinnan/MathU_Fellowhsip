@@ -299,6 +299,7 @@ class student{
 
 
 	public $id;
+	public $student_id;
 	public $first_name;
 	public $last_name;
 	public $date_of_birth;
@@ -331,8 +332,9 @@ class student{
 	//public subject_marks $Subjects_marks;
 	public filters $Filter;
 	
-	public function __construct($id, $first_name, $last_name, $date_of_birth, $email_address, $validated, $nationality, $contact_number, $city, $province, $disability, $current_academic_level, $grade, $syllabus, $average, $currently_studying, $year_of_study, $study_institution, $continue_studies, $gpa, $description_of_student, $bursarred, $current_bursaries, $workback, $website, $number_of_reports,$banned){
+	public function __construct($id, $student_id, $first_name, $last_name, $date_of_birth, $email_address, $validated, $nationality, $contact_number, $city, $province, $disability, $current_academic_level, $grade, $syllabus, $average, $currently_studying, $year_of_study, $study_institution, $continue_studies, $gpa, $description_of_student, $bursarred, $current_bursaries, $workback, $website, $number_of_reports,$banned){
 		 $this->id = $id;
+		 $this->student_id = $student_id;
 		 $this->first_name = $first_name;
 		 $this->last_name = $last_name;
 		 $this->date_of_birth = $date_of_birth;
