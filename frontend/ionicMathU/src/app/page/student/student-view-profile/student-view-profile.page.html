@@ -1,24 +1,21 @@
 <app-menu></app-menu>
 <ion-header>
   <ion-toolbar>
-
-    <ion-button fill = 'none' slot="start">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
-    </ion-button>
-
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <img src="assets/mathu-fellows-logo_final.png" alt="mathU Logo" class="logo-top">
-    <!-- <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons> -->
-    
     <ion-button fill = 'none' slot="end"  routerLink="/student-edit-profile">
       <ion-icon name="brush"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
   <div padding style="margin:15px">
     <h3>My detials: {{thisStudent.first_name}} {{thisStudent.last_name}}</h3>
     
@@ -77,12 +74,12 @@
       {{thisStudent.gpa}}
     </div>
 
-    <div class="applicant-info" *ngIf="thisStudent.Students_marks.length > 0">
+    <!-- <div class="applicant-info" *ngIf="thisStudent.Students_marks.length > 0">
       <b>Current subjects: </b>
       <ul *ngFor="let item of thisStudent.Students_marks" class="marks-list">
         <li>{{item.subject_name}}: {{item.marks}}</li>
       </ul>
-    </div>
+    </div> -->
 
     <div class="applicant-info" *ngIf="thisStudent.website">
       <b>Personal website/LinkedIn profile:</b>
@@ -113,87 +110,3 @@
   </div>
   
 <ion-content>
-
-
-
-
-
-
-
-
-
-<!-- <ion-content>
-  <super-tabs>
-    <super-tabs-toolbar slot="top" color="light">
-      <super-tab-button>
-        <ion-label>Student details</ion-label>
-      </super-tab-button>
-
-
-      <super-tab-button>
-        <ion-label>Academics</ion-label>
-      </super-tab-button>
-    </super-tabs-toolbar>
-
-    <super-tabs-container>
-      <super-tab>
-        <ion-content>
-          <form [formGroup]="addBursary" (ngSubmit)="addBursarySubmit()"></form>
-          <h3>Student details</h3>
-          <ion-list>
-            <ion-item>
-              <ion-label position="floating">Student name</ion-label>
-              <ion-input placeholder="Student Name" [(ngModel)]="student_name" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Student surname</ion-label>
-              <ion-input placeholder="Student Surname" [(ngModel)]="student_surname" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Email address</ion-label>
-              <ion-input placeholder="Email Address" [(ngModel)]="student_email" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Contact number</ion-label>
-              <ion-input placeholder="Contact Number" [(ngModel)]="student_contact_number" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Date of birth</ion-label>
-              <ion-datetime displayFormat="DD MM YY" placeholder="DD/MM/YY" [(ngModel)]="student_dob"></ion-datetime>
-            </ion-item>
-          </ion-list>
-          <ion-item>
-            <ion-label position="floating">Province</ion-label>
-            <ion-select>
-              <ion-select-option value="Mpumalanga">Mpumalanga</ion-select-option>
-              <ion-select-option value="Eastern Cape">Eastern Cape</ion-select-option>
-              <ion-select-option value="Free State">Free State</ion-select-option>
-              <ion-select-option value="Gauteng">Gauteng</ion-select-option>
-              <ion-select-option value="Limpopo">Limpopo</ion-select-option>
-              <ion-select-option value="Northern Cape">Northern Cape</ion-select-option>
-              <ion-select-option value="North West">North West</ion-select-option>
-              <ion-select-option value="Western Cape">Western Cape</ion-select-option>
-              <ion-select-option value="KwaZulu-Natal">KwaZulu-Natal</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label>RSA citizen</ion-label>
-            <ion-checkbox formControlName="name" checked="false" color="dark"></ion-checkbox>
-          </ion-item>
-
-
-        </ion-content>
-      </super-tab>
-      <super-tab>
-        <ion-content>
-          <h2 class="ion-text-center">Sponsor Sign Up</h2> -->
-          <!-- <h3>Student academics</h3>
-
-        </ion-content>
-
-
-      </super-tab>
-    </super-tabs-container>
-  </super-tabs>
-
-</ion-content> -->

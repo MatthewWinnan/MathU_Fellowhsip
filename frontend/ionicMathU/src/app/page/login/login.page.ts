@@ -141,9 +141,10 @@ export class LoginPage implements OnInit {
         if (res["Student"]){
           this.user.student = new student_users();
           this.user.student.id = res["Student"]["id"];
+          this.user.student.student_id = res["Student"]["student_id"];
           this.user.student.first_name = res["Student"]["first_name"];
           this.user.student.last_name = res["Student"]["last_name"];
-          this.user.student.email_address = res["Student"]["email"];
+          this.user.student.email_address = res["Student"]["email_address"];
           this.user.student.date_of_birth = res["Student"]["date_of_birth"];
           this.user.student.nationality = res["Student"]["nationality"];
           this.user.student.contact_number = res["Student"]["contact_number"];

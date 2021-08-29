@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { student_users } from '../../../model/student_users';
+import { AllUsers } from '../../../model/all_users';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/service/api/api.service';
+import { ApiService } from '../../../service/api.service';
 import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-view-profile',
@@ -12,7 +14,9 @@ import { ToastController } from '@ionic/angular';
 })
 export class ViewProfilePage implements OnInit {
   dateToday = new Date().toISOString().substring(0,10);
-  thisStudent:student_users = new student_users();
+  thisStudent: student_users = new student_users();
+  allUsersDetials = new AllUsers();
+  userType: string = "";
   the_message : string = "";
 
   constructor(
@@ -20,37 +24,12 @@ export class ViewProfilePage implements OnInit {
     private router:Router,
     public _apiService: ApiService,
     public toastController: ToastController,
+    public storage: Storage,
   ) {
-      //get data from storage 
-      //for now creating a dummy dataset
-      this.thisStudent.id = 35;
-      this.thisStudent.student_id = "U035";
-      this.thisStudent.first_name = "Mary";
-      this.thisStudent.last_name = "Lamb";
-      this.thisStudent.date_of_birth = "2005-08-28";
-      this.thisStudent.email_address = "mary@gmail.com";
-      //the above fields are filled it from register 
-      this.thisStudent.nationality = null;
-      this.thisStudent.contact_number = "";
-      this.thisStudent.city = "";
-      this.thisStudent.province = "";
-      this.thisStudent.disability = null;
-      this.thisStudent.current_academic_level = "";
-      this.thisStudent.grade = 0;
-      this.thisStudent.syllabus = "";
-      this.thisStudent.average = 0;
-      this.thisStudent.currently_studying = "";
-      this.thisStudent.year_of_study = "";
-      this.thisStudent.study_institution = "";
-      this.thisStudent.continue_studies = null;
-      this.thisStudent.gpa = 0;
-      this.thisStudent.description_of_student = "";
-      this.thisStudent.bursarred = null;
-      this.thisStudent.current_bursaries = "";
-      this.thisStudent.workback = 0;
-      this.thisStudent.website = "";
-      this.thisStudent.Students_marks = [];
-
+    //get data from storage 
+    this.getUserType();
+    this.getStudentType();
+    this.getAllUsersDetails();
   }
 
   addStudent_details = this.formBuilder.group({
@@ -62,17 +41,17 @@ export class ViewProfilePage implements OnInit {
     current_academic_level: [''],
     grade: [0],
     syllabus: [''],
-    average: [60.0,[Validators.min(60)]],
+    average: [60.0],
     currently_studying: [''],
     year_of_study: [''],
     study_institution: [''],
     continue_studies: [false],
-    gpa: [60.0,[Validators.min(60)]],
+    gpa: [60.0],
     description_of_student: [''],
     website: [''],
     bursarred: [''],
     current_bursaries: [''],
-    workback: [''],
+    workback: [0],
     
   });
 
@@ -142,12 +121,6 @@ export class ViewProfilePage implements OnInit {
       {type: 'pattern', message:'Please enter valid Contact Number'},
     ],
     disability: [],
-    average: [
-      {type: 'min', message:'Average should atleast be 60'},
-    ],
-    gpa: [
-      {type: 'min', message:'Average should atleast be 60'},
-    ],
   };
 
   public addStudentDetails() {
@@ -171,25 +144,28 @@ export class ViewProfilePage implements OnInit {
     this.thisStudent.bursarred = this.addStudent_details.value.bursarred;
     this.thisStudent.current_bursaries = this.addStudent_details.value.current_bursaries ;
     this.thisStudent.workback = this.addStudent_details.value.workback;
-    // add in marks
     console.log(this.thisStudent);
     this._apiService.editStudentProfile(this.thisStudent).subscribe((res) => {
+      this.allUsersDetials.student = this.thisStudent;
       console.log("EDIT API SUCCESS ===", res);
       this.the_message = res["message"];
       this.printMessage();
       console.log(this.the_message.substring(0,7));
       if (this.the_message.substring(0,7) == "Success"){
-        this.router.navigate(['./login']);
+        //overwrite values in storage
+        this.setValue(this.allUsersDetials);
+        //console.log("move to different page");
+        this.router.navigateByUrl('./student-view-profile/2');
       }
     }, (error:any) => {
       this.the_message = 'error';// error;
       this.printMessage();
       console.log("ERROR ===", error);
     });
-    //this.router.navigate(['./student-view-profile']);
   }
 
   ngOnInit() {
+    this.getStudentType();
     this.addStudent_details = this.formBuilder.group({
       contact_number: [this.thisStudent.contact_number,
         [
@@ -204,7 +180,7 @@ export class ViewProfilePage implements OnInit {
       current_academic_level: [this.thisStudent.current_academic_level],
       grade: [this.thisStudent.grade],
       syllabus: [this.thisStudent.syllabus],
-      average: [this.thisStudent.average,[Validators.min(60)]],
+      average: [this.thisStudent.average],
       currently_studying: [this.thisStudent.currently_studying],
       year_of_study: [this.thisStudent.year_of_study],
       study_institution: [this.thisStudent.study_institution],
@@ -216,6 +192,38 @@ export class ViewProfilePage implements OnInit {
       current_bursaries: [this.thisStudent.current_bursaries],
       workback: [this.thisStudent.workback],
     });
+  }
+
+  getUserType(){
+    this.storage.get('name').then( (val) => {
+      //console.log(val);
+      this.userType = val["role"];
+    }, (err)=>{
+      this.userType = "";
+    })
+  }
+
+  getStudentType(){
+    this.storage.get('name').then( (val) => {
+      //console.log(val);
+      this.thisStudent = val["student"];
+    }, (err)=>{
+      this.thisStudent;
+    })
+  }
+
+  getAllUsersDetails(){
+    this.storage.get('name').then( (val) => {
+      this.allUsersDetials = val;
+    }, (err)=>{
+      console.log("all detials error " + err);
+    })    
+  }
+
+  setValue(value){
+    this.storage.clear();
+    //this.storage.set('name', "");
+    this.storage.set('name', value);
   }
 
   async printMessage() {

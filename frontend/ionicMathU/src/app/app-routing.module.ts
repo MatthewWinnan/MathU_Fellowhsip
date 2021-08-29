@@ -59,6 +59,10 @@ const routes: Routes = [
     loadChildren: () => import('./page/student/student-view-profile/student-view-profile.module').then( m => m.ViewStudentPageModule)
   },
   {
+    path: 'student-view-profile/:id',
+    loadChildren: () => import('./page/student/student-view-profile/student-view-profile.module').then( m => m.ViewStudentPageModule)
+  },
+  {
     path: 'student-edit-profile',
     loadChildren: () => import('./page/student/student-edit-profile/student-edit-profile.module').then( m => m.EditStudentPageModule)
   },
