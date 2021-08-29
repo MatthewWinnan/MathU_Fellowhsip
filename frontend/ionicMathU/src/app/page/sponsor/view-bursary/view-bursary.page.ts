@@ -179,7 +179,7 @@ export class ViewBursaryPage implements OnInit {
           console.log(deactivateItem);
           //send api request 
           this._apiService.deactivateBursary(deactivateItem).subscribe((res:Bursary) => {
-            console.log("REQUEST SUCCESS ===", res);
+            console.log("DEACTIVATE REQUEST SUCCESS ===", res);
             this.the_message = deactivateItem.bursary_name + " has been deactivated.";
             this.printMessage();
             if (this.the_message.substring(0,7) == "Success"){

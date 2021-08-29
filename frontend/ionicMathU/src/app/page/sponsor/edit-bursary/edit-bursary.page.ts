@@ -223,7 +223,7 @@ export class EditBursaryPage implements OnInit {
     
     //send api request 
     this._apiService.editBursary(this.bursary).subscribe((res:Bursary) => {
-      console.log("REQUEST SUCCESS ===", res);
+      console.log("EDIT REQUEST SUCCESS ===", res);
       this.the_message = res["message"];
       this.printMessage();
       if (this.the_message.substring(0,7) == "Success"){
