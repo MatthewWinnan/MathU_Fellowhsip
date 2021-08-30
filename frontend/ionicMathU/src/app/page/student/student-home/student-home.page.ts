@@ -40,6 +40,8 @@ export class StudentHomePage implements OnInit {
   emailAddress: any;
 
   bursaryType: any;
+  bursaryTypeWorkBack: boolean;
+  bursaryWorkBackDuration: number;
   bursaryDuration: any;
   academicLevel: any;
   minYearRequired: any;
@@ -132,7 +134,6 @@ export class StudentHomePage implements OnInit {
 
   ngOnInit() {
     
-    //this.loading()
     //this.presentLoading
     
     let k: number;
@@ -273,7 +274,7 @@ export class StudentHomePage implements OnInit {
   isBursaryExpired(d: number) {
     let bursDate = new Date(this.bursariesList[d].closing_date)
     this.bursValid = false
-
+    bursDate.setHours(23, 59, 59, 999)
     if (this.currentDate <= bursDate) {
       this.bursValid = true
     }
@@ -326,6 +327,7 @@ export class StudentHomePage implements OnInit {
     this.emailAddress = this.bursariesList[i].email_address;
 
     this.bursaryType = this.bursariesList[i].bursary_type;
+    this.bursaryWorkBackDuration = this.bursariesList[i].WB_duration;
     this.bursaryDuration = this.bursariesList[i].bursary_duration;
     this.academicLevel = this.bursariesList[i].academic_level;
     this.minYearRequired = this.bursariesList[i].minimum_year_required;
@@ -341,6 +343,15 @@ export class StudentHomePage implements OnInit {
 
     /* this.documentsNeeded =  */
     this.dateForFurtherCommunication = this.bursariesList[i].shortlist_date; 
+
+
+    /* Bursary WB Duration */
+    this.bursaryTypeWorkBack = false
+    console.log(this.bursaryTypeWorkBack)
+    if (this.bursaryType == "Work Back") {
+      this.bursaryTypeWorkBack = true
+      console.log(this.bursaryTypeWorkBack)
+    } 
        
   }
 
@@ -424,7 +435,7 @@ export class StudentHomePage implements OnInit {
             "Books Allowance",
             "Transport"
         ],
-        closing_date: "2021-06-16",
+        closing_date: "2021-08-30",
         shortlist_date: "2021-11-20",
         email_address: "name@gmail.com",
         bursary_duration: 2,

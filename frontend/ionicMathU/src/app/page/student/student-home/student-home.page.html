@@ -93,12 +93,14 @@
             <ul class="main-list">
               <li>
                 <ion-icon name="document"></ion-icon>
-                Bursary Type: {{ bursaryType }}
-              </li>
-              <li *ngIf="bursaryType == 'Work Back'">
-                <ion-icon name="document"></ion-icon>
-                Work Back Duration time: add in time
-                (also change the icon) 
+                {{ bursaryType }}
+                <div *ngIf="bursaryTypeWorkBack">
+                    <li>
+                  <ul>
+                      Duration: {{ bursaryWorkBackDuration}} years
+                  </ul>
+                    </li>
+                </div>
               </li>
               <li>
                 <ion-icon name="time"></ion-icon>
