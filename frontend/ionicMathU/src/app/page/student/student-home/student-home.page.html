@@ -99,7 +99,15 @@
             <ul>
               <li>
                 <ion-icon name="document"></ion-icon>
-                {{ bursaryType }}</li>
+                {{ bursaryType }}
+                <div *ngIf="bursaryTypeWorkBack">
+                  <ul>
+                    <li>
+                      Duration: {{ bursaryWorkBackDuration}} years
+                    </li>
+                  </ul>
+                </div>
+              </li>
               <li>
                 <ion-icon name="time"></ion-icon>
                 The duration the bursary is {{ bursaryDuration }} years</li>
